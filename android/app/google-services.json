@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "233623615327",
+    "project_id": "merasnew",
+    "storage_bucket": "merasnew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233623615327:android:d9609c25ea46d03c11e8ea",
+        "android_client_info": {
+          "package_name": "com.example.meras_sprint1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233623615327-gc968tb1qpss8md15qcpe5nk1is063da.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBYJ2180D9y2ZdfUjAgsyYrjVv0SD21Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233623615327-gc968tb1qpss8md15qcpe5nk1is063da.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
