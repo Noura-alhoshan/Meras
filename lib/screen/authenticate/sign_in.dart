@@ -25,9 +25,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[100],
+      backgroundColor: Colors.purple[30],
       appBar: AppBar(
-        backgroundColor: Colors.purple[400],
+        backgroundColor: Colors.deepPurple,
         elevation: 0.0,
         title: Text('مراس'),
         actions: <Widget>[
@@ -38,9 +38,13 @@ class _SignInState extends State<SignIn> {
           ),
         ],
       ),
+      
+      
       body: Container(
+       
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form( 
+          
           key: _formKey,
           child: Column(
             children: <Widget>[
@@ -71,7 +75,7 @@ class _SignInState extends State<SignIn> {
                 //color: Colors.pink[400],
                 child: Text('دخول'),
                   style: ElevatedButton.styleFrom(
-                  primary: Colors.purple,
+                  primary: Colors.deepPurple[800],
                   textStyle: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
