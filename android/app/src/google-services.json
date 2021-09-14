@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "928299247445",
+    "firebase_url": "https://meras-87629-default-rtdb.firebaseio.com",
+    "project_id": "meras-87629",
+    "storage_bucket": "meras-87629.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928299247445:android:7c8e53064fd5d4a4a8b1dc",
+        "android_client_info": {
+          "package_name": "com.example.meras"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928299247445-tb9m16gtbm938nv5834doihbtlot7fhh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlM1HX7XTm-6OeQvw0OAAD1mfdeKWKYdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928299247445-tb9m16gtbm938nv5834doihbtlot7fhh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "928299247445-qm1749kbg5lei9io3rq6adqqtgs3ia77.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.meras"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
