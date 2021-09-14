@@ -1,7 +1,7 @@
 //import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/services/auth.dart';
 import 'package:meras/screen/wrapper.dart'; 
 import 'package:flutter/material.dart';
@@ -15,6 +15,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

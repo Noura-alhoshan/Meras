@@ -15,15 +15,15 @@ class home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.brown[50],
+        //backgroundColor: Colors.deepPurple[200],
         appBar: AppBar(
-          title: Text('Brew Crew'),
-          backgroundColor: Colors.brown[400],
+          title: Text('مراس'),
+          backgroundColor: Colors.deepPurple[100],
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(
               icon: Icon(Icons.person),
-              label: Text('logout'),
+              label: Text('تسجيل الخروج'),
               onPressed: () async {
                 await _auth.signOut();
               },

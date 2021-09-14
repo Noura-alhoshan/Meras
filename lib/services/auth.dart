@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:meras/services/database.dart';
 import 'package:meras/models/MyUser.dart'; 
-
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  //final FirebaseFirestore fuser = FirebaseFirestore.instance;
   // create MyUser obj based on firebase user
   MyUser? _userFromFirebase(User? user) { 
     return user != null ? MyUser(uid: user.uid) : null;
@@ -21,11 +22,26 @@ class AuthService {
 
   //sign up ############ testing version until Haifa implement it 
 
-   Future registerWithEmailAndPassword(String email, String password) async {
+  //  Future registerWithEmailAndPassword(String email, String password) async {
+  //   try {
+  //     UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+  //     User? user = result.user;
+  //     return _userFromFirebase(user);
+  //   } catch (error) {
+  //     print(error.toString());
+  //     return null;
+  //   } 
+  // }
+
+   Future registerWithEmailAndPassword(String Fname, String Lname, String Gender, //DateTime Birth,
+                              String Neigh, String Email, String Pass ) async {
+     
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      User? user = result.user;
-      return _userFromFirebase(user);
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: Email, password: Pass);
+      User? user1 = result.user;
+      // create a new document for the user with the uid
+      await DatabaseService().updateUserData(Fname,Lname, Gender ,Neigh ,Email,Pass);
+      return _userFromFirebase(user1);
     } catch (error) {
       print(error.toString());
       return null;
@@ -33,11 +49,13 @@ class AuthService {
   }
 
 
+
   //sign in 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
+      
       return user;
     } catch (error) {
       print(error.toString());

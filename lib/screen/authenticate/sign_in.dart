@@ -21,15 +21,18 @@ class _SignInState extends State<SignIn> {
   // text field state
   String email = '';
   String password = '';
+  String sp='                              ';
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
+      
       backgroundColor: Colors.purple[30],
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.deepPurple[100],
         elevation: 0.0,
-        title: Text('مراس'),
+        //title: Text('مراس'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
@@ -40,43 +43,60 @@ class _SignInState extends State<SignIn> {
       ),
       
       
-      body: Container(
-       
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+      body: 
+      SingleChildScrollView( child: 
+      Container(
+   
+        padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 50.0),
         child: Form( 
           
           key: _formKey,
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
+              Image.asset('assets/images/logo.png', height: 230,),
               TextFormField(
-              decoration: InputDecoration(
+               textAlign: TextAlign.center,
+               decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
+              ),
               hintText: "البريد الإلكتروني"
 
             ),
-                validator: (val) => val!.isEmpty? 'الرجاء إدخال البريد الإلكتروني' : null,//added ! to val
+                validator: (val) => val!.isEmpty? sp+'الرجاء إدخال البريد الإلكتروني' : null,//added ! to val
                 onChanged: (val) {
                   setState(() => email = val);
                 },
               ),
               SizedBox(height: 20.0),
               TextFormField(
+              textAlign: TextAlign.center,
               decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
+              ),
+              
               hintText: "الرمز السري"
-            ),
+               ),
                 obscureText: true,
-                validator: (val) => val!.length < 6 ? 'الرجاء إدخال الرمز السري' : null,//added ! to val
+                validator: (val) => val!.length < 6 ? sp+'    الرجاء إدخال الرمز السري' : null,//added ! to val
                 onChanged: (val) {
                   setState(() => password = val);
                 },
+              ),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
                 //color: Colors.pink[400],
                 child: Text('دخول'),
                   style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple[800],
-                  textStyle: TextStyle(color: Colors.white),
+                  primary: Colors.deepPurple[50],
+                  onPrimary: Colors.deepPurple[900],
                 ),
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){//added a ! check
@@ -89,14 +109,11 @@ class _SignInState extends State<SignIn> {
                   }
                 }
               ),
-              SizedBox(height: 12.0),
-              Text(
-                error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
-              ),
+              
             ],
           ),
         ),
+      ),
       ),
     );
   }
