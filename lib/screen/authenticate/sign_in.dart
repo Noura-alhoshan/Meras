@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
 import 'package:auto_direction/auto_direction.dart';
+import 'package:meras/screen/authenticate/reset.dart'; 
 
 class SignIn extends StatefulWidget {
 
@@ -77,10 +78,10 @@ class _SignInState extends State<SignIn> {
                 borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
               ),
               
-              hintText: "الرمز السري"
+              hintText: "كلمة المرور"
                ),
                 obscureText: true,
-                validator: (val) => val!.length < 6 ? sp+'    الرجاء إدخال الرمز السري' : null,//added ! to val
+                validator: (val) => val!.length < 6 ? sp+'   الرجاء إدخال كلمة المرور' : null,//added ! to val
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -90,7 +91,19 @@ class _SignInState extends State<SignIn> {
                 error,
                 style: TextStyle(color: Colors.red, fontSize: 14.0),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 10.0),
+
+              Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                child: Text('هل نسيت كلمة المرور؟'),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ResetScreen()),
+                ),
+              )
+            ],
+          ),
               ElevatedButton(
                 //color: Colors.pink[400],
                 child: Text('دخول'),
