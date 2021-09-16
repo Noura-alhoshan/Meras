@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "233623615327",
-    "project_id": "merasnew",
-    "storage_bucket": "merasnew.appspot.com"
+    "project_number": "911461091385",
+    "project_id": "my-meras",
+    "storage_bucket": "my-meras.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:233623615327:android:d9609c25ea46d03c11e8ea",
+        "mobilesdk_app_id": "1:911461091385:android:cd4963412e34c06f7ae5e8",
         "android_client_info": {
           "package_name": "com.example.meras_sprint1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "233623615327-gc968tb1qpss8md15qcpe5nk1is063da.apps.googleusercontent.com",
+          "client_id": "911461091385-ghjnfak9qopmut516q5qsh8pid5boqq2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBYJ2180D9y2ZdfUjAgsyYrjVv0SD21Kc"
+          "current_key": "AIzaSyBaSNfS1tMwuFz361sFG1LWizJoodhT3Ug"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "233623615327-gc968tb1qpss8md15qcpe5nk1is063da.apps.googleusercontent.com",
+              "client_id": "911461091385-ghjnfak9qopmut516q5qsh8pid5boqq2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
