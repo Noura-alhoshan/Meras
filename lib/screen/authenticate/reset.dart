@@ -23,7 +23,9 @@ class _ResetScreenState extends State<ResetScreen> {
         //title: Text('إعادة تعيين كلمة المرور', style: TextStyle(color: Colors.deepPurple,),),
       ),
 
-      body: Column(
+      body:
+       SingleChildScrollView( child:  
+      Column(
         
         children: [
           
@@ -87,6 +89,7 @@ class _ResetScreenState extends State<ResetScreen> {
           ),
 
         ],),
+       ),
     );
   }
 }

@@ -1,9 +1,14 @@
+//import 'dart:js';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
 import 'package:auto_direction/auto_direction.dart';
 import 'package:meras/screen/authenticate/reset.dart'; 
 
+
+ int glovar= 0;
+ bool glovar2= true;
 class SignIn extends StatefulWidget {
 
   final Function toggleView;
@@ -13,12 +18,15 @@ class SignIn extends StatefulWidget {
   _SignInState createState() => _SignInState();
 }
 
+
 class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
-
+  
+   //
+  
   // text field state
   String email = '';
   String password = '';
@@ -104,24 +112,34 @@ class _SignInState extends State<SignIn> {
               )
             ],
           ),
-              ElevatedButton(
+               ElevatedButton(
                 //color: Colors.pink[400],
                 child: Text('دخول'),
                   style: ElevatedButton.styleFrom(
                   primary: Colors.deepPurple[50],
                   onPrimary: Colors.deepPurple[900],
                 ),
-                onPressed: () async {
+                onPressed:  () {
+                  //glovar=0;
                   if(_formKey.currentState!.validate()){//added a ! check
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                    if(result == null) {
-                      setState(() {
+                    dynamic result = _auth.isallowed(email, password,context,glovar);
+                    print(glovar);
+                    if(result == null || glovar > 0) {
+                       setState(() {
                         error = 'لا يمكن تسجيل الدخول بالمعلومات المعطاة';
                       });
+                      }
+                      //glovar=0;
                     }
                   }
-                }
+                
               ),
+              
+              // Text(
+              //   ermsg,
+              //   style: TextStyle(color: Colors.red, fontSize: 14.0),
+              // ),
+              // SizedBox(height: 10.0),
               
             ],
           ),
@@ -129,5 +147,6 @@ class _SignInState extends State<SignIn> {
       ),
       ),
     );
+    
   }
 }

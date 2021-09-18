@@ -27,7 +27,6 @@ dependencies:
     sdk: flutter
   auto_direction: ^0.0.5
   firebase_core: ^1.6.0
-  firebase_database: ^7.2.2
   firebase_auth: ^3.1.1
   cloud_firestore: ^2.5.2
   provider: ^6.0.0
