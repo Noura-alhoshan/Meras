@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meras/screen/home/home.dart';
 import 'package:meras/services/auth.dart';
 import 'package:meras/screen/wrapper.dart'; 
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       initialData: null,
       value: AuthService().user,
       child: MaterialApp(
-        home: Wrapper(),
+        home: Wrapper(),///wrapper
       ),
       
     );

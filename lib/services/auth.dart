@@ -170,5 +170,12 @@ count=0;
     }
   }
 
+ getEmail() async {
+     User uuser = await _auth.currentUser!;
+  final mailID = uuser.email;
+  print(mailID);
+  return mailID;
+
+}
 
 }
