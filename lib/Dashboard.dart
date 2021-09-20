@@ -7,51 +7,61 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  List userProfilesList = [];
   @override
   void initState() {
     super.initState();
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-    return Card(
-      child: ListTile(
-        title: Text(document['Fname']),
-        subtitle: Text(document['Discerption']),
-        leading: IconButton(
-            icon: Icon(Icons.account_circle_rounded),
-            iconSize: 50,
-            onPressed: () {
-              //    nav();
-            }
+    Size size = MediaQuery.of(context).size;
 
-            //left
-            //  child: Image(
-            //     image: AssetImage(''),
-            //    ),
+    return Container(
+      width: double.infinity,
+      //height: size.height,
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            left: 0,
+            child: Image.asset(
+              "assets/main_top.png",
+              width: size.width * 0.35,
             ),
-        trailing: new ButtonBar(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            TextButton(
-              child: Text('قبول'),
-              onPressed: () {/** */},
-              style: TextButton.styleFrom(
-                  primary: Colors.black,
-                  backgroundColor: Colors.lightGreen[200],
-                  textStyle: TextStyle(fontSize: 16)),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Image.asset(
+              "assets/login_bottom.png",
+              width: size.width * 0.4,
             ),
-            TextButton(
-              child: Text('رفض'),
-              onPressed: () {/** */},
-              style: TextButton.styleFrom(
-                  primary: Colors.black,
-                  backgroundColor: Colors.redAccent[200],
-                  textStyle: TextStyle(fontSize: 16)),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(document['Fname'] + ' ' + document['Lname']),
+              subtitle: Text(document['Discerption']),
+//
+              leading: document['Gender'] == 'female'
+                  ? Image.asset("assets/driver-female.jpg")
+                  : Image.asset("assets/driver-male.jpg"),
+
+              trailing: new ButtonBar(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextButton(
+                    child: Text('معلومات المدرب'),
+                    onPressed: () {/** */},
+                    style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Colors.deepPurple[400],
+                        textStyle: TextStyle(fontSize: 16)),
+                  ),
+                ],
+              ),
+              //Text('@ @'), //right
             ),
-          ],
-        ),
-        //Text('@ @'), //right
+          ),
+        ],
       ),
     );
   }
@@ -78,4 +88,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
 //  void nav() async {
 //    Navigator.pushNamed(context, '/DatabaseManager'); //nn
   // }
+
 }
