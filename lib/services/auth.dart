@@ -2,7 +2,6 @@
 //import 'package:path/path.dart';
 //import 'package:path/path.dart' as Path; 
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -130,50 +129,50 @@ static int count =0;
   }
 
 
-   Future isallowed(String email, String password,BuildContext context) async  {
-     //glovar =1;
-    FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
+//    Future isallowed(String email, String password,BuildContext context) async  {
+//      //glovar =1;
+//     FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
      
-      querySnapshot.docs.forEach((value) 
-      {
-        if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='D' )
-        {
-          //glovar=glovar+1; 
-          count= count +1; 
-          // print("in auth");
-          // print(change);
-        }
-      } 
-      );
-     // print("in auth");
-            if (count > 0)  {       
-                //glovar=0;
-                Navigator.push( context, 
-                MaterialPageRoute(builder: (context) => notApproaved()),
-  );
-       } 
-        //else print("Im in else");
-     //else return signInWithEmailAndPassword( email, password);
-  // {
-  //       try 
-  //   {
-  //     UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-  //     User? user = result.user; 
-  //     glovar=1;
-  //     return user;
-  //   } 
-  //   catch (error) 
-  //   {
-  //     print(error.toString());
-  //      glovar=1;
-  //     return null;
-  //   } }
-   }
-   );
+//       querySnapshot.docs.forEach((value) 
+//       {
+//         if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='D' )
+//         {
+//           //glovar=glovar+1; 
+//           count= count +1; 
+//           // print("in auth");
+//           // print(change);
+//         }
+//       } 
+//       );
+//      // print("in auth");
+//             if (count > 0)  {       
+//                 //glovar=0;
+//                 Navigator.push( context, 
+//                 MaterialPageRoute(builder: (context) => notApproaved()),
+//   );
+//        } 
+//         //else print("Im in else");
+//      //else return signInWithEmailAndPassword( email, password);
+//   // {
+//   //       try 
+//   //   {
+//   //     UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+//   //     User? user = result.user; 
+//   //     glovar=1;
+//   //     return user;
+//   //   } 
+//   //   catch (error) 
+//   //   {
+//   //     print(error.toString());
+//   //      glovar=1;
+//   //     return null;
+//   //   } }
+//    }
+//    );
 
-count=0;
+// count=0;
 
-}
+// }
 
 
 
