@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meras/models/MyUser.dart'; 
 
 class DatabaseService {
 
@@ -20,5 +21,33 @@ class DatabaseService {
     };
     userscollection.add(datademo);
   }
+
+
+// user data from snapshots
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      Fname: snapshot['Fname'],
+      Lname: snapshot['Lname'],
+      Email: snapshot['Email'],
+      Pass: snapshot['Pass'],
+      Gender: snapshot['Gender'],   
+      Age: snapshot['Age'],
+      City: snapshot['City'],
+      Neighborhood: snapshot['Neighborhood'],
+
+    );
+  }
+
+
+
+// get user doc stream
+  Stream<UserData> get userData {
+    return userscollection.doc(uid).snapshots()
+      .map(_userDataFromSnapshot);
+  }
+
+
+
 
 }

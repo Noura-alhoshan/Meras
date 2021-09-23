@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meras/screen/Welcome/welcome_screen.dart';
 import 'package:meras/screen/home/home.dart'; 
 import 'package:meras/screen/authenticate/authenticate.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class Wrapper extends StatelessWidget {
     //print(user);//////////////////////////////////////////////////
 
     if (user == null){
-      return authenticate();
+      return WelcomeScreen();
     } else {
       return home();
     }

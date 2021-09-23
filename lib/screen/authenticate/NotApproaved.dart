@@ -82,7 +82,7 @@ final _formKey = GlobalKey<FormState>();
             child: const Text('إغلاق', style:TextStyle(color: Colors.deepPurple, fontSize: 16.0) , ),
             onPressed: () {
                   Navigator.pop( context, 
-                   MaterialPageRoute(builder: (context) => SignIn(toggleView: toggleView )),);
+                   MaterialPageRoute(builder: (context) => SignIn()),);
                   //SystemNavigator.pop(); 
                  // glovar=1;
             },

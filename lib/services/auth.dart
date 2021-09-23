@@ -1,6 +1,8 @@
 //import 'dart:html';
 //import 'package:path/path.dart';
 //import 'package:path/path.dart' as Path; 
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,7 @@ import 'package:meras/screen/authenticate/reset.dart';
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-final FirebaseFirestore fuser = FirebaseFirestore.instance;
+//final FirebaseFirestore fuser = FirebaseFirestore.instance;
 static int count =0;
   
   // create MyUser obj based on firebase user
@@ -61,7 +63,7 @@ static int count =0;
      
     //try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: Email, password: Pass);
-      User? user1 = result.user;
+      User? user1 = result.user; 
       // create a new document for the user with the uid
        DatabaseService(uid: user1!.uid).updateUserData(Fname,Lname, Gender ,Neigh ,Email,Pass);
     //   return _userFromFirebase(user1);
@@ -87,33 +89,49 @@ static int count =0;
   //     );
 
   //sign in 
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(String email, String password,BuildContext context) async {
   
     try 
     {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user; 
-      //print('im in try');
-      //print(result.user);
-      //glovar=1;
       return user;
 
     } 
     catch (error) 
     {
-      print(error.toString());
-      glovar=1;
-       //print('im in catch');
-      //glovar=0;
+         FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
+     
+      querySnapshot.docs.forEach((value) 
+      {
+        if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='D' )
+        {
+          //glovar=glovar+1; 
+          count= count +1; 
+          // print("in auth");
+          // print(change);
+        }
+      } 
+      );
+     // print("in auth");
+            if (count > 0)  {       
+                //glovar=0;
+                Navigator.push( context, 
+                MaterialPageRoute(builder: (context) => notApproaved()),
+  );
+       } else 
       return null;
+      }
+   );
     } 
+    
     //yesOrno= false; 
     
   }
 
 
-  Future isallowed(String email, String password,BuildContext context, int change)  async {
-    glovar=0;
+   Future isallowed(String email, String password,BuildContext context) async  {
+     //glovar =1;
     FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
      
       querySnapshot.docs.forEach((value) 
@@ -134,29 +152,29 @@ static int count =0;
                 MaterialPageRoute(builder: (context) => notApproaved()),
   );
        } 
-       //else print("Im in else");
-     else 
-  {
-        try 
-    {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      User? user = result.user; 
-      glovar=0;
-      return user;
-    } 
-    catch (error) 
-    {
-      print(error.toString());
-       glovar=1;
-      return null;
-    } }
+        //else print("Im in else");
+     //else return signInWithEmailAndPassword( email, password);
+  // {
+  //       try 
+  //   {
+  //     UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+  //     User? user = result.user; 
+  //     glovar=1;
+  //     return user;
+  //   } 
+  //   catch (error) 
+  //   {
+  //     print(error.toString());
+  //      glovar=1;
+  //     return null;
+  //   } }
    }
-    );
+   );
 
 count=0;
 
+}
 
-    }
 
 
 
@@ -170,12 +188,19 @@ count=0;
     }
   }
 
- getEmail() async {
-     User uuser = await _auth.currentUser!;
-  final mailID = uuser.email;
-  print(mailID);
-  return mailID;
 
-}
+
+  Future showError() async  {
+dynamic res;
+  FirebaseAuth.instance
+  .userChanges()
+  .listen((User? user) {
+    if (user == null) { res = 1;}
+    else {print('im in elsssse'); res= 2 ;}
+  
+ },
+ 
+ ); return res; 
+ }
 
 }

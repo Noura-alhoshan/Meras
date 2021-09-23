@@ -19,7 +19,7 @@ class NavDrawer extends StatelessWidget  {
 
   @override
    Widget build(BuildContext context)  {
-dynamic mailID = _auth.getEmail();
+//dynamic mailID = _auth.getEmail();
 //String mail= mailID.toString();
     return  Container(
       height: 650,

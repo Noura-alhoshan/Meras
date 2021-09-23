@@ -1,18 +1,19 @@
 //import 'dart:js';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:meras/screen/home/home.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
 import 'package:auto_direction/auto_direction.dart';
 import 'package:meras/screen/authenticate/reset.dart'; 
 
 
- int glovar= 0;
+ dynamic glovar=0 ;
  bool glovar2= true;
 class SignIn extends StatefulWidget {
 
-  final Function toggleView;
-  SignIn({ required this.toggleView });//added required
+  //final Function toggleView;
+  //SignIn({ required this.toggleView });//added required
 
   @override
   _SignInState createState() => _SignInState();
@@ -43,11 +44,11 @@ class _SignInState extends State<SignIn> {
         elevation: 0.0,
         //title: Text('مراس'),
         actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('إنشاء حساب'),
-            onPressed: () => widget.toggleView(),
-          ),
+         // FlatButton.icon(
+            //icon: Icon(Icons.person),
+           // label: Text('إنشاء حساب'),
+            //onPressed: () => widget.toggleView(),
+         // ),
         ],
       ),
       
@@ -89,7 +90,7 @@ class _SignInState extends State<SignIn> {
               hintText: "كلمة المرور"
                ),
                 obscureText: true,
-                validator: (val) => val!.length < 6 ? sp+'   الرجاء إدخال كلمة المرور' : null,//added ! to val
+                validator: (val) => val!.length < 1 ? sp+'   الرجاء إدخال كلمة المرور' : null,//added ! to val
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -119,18 +120,30 @@ class _SignInState extends State<SignIn> {
                   primary: Colors.deepPurple[50],
                   onPrimary: Colors.deepPurple[900],
                 ),
-                onPressed:  () {
+                onPressed:  () async {
                   //glovar=0;
                   if(_formKey.currentState!.validate()){//added a ! check
-                    dynamic result = _auth.isallowed(email, password,context,glovar);
-                    print(glovar);
-                    if(result == null || glovar > 0) {
+                    dynamic result = await _auth.signInWithEmailAndPassword(email, password,context);
+                    //dynamic er =   _auth.showError();
+                    //print(glovar);
+                    //if (glovar != null)
+                    if(result == null) {
                        setState(() {
                         error = 'لا يمكن تسجيل الدخول بالمعلومات المعطاة';
+                        //print('damn here again');
                       });
                       }
+                     
                       //glovar=0;
-                    }
+                     //dynamic er =   _auth.showError();
+                    //   if( _auth.showError() == null ) {
+                    //    setState( ()  {
+                    //     error = 'لا يمكن تسجيل الدخول بالمعلومات المعطاة';
+                    //   });
+                    //   }
+                     }
+
+                     
                   }
                 
               ),
@@ -149,4 +162,7 @@ class _SignInState extends State<SignIn> {
     );
     
   }
+
+
+  
 }
