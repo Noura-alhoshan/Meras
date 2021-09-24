@@ -30,6 +30,11 @@ dependencies:
   bottom_navy_bar:
   firebase_core:
   cloud_firestore:
+  awesome_notifications:
+  firebase_messaging:
+  fluttertoast:
+  random_string:
+
     
 
 dev_dependencies:

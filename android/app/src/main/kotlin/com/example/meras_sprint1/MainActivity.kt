@@ -1,4 +1,4 @@
-package com.example.meras_sprint1
+package com.example.meras
 
 import io.flutter.embedding.android.FlutterActivity
 

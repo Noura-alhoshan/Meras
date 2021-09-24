@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.meras_sprint1">
+    package="com.example.meras">
    <application
         android:label="meras_sprint1"
         android:icon="@mipmap/ic_launcher">
