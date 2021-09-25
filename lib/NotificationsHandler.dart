@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
 
-dynamic createLocalNotification({required Map<String, dynamic> message}) async {
+createLocalNotification({required Map<String, dynamic> message}) async {
   print(message);
 
   final Map<String, String> data = {};
