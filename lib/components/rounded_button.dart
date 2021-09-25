@@ -13,6 +13,7 @@ class RoundedButton extends StatelessWidget {
     required this.press,
     this.color = kPrimaryColor,
     this.textColor = Colors.white,
+    
   }) : super(key: key);
 
   @override
@@ -35,7 +36,7 @@ class RoundedButton extends StatelessWidget {
     return ElevatedButton(
       child: Text(
         text,
-        style: TextStyle(color: textColor, fontSize: 15),
+        style: TextStyle(color: textColor, fontSize: 17),
       ),
       onPressed: press,
       style: ElevatedButton.styleFrom(

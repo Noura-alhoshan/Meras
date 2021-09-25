@@ -99,22 +99,18 @@ static int count =0;
     } 
     catch (error) 
     {
-         FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
+      FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
      
       querySnapshot.docs.forEach((value) 
       {
         if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='D' )
         {
-          //glovar=glovar+1; 
           count= count +1; 
-          // print("in auth");
-          // print(change);
         }
       } 
       );
      // print("in auth");
             if (count > 0)  {       
-                //glovar=0;
                 Navigator.push( context, 
                 MaterialPageRoute(builder: (context) => notApproaved()),
   );
@@ -124,7 +120,7 @@ static int count =0;
    );
     } 
     
-    //yesOrno= false; 
+ count=0;
     
   }
 
@@ -190,7 +186,7 @@ static int count =0;
 
 
   Future showError() async  {
-dynamic res;
+  dynamic res;
   FirebaseAuth.instance
   .userChanges()
   .listen((User? user) {

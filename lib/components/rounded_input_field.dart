@@ -7,19 +7,24 @@ import 'package:meras/constants.dart';
 class RoundedInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
+  final FormFieldValidator validator;
   final ValueChanged<String> onChanged;
   const RoundedInputField({
      Key? key,
     required this.hintText,
     this.icon = Icons.person,
     required this.onChanged,
+    required this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+       // textAlign: TextAlign.center,
         onChanged: onChanged,
+         //obscureText: true,
+        validator: validator,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           icon: Icon(

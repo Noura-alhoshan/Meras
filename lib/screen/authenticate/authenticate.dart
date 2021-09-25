@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:meras/screen/authenticate/sign_in.dart'; 
 import 'package:meras/screen/authenticate/register.dart'; 
 

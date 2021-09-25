@@ -18,11 +18,11 @@ final _formKey = GlobalKey<FormState>();
 
 
  @override
-   bool showSignIn = true;
-  void toggleView(){
-    //print(showSignIn.toString());
-    setState(() => showSignIn = !showSignIn);
-  } 
+  //  bool showSignIn = true;
+  // void toggleView(){
+  //   //print(showSignIn.toString());
+  //   setState(() => showSignIn = !showSignIn);
+  // } 
 
 
   Widget build(BuildContext context) {
@@ -48,8 +48,6 @@ final _formKey = GlobalKey<FormState>();
           key: _formKey,
           child: Column(
             children: <Widget>[
-            
-            //Image.asset('assets/images/logo.png', height: 230,),
 
 
           Text(
@@ -59,7 +57,7 @@ final _formKey = GlobalKey<FormState>();
               SizedBox(height: 40.0),
 
 
-            AlertDialog(
+        AlertDialog(
         title: const Text('عزيزي المدرب',textAlign: TextAlign.center,),
         content: SingleChildScrollView(
           child: ListBody(

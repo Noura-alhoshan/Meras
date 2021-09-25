@@ -29,25 +29,30 @@ class Body extends StatelessWidget {
             RoundedInputField(
               hintText: "الأسم الأول",
               onChanged: (value) {},
+              validator: (value) {},
             ),
             RoundedInputField(
               hintText: "الأسم الاخير",
               onChanged: (value) {},
+              validator: (value) {},
             ),
             RoundedInputField(
               hintText: "العمر",
               onChanged: (value) {},
+              validator: (value) {},
             ),
             RoundedInputField(
               hintText: "البريد الاكتروني",
               onChanged: (value) {},
+              validator: (value) {},
             ),
-            RoundedPasswordField(
-              onChanged: (value) {},
-            ),
+            // RoundedPasswordField(
+            //   onChanged: (value) {},
+            // ),
             RoundedInputField(
               hintText: "رقم الجوال",
               onChanged: (value) {},
+              validator: (value) {},
             ),
             // RoundedInputField(
             //   hintText: "نبذة تعريفية",
