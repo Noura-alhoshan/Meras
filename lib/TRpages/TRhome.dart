@@ -94,7 +94,7 @@ class TRhome extends StatelessWidget {
                   await createLocalNotification(message: {
                     'title': 'Contact Form Submitted',
                     'message':
-                        'Thankyou, your message from ${nameController.text}'
+                        'Thank you, your message from ${nameController.text}.'
                   });
                 }
               },

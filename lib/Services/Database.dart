@@ -6,7 +6,7 @@ final databaseReference = FirebaseFirestore.instance;
 class Database {
   createContactRequest(ContactModel contactData) async {
     await databaseReference
-        .collection('Contact')
+        .collection('Contact Form')
         .doc(contactData.id)
         .set(contactData.toJson());
   }
