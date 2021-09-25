@@ -4,6 +4,7 @@ import 'package:meras_sprint1/Models/ContactModel.dart';
 import 'package:meras_sprint1/Services/Database.dart';
 import 'package:random_string/random_string.dart';
 import '../Global.dart';
+import '../NotificationsHandler.dart';
 
 class TRhome extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -89,9 +90,15 @@ class TRhome extends StatelessWidget {
                   await Database().createContactRequest(contactData);
 
                   showMessage('Hoorrayyy!, Your Form Is Valid', Status.SUCCESS);
+
+                  await createLocalNotification(message: {
+                    'title': 'Contact Form Submitted',
+                    'message':
+                        'Thankyou, your message from ${nameController.text}'
+                  });
                 }
               },
-            )
+            ),
           ],
         ),
       ),
