@@ -1,23 +1,58 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
-class DatabaseService{
+class DatabaseService {
 
   final String uid;
-  DatabaseService({required this.uid});
-  //collection refrence
-  final CollectionReference merasCollection = FirebaseFirestore.instance.collection('trainees');
-  final CollectionReference merasCollection2 = FirebaseFirestore.instance.collection('Coaches');
+  DatabaseService({ required this.uid }); //added required it was comment
 
-  Future updateTraineeData(String Fname,String Lname,String email,int age,String password,String phoneNumber,String city, String gender) async {
-    return await merasCollection.doc(uid).set({
-      'First Name': Fname,
+  // users collection reference
+  CollectionReference userscollection = FirebaseFirestore.instance.collection('users');
+
+  updateUserData(String Fname, String Lname, String Gender, String  Neigh, String Email,String Pass ) async {
+
+    Map<String,dynamic> datademo= {"Fname": Fname,
+      'Lname': Lname,
+      'Gender': Gender,
+      'Neighborhood': Neigh,
+      'Email': Email,
+      'Pass': Pass,
+    };
+    userscollection.add(datademo);
+  }
+
+  // trainees collection reference
+  CollectionReference traineeCollection = FirebaseFirestore.instance.collection('trainees');
+
+  updateTraineeData(String Fname, String Lname, String email, String password,
+                  String age, String phoneNumber, String neighborhood, String gender) {
+    Map<String,dynamic> traineeDataDemo = {
+      "First Name": Fname,
       'Last Name': Lname,
       'Email': email,
-      'Age': age,
       'Password': password,
+      'Age': age,
       'Phone Number': phoneNumber,
-      'City': city,
-      'Gender': gender
-    });
+      'Neighborhood': neighborhood,
+      'Gender': gender,
+    };
+    traineeCollection.add(traineeDataDemo);
+  }
+  CollectionReference coachesCollection = FirebaseFirestore.instance.collection('Coach');
+
+  updateCoachesData(String Fname, String Lname,String email,String password, String age,
+      String phoneNumber, String neighborhood,String description, String gender, String status) {
+    Map<String,dynamic> traineeDataDemo = {
+      "Fame": Fname,
+      'Lame': Lname,
+      'Email': email,
+      'Pass': password,
+      'Age': age,
+      'Phone Number': phoneNumber,
+      'Discerption': description,
+      'Neighborhood': neighborhood,
+      'Gender': gender,
+      'Status': status,
+    };
+    coachesCollection.add(traineeDataDemo);
   }
 }

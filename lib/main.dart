@@ -1,31 +1,37 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:meras/screens/wrapper.dart';
+//import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/services/auth.dart';
+import 'package:meras/screen/wrapper.dart'; 
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:meras/models/MyUser.dart';
 
-import 'models/MyUser.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
+   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  //const MyApp({Key? key}) : super(key: key);
 
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   // This widget is the root of your application.
-  //@overridepud
+  @override
   Widget build(BuildContext context) {
     return StreamProvider<MyUser?>.value(
-      value: AuthService().user,
+      //catchError: () =>null,
       initialData: null,
+      value: AuthService().user,
       child: MaterialApp(
-        home: wrapper(),
+        home: Wrapper(),
       ),
+      
     );
   }
 }
+
+//Directionality( // add this
+        //textDirection: TextDirection.rtl, 
+        //child:

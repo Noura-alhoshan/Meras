@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:meras/services/database.dart';
 
 class Register extends StatefulWidget {
 
@@ -12,31 +18,46 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
+  late File License;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
+  String url = '';
 
   // text field state
-  String email = '';
-  String password = '';
-
+  String Fname= '';
+  String Lname= '';
+  String Gender= '';
+  //late DateTime Birth;//late?
+  String Neigh= ''; 
+  String Email= '';
+  String Pass= '';
+//  final DateTime now = DateTime.now();
+//   final DateFormat formatter = DateFormat('yyyy-MM-dd');
+//   final String formatted = formatter.format(now);
+ 
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
-      appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+      //backgroundColor: Colors.deepPurple[200],
+            appBar: AppBar(
+        backgroundColor: Colors.deepPurple[100],
+         //title: Text('انشاء حساب مراس'),
         elevation: 0.0,
-        title: Text('Sign up to Brew Crew'),
+        //title: Text('مراس'),
         actions: <Widget>[
-          ElevatedButton.icon(
+          FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Sign In'),
+            label: Text('تسجيل الدخول'),
+            
             onPressed: () => widget.toggleView(),
           ),
         ],
       ),
-      body: Container(
+      body: 
+       SingleChildScrollView( 
+         child: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
           key: _formKey,
@@ -46,35 +67,91 @@ class _RegisterState extends State<Register> {
               TextFormField(
                 validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
-                  setState(() => email = val);
+                  setState(() => Fname = val);
                 },
               ),
               SizedBox(height: 20.0),
-              TextFormField(
+                 TextFormField(
+                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                onChanged: (val) {
+                  setState(() => Lname = val);
+                },
+              ),
+              SizedBox(height: 20.0),
+
+                       TextFormField(
+                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                onChanged: (val) {
+                  setState(() => Email = val);
+                },
+              ),
+              SizedBox(height: 20.0),
+
+                TextFormField(
                 obscureText: true,
                 validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
-                  setState(() => password = val);
+                  setState(() => Pass = val);
+                },
+              ),
+              SizedBox(height: 20.0),
+
+                      TextFormField(
+                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                onChanged: (val) {
+                  setState(() => Gender = val);
+                },
+              ),
+              SizedBox(height: 20.0),
+              //         TextFormField(
+              //   validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+              //   onChanged: (val) {
+              //     setState(() => Birthdate = val);
+              //   },
+              // ),
+              // SizedBox(height: 20.0),
+         TextFormField(
+                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                onChanged: (val) {
+                  setState(() => Neigh = val);
                 },
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
                 //color: Colors.pink[400],
-                child: Text('Register'),
+                  child: Text('تحميل صورة رخصة القيادة'),
                   style: ElevatedButton.styleFrom(
-                  primary: Colors.purple,
-                  textStyle: TextStyle(color: Colors.white),
+                    primary: Colors.deepPurple[50],
+                    onPrimary: Colors.deepPurple[900],
+                    //textStyle: TextStyle(color: Colors.black),
+                  ),
+                  onPressed: () async{
+                    getImage();
+                    uploadImage();
+                  }
+              ),
+
+
+
+           
+              ElevatedButton(
+                //color: Colors.pink[400],
+            child: Text('إنشاء'),
+                  style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple[50],
+                  onPrimary: Colors.deepPurple[900],
+                  //textStyle: TextStyle(color: Colors.black),
                 ),
-                onPressed: () async {
+                onPressed: () {//async
                   if(_formKey.currentState!.validate()){
-                  //  dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-                  //  if(result == null) {
+                    dynamic result = _auth.registerWithEmailAndPassword(Fname, Lname,Gender, Neigh, Email,Pass);//await
+                    if(result == null) {
                       setState(() {
                         error = 'Please supply a valid email';
                       });
                     }
                   }
-               // }
+                }
               ),
               SizedBox(height: 12.0),
               Text(
@@ -85,6 +162,26 @@ class _RegisterState extends State<Register> {
           ),
         ),
       ),
+       ),
     );
   }
+
+  void uploadImage() async{
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child("Licenses"+ DateTime.now().toString()+".jpg");
+    UploadTask uploadTask = ref.putFile(License);
+    uploadTask.whenComplete(() {
+      url = ref.getDownloadURL() as String;
+    }).catchError((onError) {
+      print(onError);
+    });
+  }
+
+  Future getImage() async {
+    File image = (await ImagePicker.platform.getImage(source: ImageSource.gallery)) as File;
+    setState(() {
+      License = image;
+    });
+  }
+
 }
