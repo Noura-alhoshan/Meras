@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/Test.dart';
 
@@ -26,12 +25,12 @@ void main() async {
 //             child: Text('Details'),
 //           ),
 
-class DashboardScreen extends StatefulWidget {
+class CoachlistScreen extends StatefulWidget {
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
+  _CoachlistScreenState createState() => _CoachlistScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _CoachlistScreenState extends State<CoachlistScreen> {
   @override
   void initState() {
     super.initState();
@@ -62,7 +61,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               width: size.width * 0.65,
             ),
           ), */
-          document['Status'] == 'D'
+          document['Status'] == 'A'
               ? Card(
                   child: ListTile(
                     title: Text(document['Fname'] + ' ' + document['Lname']),
@@ -93,7 +92,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('المدربون الجدد'),
+        title: Text('قائمة المدربين'),
         backgroundColor: Colors.deepPurple[400],
       ),
       body: StreamBuilder<QuerySnapshot>(

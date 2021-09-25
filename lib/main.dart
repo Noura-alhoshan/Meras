@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:meras1/Coachlist.dart';
 import 'package:meras1/Dashboard.dart';
+import 'package:meras1/Test.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +12,8 @@ void main() async {
     routes: {
       '/login': (context) => LoginScreen(),
       '/dashboard': (context) => DashboardScreen(),
+      '/Test': (context) => TestScreen(),
+      '/coachlist': (context) => CoachlistScreen(),
     },
   ));
 }
@@ -32,9 +36,28 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FlatButton(
-                  child: Text('nav'),
+                  child: Text('PENDING CHOACH LIST'),
                   onPressed: () {
                     nav();
+                  },
+                  color: Colors.white,
+                ),
+                FlatButton(
+                  child: Text('ACCEPTED CHACH LIST'),
+                  onPressed: () {
+                    nav2();
+                  },
+                  color: Colors.white,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlatButton(
+                  child: Text('TEST'),
+                  onPressed: () {
+                    nav1();
                   },
                   color: Colors.white,
                 ),
@@ -46,8 +69,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void nav1() async {
+    Navigator.pushNamed(context, '/Test'); //nn
+  }
+
   void nav() async {
     Navigator.pushNamed(context, '/dashboard'); //nn
+  }
+
+  void nav2() async {
+    Navigator.pushNamed(context, '/coachlist'); //nn
   }
 }
 //
