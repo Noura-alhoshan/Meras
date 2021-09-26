@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:meras1/ADcategory.dart';
 import 'package:meras1/Coachlist.dart';
 import 'package:meras1/Dashboard.dart';
 import 'package:meras1/Test.dart';
@@ -14,6 +15,7 @@ void main() async {
       '/dashboard': (context) => DashboardScreen(),
       '/Test': (context) => TestScreen(),
       '/coachlist': (context) => CoachlistScreen(),
+      '/ADcategory': (context) => ADcategory(),
     },
   ));
 }
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void nav1() async {
-    Navigator.pushNamed(context, '/Test'); //nn
+    Navigator.pushNamed(context, '/ADcategory'); //nn
   }
 
   void nav() async {

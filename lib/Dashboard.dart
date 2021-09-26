@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/Background.dart';
 import 'package:meras1/Test.dart';
@@ -56,7 +56,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
-                        primary: Colors.deepPurple[400],
+                        primary: Color(0xFF6F35A5),
                         textStyle: TextStyle(fontSize: 16)),
                   ),
                 ),
@@ -69,8 +69,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('قائمة المدربين'),
-        backgroundColor: Colors.deepPurple[400],
+        title: Text('قائمة المدربين قيد الانتظار'),
+        backgroundColor: Color(0xFF6F35A5),
       ),
       body: SingleChildScrollView(
         child: Background(

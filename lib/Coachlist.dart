@@ -55,7 +55,7 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
-                        primary: Colors.deepPurple[400],
+                        primary: Color(0xFF6F35A5),
                         textStyle: TextStyle(fontSize: 16)),
                   ),
                 ),
@@ -68,8 +68,8 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('قائمة المدربين'),
-        backgroundColor: Colors.deepPurple[400],
+        title: Text(' قائمة مدربين القيادة '),
+        backgroundColor: Color(0xFF6F35A5),
       ),
       body: SingleChildScrollView(
         child: Background(
