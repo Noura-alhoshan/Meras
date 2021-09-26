@@ -24,6 +24,7 @@ class ContactModel {
   String? message;
   dynamic createdAt;
 
+//Constructing a new User instance from a map structure.
   factory ContactModel.fromJson(Map<String, dynamic> json) => ContactModel(
         id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
@@ -31,7 +32,7 @@ class ContactModel {
         message: json["message"] == null ? null : json["message"],
         createdAt: json["createdAt"] == null ? null : json["createdAt"],
       );
-
+//Converts a User instance into a map.
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "name": name == null ? null : name,
