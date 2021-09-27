@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:meras/constants.dart';
+import 'package:meras/models/MyUser.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
 import 'package:meras/services/auth.dart';
@@ -10,7 +12,20 @@ import 'package:provider/provider.dart';
 
 
 
-class home extends StatelessWidget {
+class home extends StatefulWidget {
+	  home({ required this.userId});
+
+	AuthService aut= AuthService();
+
+	  final String userId;
+	
+
+	  @override
+	  State<StatefulWidget> createState() => new _HomePageState();
+	}
+	
+
+	class _HomePageState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +45,7 @@ class MyHomePage extends StatelessWidget {
       drawer: NavDrawer(),
       appBar: AppBar(
         //title: Text('Side menu'),
-        backgroundColor: Colors.deepPurple[100],
+        backgroundColor: kPrimaryLightColor,
       ),
       body: Center(
         child: Text('home'),
