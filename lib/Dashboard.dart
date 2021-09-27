@@ -40,7 +40,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
-      child: document['Status'] == 'A'
+      child: document['Status'] == 'P'
           ? Container(
               child: Card(
                 child: ListTile(
@@ -79,7 +79,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   FirebaseFirestore.instance.collection('Coach').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return const Text('loading 7 ...');
+
                 return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(), //<--here
+
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) =>
                       _buildListItem(context, (snapshot.data!).docs[index]),
@@ -94,3 +97,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Navigator.pushNamed(context, '/Test'); //nn
   }
 }
+
+/*
+
+CustomScrollView(
+        center: centerKey,
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+
+                );
+              },
+            ),
+          ),
+          SliverList(
+            key: centerKey,
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+   
+                );
+              },
+            ),
+          ),
+        ],
+      ),*/

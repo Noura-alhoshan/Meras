@@ -79,6 +79,8 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return const Text('loading 7 ...');
                 return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(), //<--here
+
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) =>
                       _buildListItem(context, (snapshot.data!).docs[index]),
