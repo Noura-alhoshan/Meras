@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/models/MyUser.dart';
@@ -9,6 +10,10 @@ import 'package:provider/provider.dart';
 
 
 //this home page will be edited to fit our app, this one is just for testing ^_^
+final FirebaseAuth auth = FirebaseAuth.instance;
+final User? user = auth.currentUser;
+final userid = user!.uid;
+   CollectionReference firevar = FirebaseFirestore.instance.collection('users');
 
 
 
@@ -16,9 +21,7 @@ class home extends StatefulWidget {
 	  home({ required this.userId});
 
 	AuthService aut= AuthService();
-
-	  final String userId;
-	
+	final String userId;
 
 	  @override
 	  State<StatefulWidget> createState() => new _HomePageState();
@@ -29,10 +32,7 @@ class home extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+   
       home: MyHomePage(),
     );
   }
@@ -45,10 +45,10 @@ class MyHomePage extends StatelessWidget {
       drawer: NavDrawer(),
       appBar: AppBar(
         //title: Text('Side menu'),
-        backgroundColor: kPrimaryLightColor,
+        backgroundColor: Colors.deepPurple[100],
       ),
       body: Center(
-        child: Text('home'),
+        child: Text(userid.toString()),
       ),
     );
   }

@@ -60,16 +60,10 @@ static int count =0;
    Future registerWithEmailAndPassword(String Fname, String Lname, String Gender, //DateTime Birth,
                               String Neigh, String Email, String Pass ) async {
      
-    //try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: Email, password: Pass);
       User? user1 = result.user; 
-      // create a new document for the user with the uid
        DatabaseService(uid: user1!.uid).updateUserData(Fname,Lname, Gender ,Neigh ,Email,Pass);
-    //   return _userFromFirebase(user1);
-    // } catch (error) {
-    //   print(error.toString());
-    //   return null;
-    // } 
+ 
   }
 
 
