@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meras/screen/Welcome/welcome_screen.dart';
+//import 'package:meras/screen/Welcome/welcome_screen.dart';
 import 'package:meras/screen/home/home.dart'; 
 import 'package:meras/screen/authenticate/authenticate.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/models/MyUser.dart';
+
+import 'coachProfile_admin/coachProfile_admin.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({ Key? key }) : super(key: key); 
@@ -18,7 +20,7 @@ class Wrapper extends StatelessWidget {
     if (user == null){
       return authenticate();//homescreen 
     } else {
-      return home();
+      return CProfilePage();
     }
   }
 }
