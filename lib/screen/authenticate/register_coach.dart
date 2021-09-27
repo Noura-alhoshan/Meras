@@ -26,11 +26,10 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
     'السلي وماحولها','طويق وماحولها','الدرعية وماحولها','الملك فهد وماحوله', 'عرقة وماحولها',
     'العقيق وماحولها','العليا وماحولها'];
 
-  late File License;
+  //late File License;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
-  String url = '';
 
 
   // text field state
@@ -244,8 +243,8 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                       //textStyle: TextStyle(color: Colors.black),
                     ),
                     onPressed: () async{
-                      getImage();
-                      uploadImage();
+                      // getImage();
+                      // uploadImage();
                     }
                 ),
 
@@ -280,21 +279,21 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
       ),
     );
   }
-  void uploadImage() async{
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("Licenses"+ DateTime.now().toString()+".jpg");
-    UploadTask uploadTask = ref.putFile(License);
-    uploadTask.whenComplete(() {
-      url = ref.getDownloadURL() as String;
-    }).catchError((onError) {
-      print(onError);
-    });
-  }
-
-  Future getImage() async {
-    File image = (await ImagePicker.platform.getImage(source: ImageSource.gallery)) as File;
-    setState(() {
-      License = image;
-    });
-  }
+  // void uploadImage() async{
+  //   FirebaseStorage storage = FirebaseStorage.instance;
+  //   Reference ref = storage.ref().child("Licenses"+ DateTime.now().toString()+".jpg");
+  //   UploadTask uploadTask = ref.putFile(License);
+  //   uploadTask.whenComplete(() {
+  //     url = ref.getDownloadURL() as String;
+  //   }).catchError((onError) {
+  //     print(onError);
+  //   });
+  // }
+  //
+  // Future getImage() async {
+  //   File image = (await ImagePicker.platform.getImage(source: ImageSource.gallery)) as File;
+  //   setState(() {
+  //     License = image;
+  //   });
+  // }
 }

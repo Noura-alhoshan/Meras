@@ -4,7 +4,6 @@ import 'package:meras/screen/authenticate/register_trainee.dart';
 import 'package:meras/screen/authenticate/sign_in.dart'; 
 import 'package:meras/screen/authenticate/register.dart';
 
-import 'MyImagePicker.dart';
 
 
 class  authenticate extends StatefulWidget {
@@ -34,7 +33,7 @@ class _authenticateState extends State<authenticate> {
     //   return Register(toggleView: toggleView);
     // }
     else {
-      return MyImagePicker(toggleView: toggleView);
+      return RegisterAsCoatch(toggleView: toggleView);
     }
   }
 }

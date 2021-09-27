@@ -48,10 +48,23 @@ final FirebaseFirestore fuser = FirebaseFirestore.instance;
   Future registerAsCoach(String Fname, String Lname,String email,String password, String age,
         String phoneNumber, String neighborhood,String description, String gender, String status) async {
 
-    UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-    User? user1 = result.user;
-    DatabaseService(uid: user1!.uid).updateCoachesData(Fname,Lname,email,password,age,phoneNumber,neighborhood,
-        description, gender, status);
+    CollectionReference coachesCollection = FirebaseFirestore.instance.collection('Coach');
+    Map<String,dynamic> traineeDataDemo = {
+      "Fame": Fname,
+      'Lame': Lname,
+      'Email': email,
+      'Pass': password,
+      'Age': age,
+      'Phone Number': phoneNumber,
+      'Discerption': description,
+      'Neighborhood': neighborhood,
+      'Gender': gender,
+      'Status': status,
+    };
+    coachesCollection.add(traineeDataDemo);
+    // User? user1 = result.user;
+    // DatabaseService(uid: user1!.uid).updateCoachesData(Fname,Lname,email,password,age,phoneNumber,neighborhood,
+    //     description, gender, status);
   }
 
   //sign in 
