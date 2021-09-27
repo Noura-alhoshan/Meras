@@ -40,14 +40,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
-      child: document['Status'] == 'D'
+      child: document['Status'] == 'A'
           ? Container(
               child: Card(
                 child: ListTile(
                   title: Text(document['Fname'] + ' ' + document['Lname']),
                   subtitle: Text(document['Discerption']),
                   leading: document['Gender'] == 'female'
-                      ? Image.asset("assets/driver-female.jpg")
+                      ? Image.asset("assets/Female.png")
                       : Image.asset("assets/driver-male.jpg"),
                   trailing: ElevatedButton(
                     child: Text('معلومات المدرب'),
