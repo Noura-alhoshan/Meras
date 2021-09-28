@@ -6,7 +6,7 @@ import 'package:meras1/Test.dart';
 void main() async {
   runApp(MaterialApp(
     routes: {
-      '/test': (context) => TestScreen(),
+      //  '/test': (context) => TestScreen(ic),
     },
   ));
 }
@@ -91,7 +91,12 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
     );
   }
 
-  void nav(String id) async {
-    Navigator.pushNamed(context, '/Test'); //nn
+  void nav(String icd) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return TestScreen(icd);
+      }),
+    );
   }
 }

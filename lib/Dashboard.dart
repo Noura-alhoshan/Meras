@@ -7,7 +7,7 @@ import 'package:meras1/Test.dart';
 void main() async {
   runApp(MaterialApp(
     routes: {
-      '/test': (context) => TestScreen(),
+      //  '/test': (context) => TestScreen(),
     },
   ));
 }
@@ -97,30 +97,3 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Navigator.pushNamed(context, '/Test'); //nn
   }
 }
-
-/*
-
-CustomScrollView(
-        center: centerKey,
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-
-                );
-              },
-            ),
-          ),
-          SliverList(
-            key: centerKey,
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-   
-                );
-              },
-            ),
-          ),
-        ],
-      ),*/
