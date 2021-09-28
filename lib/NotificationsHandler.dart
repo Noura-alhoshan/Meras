@@ -22,7 +22,7 @@ createLocalNotification({required Map<String, dynamic> message}) async {
           payload: data));
 }
 
-// Converts Remote Notifcation to Local Notification
+// Converts remote notifcation to local notification
 handleNetworkNotification(RemoteMessage message) {
   AwesomeNotifications().createNotification(
       content: NotificationContent(

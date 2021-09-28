@@ -14,12 +14,15 @@ class TRcategory extends StatefulWidget {
 class _State extends State<TRcategory> {
   int selectedIndex = 0;
 
-  // handleNotifications() async {
-  //   await firebaseMessaging.getToken().then((value) {
-  //     print('Token');
-  //     print(value);
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+
+    // Generates push notification token
+    firebaseMessaging.getToken().then((token) {
+      print(token);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
