@@ -22,15 +22,21 @@ createLocalNotification({required Map<String, dynamic> message}) async {
           payload: data));
 }
 
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('Initialized Background Messenging');
-  await createLocalNotification(message: message.data);
+// Converts Remote Notifcation to Local Notification
+handleNetworkNotification(RemoteMessage message) {
+  AwesomeNotifications().createNotification(
+      content: NotificationContent(
+          id: int.parse(randomNumeric(3)),
+          channelKey: 'basic_channel',
+          title: message.notification!.title,
+          body: message.notification!.body,
+          payload: {}));
 }
 
-dynamic handleNotificationRouting(
-    {required Map<String, dynamic> message}) async {
-  print(message);
+// It will be called when the app is terminated
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  await createLocalNotification(message: message.data);
 }
 
 dynamic initializeLocalNotification() {

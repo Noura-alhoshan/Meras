@@ -8,7 +8,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  //App is terminated
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  //App is closed(Inside the RAM)
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    await handleNetworkNotification(message);
+  });
+
+  // App is opened
+  FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+    await handleNetworkNotification(message);
+  });
 
   initializeLocalNotification();
 
