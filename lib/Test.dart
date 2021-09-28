@@ -1,6 +1,15 @@
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:meras1/ADcategory.dart';
+
+void main() async {
+  runApp(MaterialApp(
+    routes: {
+      '/ADcategory': (context) => ADcategory(),
+    },
+  ));
+}
 
 class TestScreen extends StatefulWidget {
   final String id;
@@ -54,6 +63,28 @@ class _TestScreenState extends State<TestScreen> {
             //  document['Email'],
             style: TextStyle(fontSize: 35),
           ),
+          TextButton(
+            child: Text('رفض'),
+            onPressed: () {/** */},
+            style: TextButton.styleFrom(
+                primary: Colors.black,
+                backgroundColor: Colors.redAccent[200],
+                textStyle: TextStyle(fontSize: 16)),
+          ),
+          TextButton(
+            child: Text('قبول'),
+            onPressed: () {
+              FirebaseFirestore.instance
+                  .collection('Coach')
+                  .doc(widget.id)
+                  .update({'Status': 'A'});
+              nav1();
+            },
+            style: TextButton.styleFrom(
+                primary: Colors.black,
+                backgroundColor: Colors.lightGreen[200],
+                textStyle: TextStyle(fontSize: 16)),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           ),
@@ -77,11 +108,16 @@ class _TestScreenState extends State<TestScreen> {
             if (!snapshot.hasData) return const Text('loading 7 ...');
             return ListView.builder(
               physics: const NeverScrollableScrollPhysics(), //<--here
+              itemCount: 1,
 
               itemBuilder: (context, index) =>
-                  _buildListItem(context, (snapshot.data!).docs[index]),
+                  _buildListItem(context, (snapshot.data!).docs[0]),
             );
           }),
     );
+  }
+
+  void nav1() async {
+    Navigator.pushNamed(context, '/ADcategory'); //nn
   }
 }

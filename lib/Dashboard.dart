@@ -93,7 +93,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  void nav(String id) async {
-    Navigator.pushNamed(context, '/Test'); //nn
+  void nav(String icd) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return TestScreen(icd);
+      }),
+    );
   }
 }

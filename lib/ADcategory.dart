@@ -10,7 +10,7 @@ class ADcategory extends StatefulWidget {
 }
 
 class _State extends State<ADcategory> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +18,10 @@ class _State extends State<ADcategory> {
           ? ADnotification()
           : selectedIndex == 1
               ? DashboardScreen()
-              : selectedIndex == 2
-                  ? ADhome()
-                  : ADhome(),
+              : DashboardScreen(),
+      //  : selectedIndex == 2
+      //       ? ADhome()
+      //        : ADhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
@@ -38,10 +39,10 @@ class _State extends State<ADcategory> {
               icon: Icon(Icons.list_alt_sharp),
               title: Text('القائمة'),
               activeColor: Colors.blue),
-          BottomNavyBarItem(
-              icon: Icon(Icons.home),
-              title: Text('الرئيسية'),
-              activeColor: Colors.green),
+          // BottomNavyBarItem(
+          //     icon: Icon(Icons.home),
+          //      title: Text('الرئيسية'),
+          //     activeColor: Colors.green),
         ],
       ),
     );
