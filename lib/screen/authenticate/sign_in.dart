@@ -6,6 +6,7 @@ import 'package:meras/components/rounded_button.dart';
 import 'package:meras/components/rounded_input_field.dart';
 import 'package:meras/components/rounded_password_field.dart';
 import 'package:meras/screen/Signup/signup_screen.dart';
+import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/screen/home/home.dart';
 import 'package:meras/services/auth.dart';
@@ -66,7 +67,7 @@ class _SignInState extends State<SignIn> {
                hintText: sp+"      البريد الإلكتروني",
                 validator: (val) => val!.isEmpty? '         الرجاء إدخال البريد الإلكتروني' : null,//added ! to val
                 onChanged: (val) {
-                  setState(() => email = val);
+                  setState(() => email = val.trim());
                 },
               ),
               SizedBox(height: 20.0),
@@ -98,7 +99,7 @@ class _SignInState extends State<SignIn> {
               
               Text(
                 error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
+                style: TextStyle(color: Colors.red, fontSize: 15.0),
               ),
               SizedBox(height: 10.0),
 
@@ -106,7 +107,7 @@ class _SignInState extends State<SignIn> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                child: Text('هل نسيت كلمة المرور؟',style: TextStyle(fontSize: 15.5),),
+                child: Text('هل نسيت كلمة المرور؟',style: TextStyle(fontSize: 15.8),),
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => ResetScreen()),
                 ),
@@ -143,18 +144,26 @@ class _SignInState extends State<SignIn> {
                 
               ),
               
-               AlreadyHaveAnAccountCheck(
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
-                    },
-                  ),
-                );
-              },
-            ),
+            Row(
+
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                child: Text('حساب مدرب',style: TextStyle(fontSize: 15.5,color: kPrimaryColor,fontWeight: FontWeight.bold),),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => notApproaved()),//CHANGE IT 
+                ),
+              ),
+              TextButton(
+                child: Text('  حساب متعلم',style: TextStyle(fontSize: 15.5,color: kPrimaryColor,fontWeight: FontWeight.bold),),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SignUpScreen()),
+                ),
+              ),
+              
+              Text(' ليس لديك حساب؟ قم بإنشاء',style: TextStyle(fontSize: 15.5,color: kPrimaryColor)),
+            ],
+          ),
             ],
           ),
         ),

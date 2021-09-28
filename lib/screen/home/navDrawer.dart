@@ -1,21 +1,18 @@
+import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/database.dart';
 import 'package:meras/models/MyUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../constants.dart';
+import 'BaseAlertDialog.dart';
 //import 'package:flutter/material.dart';
-
-
-
 
 
 class NavDrawer extends StatelessWidget  {
 
    final AuthService _auth = AuthService(); 
-   
-  
- 
-
 
   @override
    Widget build(BuildContext context)  {
@@ -40,7 +37,7 @@ class NavDrawer extends StatelessWidget  {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.deepPurple[100],
+              color: kPrimaryLightColor,
               
             ), //child: null,
           ),
@@ -55,16 +52,31 @@ class NavDrawer extends StatelessWidget  {
           ListTile(
             title: Text('تسجيل الخروج'),
             leading: Icon(Icons.exit_to_app),
-            onTap: () async {
+            onTap: ()  {  
+              
+         var baseDialog = BaseAlertDialog(
+              title: "",
+              content: "هل أنت متأكد من تسجيل الخروج؟",
+              yesOnPressed: () async {
                 await _auth.signOut();
+                Navigator.pop( context, 
+                   MaterialPageRoute(builder: (context) => SignIn()),);
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                   },
+                
+              noOnPressed: () {
+                Navigator.of(context, rootNavigator: true).pop('dialog');
               },
-          ),
+              yes: "نعم",
+              no: "لا");
+          showDialog(context: context, builder: (BuildContext context) => baseDialog);
+          }
+         ,),
         ],
       ),  
-    ),);
+    ),
+    );
   
   }
-
-
 }
 

@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/constants.dart';
-import 'package:meras/screen/Welcome/welcome_screen.dart';
+//import 'package:meras/screen/Welcome/welcome_screen.dart';
 import 'package:meras/screen/home/home.dart';
 import 'package:meras/screen/wrapper.dart';
 import 'package:meras/services/auth.dart';

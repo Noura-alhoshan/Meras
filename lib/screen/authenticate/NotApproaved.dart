@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
 import 'package:meras/screen/authenticate/sign_in.dart'; 
@@ -28,18 +29,13 @@ final _formKey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        //backgroundColor: Colors.deepPurple[200],
-        appBar: AppBar(
-          //title: Text('You are not allowed to sign in'),
-          backgroundColor: Colors.deepPurple[100],
-          elevation: 0.0,
-          actions: <Widget>[
-          
-          ],
-        ),
 
-       body: 
-      SingleChildScrollView( child: 
+       body: Background( child:
+      SingleChildScrollView( 
+        padding: EdgeInsets.only(top: 7.0),
+        child: 
+        
+        
       Container(
    
         padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 50.0),
@@ -60,6 +56,7 @@ final _formKey = GlobalKey<FormState>();
         AlertDialog(
         title: const Text('عزيزي المدرب',textAlign: TextAlign.center,),
         content: SingleChildScrollView(
+         
           child: ListBody(
             children: const <Widget>[
               
@@ -88,15 +85,12 @@ final _formKey = GlobalKey<FormState>();
         ],
         
       )],
-    )
-
-   
-              
+    )        
             ),
           ),
         ),
       ),
-      );
+      ),);
 
   }
 }
