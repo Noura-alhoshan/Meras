@@ -24,7 +24,7 @@ class DatabaseService {
   CollectionReference traineeCollection = FirebaseFirestore.instance.collection('trainees');
 
   updateTraineeData(String Fname, String Lname, String email, String password,
-                  String age, String phoneNumber, String neighborhood, String gender) {
+                  int age, String phoneNumber, String neighborhood, String gender) {
     Map<String,dynamic> traineeDataDemo = {
       "First Name": Fname,
       'Last Name': Lname,
@@ -42,8 +42,8 @@ class DatabaseService {
   updateCoachesData(String Fname, String Lname,String email,String password, String age,
       String phoneNumber, String neighborhood,String description, String gender, String status) {
     Map<String,dynamic> traineeDataDemo = {
-      "Fame": Fname,
-      'Lame': Lname,
+      "Fname": Fname,
+      'Lname': Lname,
       'Email': email,
       'Pass': password,
       'Age': age,

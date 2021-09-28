@@ -33,10 +33,34 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
   String Lname = '';
   String email = '';
   String password = '';
-  String age = '';
+  //String age = '';
   String phoneNumber = '';
   String neighborhood = '';
   String gender = '';
+
+  int _age = 0;
+  String _message = '';
+
+  void ageOnSubmitted(String value) {
+    try {
+      _age = int.parse(value);
+    } on FormatException catch(ex) {
+      setState(() {
+        _message = "من فضلك أدخل عمرك حيث لا يقل عن ١٧ عام";
+      });
+    }
+  }
+
+  void enterMeras() {
+    setState(() {
+      if (_age > 17) {
+        _message = "مرحبًا بك!";
+      }
+      else {
+        _message = "تأكد من إدخال جميع المعلومات بشكل صحيح";
+      }
+    });
+  }
 
 
   @override
@@ -132,10 +156,7 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                         borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
                       ),
                       hintText: "العمر"),
-                  validator: (val) => val!.length < 2 ? 'العمر المسموح ١٧ وأعلى' : null,//added ! to val
-                  onChanged: (val) {
-                    setState(() => age = val);
-                  },
+                  onChanged: ageOnSubmitted,
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
@@ -216,7 +237,7 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                     ),
                     onPressed: () {//async
                       if(_formKey.currentState!.validate()){
-                        dynamic result = _auth.registerAsTrainee(Fname, Lname, email, password, age, phoneNumber, neighborhood, gender);//await
+                        dynamic result = _auth.registerAsTrainee(Fname, Lname, email, password, _age, phoneNumber, neighborhood, gender);//await
                         if(result == null) {
                           setState(() {
                             error = 'تأكد من إدخال المعلومات بشكل صحيح';

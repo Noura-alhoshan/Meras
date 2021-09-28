@@ -33,6 +33,7 @@ dependencies:
   intl: ^0.17.0
   image_picker: ^0.8.4+2
   firebase_storage: ^10.0.3
+  permission_handler: ^8.1.6
 
 
   #uses-material-design: true

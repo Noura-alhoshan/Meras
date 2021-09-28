@@ -6,6 +6,7 @@ import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/services/database.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class RegisterAsCoatch extends StatefulWidget {
 
@@ -30,6 +31,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
+  String imageUrl = '';
 
 
   // text field state
@@ -37,11 +39,35 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   String Lname = '';
   String email = '';
   String password = '';
-  String age = '';
+  //String age = '';
   String phoneNumber = '';
   String neighborhood = '';
   String description = '';
   String gender = '';
+
+  int _age = 0;
+  String _message = '';
+
+  void ageOnSubmitted(String value) {
+    try {
+      _age = int.parse(value);
+    } on FormatException catch(ex) {
+      setState(() {
+        _message = "من فضلك أدخل عمرك بشكل صحيح";
+      });
+    }
+  }
+
+  void enterMeras() {
+    setState(() {
+      if (_age > 17) {
+        _message = " ";
+      }
+      else {
+        _message = "العمر المسموح به ١٧ وأكثر";
+      }
+    });
+  }
 
 
   @override
@@ -70,7 +96,6 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20.0),
                 TextFormField(
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
@@ -124,26 +149,27 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                       hintText: "كلمة المرور"
                   ),
                   obscureText: true,
-                  validator: (val) => val!.length < 6 ? '   الرجاء إدخال كلمة المرور بشكل صحيح' : null,//added ! to val
+                  validator: (val) => val!.length < 6 ? 'الرجاء إدخال كلمة المرور بشكل صحيح' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => password = val);
                   },
                 ),
                 SizedBox(height: 20.0),
-
                 TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "العمر"),
-                  validator: (val) => val!.length < 2 ? 'العمر المسموح ١٧ وأعلى' : null,//added ! to val
-                  onChanged: (val) {
-                    setState(() => age = val);
-                  },
+                textAlign: TextAlign.right,
+                decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
+                    ),
+                    hintText: "العمر"),
+                  validator: (val) => val!.isEmpty? 'الرجاء إدخال العمر' : null,
+                  onChanged: ageOnSubmitted,
                 ),
-                SizedBox(height: 20.0),
+                Text(
+                    _message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14.0, color: Colors.red)
+                ),
 
                 TextFormField(
                   textAlign: TextAlign.right,
@@ -157,24 +183,20 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     setState(() => phoneNumber = val);
                   },
                 ),
-                Text(""),
-                TextField(
+                SizedBox(height: 20.0),
+                TextFormField(
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
                       ),
                       hintText: "وصف"),
-                  keyboardType: TextInputType.multiline,
-                  minLines: 1,//Normal textInputField will be displayed
-                  maxLines: 5,// when user presses enter it will adapt to it
-                  onChanged: (val){
-                    setState(() {
-                      description = val;
-                    });
+                  validator: (val) => val!.isEmpty? 'الرجاء إدخال وصف' : null,//added ! to val
+                  onChanged: (val) {
+                    setState(() =>  description = val);
                   },
                 ),
-                Text(""),
+                SizedBox(height: 20.0),
                 Text(""),
                 Text(':اختر منطقتك السكنيةأو المنطقة التي تريد التدريب فيها', textAlign: TextAlign.right,),
                 Column(
@@ -200,7 +222,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                   ],
                 ),
                 SizedBox(height: 20.0),
-                Text(""),
+                SizedBox(height: 20.0),
                 Text(':الجنس                                                                             ',
                   textAlign: TextAlign.right,),
                 Column(
@@ -233,21 +255,27 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     ),
                   ],
                 ),
-                Text(""),
-                ElevatedButton(
-                  //color: Colors.pink[400],
-                    child: Text('تحميل صورة رخصة القيادة'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple[50],
-                      onPrimary: Colors.deepPurple[900],
-                      //textStyle: TextStyle(color: Colors.black),
+                SizedBox(height: 20.0),
+                Column(
+                  children: <Widget>[
+                    //(imageUrl != null)
+                        // ? Image.network(imageUrl)
+                        // : Placeholder(fallbackHeight: 100.0, fallbackWidth: 150.0,),
+                    SizedBox(height: 20.0,),
+                    ElevatedButton(
+                        child: Text('تحميل صورة رخصة القيادة',textAlign: TextAlign.center,),
+                      style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple[50],
+                            onPrimary: Colors.deepPurple[900],
+                          ),
+                      onPressed: () => uploadImage(),
+
                     ),
-                    onPressed: () async{
-                      // getImage();
-                      // uploadImage();
-                    }
+                  ],
                 ),
 
+                Text(imageUrl, textAlign: TextAlign.center,),
+                SizedBox(height: 20.0),
                 ElevatedButton(
                   //color: Colors.pink[400],
                     child: Text('إنشاء حساب مدرب'),
@@ -258,10 +286,11 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     ),
                     onPressed: () {//async
                       if(_formKey.currentState!.validate()){
-                        dynamic result = _auth.registerAsCoach(Fname, Lname,email, password, age,phoneNumber,neighborhood,description,gender,'P');//await
+                        enterMeras();
+                        dynamic result = _auth.registerAsCoach(Fname, Lname,email, password, _age,phoneNumber,neighborhood,description,gender,'P',imageUrl);//await
                         if(result == null) {
                           setState(() {
-                            error = 'Please supply a valid email';
+                            error = 'من فضلك تأكد من إدخال المعلومات بشكل صحيح';
                           });
                         }
                       }
@@ -279,21 +308,38 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
       ),
     );
   }
-  // void uploadImage() async{
-  //   FirebaseStorage storage = FirebaseStorage.instance;
-  //   Reference ref = storage.ref().child("Licenses"+ DateTime.now().toString()+".jpg");
-  //   UploadTask uploadTask = ref.putFile(License);
-  //   uploadTask.whenComplete(() {
-  //     url = ref.getDownloadURL() as String;
-  //   }).catchError((onError) {
-  //     print(onError);
-  //   });
-  // }
-  //
-  // Future getImage() async {
-  //   File image = (await ImagePicker.platform.getImage(source: ImageSource.gallery)) as File;
-  //   setState(() {
-  //     License = image;
-  //   });
-  // }
+
+  uploadImage () async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+
+    //Check for permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+    if(permissionStatus.isGranted){
+      //Select Image
+      image = (await _picker.getImage(source: ImageSource.gallery))!;
+      var file = File(image.path);
+
+      if(image != null){
+        //Upload to Firebase
+        var snapshot = await _storage.ref()
+            .child('Coaches Licenses/license')
+            .putFile(file);
+
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+      }else{
+        print('No Path received');
+      }
+
+    }else{
+      print('تم رفض الوصول لألبوم الكاميرا، فضلًا حاول مرة أخرى');
+    }
+  }
 }
