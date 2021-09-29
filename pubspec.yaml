@@ -31,6 +31,7 @@ dependencies:
   cloud_firestore: ^2.5.2
   provider: ^6.0.0
   intl: ^0.17.0
+  full_screen_image: ^1.0.2
 
 
   #uses-material-design: true

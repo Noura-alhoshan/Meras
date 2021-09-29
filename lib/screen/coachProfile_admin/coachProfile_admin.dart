@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:meras/models/MyUser.dart';
 import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/screen/coachProfile_admin/Coach.dart';
-import 'package:meras/screen/coachProfile_admin/user_preferences.dart';
+//import 'package:meras/screen/coachProfile_admin/user_preferences.dart';
 import 'package:meras/screen/coachProfile_admin/widget/appbar_widget.dart';
 import 'package:meras/screen/coachProfile_admin/widget/button_widget.dart';
 import 'package:meras/screen/coachProfile_admin/widget/numbers_widget.dart';
@@ -62,7 +62,7 @@ class _TestScreenState extends State<TestScreen> {
   Widget _build(BuildContext context, DocumentSnapshot document) {
 
 
-    return Container(
+    return Background( child: Container(
         height: 1100,
         //child: SingleChildScrollView(
           child:  ListView(
@@ -79,22 +79,16 @@ class _TestScreenState extends State<TestScreen> {
           const SizedBox(height: 24),
           //const SizedBox(height: 24),
          // NumbersWidget(),
-           Row(
-           children: <Widget>[ 
-             Padding(padding:EdgeInsets.symmetric(horizontal: 37, vertical: 5)),
-             Center(child: Accept()),
-             SizedBox(width: 24),
-          Center(child: Reject()), ]),
-          const SizedBox(height: 38),
+    
 
             Row(
            children: <Widget>[ 
              Padding(padding:EdgeInsets.symmetric(horizontal: 0, vertical: 0)),
               Text('             العمر',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
                 Text('                       الجنس',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
              //Center(child: Text('العمر')),
              SizedBox(width: 24),
@@ -122,10 +116,17 @@ class _TestScreenState extends State<TestScreen> {
            ]),
 
           buildAbout(document),
-          
+          const SizedBox(height: 38),
+                 Row(
+           children: <Widget>[ 
+             Padding(padding:EdgeInsets.symmetric(horizontal: 37, vertical: 5)),
+             Center(child: Accept()),
+             SizedBox(width: 24),
+          Center(child: Reject()), ]),
+          const SizedBox(height: 38),
         ],
       ),
-    );
+    ),);
   }
 
   Widget buildName( DocumentSnapshot document) => Column(
