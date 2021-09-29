@@ -1,7 +1,10 @@
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/ADcategory.dart';
+import 'package:meras1/BaseAlertDialog.dart';
+import 'package:meras1/auth.dart';
 
 void main() async {
   runApp(MaterialApp(
@@ -10,6 +13,8 @@ void main() async {
     },
   ));
 }
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class TestScreen extends StatefulWidget {
   final String id;
@@ -73,12 +78,33 @@ class _TestScreenState extends State<TestScreen> {
           ),
           TextButton(
             child: Text('قبول'),
-            onPressed: () {
-              FirebaseFirestore.instance
-                  .collection('Coach')
-                  .doc(widget.id)
-                  .update({'Status': 'A'});
-              nav1();
+            onPressed: () async {
+              var baseDialog = BaseAlertDialog(
+                  title: "",
+                  content: "هل أنت متأكد من قبول المدرب؟",
+                  yesOnPressed: () async {
+                    FirebaseFirestore.instance
+                        .collection('Coach')
+                        .doc(widget.id)
+                        .update({'Status': 'A'});
+                    UserCredential result =
+                        await _auth.createUserWithEmailAndPassword(
+                            email: document['Email'],
+                            password: document['Pass']);
+                    Navigator.pop(
+                      context,
+                      MaterialPageRoute(builder: (context) => ADcategory()),
+                    );
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                  noOnPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                  yes: "نعم",
+                  no: "لا");
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => baseDialog);
             },
             style: TextButton.styleFrom(
                 primary: Colors.black,

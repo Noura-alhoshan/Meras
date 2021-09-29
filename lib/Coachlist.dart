@@ -44,7 +44,8 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
               child: Card(
                 child: ListTile(
                   title: Text(document['Fname'] + ' ' + document['Lname']),
-                  subtitle: Text(document['Discerption']),
+                  //  subtitle: Text(document['Discerption']),
+
                   leading: document['Gender'] == 'female'
                       ? Image.asset("assets/Female.png")
                       : Image.asset("assets/driver-male.jpg"),
@@ -69,7 +70,7 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(' قائمة مدربين القيادة '),
-        backgroundColor: Color(0xFF6F35A5),
+        backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
         child: Background(

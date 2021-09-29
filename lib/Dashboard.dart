@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/Background.dart';
 import 'package:meras1/Test.dart';
+import 'package:meras1/coachProfile_admin.dart';
 
 void main() async {
   runApp(MaterialApp(
@@ -44,12 +45,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ? Container(
               child: Card(
                 child: ListTile(
-                  title: Text(document['Fname'] + ' ' + document['Lname']),
-                  subtitle: Text(document['Discerption']),
-                  leading: document['Gender'] == 'female'
+                  title: Text(
+                    document['Fname'] + ' ' + document['Lname'],
+                    textAlign: TextAlign.right,
+                  ),
+
+                  //  subtitle: Text(document['Discerption']),
+                  trailing: document['Gender'] == 'female'
                       ? Image.asset("assets/Female.png")
                       : Image.asset("assets/driver-male.jpg"),
-                  trailing: ElevatedButton(
+                  leading: ElevatedButton(
                     child: Text('معلومات المدرب'),
                     onPressed: () {
                       nav(document.id);
@@ -70,7 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('قائمة المدربين قيد الانتظار'),
-        backgroundColor: Color(0xFF6F35A5),
+        backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
         child: Background(
@@ -97,7 +102,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return TestScreen(icd);
+        return TestScreen1(icd);
       }),
     );
   }
