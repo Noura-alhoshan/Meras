@@ -1,8 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:meras1/ADpages/ADhome.dart';
-import 'package:meras1/ADpages/ADnotification.dart';
-import 'package:meras1/Dashboard.dart';
+import 'package:meras1/screen/admin/ADnotification.dart';
+import 'package:meras1/screen/admin/Dashboard.dart';
 
 class ADcategory extends StatefulWidget {
   @override

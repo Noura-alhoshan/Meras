@@ -2,9 +2,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meras1/ADcategory.dart';
-import 'package:meras1/BaseAlertDialog.dart';
-import 'package:meras1/auth.dart';
+import 'package:meras1/screen/admin/ADcategory.dart';
+import 'package:meras1/screen/home/BaseAlertDialog.dart';
+import 'package:meras1/Services/auth.dart';
 
 void main() async {
   runApp(MaterialApp(
@@ -70,7 +70,37 @@ class _TestScreenState extends State<TestScreen> {
           ),
           TextButton(
             child: Text('رفض'),
-            onPressed: () {/** */},
+            onPressed: () async {
+              var baseDialog = BaseAlertDialog(
+                  title: "",
+                  content: "هل أنت متأكد من رفض المدرب؟",
+                  yesOnPressed: () async {
+                    deleteUser();
+
+                    Navigator.pop(
+                      context,
+                      MaterialPageRoute(builder: (context) => ADcategory()),
+                    );
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                  noOnPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                  yes: "نعم",
+                  no: "لا");
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => baseDialog);
+
+              //  print("test1");
+
+              //    await sendEmail(
+              //      'nooni-4321@hotmail.com',
+              //       'hey1',
+              //       'confireeeemd',
+              //       );
+              //     print("test2");
+            },
             style: TextButton.styleFrom(
                 primary: Colors.black,
                 backgroundColor: Colors.redAccent[200],
@@ -79,6 +109,8 @@ class _TestScreenState extends State<TestScreen> {
           TextButton(
             child: Text('قبول'),
             onPressed: () async {
+              print("test3");
+
               var baseDialog = BaseAlertDialog(
                   title: "",
                   content: "هل أنت متأكد من قبول المدرب؟",
@@ -145,5 +177,31 @@ class _TestScreenState extends State<TestScreen> {
 
   void nav1() async {
     Navigator.pushNamed(context, '/ADcategory'); //nn
+  }
+
+  sendEmail(String sendEmailTo, String subject, String emailBody) async {
+    await FirebaseFirestore.instance.collection("mail").add(
+      {
+        'to': "$sendEmailTo",
+        'message': {
+          'subject': "$subject",
+          'text': "$emailBody",
+        },
+      },
+    ).then(
+      (value) {
+        print("object !!!!!!");
+      },
+    );
+    print('email done');
+  }
+
+  Future<void> deleteUser() {
+    CollectionReference users = FirebaseFirestore.instance.collection('Coach');
+    return users
+        .doc(widget.id)
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
   }
 }

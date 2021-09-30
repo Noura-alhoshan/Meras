@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:meras1/ADcategory.dart';
-import 'package:meras1/Background.dart';
-import 'package:meras1/BaseAlertDialog.dart';
+import 'package:meras1/screen/admin/ADcategory.dart';
+import 'package:meras1/widget/Background.dart';
+import 'package:meras1/screen/home/BaseAlertDialog.dart';
 import 'package:meras1/widget/button_widget.dart';
 import 'package:meras1/widget/profile_widget.dart';
 
@@ -172,13 +172,22 @@ class _TestScreenState extends State<TestScreen1> {
   Widget Reject(DocumentSnapshot document) => ButtonWidget(
         colorr: red,
         text: 'رفض',
-        onClicked: () {},
+        onClicked: () async {
+          print("test1");
+
+          await sendEmail(
+            'nooni-4321@hotmail.com',
+            'hey1',
+            'confireeeemd',
+          );
+          print("test2");
+        },
       );
   Widget Accept(DocumentSnapshot document) => ButtonWidget(
         colorr: green,
         text: 'قبول',
         onClicked: () async {
-          print('test' + document['Email']);
+          // print('test' + document['Email']);
 
           var baseDialog = BaseAlertDialog(
               title: "",
@@ -191,6 +200,8 @@ class _TestScreenState extends State<TestScreen1> {
                 UserCredential result =
                     await _auth.createUserWithEmailAndPassword(
                         email: document['Email'], password: document['Pass']);
+                deleteField();
+
                 Navigator.pop(
                   context,
                   MaterialPageRoute(builder: (context) => ADcategory()),
@@ -244,4 +255,31 @@ class _TestScreenState extends State<TestScreen1> {
           ],
         ),
       );
+  sendEmail(String sendEmailTo, String subject, String emailBody) async {
+    await FirebaseFirestore.instance.collection("mail").add(
+      {
+        'to': "$sendEmailTo",
+        'message': {
+          'subject': "$subject",
+          'text': "$emailBody",
+        },
+      },
+    ).then(
+      (value) {
+        print("object !!!!!!");
+      },
+    );
+    print('email done');
+  }
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Coach');
+
+  Future<void> deleteField() {
+    return users
+        .doc(widget.id)
+        .update({'Pass': FieldValue.delete()})
+        .then((value) => print("User's Property Deleted"))
+        .catchError(
+            (error) => print("Failed to delete user's property: $error"));
+  }
 }

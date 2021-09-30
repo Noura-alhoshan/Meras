@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meras1/Background.dart';
+//import 'package:meras1/widget/Background.dart'd.dart';
 import 'package:meras1/Test.dart';
-import 'package:meras1/coachProfile_admin.dart';
+//import 'package:meras1/screen/admin/navDraweradmin.dart';
+import 'package:meras1/screen/tranee/navDrawertranee.dart';
+import 'package:meras1/widget/Background.dart';
 
 void main() async {
   runApp(MaterialApp(
     routes: {
-      //  '/test': (context) => TestScreen(),
+      //  '/test': (context) => TestScreen(ic),
     },
   ));
 }
@@ -28,12 +29,12 @@ void main() async {
 //             child: Text('Details'),
 //           ),
 
-class DashboardScreen extends StatefulWidget {
+class CoachlistScreen extends StatefulWidget {
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
+  _CoachlistScreenState createState() => _CoachlistScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _CoachlistScreenState extends State<CoachlistScreen> {
   @override
   void initState() {
     super.initState();
@@ -41,17 +42,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
-      child: document['Status'] == 'P'
+      child: document['Status'] == 'A'
           ? Container(
               child: Card(
                 child: ListTile(
                   title: Text(
                     document['Fname'] + ' ' + document['Lname'],
                     textAlign: TextAlign.right,
+                    // style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-
-                  //  subtitle: Text(document['Discerption']),
-                  trailing: document['Gender'] == 'female'
+                  subtitle: Text(
+                    document['Age'] +
+                        ' :' +
+                        'الجنس:' +
+                        ' ' +
+                        document['Gender'] +
+                        '        ' +
+                        'العمر',
+                    textAlign: TextAlign.right,
+                    // style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  trailing: document['Gender'] == 'أنثى'
                       ? Image.asset("assets/Female.png")
                       : Image.asset("assets/driver-male.jpg"),
                   leading: ElevatedButton(
@@ -73,8 +84,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawertranee(),
       appBar: AppBar(
-        title: Text('قائمة المدربين قيد الانتظار'),
+        title: Text('قائمة المدربين المتاحين'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
@@ -84,7 +96,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   FirebaseFirestore.instance.collection('Coach').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return const Text('loading 7 ...');
-
                 return ListView.builder(
                   physics: const NeverScrollableScrollPhysics(), //<--here
 
@@ -102,7 +113,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return TestScreen1(icd);
+        return TestScreen(icd);
       }),
     );
   }

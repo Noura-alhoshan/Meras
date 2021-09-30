@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:meras1/ADcategory.dart';
-import 'package:meras1/Coachlist.dart';
-import 'package:meras1/Dashboard.dart';
+import 'package:meras1/screen/admin/ADcategory.dart';
+import 'package:meras1/screen/tranee/Coachlist.dart';
+import 'package:meras1/screen/admin/Dashboard.dart';
 import 'package:meras1/Test.dart';
+
+import 'screen/tranee/TRcategory.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +18,7 @@ void main() async {
       // '/Test': (context) => TestScreen(),
       '/coachlist': (context) => CoachlistScreen(),
       '/ADcategory': (context) => ADcategory(),
+      '/TRcategory': (context) => TRcategory(),
     },
   ));
 }
@@ -45,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.white,
                 ),
                 FlatButton(
-                  child: Text('ACCEPTED CHACH LIST'),
+                  child: Text('Tranee'),
                   onPressed: () {
                     nav2();
                   },
@@ -57,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FlatButton(
-                  child: Text('TEST'),
+                  child: Text('Admin'),
                   onPressed: () {
                     nav1();
                   },
@@ -80,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void nav2() async {
-    Navigator.pushNamed(context, '/coachlist'); //nn
+    Navigator.pushNamed(context, '/TRcategory'); //nn
   }
 }
 //
