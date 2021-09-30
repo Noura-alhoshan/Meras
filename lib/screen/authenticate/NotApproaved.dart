@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/services/auth.dart';
@@ -75,9 +76,11 @@ final _formKey = GlobalKey<FormState>();
         actions: <Widget>[
           TextButton(
             child: const Text('إغلاق', style:TextStyle(color: Colors.deepPurple, fontSize: 16.0) , ),
-            onPressed: () {
+            onPressed: () async {
+               final FirebaseAuth _auth = FirebaseAuth.instance;
                   Navigator.pop( context, 
                    MaterialPageRoute(builder: (context) => SignIn()),);
+                    return await _auth.signOut();
                   //SystemNavigator.pop(); 
                  // glovar=1;
             },
