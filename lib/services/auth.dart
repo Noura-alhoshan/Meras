@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
+import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/services/database.dart';
 import 'package:meras/models/MyUser.dart'; 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,6 +56,37 @@ static int count =0;
 
  
 
+ Future registerAsTrainee(String Fname, String Lname, String email, String password, int age,
+      String phoneNumber, String neighborhood, String gender ) async {
+
+    UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    User? user1 = result.user;
+    DatabaseService(uid: user1!.uid).updateTraineeData(Fname,Lname,email,password,age,phoneNumber,neighborhood,gender);
+  }
+
+  Future registerAsCoach(String Fname, String Lname,String email,String password, int age,
+        String phoneNumber, String neighborhood,String description, String gender, String status, String url) async {
+
+    CollectionReference coachesCollection = FirebaseFirestore.instance.collection('Coach');
+    Map<String,dynamic> traineeDataDemo = {
+      "Fame": Fname,
+      'Lame': Lname,
+      'Email': email,
+      'Pass': password,
+      'Age': age,
+      'Phone Number': phoneNumber,
+      'Discerption': description,
+      'Neighborhood': neighborhood,
+      'Gender': gender,
+      'Status': status,
+      'URL': url,
+    };
+    coachesCollection.add(traineeDataDemo);
+    // User? user1 = result.user;
+    // DatabaseService(uid: user1!.uid).updateCoachesData(Fname,Lname,email,password,age,phoneNumber,neighborhood,
+    //     description, gender, status);
+  }
+
 
   
    Future registerWithEmailAndPassword(String Fname, String Lname, String Gender, //DateTime Birth,
@@ -69,18 +101,6 @@ static int count =0;
 
 
 
-
-  // FirebaseFirestore.instance.collection("Coach").get().then((querySnapshot) {
-     
-  //     querySnapshot.docs.forEach((value) {
-  //       //print("users: results: value");
-  //       if(value.data()['Status'].toString()=='D' && value.data()['Email'].toString() == email ){
-  //         print('its  happening');
-    
-  //     }
-  //     }
-  //     );
-
   //sign in 
   Future signInWithEmailAndPassword(String email, String password,BuildContext context) async {
   
@@ -93,21 +113,39 @@ static int count =0;
     } 
     catch (error) 
     {
-      FirebaseFirestore.instance.collection("users").get().then((querySnapshot) async {//async
+      FirebaseFirestore.instance.collection("Coach").get().then((querySnapshot) async {//async
      
       querySnapshot.docs.forEach((value) 
       {
-        if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='D' )
+        if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='P' )
         {
           count= count +1; 
         }
       } 
       );
-     // print("in auth");
-            if (count > 0)  {       
-                Navigator.push( context, 
-                MaterialPageRoute(builder: (context) => notApproaved()),
-  );
+            if (count > 0)  {
+                  //UserCredential result = await _auth.signInWithEmailAndPassword(email: "DefaultEmail@gmail.com", password: "1234567");
+                  //User? user3 = result.user; 
+                  var baseDialog = BaseAlertDialog(
+              title: "",
+              content: "  :عزيزي المدرب\n لا يمكنك تسجيل الدخول لانه لم يتم توثيق حسابك بعد"+"\n ملاحظة: يتم التوثيق حسب صلاحية رخصة قيادتك",
+              yesOnPressed: ()  {
+                
+                Navigator.pop( context, 
+                   MaterialPageRoute(builder: (context) => SignIn()),);
+                    //Navigator.of(context, rootNavigator: true).pop('dialog');
+                   
+                   },
+                
+              noOnPressed: () {
+                //Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              yes: "إغلاق",
+              no: "");
+          showDialog(context: context, builder: (BuildContext context) => baseDialog); 
+               // Navigator.push( context, 
+               // MaterialPageRoute(builder: (context) => notApproaved()), );
+              // return user3; 
        } else 
       return null;
       }

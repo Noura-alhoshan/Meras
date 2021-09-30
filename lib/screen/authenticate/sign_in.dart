@@ -8,6 +8,8 @@ import 'package:meras/components/rounded_password_field.dart';
 import 'package:meras/screen/Signup/signup_screen.dart';
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/background.dart';
+import 'package:meras/screen/authenticate/register_coach.dart';
+import 'package:meras/screen/authenticate/register_trainee.dart';
 import 'package:meras/screen/home/home.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
@@ -123,7 +125,10 @@ class _SignInState extends State<SignIn> {
                     //dynamic er =   _auth.showError();
                     //print(glovar);
                     //if (glovar != null)
-                    if(result == null) {
+                    if (result != null && result.email == "DefaultEmail@gmail.com"  ) 
+                     await _auth.signOut();
+                   
+                   else if(result == null) {
                        setState(() {
                         error = 'لا يمكن تسجيل الدخول بالمعلومات المعطاة';
                         //print('damn here again');
@@ -151,13 +156,13 @@ class _SignInState extends State<SignIn> {
               TextButton(
                 child: Text('حساب مدرب',style: TextStyle(fontSize: 15.5,color: kPrimaryColor,fontWeight: FontWeight.bold),),
                 onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => notApproaved()),//CHANGE IT 
+                  MaterialPageRoute(builder: (context) => RegisterAsCoatch()),//CHANGE IT 
                 ),
               ),
               TextButton(
                 child: Text('  حساب متعلم',style: TextStyle(fontSize: 15.5,color: kPrimaryColor,fontWeight: FontWeight.bold),),
                 onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SignUpScreen()),
+                  MaterialPageRoute(builder: (context) => RegisterAsTrainee()),
                 ),
               ),
               
