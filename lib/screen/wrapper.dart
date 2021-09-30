@@ -26,7 +26,7 @@ class Wrapper extends StatelessWidget {
     if (user == null){
       return authenticate();//homescreen 
     } else { 
-      return DoctorsInfo('BsFlJ1MMwSVHMdEfRvri'); //TestScreen('BsFlJ1MMwSVHMdEfRvri');  //KxEvQXNr9smM955QCQDW
+      return  TestScreen('BsFlJ1MMwSVHMdEfRvri');  //KxEvQXNr9smM955QCQDW
 
       //return home(userId: user.uid,);
     }
