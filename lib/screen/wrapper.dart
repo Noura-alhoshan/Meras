@@ -18,12 +18,13 @@ class Wrapper extends StatelessWidget {
 
    //signed in or not? 2 options
     final user = Provider.of<MyUser?>(context);// i added ? even tho there was no error 
-    //print(user);//////////////////////////////////////////////////
+
 
     if (user == null){
       return authenticate();//homescreen 
     } else {
-      return home(userId: user.uid,);
+      //print(user.uid);
+      return home(userId: user.uid);
     }
   }
 }
