@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:meras/screen/Navigation/ADpages/ADhome.dart';
 import 'package:meras/screen/Navigation/TRpages/TRhome.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
+import 'package:meras/screen/coachProfile_admin/widget/profile_widget.dart';
 import 'package:meras/screen/home/home.dart'; 
 import 'package:meras/screen/authenticate/authenticate.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/models/MyUser.dart';
 
 import 'coachProfile_admin/coachProfile_admin.dart';
+import 'coachProfile_admin/profile.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({ Key? key }) : super(key: key); 
@@ -24,7 +26,7 @@ class Wrapper extends StatelessWidget {
     if (user == null){
       return authenticate();//homescreen 
     } else { 
-      return TestScreen('BsFlJ1MMwSVHMdEfRvri');  //KxEvQXNr9smM955QCQDW
+      return DoctorsInfo('BsFlJ1MMwSVHMdEfRvri'); //TestScreen('BsFlJ1MMwSVHMdEfRvri');  //KxEvQXNr9smM955QCQDW
 
       //return home(userId: user.uid,);
     }
