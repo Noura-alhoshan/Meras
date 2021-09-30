@@ -27,8 +27,12 @@ class BaseAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String space='                       ';
-    return AlertDialog(
-      
+    return 
+    
+    AlertDialog(
+       shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: EdgeInsets.only(top: 24.0),
       content: new Text(this._content,style: TextStyle(fontSize: 15.7,fontWeight: FontWeight.bold,),textAlign: TextAlign.center ),
       backgroundColor: Colors.white,
       //shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
