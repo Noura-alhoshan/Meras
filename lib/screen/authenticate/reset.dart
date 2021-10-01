@@ -3,6 +3,7 @@ import 'package:meras/components/rounded_button.dart';
 import 'package:meras/components/rounded_input_field.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/authenticate/background.dart';
+import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart'; 
 import 'package:auto_direction/auto_direction.dart';
@@ -18,6 +19,7 @@ class _ResetScreenState extends State<ResetScreen> {
   final auth = FirebaseAuth.instance;
   String sp='      ';
   String eror = '';
+  bool valid = true;
   @override
   Widget build(BuildContext context) {
     
@@ -68,22 +70,66 @@ child: Background(
               SizedBox(height: 10.0),
 
           Row(
+            
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             
             children: [
               RoundedButton(
                 text: 'إرسال',
-                press: ()  {
-                  try{
-                    auth.sendPasswordResetEmail(email: _email);
-                    Navigator.of(context).pop();
+                press: () async 
+                {
+                   try{
+                   await auth.sendPasswordResetEmail(email: _email);
                    }
                   catch(error){
+                   // print(error.toString()); 
                     setState(() {
-                        eror = 'لا يمكن تسجيل الدخول بالمعلومات المعطاة';  
+                        eror = 'الرجاء التحقق من صلاحية البريد الإلكتروني';  
                       });
-                      }
-                },
+                    valid =false;
+                      
+                  }
+                      if (valid){
+                         var baseDialog = BaseAlertDialog(
+                          title: "",
+                          content: "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني   ",
+                          yesOnPressed: () async {
+                                Navigator.of(context).pop();  
+                                Navigator.of(context, rootNavigator: true).pop('dialog');
+                                    // Navigator.pop( context, 
+                                   //   MaterialPageRoute(builder: (context) => SignIn()),);
+                              },
+                            
+                          noOnPressed: () {
+                            //Navigator.of(context, rootNavigator: true).pop('dialog');
+                          },
+                          yes: "إغلاق",
+                          no: "");
+                      showDialog(context: context, builder: (BuildContext context) => baseDialog);
+                                      //Navigator.of(context).pop();  
+                      }  
+               },
+
+
+
+      //                  try{
+      //               auth.sendPasswordResetEmail(email: _email);
+      //             }
+                   
+      //             catch(error){
+      //               switch (error.toString()) {
+      // case "[firebase_auth/user-not-found]":
+      // case "invalid-email":
+      //   //errorMessage = "Your email address appears to be malformed."
+      //   print("go away");
+      //               setState(() {
+      //                   eror = 'البريد الإلكتروني غير موجود';
+      //                 });
+      //                  break;
+      //  }
+      //                 }
+                  // Navigator.of(context).pop();
+                
                 //color: Theme.of(context).accentColor,
               ),
 
