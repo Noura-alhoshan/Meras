@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/screen/admin/navDraweradmin.dart';
-import 'package:meras1/widget/Background.dart';
+import 'package:meras1/widget/BackgroundA.dart';
 import 'package:meras1/screen/admin/coachProfile_admin.dart';
 
 void main() async {
@@ -62,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
-        child: Background(
+        child: BackgroundA(
           child: Scrollbar(
             isAlwaysShown: true,
             controller: _scrollController,

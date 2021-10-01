@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 //import 'package:meras1/widget/Background.dart'd.dart';
 import 'package:meras1/Test.dart';
 //import 'package:meras1/screen/admin/navDraweradmin.dart';
-import 'package:meras1/screen/tranee/navDrawertranee.dart';
-import 'package:meras1/widget/Background.dart';
+import 'package:meras1/screen/home/navDrawer.dart';
+import 'package:meras1/widget/BackgroundA.dart';
 
 void main() async {
   runApp(MaterialApp(
@@ -69,13 +69,13 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawertranee(),
+      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('قائمة المدربين المتاحين'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
-        child: Background(
+        child: BackgroundA(
           child: Scrollbar(
             isAlwaysShown: true,
             controller: _scrollController,

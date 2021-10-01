@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/screen/admin/ADcategory.dart';
-import 'package:meras1/widget/Background.dart';
+import 'package:meras1/widget/BackgroundA.dart';
 import 'package:meras1/screen/home/BaseAlertDialog.dart';
 import 'package:meras1/widget/FullScreen.dart';
 import 'package:meras1/widget/button_widget.dart';
@@ -144,7 +144,7 @@ class _TestScreenState extends State<TestScreen1> {
       height: 230.0,
       width: 250.0,
     );
-    return Background(
+    return BackgroundA(
       child: Container(
         height: 900,
         child: SingleChildScrollView(

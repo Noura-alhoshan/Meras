@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:meras1/Services/auth.dart';
 
-import '../home/BaseAlertDialog.dart';
+import 'BaseAlertDialog.dart';
 
-class NavDrawertranee extends StatelessWidget {
+class NavDrawer extends StatelessWidget {
   final AuthService _auth = AuthService();
 
   @override
