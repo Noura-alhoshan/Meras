@@ -20,9 +20,6 @@ class _State extends State<TRcategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //     backgroundColor: Colors.purple[400],
-      //s    title: Center(child: Text('مراس'))),
       body: selectedIndex == 0
           ? TRnotification()
           : selectedIndex == 1

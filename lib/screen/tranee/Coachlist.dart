@@ -8,26 +8,9 @@ import 'package:meras1/widget/Background.dart';
 
 void main() async {
   runApp(MaterialApp(
-    routes: {
-      //  '/test': (context) => TestScreen(ic),
-    },
+    routes: {},
   ));
 }
-
-//
-//final FirebaseAuth auth = FirebaseAuth.instance;
-//void inputData() {
-//f//inal User user = auth.currentUser;
-//final uid = user.uid;
-// Similarly we can get email as well
-//final uemail = user.email;
-// print(uid);
-//print(uemail);
-//}
-//RaisedButton(
-//          onPressed: getCurrentUser,
-//             child: Text('Details'),
-//           ),
 
 class CoachlistScreen extends StatefulWidget {
   @override
@@ -35,6 +18,8 @@ class CoachlistScreen extends StatefulWidget {
 }
 
 class _CoachlistScreenState extends State<CoachlistScreen> {
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -91,19 +76,24 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
       ),
       body: SingleChildScrollView(
         child: Background(
-          child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('Coach').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('loading 7 ...');
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(), //<--here
+          child: Scrollbar(
+            isAlwaysShown: true,
+            controller: _scrollController,
+            child: StreamBuilder<QuerySnapshot>(
+                stream:
+                    FirebaseFirestore.instance.collection('Coach').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const Text('loading 7 ...');
+                  return ListView.builder(
+                    //physics: const NeverScrollableScrollPhysics(), //<--here
+                    controller: _scrollController,
 
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) =>
-                      _buildListItem(context, (snapshot.data!).docs[index]),
-                );
-              }),
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) =>
+                        _buildListItem(context, (snapshot.data!).docs[index]),
+                  );
+                }),
+          ),
         ),
       ),
     );

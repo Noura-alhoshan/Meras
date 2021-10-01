@@ -1,14 +1,8 @@
-//import 'package:meras/screen/authenticate/sign_in.dart';
-//import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:meras/services/database.dart';
-//import 'package:meras/models/MyUser.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:meras1/Services/auth.dart';
 
-////import '../../constants.dart';
 import '../home/BaseAlertDialog.dart';
-//import 'package:flutter/material.dart';
 
 class NavDrawertranee extends StatelessWidget {
   final AuthService _auth = AuthService();

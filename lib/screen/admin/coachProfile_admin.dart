@@ -5,18 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:meras1/screen/admin/ADcategory.dart';
 import 'package:meras1/widget/Background.dart';
 import 'package:meras1/screen/home/BaseAlertDialog.dart';
+import 'package:meras1/widget/FullScreen.dart';
 import 'package:meras1/widget/button_widget.dart';
 import 'package:meras1/widget/profile_widget.dart';
 
-//import 'package:meras1/MyUser.dart';
-//import 'package:meras/screen/authenticate/background.dart';
-//import 'package:meras/screen/coachProfile_admin/Coach.dart';
-//import 'package:meras/screen/coachProfile_admin/user_preferences.dart';
-//import 'package:meras/screen/coachProfile_admin/widget/appbar_widget.dart';
-//import 'package:meras/screen/coachProfile_admin/widget/button_widget.dart';
-//import 'package:meras/screen/coachProfile_admin/widget/numbers_widget.dart';
-////mport 'package:meras/screen/coachProfile_admin/widget/profile_widget.dart';
-//import 'package:meras/screen/home/home.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class TestScreen1 extends StatefulWidget {
@@ -27,7 +19,12 @@ class TestScreen1 extends StatefulWidget {
   _TestScreenState createState() => _TestScreenState();
 }
 
+Color red = Color(0xFFFFCDD2);
+Color green = Color(0xFFC8E6C9);
+
 class _TestScreenState extends State<TestScreen1> {
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -44,21 +41,27 @@ class _TestScreenState extends State<TestScreen1> {
         ),
         backgroundColor: Colors.deepPurple[100],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('Coach')
-              .where(FieldPath.documentId, isEqualTo: widget.id)
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text('loading 7 ...');
-            return ListView.builder(
-              physics: const NeverScrollableScrollPhysics(), //<--here
-              itemCount: 1,
+      body: Scrollbar(
+        isAlwaysShown: true,
+        controller: _scrollController,
+        child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Coach')
+                .where(FieldPath.documentId, isEqualTo: widget.id)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return const Text('loading 7 ...');
+              return ListView.builder(
+                controller: _scrollController,
 
-              itemBuilder: (context, index) =>
-                  _build(context, (snapshot.data!).docs[0]),
-            );
-          }),
+                physics: const NeverScrollableScrollPhysics(), //<--here
+                itemCount: 1,
+
+                itemBuilder: (context, index) =>
+                    _build(context, (snapshot.data!).docs[0]),
+              );
+            }),
+      ),
     );
   }
 
@@ -66,121 +69,38 @@ class _TestScreenState extends State<TestScreen1> {
     Navigator.pushNamed(context, '/ADcategory'); //nn
   }
 
-  Color red = Color(0xFFFFCDD2);
-  Color green = Color(0xFFC8E6C9);
-
-  Widget _build(BuildContext context, DocumentSnapshot document) {
-    return Background(
-      child: Container(
-        height: 1100,
-        //child: SingleChildScrollView(
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          children: [
-            const SizedBox(height: 14),
-            ProfileWidget(
-              imagePath: document['URL'],
-              onClicked: () async {},
-            ),
-            const SizedBox(height: 24),
-            buildName(document),
-            const SizedBox(height: 24),
-            //const SizedBox(height: 24),
-            // NumbersWidget(),
-
-            Row(children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0)),
-              Text(
-                '             العمر',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '                       الجنس',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              //Center(child: Text('العمر')),
-              SizedBox(width: 24),
-            ]),
-
-            Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .center, //Center Row contents horizontally,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 0, vertical: 0)),
-                  const SizedBox(height: 16),
-                  Center(
-                    child: Text(
-                      document['Age'] + '                       ',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, height: 1.4),
-                    ),
-                  ),
-
-                  const SizedBox(width: 33),
-                  Text(
-                    document['Gender'] + "                       ",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(fontSize: 16, height: 1.4),
-                  ),
-
-                  //Center(child: Text('العمر')),
-                  SizedBox(width: 48),
-                ]),
-
-            buildAbout(document),
-            const SizedBox(height: 38),
-            Row(children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 37, vertical: 5)),
-              Center(child: Accept(document)),
-              SizedBox(width: 24),
-              Center(child: Reject(document)),
-            ]),
-            const SizedBox(height: 38),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildName(DocumentSnapshot document) => Column(
-        mainAxisAlignment:
-            MainAxisAlignment.center, //Center Column contents vertically,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            document['Fname'] + ' ' + document['Lname'],
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            document['Email'],
-            style: TextStyle(color: Colors.grey, fontSize: 15.7),
-          ),
-          SizedBox(height: 8),
-          Text(
-            document['Phone Number'],
-            style: TextStyle(color: Colors.grey, fontSize: 15.7),
-          )
-        ],
-      );
-
   Widget Reject(DocumentSnapshot document) => ButtonWidget(
         colorr: red,
         text: 'رفض',
         onClicked: () async {
-          print("test1");
+          var baseDialog = BaseAlertDialog(
+              title: "",
+              content: "هل أنت متأكد من رفض المدرب؟",
+              yesOnPressed: () async {
+                deleteUser();
 
-          await sendEmail(
-            'nooni-4321@hotmail.com',
-            'hey1',
-            'confireeeemd',
-          );
-          print("test2");
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(builder: (context) => ADcategory()),
+                );
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              noOnPressed: () {
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              yes: "نعم",
+              no: "لا");
+          showDialog(
+              context: context, builder: (BuildContext context) => baseDialog);
+
+          //  print("test1");
+
+          //    await sendEmail(
+          //      'nooni-4321@hotmail.com',
+          //       'hey1',
+          //       'confireeeemd',
+          //       );
+          //     print("test2");
         },
       );
   Widget Accept(DocumentSnapshot document) => ButtonWidget(
@@ -218,43 +138,200 @@ class _TestScreenState extends State<TestScreen1> {
         },
       );
 
-  Widget buildAbout(document) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 19),
-            Center(
-              child: Text(
-                ' المنطقة السكنية',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  Widget _build(BuildContext context, DocumentSnapshot document) {
+    Image im = new Image.network(
+      document['URL'],
+      height: 230.0,
+      width: 250.0,
+    );
+    return Background(
+      child: Container(
+        height: 900,
+        child: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.deepPurple.shade50,
+                Colors.white10,
+              ],
+            )),
+            // height: 900,
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
+            child: Column(children: <Widget>[
+              Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(89),
+                  child: Container(
+                    child: ImageFullScreenWrapperWidget(
+                      child: im,
+                      dark: false,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 1),
-            Center(
-              child: Text(
-                document['Neighborhood'],
-                style: TextStyle(fontSize: 16, height: 1.4),
+              //       Image.network(
+              //  'https://image.flaticon.com/icons/png/512/1251/1251743.png',
+              //   height: 230.0,
+              //   width: 250.0,
+              // ),
+              Text(
+                document['Fname'] + ' ' + document['Lname'] + '  ',
+                style: TextStyle(
+                    fontSize: 23,
+                    // color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
               ),
-            ),
-            SizedBox(height: 19.0),
-            Center(
-              child: Text(
-                'الوصف',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Text(
+                document['Email'],
+                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
-            ),
-            const SizedBox(height: 1),
-            Center(
-              child: Text(
-                document['Discerption'],
-                style: TextStyle(fontSize: 16, height: 1.4),
+              SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              Text(document['Phone Number'],
+                  style: TextStyle(fontSize: 18, color: Colors.grey)),
+              Divider(color: Colors.deepPurple[900]),
+              Container(
+                child: Column(children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Table(
+                      defaultColumnWidth: FixedColumnWidth(120.0),
+                      border: TableBorder.all(
+                          color: Colors.white,
+                          style: BorderStyle.solid,
+                          width: 0),
+                      children: [
+                        TableRow(children: [
+                          Column(children: [Text('')]),
+                          Column(children: [
+                            Text('')
+                          ]), //Column(children:[Text('')]),
+                        ]),
+                        TableRow(children: [
+                          //Column(children:[Text('')]),
+                          Column(children: [
+                            Text(
+                              document['Gender'],
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              textAlign: TextAlign.right,
+                            )
+                          ]),
+                          Column(children: [
+                            Text(
+                              'الجنس',
+                              style: TextStyle(fontSize: 20.0),
+                              textAlign: TextAlign.right,
+                            )
+                          ]),
+                        ]),
+                        TableRow(children: [
+                          Column(children: [Text('')]),
+                          Column(children: [
+                            Text('')
+                          ]), //Column(children:[Text('')]),
+                        ]),
+                        TableRow(children: [
+                          //Column(children:[Text('')]),
+                          Column(children: [
+                            Text(document['Age'],
+                                style:
+                                    TextStyle(fontSize: 18, color: Colors.grey))
+                          ]),
+                          Column(children: [
+                            Text('العمر', style: TextStyle(fontSize: 20.0))
+                          ]),
+                        ]),
+                        TableRow(children: [
+                          Column(children: [Text('')]),
+                          Column(children: [
+                            Text('')
+                          ]), //Column(children:[Text('')]),
+                        ]),
+                        TableRow(children: [
+                          // Column(children:[Text('')]),
+                          Column(children: [
+                            Text(document['Neighborhood'],
+                                style:
+                                    TextStyle(fontSize: 18, color: Colors.grey))
+                          ]),
+                          Column(children: [
+                            Text('المنطقة السكنية',
+                                style: TextStyle(fontSize: 20.0))
+                          ]),
+                        ]),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Table(
+                        defaultColumnWidth: FixedColumnWidth(230.0),
+                        border: TableBorder.all(
+                            color: Colors.white,
+                            style: BorderStyle.solid,
+                            width: 0),
+                        children: [
+                          TableRow(children: [
+                            //Column(children:[Text('')]),
+                            Column(children: [
+                              Text(
+                                'الوصف',
+                                style: TextStyle(fontSize: 20.0),
+                                textAlign: TextAlign.center,
+                              )
+                            ]),
+                          ]),
+                          TableRow(children: [
+                            Column(children: [
+                              Text(document['Discerption'],
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.grey))
+                            ]),
+                          ]),
+                        ]),
+                  ),
+                  //  Text(
+                  //       "الوصف",
+                  //       style: TextStyle(fontSize: 21),
+                  //       textAlign: TextAlign.right,
+                  //     ),
+                  //     SizedBox(
+                  //       height: 8,
+                  //     ),
+                  //     Text(document["Discerption"],
+                  //         style: TextStyle(
+                  //           color: Colors.grey,
+                  //           fontSize: 18,
+                  //         ),
+                  //         textAlign: TextAlign.justify),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Row(children: <Widget>[
+                    Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 37, vertical: 5)),
+                    Center(child: Accept(document)),
+                    SizedBox(width: 24),
+                    Center(child: Reject(document)),
+                  ]),
+                ]),
+              ),
+            ]),
+          ),
         ),
-      );
+      ),
+    );
+  }
+
   sendEmail(String sendEmailTo, String subject, String emailBody) async {
     await FirebaseFirestore.instance.collection("mail").add(
       {
@@ -281,5 +358,14 @@ class _TestScreenState extends State<TestScreen1> {
         .then((value) => print("User's Property Deleted"))
         .catchError(
             (error) => print("Failed to delete user's property: $error"));
+  }
+
+  Future<void> deleteUser() {
+    CollectionReference users = FirebaseFirestore.instance.collection('Coach');
+    return users
+        .doc(widget.id)
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
   }
 }
