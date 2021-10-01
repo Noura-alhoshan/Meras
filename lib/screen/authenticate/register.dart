@@ -1,11 +1,6 @@
-import 'dart:io';
-
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:meras/services/database.dart';
 
 class Register extends StatefulWidget {
 
@@ -18,11 +13,9 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
-  late File License;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
-  String url = '';
 
   // text field state
   String Fname= '';
@@ -31,7 +24,7 @@ class _RegisterState extends State<Register> {
   //late DateTime Birth;//late?
   String Neigh= ''; 
   String Email= '';
-  String Pass= '';
+  String Pass= ''; 
 //  final DateTime now = DateTime.now();
 //   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 //   final String formatted = formatter.format(now);
@@ -117,22 +110,6 @@ class _RegisterState extends State<Register> {
                 },
               ),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                //color: Colors.pink[400],
-                  child: Text('تحميل صورة رخصة القيادة'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple[50],
-                    onPrimary: Colors.deepPurple[900],
-                    //textStyle: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () async{
-                    getImage();
-                    uploadImage();
-                  }
-              ),
-
-
-
            
               ElevatedButton(
                 //color: Colors.pink[400],
@@ -165,23 +142,4 @@ class _RegisterState extends State<Register> {
        ),
     );
   }
-
-  void uploadImage() async{
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("Licenses"+ DateTime.now().toString()+".jpg");
-    UploadTask uploadTask = ref.putFile(License);
-    uploadTask.whenComplete(() {
-      url = ref.getDownloadURL() as String;
-    }).catchError((onError) {
-      print(onError);
-    });
-  }
-
-  Future getImage() async {
-    File image = (await ImagePicker.platform.getImage(source: ImageSource.gallery)) as File;
-    setState(() {
-      License = image;
-    });
-  }
-
 }

@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:random_string/random_string.dart';
 
 class DatabaseService {
 
@@ -29,7 +30,6 @@ class DatabaseService {
       "First Name": Fname,
       'Last Name': Lname,
       'Email': email,
-      'Password': password,
       'Age': age,
       'Phone Number': phoneNumber,
       'Neighborhood': neighborhood,
@@ -42,6 +42,7 @@ class DatabaseService {
   updateCoachesData(String Fname, String Lname,String email,String password, String age,
       String phoneNumber, String neighborhood,String description, String gender, String status) {
     Map<String,dynamic> traineeDataDemo = {
+      "id": randomAlpha(20),
       "Fname": Fname,
       'Lname': Lname,
       'Email': email,

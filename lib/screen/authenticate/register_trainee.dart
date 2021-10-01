@@ -1,12 +1,20 @@
+import 'dart:math';
+
+import 'package:flutter/services.dart';
+import 'package:meras/screen/Welcome/welcome_screen.dart';
+import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:meras/constants.dart';
+import 'package:meras/screen/authenticate/background2.dart';
+import 'package:meras/components/rounded_button.dart';
+import 'package:meras/components/rounded_input_field.dart';
+import 'package:meras/components/rounded_password_field.dart';
 
 class RegisterAsTrainee extends StatefulWidget {
 
-  final Function toggleView;
-  RegisterAsTrainee({ required this.toggleView });
 
   @override
   _RegisterAsTraineeState createState() => _RegisterAsTraineeState();
@@ -20,7 +28,8 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  String error = '';
+  String error = 'lkjhgfdfghjkl;';
+  String e = 'انا موب هنا';
 
   String dropdownValue = 'الرمال وماحولها';
   var items = ['الرمال وماحولها','اليرموك وماحولها','الملقا وماحوله','العارض وماحوله',
@@ -37,16 +46,19 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
   String phoneNumber = '';
   String neighborhood = '';
   String gender = '';
+  bool _passwordVisible=true;
 
   int _age = 0;
   String _message = '';
+  String sp='      ';
+
 
   void ageOnSubmitted(String value) {
     try {
       _age = int.parse(value);
     } on FormatException catch(ex) {
       setState(() {
-        _message = "من فضلك أدخل عمرك حيث لا يقل عن ١٧ عام";
+        _message = "من فضلك أدخل عمرك بشكل صحيح";
       });
     }
   }
@@ -54,10 +66,10 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
   void enterMeras() {
     setState(() {
       if (_age > 17) {
-        _message = "مرحبًا بك!";
+        _message = " ";
       }
       else {
-        _message = "تأكد من إدخال جميع المعلومات بشكل صحيح";
+        _message = "العمر المسموح به ١٧ وأكثر";
       }
     });
   }
@@ -66,113 +78,90 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.deepPurple[200],
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple[100],
-        elevation: 0.0,
-        title: Text('مِرَاس حيث سهولة التعلم'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('تسجيل الدخول'),
 
-            onPressed: () => widget.toggleView(),
-          ),
-        ],
-      ),
+
       body:
       SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+
+        child: Background(
+
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20.0),
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-
-                      hintText: "الأسم الأول"),
+                SizedBox(height: 40.0),
+                SizedBox(height: 40.0),
+                Text(
+                  "إنشاء حساب متعلم جديد",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 40.0),
+                RoundedInputField(
+                  //textAlign: TextAlign.right,
+                  hintText: sp+"          الأسم الأول",
                   validator: (val) => val!.isEmpty ? 'الرجاء إدخال الأسم الأول' : null,
                   onChanged: (val) {
                     setState(() => Fname = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-
-                      hintText: "الأسم الأخير"),
+                RoundedInputField(
+                  //textAlign: TextAlign.right,
+                  hintText: sp+"          الأسم الأخير",
                   validator: (val) => val!.isEmpty ? 'الرجاء إدخال الأسم الأخير' : null,
                   onChanged: (val) {
                     setState(() => Lname = val);
                   },
                 ),
-                SizedBox(height: 20.0),
+                RoundedInputField(
 
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "البريد الإلكتروني"),
+                  hintText: sp+"         البريد الاكتروني",
                   validator: (val) => val!.isEmpty? 'الرجاء إدخال البريد الإلكتروني' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => email = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-
-                      hintText: "كلمة المرور"
-                  ),
-                  obscureText: true,
-                  validator: (val) => val!.length < 6 ? '   الرجاء إدخال كلمة المرور بشكل صحيح' : null,//added ! to val
+                RoundedPasswordField(
+                  obscure:_passwordVisible ,
+                  validator: (val) => val!.length < 6 ? 'الرجاء إدخال كلمة المرور بشكل صحيح، ٦ خانات وأكثر' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => password = val);
                   },
+                  icons: IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: kPrimaryColor,
+                    ),
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    },
+                  ),
                 ),
-                SizedBox(height: 20.0),
-
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "العمر"),
+                RoundedInputField(
+                  hintText: sp+"                العمر",
                   onChanged: ageOnSubmitted,
+                  validator: (value) {  },
                 ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "رقم الجوال"),
+                Text(
+                    _message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14.0, color: Colors.red)
+                ),
+                RoundedInputField(
+                  hintText: sp+"          رقم الجوال",
                   validator: (val) => val!.isEmpty? 'الرجاء إدخال رقم الجوال' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => phoneNumber = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-                Text(':اختر منطقتك السكنيةأو المنطقة التي تريد التدرب فيها', textAlign: TextAlign.right,),
+                SizedBox(height: 40.0),
+                Text(':اختر منطقتك السكنية أو المنطقة التي تريد التدرب فيها', textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16.0),),
                 Column(
                   children: <Widget>[
                     DropdownButton(
@@ -189,18 +178,19 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                         });
                       },
                       value: dropdownValue,
-                      isExpanded: true,
                       icon: Icon(Icons.arrow_drop_down_circle),
                       iconEnabledColor: Colors.deepPurple,
                     )
                   ],
                 ),
-                Text(':الجنس                                                                             ',
-                  textAlign: TextAlign.right,),
+                SizedBox(height: 40.0),
+                Text(':الجنس                                                                    ',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontSize: 16.0),),
               Column(
               children: <Widget>[
                 RadioListTile<SingingCharacter>(
-                  //title: const Text('ذكر', textAlign: TextAlign.right,),
+                  title: const Text('ذكر', textAlign: TextAlign.right,),
                   value: SingingCharacter.lafayette,
                   groupValue: _character,
                   onChanged: (SingingCharacter? value) {
@@ -227,30 +217,50 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                 ),
               ],
              ),
-                ElevatedButton(
+                Text(
+                  e,
+                  style: TextStyle(color: Colors.red, fontSize: 15.0),
+                ),
+                RoundedButton(
                   //color: Colors.pink[400],
-                    child: Text('إنشاء حساب متعلم'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple[50],
-                      onPrimary: Colors.deepPurple[900],
-                      //textStyle: TextStyle(color: Colors.black),
-                    ),
-                    onPressed: () {//async
+                    text: 'إنشاء حساب متعلم',
+                    press: () {//async
                       if(_formKey.currentState!.validate()){
-                        dynamic result = _auth.registerAsTrainee(Fname, Lname, email, password, _age, phoneNumber, neighborhood, gender);//await
-                        if(result == null) {
-                          setState(() {
-                            error = 'تأكد من إدخال المعلومات بشكل صحيح';
-                          });
+                        try{
+                          dynamic result = _auth.registerAsTrainee(Fname, Lname, email, password, _age, phoneNumber, neighborhood, gender);//await
+                           if(result == null) {
+                            setState(() {
+                              e = 'تأكد من إدخال المعلومات بشكل صحيح';
+                            });
+                          }
+                        }catch(signUpError){
+                          if(signUpError is PlatformException) {
+                            if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+                              e = 'البريد الاكتروني المدخل مسجل بالفعل';
+                            }
+                          }
                         }
                       }
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                      // );
                     }
                 ),
-                SizedBox(height: 12.0),
-                Text(
-                  error,
-                  style: TextStyle(color: Colors.red, fontSize: 14.0),
-                )
+                Row(
+
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      child: Text('سجل دخول',style: TextStyle(fontSize: 15.5,color: kPrimaryColor,fontWeight: FontWeight.bold),),
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignIn()),//CHANGE IT
+                      ),
+                    ),
+
+                    Text(' هل لديك حساب؟ ',style: TextStyle(fontSize: 15.5,color: kPrimaryColor)),
+                  ],
+                ),
+                SizedBox(height: 40.0),
               ],
             ),
           ),

@@ -1,17 +1,26 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:meras/screen/Welcome/welcome_screen.dart';
+import 'package:meras/screen/authenticate/background2.dart';
+import 'package:meras/components/rounded_button.dart';
+import 'package:meras/components/rounded_input_field.dart';
+import 'package:meras/components/rounded_password_field.dart';
+import 'package:meras/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meras/screen/authenticate/sign_in.dart';
+import 'package:meras/screen/home/home.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/services/database.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'NotApproaved.dart';
+
 class RegisterAsCoatch extends StatefulWidget {
 
-  final Function toggleView;
-  RegisterAsCoatch({ required this.toggleView });
 
   @override
   _RegisterAsCoatchState createState() => _RegisterAsCoatchState();
@@ -44,9 +53,11 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   String neighborhood = '';
   String description = '';
   String gender = '';
+  bool _passwordVisible=true;
 
   int _age = 0;
   String _message = '';
+  String sp='      ';
 
   void ageOnSubmitted(String value) {
     try {
@@ -74,131 +85,97 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.deepPurple[200],
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple[100],
-        title: Text('!مدرب جديد'),
-        elevation: 0.0,
-        //title: Text('مراس'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('تسجيل الدخول'),
 
-            onPressed: () => widget.toggleView(),
-          ),
-        ],
-      ),
+
       body:
       SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+
+        child: Background(
+
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-
-                      hintText: "الأسم الأول"),
+                SizedBox(height: 40.0),
+                SizedBox(height: 40.0),
+                Text(
+                  "إنشاء حساب مدرب جديد",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 40.0),
+                RoundedInputField(
+                  //textAlign: TextAlign.right,
+                  hintText: sp+"          الأسم الأول",
                   validator: (val) => val!.isEmpty ? 'الرجاء إدخال الأسم الأول' : null,
                   onChanged: (val) {
                     setState(() => Fname = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-
-                      hintText: "الأسم الأخير"),
+                RoundedInputField(
+                  //textAlign: TextAlign.right,
+                  hintText: sp+"          الأسم الأخير",
                   validator: (val) => val!.isEmpty ? 'الرجاء إدخال الأسم الأخير' : null,
                   onChanged: (val) {
                     setState(() => Lname = val);
                   },
                 ),
-                SizedBox(height: 20.0),
+                RoundedInputField(
 
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "البريد الإلكتروني"),
+                  hintText: sp+"         البريد الاكتروني",
                   validator: (val) => val!.isEmpty? 'الرجاء إدخال البريد الإلكتروني' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => email = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-
-                      hintText: "كلمة المرور"
-                  ),
-                  obscureText: true,
-                  validator: (val) => val!.length < 6 ? 'الرجاء إدخال كلمة المرور بشكل صحيح' : null,//added ! to val
+                RoundedPasswordField(
+                  obscure:_passwordVisible ,
+                  validator: (val) => val!.length < 6 ? 'الرجاء إدخال كلمة المرور بشكل صحيح، ٦ خانات وأكثر' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => password = val);
                   },
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                textAlign: TextAlign.right,
-                decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
+                  icons: IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: kPrimaryColor,
                     ),
-                    hintText: "العمر"),
-                  validator: (val) => val!.isEmpty? 'الرجاء إدخال العمر' : null,
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    },
+                  ),
+                ),
+                RoundedInputField(
+                  hintText: sp+"                العمر",
                   onChanged: ageOnSubmitted,
+                  validator: (value) {  },
                 ),
                 Text(
                     _message,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14.0, color: Colors.red)
                 ),
-
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "رقم الجوال"),
+                RoundedInputField(
+                  hintText: sp+"          رقم الجوال",
                   validator: (val) => val!.isEmpty? 'الرجاء إدخال رقم الجوال' : null,//added ! to val
                   onChanged: (val) {
                     setState(() => phoneNumber = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 2 ,color: Colors.deepPurple),
-                      ),
-                      hintText: "وصف"),
+                RoundedInputField(
+                  hintText: sp+"               وصف",
                   validator: (val) => val!.isEmpty? 'الرجاء إدخال وصف' : null,//added ! to val
                   onChanged: (val) {
                     setState(() =>  description = val);
                   },
                 ),
-                SizedBox(height: 20.0),
-                Text(""),
-                Text(':اختر منطقتك السكنيةأو المنطقة التي تريد التدريب فيها', textAlign: TextAlign.right,),
+                SizedBox(height: 40.0),
+                Text(':اختر منطقتك السكنية أو المنطقة التي تريد التدرب فيها', textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16.0),),
                 Column(
                   children: <Widget>[
                     DropdownButton(
@@ -215,16 +192,16 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                         });
                       },
                       value: dropdownValue,
-                      isExpanded: true,
+                      //isExpanded: true,
                       icon: Icon(Icons.arrow_drop_down_circle),
                       iconEnabledColor: Colors.deepPurple,
                     )
                   ],
                 ),
-                SizedBox(height: 20.0),
-                SizedBox(height: 20.0),
-                Text(':الجنس                                                                             ',
-                  textAlign: TextAlign.right,),
+                SizedBox(height: 40.0),
+                Text(':الجنس                                                                    ',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontSize: 16.0),),
                 Column(
                   children: <Widget>[
                     RadioListTile<SingingCharacter>(
@@ -255,52 +232,68 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20.0),
                 Column(
                   children: <Widget>[
                     //(imageUrl != null)
                         // ? Image.network(imageUrl)
                         // : Placeholder(fallbackHeight: 100.0, fallbackWidth: 150.0,),
                     SizedBox(height: 20.0,),
-                    ElevatedButton(
-                        child: Text('تحميل صورة رخصة القيادة',textAlign: TextAlign.center,),
-                      style: ElevatedButton.styleFrom(
-                            primary: Colors.deepPurple[50],
-                            onPrimary: Colors.deepPurple[900],
-                          ),
-                      onPressed: () => uploadImage(),
+                    RoundedButton(
+                      text: 'تحميل صورة رخصة القيادة',
+                      textColor: kPrimaryColor,
+                      color: kPrimaryLightColor,
+                      press: () => uploadImage(),
 
                     ),
                   ],
                 ),
-
-                Text(imageUrl, textAlign: TextAlign.center,),
-                SizedBox(height: 20.0),
-                ElevatedButton(
+                Text(imageUrl, textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 11.0),),
+                RoundedButton(
                   //color: Colors.pink[400],
-                    child: Text('إنشاء حساب مدرب'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple[50],
-                      onPrimary: Colors.deepPurple[900],
-                      //textStyle: TextStyle(color: Colors.black),
-                    ),
-                    onPressed: () {//async
+                    text: 'إنشاء حساب مدرب',
+                    press: () {//async
                       if(_formKey.currentState!.validate()){
                         enterMeras();
-                        dynamic result = _auth.registerAsCoach(Fname, Lname,email, password, _age,phoneNumber,neighborhood,description,gender,'P',imageUrl);//await
-                        if(result == null) {
-                          setState(() {
-                            error = 'من فضلك تأكد من إدخال المعلومات بشكل صحيح';
-                          });
+                        try{
+                          dynamic result = _auth.registerAsCoach(Fname, Lname,email, password, _age,phoneNumber,neighborhood,description,gender,'P',imageUrl);//await
+                          if(result == null) {
+                            setState(() {
+                              error = 'من فضلك تأكد من إدخال المعلومات بشكل صحيح';
+                            });
+                          }
+                        }catch(signUpError){
+                          if(signUpError is PlatformException) {
+                            if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+                              error = 'البريد الاكتروني المدخل تم مسجل بالفعل';
+                            }
+                          }
                         }
                       }
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => notApproaved()),
+                      );
                     }
                 ),
-                SizedBox(height: 12.0),
                 Text(
                   error,
-                  style: TextStyle(color: Colors.red, fontSize: 14.0),
-                )
+                  style: TextStyle(color: Colors.red, fontSize: 15.0),
+                ),
+                Row(
+
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      child: Text('سجل دخول',style: TextStyle(fontSize: 15.5,color: kPrimaryColor,fontWeight: FontWeight.bold),),
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignIn()),//CHANGE IT
+                      ),
+                    ),
+
+                    Text(' هل لديك حساب؟ ',style: TextStyle(fontSize: 15.5,color: kPrimaryColor)),
+                  ],
+                ),
+                SizedBox(height: 40.0),
               ],
             ),
           ),

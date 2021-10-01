@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:meras/services/database.dart';
 import 'package:meras/models/MyUser.dart'; 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -69,7 +70,7 @@ final FirebaseFirestore fuser = FirebaseFirestore.instance;
   }
 
   //sign in 
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(String email, String password, BuildContext context) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
