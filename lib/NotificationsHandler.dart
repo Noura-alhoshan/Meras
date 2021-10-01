@@ -24,6 +24,7 @@ createLocalNotification({required Map<String, dynamic> message}) async {
 
 // Converts remote notifcation to local notification
 handleNetworkNotification(RemoteMessage message) {
+  print(message.notification);
   AwesomeNotifications().createNotification(
       content: NotificationContent(
           id: int.parse(randomNumeric(3)),

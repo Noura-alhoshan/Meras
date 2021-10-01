@@ -13,12 +13,12 @@ void main() async {
 
 //App is closed(Inside the RAM)
   FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-    await handleNetworkNotification(message);
+    await createLocalNotification(message: message.data);
   });
 
 // App is opened
   FirebaseMessaging.onMessageOpenedApp.listen((message) async {
-    await handleNetworkNotification(message);
+    await createLocalNotification(message: message.data);
   });
 
   initializeLocalNotification();
