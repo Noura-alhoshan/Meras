@@ -29,6 +29,7 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
     return SingleChildScrollView(
       child: document['Status'] == 'A'
           ? Container(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Card(
                 child: ListTile(
                   title: Text(

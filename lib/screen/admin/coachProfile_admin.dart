@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:meras1/google_auth_api.dart';
 import 'package:meras1/screen/admin/ADcategory.dart';
 import 'package:meras1/widget/BackgroundA.dart';
 import 'package:meras1/screen/home/BaseAlertDialog.dart';
@@ -54,7 +57,7 @@ class _TestScreenState extends State<TestScreen1> {
               return ListView.builder(
                 controller: _scrollController,
 
-                physics: const NeverScrollableScrollPhysics(), //<--here
+                //  physics: const NeverScrollableScrollPhysics(), //<--here
                 itemCount: 1,
 
                 itemBuilder: (context, index) =>
@@ -78,7 +81,7 @@ class _TestScreenState extends State<TestScreen1> {
               content: "هل أنت متأكد من رفض المدرب؟",
               yesOnPressed: () async {
                 deleteUser();
-
+                sendRejecteEmail(document);
                 Navigator.pop(
                   context,
                   MaterialPageRoute(builder: (context) => ADcategory()),
@@ -105,7 +108,7 @@ class _TestScreenState extends State<TestScreen1> {
       );
   Widget Accept(DocumentSnapshot document) => ButtonWidget(
         colorr: green,
-        text: 'قبول',
+        text: ' email قبول',
         onClicked: () async {
           // print('test' + document['Email']);
 
@@ -113,6 +116,8 @@ class _TestScreenState extends State<TestScreen1> {
               title: "",
               content: "هل أنت متأكد من قبول المدرب؟",
               yesOnPressed: () async {
+                sendAccepteEmail(document);
+
                 FirebaseFirestore.instance
                     .collection('Coach')
                     .doc(widget.id)
@@ -121,11 +126,11 @@ class _TestScreenState extends State<TestScreen1> {
                     await _auth.createUserWithEmailAndPassword(
                         email: document['Email'], password: document['Pass']);
                 deleteField();
-
                 Navigator.pop(
                   context,
                   MaterialPageRoute(builder: (context) => ADcategory()),
                 );
+
                 Navigator.of(context, rootNavigator: true).pop('dialog');
               },
               noOnPressed: () {
@@ -269,7 +274,6 @@ class _TestScreenState extends State<TestScreen1> {
                       ],
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.all(20),
                     child: Table(
@@ -298,20 +302,6 @@ class _TestScreenState extends State<TestScreen1> {
                           ]),
                         ]),
                   ),
-                  //  Text(
-                  //       "الوصف",
-                  //       style: TextStyle(fontSize: 21),
-                  //       textAlign: TextAlign.right,
-                  //     ),
-                  //     SizedBox(
-                  //       height: 8,
-                  //     ),
-                  //     Text(document["Discerption"],
-                  //         style: TextStyle(
-                  //           color: Colors.grey,
-                  //           fontSize: 18,
-                  //         ),
-                  //         textAlign: TextAlign.justify),
                   SizedBox(
                     height: 24,
                   ),
@@ -331,7 +321,7 @@ class _TestScreenState extends State<TestScreen1> {
       ),
     );
   }
-
+/*
   sendEmail(String sendEmailTo, String subject, String emailBody) async {
     await FirebaseFirestore.instance.collection("mail").add(
       {
@@ -347,7 +337,7 @@ class _TestScreenState extends State<TestScreen1> {
       },
     );
     print('email done');
-  }
+  }*/
 
   CollectionReference users = FirebaseFirestore.instance.collection('Coach');
 
@@ -367,5 +357,85 @@ class _TestScreenState extends State<TestScreen1> {
         .delete()
         .then((value) => print("User Deleted"))
         .catchError((error) => print("Failed to delete user: $error"));
+  }
+
+  Future sendAccepteEmail(DocumentSnapshot document) async {
+    //  GoogleAuthApi.signOut();
+    //  return;
+    final user = await GoogleAuthApi.signIn();
+    print('hey before null');
+
+    if (user == null) return;
+    print('hey:))))))');
+
+    final email = user.email;
+    final auth = await user.authentication;
+    final token = auth.accessToken!;
+
+    print('A authintcated: $email');
+    GoogleAuthApi.signOut();
+
+    final smtpServer = gmailSaslXoauth2(email, token);
+
+    final message = Message()
+      ..from = Address(email, 'مِرَاس|Meras')
+      ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
+      ..subject = 'Welcome to Meras مرحبا بك في مِرَاس'
+      ..text = ' مرحباً' +
+          ' ' +
+          document['Fname'] +
+          '\n' +
+          '،نبارك لك قبولك في اسرة مِرَاس ونتمنى لك تدريب امن' +
+          '\n' +
+          ' ! تستطيع الأن الدخول الى حسابك والبدء بالتدريب' +
+          '\n \n' +
+          'مع تحيات فريق مِرَاس';
+
+    try {
+      await send(message, smtpServer);
+      print('email sent');
+    } on MailerException catch (e) {
+      print(e);
+    }
+  }
+
+  Future sendRejecteEmail(DocumentSnapshot document) async {
+    //  GoogleAuthApi.signOut();
+    //  return;
+    final user = await GoogleAuthApi.signIn();
+    print('hey before null rejected');
+
+    if (user == null) return;
+    print('hey:))))))rejected');
+
+    final email = user.email;
+    final auth = await user.authentication;
+    final token = auth.accessToken!;
+
+    print('R authintcated: $email');
+    GoogleAuthApi.signOut();
+
+    final smtpServer = gmailSaslXoauth2(email, token);
+
+    final message = Message()
+      ..from = Address(email, 'مِرَاس|Meras')
+      ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
+      ..subject = 'From Meras team من فريق مِرَاس'
+      ..text = ' مرحباً' +
+          ' ' +
+          document['Fname'] +
+          '\n' +
+          '،نقدر لك اهتمامك بالتسجيل في مِرَاس ويؤسفنا ابلاغك بعدم قبول طلبك بالتدريب' +
+          '\n' +
+          ' .نرجو منك التأكد من صحة البيانات والمحاولة من جديد' +
+          '\n \n' +
+          'مع تحيات فريق مِرَاس';
+
+    try {
+      await send(message, smtpServer);
+      print('R email sent');
+    } on MailerException catch (e) {
+      print(e);
+    }
   }
 }

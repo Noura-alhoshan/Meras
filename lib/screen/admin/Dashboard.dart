@@ -26,6 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return SingleChildScrollView(
       child: document['Status'] == 'P'
           ? Container(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Card(
                 child: ListTile(
                   title: Text(
