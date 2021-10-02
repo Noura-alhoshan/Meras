@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:meras/screen/Welcome/welcome_screen.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +28,8 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  String error = 'lkjhgfdfghjkl;';
-  String e = 'انا موب هنا';
+  String error = '';
+  String e = '';
 
   String dropdownValue = 'الرمال وماحولها';
   var items = ['الرمال وماحولها','اليرموك وماحولها','الملقا وماحوله','العارض وماحوله',
@@ -218,32 +218,38 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
               ],
              ),
                 Text(
-                  e,
+                  error,
                   style: TextStyle(color: Colors.red, fontSize: 15.0),
                 ),
                 RoundedButton(
                   //color: Colors.pink[400],
                     text: 'إنشاء حساب متعلم',
-                    press: () {//async
+                    press: () async {//async
                       if(_formKey.currentState!.validate()){
                         try{
-                          dynamic result = _auth.registerAsTrainee(Fname, Lname, email, password, _age, phoneNumber, neighborhood, gender);//await
+                          dynamic result = await _auth.registerAsTrainee(Fname, Lname, email, password, _age, phoneNumber, neighborhood, gender);//await
                            if(result == null) {
-                            setState(() {
-                              e = 'تأكد من إدخال المعلومات بشكل صحيح';
+                            setState((){
+                                error = 'تأكد من إدخال المعلومات بشكل صحيح';
                             });
                           }
-                        }catch(signUpError){
-                          if(signUpError is PlatformException) {
-                            if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-                              e = 'البريد الاكتروني المدخل مسجل بالفعل';
-                            }
+
+                        }on FirebaseAuthException catch (e) {
+                             if (e.code == 'email-already-in-use') {
+                            error = 'البريد الالكتروني المدخل مسجل بالفعل';
                           }
                         }
+                        //catch(signUpError){
+                        //   if(signUpError is PlatformException) {
+                        //     if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+                        //       setState(()  {
+                        //         error = 'البريد الالكتروني المدخل مسجل بالفعل';
+                        //       });
+                        //     }
+                        //   }
+                        // }
+
                       }
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                      // );
                     }
                 ),
                 Row(

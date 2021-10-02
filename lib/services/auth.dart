@@ -40,30 +40,41 @@ final FirebaseFirestore fuser = FirebaseFirestore.instance;
 
   Future registerAsTrainee(String Fname, String Lname, String email, String password, int age,
       String phoneNumber, String neighborhood, String gender ) async {
+    try{
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User? user1 = result.user;
+      DatabaseService(uid: user1!.uid).updateTraineeData(Fname,Lname,email,password,age,phoneNumber,neighborhood,gender);
+      return user1;
+    }catch(error){
+      print(error.toString());
+      return null;
+    }
 
-    UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-    User? user1 = result.user;
-    DatabaseService(uid: user1!.uid).updateTraineeData(Fname,Lname,email,password,age,phoneNumber,neighborhood,gender);
   }
 
   Future registerAsCoach(String Fname, String Lname,String email,String password, int age,
         String phoneNumber, String neighborhood,String description, String gender, String status, String url) async {
+    try{
+      CollectionReference coachesCollection = FirebaseFirestore.instance.collection('Coach');
+      Map<String,dynamic> traineeDataDemo = {
+        "Fame": Fname,
+        'Lame': Lname,
+        'Email': email,
+        'Pass': password,
+        'Age': age,
+        'Phone Number': phoneNumber,
+        'Discerption': description,
+        'Neighborhood': neighborhood,
+        'Gender': gender,
+        'Status': status,
+        'URL': url,
+      };
+      coachesCollection.add(traineeDataDemo);
+    }catch(error){
+      print(error.toString());
+      return null;
+    }
 
-    CollectionReference coachesCollection = FirebaseFirestore.instance.collection('Coach');
-    Map<String,dynamic> traineeDataDemo = {
-      "Fame": Fname,
-      'Lame': Lname,
-      'Email': email,
-      'Pass': password,
-      'Age': age,
-      'Phone Number': phoneNumber,
-      'Discerption': description,
-      'Neighborhood': neighborhood,
-      'Gender': gender,
-      'Status': status,
-      'URL': url,
-    };
-    coachesCollection.add(traineeDataDemo);
     // User? user1 = result.user;
     // DatabaseService(uid: user1!.uid).updateCoachesData(Fname,Lname,email,password,age,phoneNumber,neighborhood,
     //     description, gender, status);
