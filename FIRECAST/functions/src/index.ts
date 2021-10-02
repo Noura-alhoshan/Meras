@@ -22,8 +22,8 @@ export const notificationsTrigger = functions.firestore
 
 
         let  payloadData = {
-            title:'New Coach Signed Up',
-            message: 'Hello, new coach signed up as ' +  msgData.Email + '. Do you want to approve it?',
+          title:'مدرب(ة) قيد التسجيل',
+          message:'هل تريد(ين) اعتماد المدرب(ة)' + ' ' + msgData.Fame + ' ' + msgData.Lame + '؟',
           };
 
           
