@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //import 'package:meras1/widget/Background.dart'd.dart';
 import 'package:meras1/Test.dart';
+import 'package:meras1/screen/admin/widget/BackgroundA.dart';
 //import 'package:meras1/screen/admin/navDraweradmin.dart';
 import 'package:meras1/screen/home/navDrawer.dart';
-import 'package:meras1/widget/BackgroundA.dart';
+//import 'package:meras1/widget/BackgroundA.dart';
 
 void main() async {
   runApp(MaterialApp(

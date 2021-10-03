@@ -1,14 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras1/screen/admin/navDraweradmin.dart';
-import 'package:meras1/widget/BackgroundA.dart';
+//import 'package:meras1/widget/BackgroundA.dart';
 import 'package:meras1/screen/admin/coachProfile_admin.dart';
-
-void main() async {
-  runApp(MaterialApp(
-    routes: {},
-  ));
-}
+import 'package:meras1/screen/admin/widget/BackgroundA.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -62,27 +57,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: Text('قائمة المدربين قيد الانتظار'),
         backgroundColor: Colors.deepPurple[100],
       ),
-      body: SingleChildScrollView(
-        child: BackgroundA(
-          child: Scrollbar(
-            isAlwaysShown: true,
-            controller: _scrollController,
-            child: StreamBuilder<QuerySnapshot>(
-                stream:
-                    FirebaseFirestore.instance.collection('Coach').snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('loading 7 ...');
+      body: Container(
+        child: SingleChildScrollView(
+          child: BackgroundA(
+            child: Scrollbar(
+              isAlwaysShown: true,
+              controller: _scrollController,
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Coach')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) return const Text('loading 7 ...');
 
-                  return ListView.builder(
-                    controller: _scrollController,
+                    return ListView.builder(
+                      controller: _scrollController,
 
-                    //physics: const NeverScrollableScrollPhysics(), //<--here
+                      //physics: const NeverScrollableScrollPhysics(), //<--here
 
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) =>
-                        _buildListItem(context, (snapshot.data!).docs[index]),
-                  );
-                }),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) =>
+                          _buildListItem(context, (snapshot.data!).docs[index]),
+                    );
+                  }),
+            ),
           ),
         ),
       ),

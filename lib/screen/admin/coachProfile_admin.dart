@@ -4,15 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:meras1/google_auth_api.dart';
+import 'package:meras1/Services/google_auth_api.dart';
 import 'package:meras1/screen/admin/ADcategory.dart';
-import 'package:meras1/widget/BackgroundA.dart';
+import 'package:meras1/screen/admin/widget/BackgroundA.dart';
+import 'package:meras1/screen/admin/widget/FullScreen.dart';
+import 'package:meras1/screen/admin/widget/button_widget.dart';
+//import 'package:meras1/widget/BackgroundA.dart';
 import 'package:meras1/screen/home/BaseAlertDialog.dart';
-import 'package:meras1/widget/FullScreen.dart';
-import 'package:meras1/widget/button_widget.dart';
-import 'package:meras1/widget/profile_widget.dart';
+//import 'package:meras1/widget/FullScreen.dart';
+//import 'package:meras1/widget/button_widget.dart';
+//import 'package:meras1/widget/profile_widget.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
+//final FirebaseFirestore fuser = FirebaseFirestore.instance;
 
 class TestScreen1 extends StatefulWidget {
   final String id;
@@ -95,15 +99,6 @@ class _TestScreenState extends State<TestScreen1> {
               no: "لا");
           showDialog(
               context: context, builder: (BuildContext context) => baseDialog);
-
-          //  print("test1");
-
-          //    await sendEmail(
-          //      'nooni-4321@hotmail.com',
-          //       'hey1',
-          //       'confireeeemd',
-          //       );
-          //     print("test2");
         },
       );
   Widget Accept(DocumentSnapshot document) => ButtonWidget(
@@ -151,7 +146,7 @@ class _TestScreenState extends State<TestScreen1> {
     );
     return BackgroundA(
       child: Container(
-        height: 900,
+        // height: 900,
         child: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
@@ -163,7 +158,7 @@ class _TestScreenState extends State<TestScreen1> {
                 Colors.white10,
               ],
             )),
-            // height: 900,
+            height: 1200,
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
             child: Column(children: <Widget>[
               Container(
@@ -321,23 +316,6 @@ class _TestScreenState extends State<TestScreen1> {
       ),
     );
   }
-/*
-  sendEmail(String sendEmailTo, String subject, String emailBody) async {
-    await FirebaseFirestore.instance.collection("mail").add(
-      {
-        'to': "$sendEmailTo",
-        'message': {
-          'subject': "$subject",
-          'text': "$emailBody",
-        },
-      },
-    ).then(
-      (value) {
-        print("object !!!!!!");
-      },
-    );
-    print('email done');
-  }*/
 
   CollectionReference users = FirebaseFirestore.instance.collection('Coach');
 
@@ -360,82 +338,90 @@ class _TestScreenState extends State<TestScreen1> {
   }
 
   Future sendAccepteEmail(DocumentSnapshot document) async {
-    //  GoogleAuthApi.signOut();
-    //  return;
-    final user = await GoogleAuthApi.signIn();
-    print('hey before null');
+    FirebaseFirestore.instance
+        .collection('Emails')
+        .doc('0ZMsVxSp9qjHnIJu2MIX')
+        .get()
+        .then((DocumentSnapshot em) async {
+      final user = await GoogleAuthApi.signIn();
+      print('hey before null');
 
-    if (user == null) return;
-    print('hey:))))))');
+      if (user == null) return;
+      print('hey:))))))');
 
-    final email = user.email;
-    final auth = await user.authentication;
-    final token = auth.accessToken!;
+      final email = user.email;
+      final auth = await user.authentication;
+      final token = auth.accessToken!;
 
-    print('A authintcated: $email');
-    GoogleAuthApi.signOut();
+      print('A authintcated: $email');
+      GoogleAuthApi.signOut();
 
-    final smtpServer = gmailSaslXoauth2(email, token);
+      final smtpServer = gmailSaslXoauth2(email, token);
 
-    final message = Message()
-      ..from = Address(email, 'مِرَاس|Meras')
-      ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
-      ..subject = 'Welcome to Meras مرحبا بك في مِرَاس'
-      ..text = ' مرحباً' +
-          ' ' +
-          document['Fname'] +
-          '\n' +
-          '،نبارك لك قبولك في اسرة مِرَاس ونتمنى لك تدريب امن' +
-          '\n' +
-          ' ! تستطيع الأن الدخول الى حسابك والبدء بالتدريب' +
-          '\n \n' +
-          'مع تحيات فريق مِرَاس';
+      final message = Message()
+        ..from = Address(email, em['Title'])
+        ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
+        ..subject =
+            em['SubjectAccepted'] //'Welcome to Meras مرحبا بك في مِرَاس'
+        ..text = em['Hello'] +
+            ' ' +
+            document['Fname'] +
+            '\n' +
+            em['TextAccepted'] +
+            '\n \n' +
+            em['End'];
 
-    try {
-      await send(message, smtpServer);
-      print('email sent');
-    } on MailerException catch (e) {
-      print(e);
-    }
+      try {
+        await send(message, smtpServer);
+        print('email sent');
+      } on MailerException catch (e) {
+        print(e);
+      }
+    });
   }
 
   Future sendRejecteEmail(DocumentSnapshot document) async {
-    //  GoogleAuthApi.signOut();
-    //  return;
-    final user = await GoogleAuthApi.signIn();
-    print('hey before null rejected');
+    FirebaseFirestore.instance
+        .collection('Emails')
+        .doc('0ZMsVxSp9qjHnIJu2MIX')
+        .get()
+        .then((DocumentSnapshot em) async {
+      //  GoogleAuthApi.signOut();
+      //  return;
+      final user = await GoogleAuthApi.signIn();
+      print('hey before null rejected');
 
-    if (user == null) return;
-    print('hey:))))))rejected');
+      if (user == null) return;
+      print('hey:))))))rejected');
 
-    final email = user.email;
-    final auth = await user.authentication;
-    final token = auth.accessToken!;
+      final email = user.email;
+      final auth = await user.authentication;
+      final token = auth.accessToken!;
 
-    print('R authintcated: $email');
-    GoogleAuthApi.signOut();
+      print('R authintcated: $email');
+      GoogleAuthApi.signOut();
 
-    final smtpServer = gmailSaslXoauth2(email, token);
+      final smtpServer = gmailSaslXoauth2(email, token);
 
-    final message = Message()
-      ..from = Address(email, 'مِرَاس|Meras')
-      ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
-      ..subject = 'From Meras team من فريق مِرَاس'
-      ..text = ' مرحباً' +
-          ' ' +
-          document['Fname'] +
-          '\n' +
-          '،نقدر لك اهتمامك بالتسجيل في مِرَاس ويؤسفنا ابلاغك بعدم قبول طلبك بالتدريب' +
-          '\n' +
-          ' .نرجو منك التأكد من صحة البيانات والمحاولة من جديد' +
-          '\n \n' +
-          'مع تحيات فريق مِرَاس';
+      final message = Message()
+        ..from = Address(email, em['Title'])
+        ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
+        ..subject =
+            em['SubjectRejected'] //'Welcome to Meras مرحبا بك في مِرَاس'
+        ..text = em['Hello'] +
+            ' ' +
+            document['Fname'] +
+            '\n' +
+            em['TextRejected'] +
+            '\n \n' +
+            em['End'];
 
-    try {
-      await send(message, smtpServer);
-      print('R email sent');
-    } on MailerException catch (e) {
-      print(e);
-    }
+      try {
+        await send(message, smtpServer);
+        print('R email sent');
+      } on MailerException catch (e) {
+        print(e);
+      }
+    });
   }
 }

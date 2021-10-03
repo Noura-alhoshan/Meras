@@ -9,13 +9,13 @@ class ADcategory extends StatefulWidget {
 }
 
 class _State extends State<ADcategory> {
-  int selectedIndex = 1;
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: selectedIndex == 0
+      body: selectedIndex == 1
           ? ADnotification()
-          : selectedIndex == 1
+          : selectedIndex == 0
               ? DashboardScreen()
               : DashboardScreen(),
       //  : selectedIndex == 2
@@ -30,18 +30,18 @@ class _State extends State<ADcategory> {
           });
         },
         items: [
-          BottomNavyBarItem(
-              icon: Icon(Icons.notifications_active_sharp),
-              title: Text('التنبيهات'),
-              activeColor: Colors.pink),
+          //BottomNavyBarItem(
+          //   icon: Icon(Icons.notifications_active_sharp),
+          //   title: Text('التنبيهات'),
+          //    activeColor: Colors.pink),
           BottomNavyBarItem(
               icon: Icon(Icons.list_alt_sharp),
               title: Text('القائمة'),
               activeColor: Colors.blue),
-          // BottomNavyBarItem(
-          //     icon: Icon(Icons.home),
-          //      title: Text('الرئيسية'),
-          //     activeColor: Colors.green),
+          BottomNavyBarItem(
+              icon: Icon(Icons.home),
+              title: Text('الرئيسية'),
+              activeColor: Colors.pink),
         ],
       ),
     );
