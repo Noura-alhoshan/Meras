@@ -13,6 +13,8 @@ class _State extends State<ADcategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+
       body: selectedIndex == 1
           ? ADnotification()
           : selectedIndex == 0

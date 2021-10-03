@@ -146,7 +146,7 @@ class _TestScreenState extends State<TestScreen1> {
     );
     return BackgroundA(
       child: Container(
-        // height: 900,
+        height: 900,
         child: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
@@ -158,7 +158,7 @@ class _TestScreenState extends State<TestScreen1> {
                 Colors.white10,
               ],
             )),
-            height: 1200,
+            //  height: 1200,
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
             child: Column(children: <Widget>[
               Container(

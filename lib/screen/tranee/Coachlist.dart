@@ -7,12 +7,6 @@ import 'package:meras1/screen/admin/widget/BackgroundA.dart';
 import 'package:meras1/screen/home/navDrawer.dart';
 //import 'package:meras1/widget/BackgroundA.dart';
 
-void main() async {
-  runApp(MaterialApp(
-    routes: {},
-  ));
-}
-
 class CoachlistScreen extends StatefulWidget {
   @override
   _CoachlistScreenState createState() => _CoachlistScreenState();
@@ -71,6 +65,7 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('قائمة المدربين المتاحين'),

@@ -51,13 +51,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget build(BuildContext context) {
+    //   Size size = MediaQuery.of(context).size;
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
       drawer: NavDraweradmin(),
       appBar: AppBar(
         title: Text('قائمة المدربين قيد الانتظار'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
+        //    height: size.height,
         child: SingleChildScrollView(
           child: BackgroundA(
             child: Scrollbar(

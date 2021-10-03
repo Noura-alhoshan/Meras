@@ -20,6 +20,7 @@ class _State extends State<TRcategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: selectedIndex == 0
           ? TRnotification()
           : selectedIndex == 1
