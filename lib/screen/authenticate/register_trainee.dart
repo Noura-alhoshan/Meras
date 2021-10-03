@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
+import 'package:meras/screen/authenticate/welcome_alert.dart';
+import 'package:meras/screen/home/home.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +30,7 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
   final _formKey = GlobalKey<FormState>();
   String error = '';
   String e = '';
+  //bool enter = true;
 
   String dropdownValue = 'الرمال وماحولها';
   var items = ['الرمال وماحولها','اليرموك وماحولها','الملقا وماحوله','العارض وماحوله',
@@ -233,8 +234,16 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                                 error = 'تأكد من إدخال المعلومات بشكل صحيح';
                             });
                           }
+                           else{
+                             Navigator.of(context).push(
+                               MaterialPageRoute(builder: (context) => WelcomeAlert()),//CHANGE IT
+                             );
+                           }
 
                         }on FirebaseAuthException catch (e) {
+                             // if (enter){
+                             //
+                             // }
                              if (e.code == 'email-already-in-use') {
                             error = 'البريد الالكتروني المدخل مسجل بالفعل';
                           }
@@ -248,8 +257,8 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                         //     }
                         //   }
                         // }
-
                       }
+
                     }
                 ),
                 Row(
