@@ -33,8 +33,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     style: TextStyle(height: 2, fontSize: 16),
                     textAlign: TextAlign.right,
                   ),
-
-                  //  subtitle: Text(document['Discerption']),
+                  subtitle: Text(
+                    'تاريخ التسجيل: ' +
+                        document['Time'].toDate().toString().substring(0, 10),
+                    style: TextStyle(height: 2, fontSize: 15),
+                    textAlign: TextAlign.right,
+                  ),
                   trailing: document['Gender'] == 'أنثى'
                       ? Image.asset("assets/Female.png")
                       : Image.asset("assets/driver-male.jpg"),
@@ -67,6 +71,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       extendBodyBehindAppBar: true,
       drawer: NavDraweradmin(),
       appBar: AppBar(
+        /*
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -78,7 +83,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               // do something
             },
           )
-        ],
+        ],*/
         title: Text('قائمة المدربين قيد الانتظار'),
         backgroundColor: Colors.deepPurple[100],
       ),
@@ -91,7 +96,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Coach')
-                      // .orderBy('Time', descending: true)
+                      .orderBy('Time', descending: false)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) return const Text('loading 7 ...');
