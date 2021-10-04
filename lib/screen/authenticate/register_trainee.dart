@@ -46,7 +46,7 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
   //String age = '';
   String phoneNumber = '';
   String neighborhood = '';
-  String gender = '';
+  String gender = 'ذكر';
   bool _passwordVisible=true;
 
   int _age = 0;

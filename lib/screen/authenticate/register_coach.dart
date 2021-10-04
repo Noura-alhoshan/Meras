@@ -52,7 +52,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   String phoneNumber = '';
   String neighborhood = '';
   String description = '';
-  String gender = '';
+  String gender = 'ذكر';
   bool _passwordVisible=true;
 
   int _age = 0;
