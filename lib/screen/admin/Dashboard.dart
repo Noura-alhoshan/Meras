@@ -17,15 +17,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
   }
 
+  static const IconData swap_vert_rounded =
+      IconData(0xf01fc, fontFamily: 'MaterialIcons');
+
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
       child: document['Status'] == 'P'
           ? Container(
+              height: 100,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Card(
                 child: ListTile(
                   title: Text(
                     document['Fname'] + ' ' + document['Lname'],
+                    style: TextStyle(height: 2, fontSize: 16),
                     textAlign: TextAlign.right,
                   ),
 
@@ -44,6 +49,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         textStyle: TextStyle(fontSize: 16)),
                   ),
                 ),
+                elevation: 6,
+                shadowColor: Colors.deepPurple[500],
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    borderSide: BorderSide(color: Colors.white, width: 1)),
               ),
             )
           : null,
@@ -57,11 +67,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
       extendBodyBehindAppBar: true,
       drawer: NavDraweradmin(),
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.swap_vert_rounded,
+              color: Colors.black,
+              size: 40,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
         title: Text('قائمة المدربين قيد الانتظار'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
-        //    height: size.height,
         child: SingleChildScrollView(
           child: BackgroundA(
             child: Scrollbar(
@@ -70,6 +91,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Coach')
+                      // .orderBy('Time', descending: true)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) return const Text('loading 7 ...');

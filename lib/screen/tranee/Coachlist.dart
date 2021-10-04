@@ -24,22 +24,18 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
     return SingleChildScrollView(
       child: document['Status'] == 'A'
           ? Container(
+              height: 100,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Card(
                 child: ListTile(
                   title: Text(
                     document['Fname'] + ' ' + document['Lname'],
+                    style: TextStyle(height: 2, fontSize: 17),
                     textAlign: TextAlign.right,
-                    // style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    document['Age'] +
-                        ' :' +
-                        'الجنس:' +
-                        ' ' +
-                        document['Gender'] +
-                        '        ' +
-                        'العمر',
+                    'الحي:' + ' ' + document['Neighborhood'],
+                    style: TextStyle(height: 2, fontSize: 16),
                     textAlign: TextAlign.right,
                     // style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -49,7 +45,7 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
                   leading: ElevatedButton(
                     child: Text('معلومات المدرب'),
                     onPressed: () {
-                      nav(document.id);
+                      //nav(document.id); //for next sprint
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
@@ -57,6 +53,11 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
                         textStyle: TextStyle(fontSize: 16)),
                   ),
                 ),
+                elevation: 6,
+                shadowColor: Colors.deepPurple[500],
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    borderSide: BorderSide(color: Colors.white, width: 1)),
               ),
             )
           : null,
@@ -71,37 +72,40 @@ class _CoachlistScreenState extends State<CoachlistScreen> {
         title: Text('قائمة المدربين المتاحين'),
         backgroundColor: Colors.deepPurple[100],
       ),
-      body: SingleChildScrollView(
-        child: BackgroundA(
-          child: Scrollbar(
-            isAlwaysShown: true,
-            controller: _scrollController,
-            child: StreamBuilder<QuerySnapshot>(
-                stream:
-                    FirebaseFirestore.instance.collection('Coach').snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('loading 7 ...');
-                  return ListView.builder(
-                    //physics: const NeverScrollableScrollPhysics(), //<--here
-                    controller: _scrollController,
+      body: Container(
+        child: SingleChildScrollView(
+          child: BackgroundA(
+            child: Scrollbar(
+              isAlwaysShown: true,
+              controller: _scrollController,
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Coach')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) return const Text('loading 7 ...');
+                    return ListView.builder(
+                      //physics: const NeverScrollableScrollPhysics(), //<--here
+                      controller: _scrollController,
 
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) =>
-                        _buildListItem(context, (snapshot.data!).docs[index]),
-                  );
-                }),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) =>
+                          _buildListItem(context, (snapshot.data!).docs[index]),
+                    );
+                  }),
+            ),
           ),
         ),
       ),
     );
   }
 
-  void nav(String icd) async {
+  /* void nav(String icd) async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
         return TestScreen(icd);
       }),
     );
-  }
+  }*/ //for next sprint
 }

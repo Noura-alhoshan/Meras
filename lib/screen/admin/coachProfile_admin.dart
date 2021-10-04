@@ -5,15 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:meras1/Services/google_auth_api.dart';
-import 'package:meras1/screen/admin/ADcategory.dart';
-import 'package:meras1/screen/admin/widget/BackgroundA.dart';
-import 'package:meras1/screen/admin/widget/FullScreen.dart';
-import 'package:meras1/screen/admin/widget/button_widget.dart';
-//import 'package:meras1/widget/BackgroundA.dart';
 import 'package:meras1/screen/home/BaseAlertDialog.dart';
-//import 'package:meras1/widget/FullScreen.dart';
-//import 'package:meras1/widget/button_widget.dart';
-//import 'package:meras1/widget/profile_widget.dart';
+
+import 'ADcategory.dart';
+import 'widget/BackgroundA.dart';
+import 'widget/FullScreen.dart';
+import 'widget/button_widget.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 //final FirebaseFirestore fuser = FirebaseFirestore.instance;
@@ -48,32 +45,24 @@ class _TestScreenState extends State<TestScreen1> {
         ),
         backgroundColor: Colors.deepPurple[100],
       ),
-      body: Scrollbar(
-        isAlwaysShown: true,
-        controller: _scrollController,
-        child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('Coach')
-                .where(FieldPath.documentId, isEqualTo: widget.id)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('loading 7 ...');
-              return ListView.builder(
-                controller: _scrollController,
+      body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('Coach')
+              .where(FieldPath.documentId, isEqualTo: widget.id)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return const Text('loading 7 ...');
+            return ListView.builder(
+              controller: _scrollController,
 
-                //  physics: const NeverScrollableScrollPhysics(), //<--here
-                itemCount: 1,
+              //  physics: const NeverScrollableScrollPhysics(), //<--here
+              itemCount: 1,
 
-                itemBuilder: (context, index) =>
-                    _build(context, (snapshot.data!).docs[0]),
-              );
-            }),
-      ),
+              itemBuilder: (context, index) =>
+                  _build(context, (snapshot.data!).docs[0]),
+            );
+          }),
     );
-  }
-
-  void nav1() async {
-    Navigator.pushNamed(context, '/ADcategory'); //nn
   }
 
   Widget Reject(DocumentSnapshot document) => ButtonWidget(
@@ -84,13 +73,10 @@ class _TestScreenState extends State<TestScreen1> {
               title: "",
               content: "هل أنت متأكد من رفض المدرب؟",
               yesOnPressed: () async {
-                deleteUser();
                 sendRejecteEmail(document);
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(builder: (context) => ADcategory()),
-                );
-                Navigator.of(context, rootNavigator: true).pop('dialog');
+
+                deleteUser();
+                nav1WithPOP();
               },
               noOnPressed: () {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -103,10 +89,8 @@ class _TestScreenState extends State<TestScreen1> {
       );
   Widget Accept(DocumentSnapshot document) => ButtonWidget(
         colorr: green,
-        text: ' email قبول',
+        text: 'قبول',
         onClicked: () async {
-          // print('test' + document['Email']);
-
           var baseDialog = BaseAlertDialog(
               title: "",
               content: "هل أنت متأكد من قبول المدرب؟",
@@ -121,12 +105,7 @@ class _TestScreenState extends State<TestScreen1> {
                     await _auth.createUserWithEmailAndPassword(
                         email: document['Email'], password: document['Pass']);
                 deleteField();
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(builder: (context) => ADcategory()),
-                );
-
-                Navigator.of(context, rootNavigator: true).pop('dialog');
+                nav1();
               },
               noOnPressed: () {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -269,34 +248,25 @@ class _TestScreenState extends State<TestScreen1> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: Table(
-                        defaultColumnWidth: FixedColumnWidth(230.0),
-                        border: TableBorder.all(
-                            color: Colors.white,
-                            style: BorderStyle.solid,
-                            width: 0),
-                        children: [
-                          TableRow(children: [
-                            //Column(children:[Text('')]),
-                            Column(children: [
-                              Text(
-                                'الوصف',
-                                style: TextStyle(fontSize: 20.0),
-                                textAlign: TextAlign.center,
-                              )
-                            ]),
-                          ]),
-                          TableRow(children: [
-                            Column(children: [
-                              Text(document['Discerption'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.grey))
-                            ]),
-                          ]),
-                        ]),
+                  Text(
+                    'الوصف',
+                    style: TextStyle(fontSize: 20.0),
+                    textAlign: TextAlign.center,
                   ),
+                  //   ]),
+                  // ]),
+                  // TableRow(children: [
+                  //   Column(children: [
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 22),
+                    child: Text(document['Discerption'],
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(fontSize: 18, color: Colors.grey)),
+                  ),
+
                   SizedBox(
                     height: 24,
                   ),
@@ -315,6 +285,28 @@ class _TestScreenState extends State<TestScreen1> {
         ),
       ),
     );
+  }
+
+/////////////////////////////////////////////////
+  void nav1() async {
+    Navigator.pushNamed(context, '/ADcategory'); //nn
+  }
+
+  void nav1WithPOP() async {
+    Navigator.pushNamed(context, '/ADcategory');
+    var baseDialog = BaseAlertDialog(
+        title: "",
+        content: "تم رفض المدرب بنجاح   ",
+        yesOnPressed: () async {
+          nav1();
+        },
+        noOnPressed: () {
+          //Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+        yes: "إغلاق",
+        no: "");
+    showDialog(
+        context: context, builder: (BuildContext context) => baseDialog); //nn
   }
 
   CollectionReference users = FirebaseFirestore.instance.collection('Coach');
@@ -354,7 +346,7 @@ class _TestScreenState extends State<TestScreen1> {
       final token = auth.accessToken!;
 
       print('A authintcated: $email');
-      GoogleAuthApi.signOut();
+      //GoogleAuthApi.signOut();
 
       final smtpServer = gmailSaslXoauth2(email, token);
 
@@ -378,6 +370,16 @@ class _TestScreenState extends State<TestScreen1> {
         print(e);
       }
     });
+    var baseDialog = BaseAlertDialog(
+        title: "",
+        content: "تم قبول المدرب بنجاح   ",
+        yesOnPressed: () async {
+          nav1();
+        },
+        noOnPressed: () {},
+        yes: "إغلاق",
+        no: "");
+    showDialog(context: context, builder: (BuildContext context) => baseDialog);
   }
 
   Future sendRejecteEmail(DocumentSnapshot document) async {
@@ -399,7 +401,7 @@ class _TestScreenState extends State<TestScreen1> {
       final token = auth.accessToken!;
 
       print('R authintcated: $email');
-      GoogleAuthApi.signOut();
+      //GoogleAuthApi.signOut();
 
       final smtpServer = gmailSaslXoauth2(email, token);
 
