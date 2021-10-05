@@ -4,6 +4,7 @@ import 'package:meras_sprint1/ADpages/ADhome.dart';
 import 'package:meras_sprint1/ADpages/ADlist.dart';
 import 'package:meras_sprint1/ADpages/ADnotification.dart';
 
+//
 class ADcategory extends StatefulWidget {
   @override
   _State createState() => _State();
