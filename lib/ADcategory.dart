@@ -2,7 +2,6 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:meras_sprint1/ADpages/ADhome.dart';
 import 'package:meras_sprint1/ADpages/ADlist.dart';
-import 'package:meras_sprint1/ADpages/ADnotification.dart';
 
 class ADcategory extends StatefulWidget {
   @override
@@ -18,33 +17,38 @@ class _State extends State<ADcategory> {
           backgroundColor: Colors.purple[400],
           title: Center(child: Text('مراس'))),
       body: selectedIndex == 0
-          ? ADnotification()
+          ? ADlist()
           : selectedIndex == 1
-              ? ADlist()
-              : selectedIndex == 2
-                  ? ADhome()
-                  : ADhome(),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: selectedIndex,
-        showElevation: true, // use this to remove appBar's elevation
-        onItemSelected: (index) {
+              ? ADhome()
+              : ADhome(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) {
           setState(() {
             selectedIndex = index;
           });
         },
         items: [
-          BottomNavyBarItem(
-              icon: Icon(Icons.notifications_active_sharp),
-              title: Text('التنبيهات'),
-              activeColor: Colors.pink),
-          BottomNavyBarItem(
-              icon: Icon(Icons.list_alt_sharp),
-              title: Text('القائمة'),
-              activeColor: Colors.blue),
-          BottomNavyBarItem(
-              icon: Icon(Icons.home),
-              title: Text('الرئيسية'),
-              activeColor: Colors.green),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.list_alt_sharp,
+              color: Colors.blue,
+            ),
+            title: Text(
+              'القائمة',
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.green,
+            ),
+            title: Text(
+              'الرئيسية',
+              style: TextStyle(color: Colors.green),
+            ),
+          ),
         ],
       ),
     );

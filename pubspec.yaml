@@ -34,6 +34,7 @@ dependencies:
   firebase_messaging:
   fluttertoast:
   random_string:
+  get:
     
 dev_dependencies:
   flutter_test:

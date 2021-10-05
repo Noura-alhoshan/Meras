@@ -39,31 +39,54 @@ class _State extends State<TRcategory> {
                   : selectedIndex == 3
                       ? TRhome()
                       : TRhome(),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: selectedIndex,
-        showElevation: true, // use this to remove appBar's elevation
-        onItemSelected: (index) {
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) {
           setState(() {
             selectedIndex = index;
           });
         },
         items: [
-          BottomNavyBarItem(
-              icon: Icon(Icons.notifications_active_sharp),
-              title: Text('التنبيهات'),
-              activeColor: Colors.pink),
-          BottomNavyBarItem(
-              icon: Icon(Icons.car_repair),
-              title: Text('الدروس'),
-              activeColor: Colors.purple),
-          BottomNavyBarItem(
-              icon: Icon(Icons.search),
-              title: Text('المدربين'),
-              activeColor: Colors.blue),
-          BottomNavyBarItem(
-              icon: Icon(Icons.home),
-              title: Text('الرئيسية'),
-              activeColor: Colors.green),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications_active_sharp,
+              color: Colors.red,
+            ),
+            title: Text(
+              'التنبيهات',
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.car_repair,
+              color: Colors.purple,
+            ),
+            title: Text(
+              'الدروس',
+              style: TextStyle(color: Colors.purple),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+              color: Colors.blue,
+            ),
+            title: Text(
+              'المدربين',
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.green,
+            ),
+            title: Text(
+              'الرئيسية',
+              style: TextStyle(color: Colors.green),
+            ),
+          ),
         ],
       ),
     );
