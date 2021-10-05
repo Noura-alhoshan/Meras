@@ -75,8 +75,6 @@ class NavDrawer extends StatelessWidget  {
         ],
       ),  
     ),
-    );
-  
+    );  
   }
 }
-

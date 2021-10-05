@@ -94,10 +94,10 @@ child: Background(
                           title: "",
                           content: "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني   ",
                           yesOnPressed: () async {
-                           Navigator.of(context).pop();  
-                            // Navigator.pop( context, 
-                            //   MaterialPageRoute(builder: (context) => SignIn()),);
+                                Navigator.of(context).pop();  
                                 Navigator.of(context, rootNavigator: true).pop('dialog');
+                                    // Navigator.pop( context, 
+                                   //   MaterialPageRoute(builder: (context) => SignIn()),);
                               },
                             
                           noOnPressed: () {
@@ -107,7 +107,6 @@ child: Background(
                           no: "");
                       showDialog(context: context, builder: (BuildContext context) => baseDialog);
                                       //Navigator.of(context).pop();  
-
                       }  
                },
 

@@ -60,6 +60,7 @@ static int count =0;
       String phoneNumber, String neighborhood, String gender ) async {
 
     UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    await result.user!.sendEmailVerification();
     User? user1 = result.user;
     DatabaseService(uid: user1!.uid).updateTraineeData(Fname,Lname,email,password,age,phoneNumber,neighborhood,gender);
   }
@@ -108,14 +109,18 @@ static int count =0;
     {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user; 
+     
+        
       return user;
+     
 
     } 
     catch (error) 
     {
+      print(error);
       FirebaseFirestore.instance.collection("Coach").get().then((querySnapshot) async {//async
      
-      querySnapshot.docs.forEach((value) 
+      querySnapshot.docs.forEach((value)
       {
         if(value.data()['Email'].toString() == email && value.data()['Status'].toString()=='P' )
         {

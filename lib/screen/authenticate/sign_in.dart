@@ -5,7 +5,7 @@ import 'package:meras/components/already_have_an_account_acheck.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/components/rounded_input_field.dart';
 import 'package:meras/components/rounded_password_field.dart';
-import 'package:meras/screen/Signup/signup_screen.dart';
+//import 'package:meras/screen/Signup/signup_screen.dart';
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/screen/authenticate/register_coach.dart';
@@ -125,10 +125,7 @@ class _SignInState extends State<SignIn> {
                     //dynamic er =   _auth.showError();
                     //print(glovar);
                     //if (glovar != null)
-                    if (result != null && result.email == "DefaultEmail@gmail.com"  ) 
-                     await _auth.signOut();
-                   
-                   else if(result == null) {
+                  if(result == null ) {
                        setState(() {
                         error = 'لا يمكن تسجيل الدخول بالمعلومات المعطاة';
                         //print('damn here again');

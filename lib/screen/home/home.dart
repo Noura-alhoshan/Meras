@@ -10,18 +10,16 @@ import 'package:provider/provider.dart';
 
 
 //this home page will be edited to fit our app, this one is just for testing ^_^
-final FirebaseAuth auth = FirebaseAuth.instance;
-final User? user = auth.currentUser;
-final userid = user!.uid;
-   CollectionReference firevar = FirebaseFirestore.instance.collection('users');
+
+  // CollectionReference firevar = FirebaseFirestore.instance.collection('users');
 
 
 
 class home extends StatefulWidget {
-	  home({ required this.userId});
+	  home();
 
 	AuthService aut= AuthService();
-	final String userId;
+	//final String? userId;
 
 	  @override
 	  State<StatefulWidget> createState() => new _HomePageState();
@@ -29,27 +27,49 @@ class home extends StatefulWidget {
 	
 
 	class _HomePageState extends State<home> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-   
-      home: MyHomePage(),
-    );
+     void initState() {
+    super.initState();
   }
-}
+ @override
+  Widget build(BuildContext context,) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
+    dynamic userid = user!.uid;
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+     print(userid+" hello there");//first user only
+
+     //print(widget.userId);//updated
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
         //title: Text('Side menu'),
         backgroundColor: Colors.deepPurple[100],
       ),
-      body: Center(
-        child: Text(userid.toString()),
-      ),
+    
+      body: Center( child: Text(userid),),
+      
     );
+    
   }
+  
 }
+
+// class MyHomePage extends StatelessWidget {
+//   MyHomePage(String? userId);
+
+//   //get userId => userId;
+
+//   @override
+//   Widget build(BuildContext context,) {
+//     return Scaffold(
+//       drawer: NavDrawer(),
+//       appBar: AppBar(
+//         //title: Text('Side menu'),
+//         backgroundColor: Colors.deepPurple[100],
+//       ),
+//       body: Center(
+//         child: Text(userId),
+//       ),
+//     );
+//   }
+//}

@@ -1,22 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:meras/models/MyUser.dart';
-import 'package:meras/screen/authenticate/background.dart';
-import 'package:meras/screen/coachProfile_admin/Coach.dart';
-//import 'package:meras/screen/coachProfile_admin/user_preferences.dart';
-import 'package:meras/screen/coachProfile_admin/widget/appbar_widget.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:meras/screen/Navigation/ADcategory.dart';
 import 'package:meras/screen/coachProfile_admin/widget/button_widget.dart';
-import 'package:meras/screen/coachProfile_admin/widget/numbers_widget.dart';
-import 'package:meras/screen/coachProfile_admin/widget/profile_widget.dart';
-import 'package:meras/screen/home/home.dart';
+import 'package:meras/screen/home/BaseAlertDialog.dart';
+import 'package:meras/services/google_auth_api.dart';
 
 import '../../constants.dart';
+import 'widget/BackgroundA.dart';
 import 'widget/FullScreen.dart';
 
-class TestScreen extends StatefulWidget {
+final FirebaseAuth _auth = FirebaseAuth.instance;
+//final FirebaseFirestore fuser = FirebaseFirestore.instance;
+
+class TestScreen1 extends StatefulWidget {
   final String id;
-  TestScreen(this.id);
+  TestScreen1(this.id);
 
   @override
   _TestScreenState createState() => _TestScreenState();
@@ -25,7 +27,9 @@ class TestScreen extends StatefulWidget {
 Color red = Color(0xFFFFCDD2);
 Color green = Color(0xFFC8E6C9);
 
-class _TestScreenState extends State<TestScreen> {
+class _TestScreenState extends State<TestScreen1> {
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -42,42 +46,89 @@ class _TestScreenState extends State<TestScreen> {
         ),
         backgroundColor: Colors.deepPurple[100],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('Coach')
-              .where(FieldPath.documentId, isEqualTo: widget.id)
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text('loading 7 ...');
-            return ListView.builder(
-              //physics: const NeverScrollableScrollPhysics(), //<--here
-              itemCount: 1,
+      body:  StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Coach')
+                .where(FieldPath.documentId, isEqualTo: widget.id)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return const Text('loading 7 ...');
+              return ListView.builder(
+                controller: _scrollController,
 
-              itemBuilder: (context, index) =>
-                  _build(context, (snapshot.data!).docs[0]),
-            );
-          }),
-    );
+                //  physics: const NeverScrollableScrollPhysics(), //<--here
+                itemCount: 1,
+
+                itemBuilder: (context, index) =>
+                    _build(context, (snapshot.data!).docs[0]),
+              );
+            }),
+      );
   }
 
   void nav1() async {
     Navigator.pushNamed(context, '/ADcategory'); //nn
   }
 
-  Widget Reject() => ButtonWidget(
+  Widget Reject(DocumentSnapshot document) => ButtonWidget(
         colorr: red,
         text: 'رفض',
-        onClicked: () {},
+        onClicked: () async {
+          var baseDialog = BaseAlertDialog(
+              title: "",
+              content: "هل أنت متأكد من رفض المدرب؟",
+              yesOnPressed: () async {
+                deleteUser();
+                sendRejecteEmail(document);
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(builder: (context) => ADcategory()),
+                );
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              noOnPressed: () {
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              yes: "نعم",
+              no: "لا");
+          showDialog(
+              context: context, builder: (BuildContext context) => baseDialog);
+        },
       );
-  Widget Accept() => ButtonWidget(
+  Widget Accept(DocumentSnapshot document) => ButtonWidget(
         colorr: green,
         text: 'قبول',
-        onClicked: () {
-          FirebaseFirestore.instance
-              .collection('Coach')
-              .doc(widget.id)
-              .update({'Status': 'A'});
-          nav1();
+        onClicked: () async {
+          // print('test' + document['Email']);
+
+          var baseDialog = BaseAlertDialog(
+              title: "",
+              content: "هل أنت متأكد من قبول المدرب؟",
+              yesOnPressed: () async {
+                sendAccepteEmail(document);
+
+                FirebaseFirestore.instance
+                    .collection('Coach')
+                    .doc(widget.id)
+                    .update({'Status': 'A'});
+                UserCredential result =
+                    await _auth.createUserWithEmailAndPassword(
+                        email: document['Email'], password: document['Pass']);
+                deleteField();
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(builder: (context) => ADcategory()),
+                );
+
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              noOnPressed: () {
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              yes: "نعم",
+              no: "لا");
+          showDialog(
+              context: context, builder: (BuildContext context) => baseDialog);
         },
       );
 
@@ -87,25 +138,23 @@ class _TestScreenState extends State<TestScreen> {
       height: 230.0,
       width: 250.0,
     );
-    return Background(
+    return BackgroundA(
       child: Container(
         height: 900,
         child: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
-            gradient: LinearGradient(
+                gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
                 Colors.deepPurple.shade50,
                 Colors.white10,
               ],
-            )
-          ),
-            // height: 900,
+            )),
+            //  height: 1200,
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
-            child: Column(
-              children: <Widget>[
+            child: Column(children: <Widget>[
               Container(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(89),
@@ -126,7 +175,7 @@ class _TestScreenState extends State<TestScreen> {
                 document['Fname'] + ' ' + document['Lname'] + '  ',
                 style: TextStyle(
                     fontSize: 23,
-                    color: kPrimaryColor,
+                    // color: kPrimaryColor,
                     fontWeight: FontWeight.bold),
               ),
               Text(
@@ -214,20 +263,7 @@ class _TestScreenState extends State<TestScreen> {
                       ],
                     ),
                   ),
-
-                  // Container(
-                  //   margin: EdgeInsets.all(20),
-                  //   child: Table(
-                  //       defaultColumnWidth: FixedColumnWidth(230.0),
-                  //       border: TableBorder.all(
-                  //           color: Colors.white,
-                  //           style: BorderStyle.solid,
-                  //           width: 0),
-                  //       children: [
-                  //         TableRow(children: [
-                  //           //Column(children:[Text('')]),
-                  //           Column(children: [
-             Text(
+                   Text(
                                 'الوصف',
                                 style: TextStyle(fontSize: 20.0),
                                 textAlign: TextAlign.center,
@@ -249,35 +285,16 @@ class _TestScreenState extends State<TestScreen> {
                                 ),
                             ),
                      
-                        //     ]),
-                        //   ]),
-                        // ]),
-                  //),
-                  //  Text(
-                  //       "الوصف",
-                  //       style: TextStyle(fontSize: 21),
-                  //       textAlign: TextAlign.right,
-                  //     ),
-                  //     SizedBox(
-                  //       height: 8,
-                  //     ),
-                  //     Text(document["Discerption"],
-                  //         style: TextStyle(
-                  //           color: Colors.grey,
-                  //           fontSize: 18,
-                  //         ),
-                  //         textAlign: TextAlign.justify),
                   SizedBox(
                     height: 24,
                   ),
-                  
                   Row(children: <Widget>[
                     Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 37, vertical: 5)),
-                    Center(child: Accept()),
+                    Center(child: Accept(document)),
                     SizedBox(width: 24),
-                    Center(child: Reject()),
+                    Center(child: Reject(document)),
                   ]),
                 ]),
               ),
@@ -286,5 +303,113 @@ class _TestScreenState extends State<TestScreen> {
         ),
       ),
     );
+  }
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Coach');
+
+  Future<void> deleteField() {
+    return users
+        .doc(widget.id)
+        .update({'Pass': FieldValue.delete()})
+        .then((value) => print("User's Property Deleted"))
+        .catchError(
+            (error) => print("Failed to delete user's property: $error"));
+  }
+
+  Future<void> deleteUser() {
+    CollectionReference users = FirebaseFirestore.instance.collection('Coach');
+    return users
+        .doc(widget.id)
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
+  }
+
+  Future sendAccepteEmail(DocumentSnapshot document) async {
+    FirebaseFirestore.instance
+        .collection('Emails')
+        .doc('0ZMsVxSp9qjHnIJu2MIX')
+        .get()
+        .then((DocumentSnapshot em) async {
+      final user = await GoogleAuthApi.signIn();
+      print('hey before null');
+
+      if (user == null) return;
+      print('hey:))))))');
+
+      final email = user.email;
+      final auth = await user.authentication;
+      final token = auth.accessToken!;
+
+      print('A authintcated: $email');
+      GoogleAuthApi.signOut();
+
+      final smtpServer = gmailSaslXoauth2(email, token);
+
+      final message = Message()
+        ..from = Address(email, em['Title'])
+        ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
+        ..subject =
+            em['SubjectAccepted'] //'Welcome to Meras مرحبا بك في مِرَاس'
+        ..text = em['Hello'] +
+            ' ' +
+            document['Fname'] +
+            '\n' +
+            em['TextAccepted'] +
+            '\n \n' +
+            em['End'];
+
+      try {
+        await send(message, smtpServer);
+        print('email sent');
+      } on MailerException catch (e) {
+        print(e);
+      }
+    });
+  }
+
+  Future sendRejecteEmail(DocumentSnapshot document) async {
+    FirebaseFirestore.instance
+        .collection('Emails')
+        .doc('0ZMsVxSp9qjHnIJu2MIX')
+        .get()
+        .then((DocumentSnapshot em) async {
+      //  GoogleAuthApi.signOut();
+      //  return;
+      final user = await GoogleAuthApi.signIn();
+      print('hey before null rejected');
+
+      if (user == null) return;
+      print('hey:))))))rejected');
+
+      final email = user.email;
+      final auth = await user.authentication;
+      final token = auth.accessToken!;
+
+      print('R authintcated: $email');
+      GoogleAuthApi.signOut();
+
+      final smtpServer = gmailSaslXoauth2(email, token);
+
+      final message = Message()
+        ..from = Address(email, em['Title'])
+        ..recipients = ['nooni-4321@hotmail.com'] //[document['Email']]
+        ..subject =
+            em['SubjectRejected'] //'Welcome to Meras مرحبا بك في مِرَاس'
+        ..text = em['Hello'] +
+            ' ' +
+            document['Fname'] +
+            '\n' +
+            em['TextRejected'] +
+            '\n \n' +
+            em['End'];
+
+      try {
+        await send(message, smtpServer);
+        print('R email sent');
+      } on MailerException catch (e) {
+        print(e);
+      }
+    });
   }
 }
