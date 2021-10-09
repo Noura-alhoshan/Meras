@@ -1,0 +1,74 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
+import 'package:meras/Controllers/NotificationsHandler.dart';
+import 'package:meras/constants.dart';
+import 'package:meras/screen/Admin/ADpages/ADlist.dart';
+import 'package:meras/screen/Welcome/welcome_screen.dart';
+import 'package:meras/screen/authenticate/sign_in.dart';
+import 'package:meras/screen/home/home.dart';
+import 'screen/Admin/ADcategory.dart';
+import 'screen/wrapper.dart';
+import 'package:meras/services/auth.dart';
+//import 'package:meras/screen/wrapper.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:meras/controllers/MyUser.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+//App is terminated
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+//App is closed(Inside the RAM)
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    await createLocalNotification(message: message.data);
+  });
+
+// App is opened
+  FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+    await createLocalNotification(message: message.data);
+  });
+
+  initializeLocalNotification();
+  AwesomeNotifications().actionStream.listen((receivedNotification) {
+    Get.to(ADlistScreen());
+  });
+  FirebaseMessaging.instance.getToken().then((token) {
+    print(token);
+  });
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return StreamProvider<MyUser?>.value(
+      //catchError: () =>null,
+      initialData: null,
+      value: AuthService().user,
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        //title: 'Flutter Auth',
+        theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: SignIn(),
+
+        ///wrapper
+      ),
+    );
+  }
+}
+
+//Directionality( // add this
+//textDirection: TextDirection.rtl,
+//child:
