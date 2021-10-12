@@ -8,6 +8,7 @@ import 'ADcategory.dart';
 import 'ADpages/ADlist.dart';
 import 'NotificationsHandler.dart';
 
+//
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
