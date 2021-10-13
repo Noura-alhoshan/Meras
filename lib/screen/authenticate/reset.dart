@@ -75,11 +75,23 @@ class _ResetScreenState extends State<ResetScreen> {
                     press: () async {
                       try {
                         await auth.sendPasswordResetEmail(email: _email);
+                        valid = true;
                       } catch (error) {
-                        // print(error.toString());
+                         print(error.toString());
+                        if (error.toString()=='[firebase_auth/unknown] Given String is empty or null'
+                        || error.toString()=="LateInitializationError: Field '_email@89216385' has not been initialized.")
+                        setState(() {
+                          eror = 'الرجاء إدخال البريد الإلكتروني';
+                        });
+                        else if(error.toString()=='[firebase_auth/invalid-email] The email address is badly formatted.')
                         setState(() {
                           eror = 'الرجاء التحقق من صلاحية البريد الإلكتروني';
                         });
+                        else  
+                        setState(() {
+                          eror = ' البريد الإلكتروني المدخل غير موجود';
+                        });
+
                         valid = false;
                       }
                       if (valid) {
@@ -134,3 +146,8 @@ class _ResetScreenState extends State<ResetScreen> {
     );
   }
 }
+
+
+
+
+

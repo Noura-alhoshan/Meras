@@ -4,7 +4,6 @@ import 'package:meras/components/already_have_an_account_acheck.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/components/rounded_input_field.dart';
 import 'package:meras/components/rounded_password_field.dart';
-import 'package:meras/screen/Signup/signup_screen.dart';
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/screen/authenticate/register_coach.dart';
@@ -150,16 +149,18 @@ class _SignInState extends State<SignIn> {
                         //   }
                       }
                     }),
-                Row(
+              Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+    
                     TextButton(
                       child: Text(
-                        'أو حساب مدرب',
+                        'حساب مدرب',
                         style: TextStyle(
                             fontSize: 15.5,
                             color: kPrimaryColor,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,),
                       ),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -167,13 +168,23 @@ class _SignInState extends State<SignIn> {
                                 RegisterAsCoatch()), //CHANGE IT
                       ),
                     ),
-                    TextButton(
-                      child: Text(
-                        '  حساب متعلم',
+                    Text(
+                        '   أو ' ,
                         style: TextStyle(
                             fontSize: 15.5,
                             color: kPrimaryColor,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold,
+                           ),
+                      ),
+                    TextButton(
+                      child: Text(
+                        'حساب متعلم',
+                        style: TextStyle(
+                            fontSize: 15.5,
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.bold, 
+                            decoration: TextDecoration.underline,
+  ),
                       ),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -183,7 +194,7 @@ class _SignInState extends State<SignIn> {
                     Text(' ليس لديك حساب؟ قم بإنشاء',
                         style: TextStyle(fontSize: 15.5, color: kPrimaryColor)),
                   ],
-                ),
+              ),
               ],
             ),
           ),
