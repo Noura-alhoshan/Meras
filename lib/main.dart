@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: SignIn(),
+        home: SignIn(), //this is a comment to test 
 
         ///wrapper
       ),
