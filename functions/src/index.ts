@@ -22,8 +22,8 @@ export const notificationsTrigger = functions.firestore
 
 
         let  payloadData = {
-          title:'مدرب(ة) قيد التسجيل',
-          message:'هل تريد(ين) اعتماد المدرب(ة)' + ' ' + msgData.Fname + ' ' + msgData.Lname + '؟',
+          title:'مدرب قيد التسجيل',
+          message:'هل تريد اعتماد المدرب' + ' ' + msgData.Fname + ' ' + msgData.Lname + '؟',
           };
 
           
