@@ -10,13 +10,12 @@ class RoundedPasswordField extends StatelessWidget {
   final IconButton icons;
   final bool obscure;
   const RoundedPasswordField({
-     Key? key,
-    required this.onChanged, 
-    required this.validator, 
+    Key? key,
+    required this.onChanged,
+    required this.validator,
     required this.icons,
     required this.obscure,
     //String? Function(val) validator,
-
   }) : super(key: key);
 
   @override
@@ -25,8 +24,8 @@ class RoundedPasswordField extends StatelessWidget {
     return TextFieldContainer(
       child: TextFormField(
         //validator: (val) => val!.length < 1 ? sp+'   الرجاء إدخال كلمة المرور' : null,
-       // textAlign:TextAlign.center,
-        
+        // textAlign:TextAlign.center,
+
         validator: validator,
         obscureText: obscure,
         onChanged: onChanged,
