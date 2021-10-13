@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:meras/Controllers/Loading.dart';
@@ -10,6 +11,7 @@ import 'package:meras/screen/Admin/services/google_auth_api.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 //final FirebaseFirestore fuser = FirebaseFirestore.instance;
@@ -116,6 +118,7 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
       );
 
   Widget _build(BuildContext context, DocumentSnapshot document) {
+    final String ph= document['Phone Number'];
     Image im = new Image.network(
       document['URL'],
       height: 230.0,
@@ -168,10 +171,13 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
               SizedBox(
-                height: 10,
+               // height: 10,
               ),
-              Text(document['Phone Number'],
-                  style: TextStyle(fontSize: 18, color: Colors.grey)),
+              TextButton(
+                 
+                  child: Text(document['Phone Number'],
+                  style: TextStyle(fontSize: 18, color: Colors.grey,decoration: TextDecoration.underline,)),
+                  onPressed: (){ launch("tel://$document['Phone Number']");}),
               Divider(color: Colors.deepPurple[900]),
               Container(
                 child: Column(children: <Widget>[
@@ -192,23 +198,27 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                         ]),
                         TableRow(children: [
                           //Column(children:[Text('')]),
-                          Column(children: [
-                            Text(
+                         
+                            Container(
+                           padding: EdgeInsets.all(2.0),
+                           child: Text(
                               document['Gender'],
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey,
                               ),
                               textAlign: TextAlign.right,
-                            )
-                          ]),
-                          Column(children: [
+                            ),),
+                          
+                          Container(
+                           padding: EdgeInsets.all(2.0),
+                           child:
                             Text(
                               'الجنس',
                               style: TextStyle(fontSize: 20.0),
-                              textAlign: TextAlign.right,
+                              textAlign: TextAlign.end,
                             )
-                          ]),
+                          ),
                         ]),
                         TableRow(children: [
                           Column(children: [Text('')]),
@@ -218,14 +228,18 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                         ]),
                         TableRow(children: [
                           //Column(children:[Text('')]),
-                          Column(children: [
+                           Container(
+                           padding: EdgeInsets.all(2.0),
+                           child:
                             Text(document['Age'].toString(),
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.grey))
-                          ]),
-                          Column(children: [
-                            Text('العمر', style: TextStyle(fontSize: 20.0))
-                          ]),
+                                    TextStyle(fontSize: 18, color: Colors.grey,), textAlign: TextAlign.right,)
+                          ),
+                           Container(
+                           padding: EdgeInsets.all(2.0),
+                           child:
+                            Text('العمر', style: TextStyle(fontSize: 20.0), textAlign: TextAlign.right,)
+                           ),
                         ]),
                         TableRow(children: [
                           Column(children: [Text('')]),
@@ -235,24 +249,31 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                         ]),
                         TableRow(children: [
                           // Column(children:[Text('')]),
-                          Column(children: [
+                          Container(
+                           padding: EdgeInsets.all(0),
+                           child:
                             Text(document['Neighborhood'],
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.grey))
-                          ]),
-                          Column(children: [
+                                    TextStyle(fontSize: 18, color: Colors.grey),textAlign: TextAlign.right,)
+                          ),
+                           Container(
+                           padding: EdgeInsets.all(0),
+                           child:
                             Text('المنطقة السكنية',
-                                style: TextStyle(fontSize: 20.0))
-                          ]),
+                                style: TextStyle(fontSize: 20.0),textAlign: TextAlign.right,)
+                          ),
                         ]),
                       ],
                     ),
                   ),
+                   Container(
+                           padding: EdgeInsets.all(2),
+                           child:
                   Text(
                     'الوصف',
                     style: TextStyle(fontSize: 20.0),
-                    textAlign: TextAlign.center,
-                  ),
+                    textAlign: TextAlign.end,
+                  )),
                   //   ]),
                   // ]),
                   // TableRow(children: [

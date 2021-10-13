@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:meras/Controllers/NotificationsHandler.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/ADpages/ADlist.dart';
-import 'package:meras/screen/Welcome/welcome_screen.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
 import 'screen/Admin/ADcategory.dart';

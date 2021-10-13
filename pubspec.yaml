@@ -41,6 +41,7 @@ dependencies:
   awesome_notifications:
   firebase_messaging:
   get:
+  url_launcher:
 
 
   #uses-material-design: true

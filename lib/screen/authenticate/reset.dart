@@ -79,7 +79,7 @@ class _ResetScreenState extends State<ResetScreen> {
                       } catch (error) {
                          print(error.toString());
                         if (error.toString()=='[firebase_auth/unknown] Given String is empty or null'
-                        || error.toString()=="LateInitializationError: Field '_email@89216385' has not been initialized.")
+                        || error.toString()=="LateInitializationError: Field '_email@995216385' has not been initialized.")
                         setState(() {
                           eror = 'الرجاء إدخال البريد الإلكتروني';
                         });

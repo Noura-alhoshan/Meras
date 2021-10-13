@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:meras/screen/Welcome/welcome_screen.dart';
 import 'package:meras/screen/authenticate/background2.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/components/rounded_input_field.dart';
@@ -111,8 +110,8 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                 SizedBox(height: 40.0),
                 RoundedInputField(
                   //textAlign: TextAlign.right,
-                  hintText: sp+"          الأسم الأول",
-                  validator: (val) => val!.isEmpty ? 'الرجاء إدخال الأسم الأول' : null,
+                  hintText: sp+"           الأسم الأول",
+                  validator: (val) => val!.isEmpty ? '                  الرجاء إدخال الأسم الأول' : null,
                   onChanged: (val) {
                     setState(() => Fname = val);
                   },
@@ -120,7 +119,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                 RoundedInputField(
                   //textAlign: TextAlign.right,
                   hintText: sp+"          الأسم الأخير",
-                  validator: (val) => val!.isEmpty ? 'الرجاء إدخال الأسم الأخير' : null,
+                  validator: (val) => val!.isEmpty ? "              الرجاء إدخال الأسم الأخير" : null,
                   onChanged: (val) {
                     setState(() => Lname = val);
                   },
@@ -131,10 +130,10 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                   validator: (val) {
                     RegExp regex = new RegExp(pattern);
                     if (!regex.hasMatch(val)) {
-                      return 'الرجاء إدخال بريد الكتروني صالح';
+                      return '            الرجاء إدخال بريد الكتروني صالح';
                     }
                     else if(val!.isEmpty){
-                      return 'الرجاء إدخال البريد الإلكتروني';
+                      return '               الرجاء إدخال البريد الإلكتروني';
                     }
                     else
                       return null;
@@ -176,15 +175,15 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                         //enterMeras();
                       } on FormatException catch(ex) {
                         setState(() {
-                          _message = "الرجاء إدخال العمر بشكل صحيح";
+                          _message = "     الرجاء إدخال العمر بشكل صحيح";
                         });
                       }
                     },//ageOnSubmitted,
                     validator: (value) {
                       if(_age < 17 ){
-                        return 'الرجاء إدخال العمر، ١٧ سنة وأكثر';
+                        return '              الرجاء إدخال العمر، ١٧ سنة وأكثر';
                       }else if(value!.isEmpty){
-                        return 'الرجاء إدخال العمر';
+                        return '             الرجاء إدخال العمر';
                       }else
                         return null;
                     }
@@ -200,10 +199,10 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                   validator: (val){
                     RegExp regExp = new RegExp(patttern);
                     if (val.length == 0) {
-                      return 'الرجاء إدخال رقم الجوال';
+                      return '                 الرجاء إدخال رقم الجوال';
                     }
                     else if (!regExp.hasMatch(val)) {
-                      return 'الرجاء إدخال رقم جوال صحيح يبدأ بـ 05';
+                      return '     الرجاء إدخال رقم جوال صحيح يبدأ بـ 05';
                     }
                     return null;
                   },
@@ -214,7 +213,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                 ),
                 RoundedInputField2(
                   hintText: sp+"               وصف",
-                  validator: (val) => val!.isEmpty? 'الرجاء إدخال وصف' : null,//added ! to val
+                  validator: (val) => val!.isEmpty? '                     الرجاء إدخال وصف' : null,//added ! to val
                   onChanged: (val) {
                     setState(() =>  description = val);
                   },
@@ -293,9 +292,9 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     ),
                   ],
                 ),
-                Text(imageUrl, textAlign: TextAlign.center,
+                Text(imageUrl,
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 11.0),),
-
                 Text(
                   error,
                   style: TextStyle(color: Colors.red, fontSize: 15.0),
@@ -304,25 +303,32 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                   //color: Colors.pink[400],
                     text: 'إنشاء حساب مدرب',
                     press: () async {//async
-                      if(_formKey.currentState!.validate()){
-                        try{
-                          dynamic result = await _auth.registerAsCoach(Fname, Lname,email, password, _age,phoneNumber,neighborhood,description,gender,'P',imageUrl);//await
-                          if(result == null) {
-                            setState(() {
-                              error = 'الرجاء التأكد من إدخال المعلومات بشكل صحيح';
-                            });
-                          }
-                          else  Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => notApproaved()),
-                          );
-                        }catch(signUpError){
-                          if(signUpError is PlatformException) {
-                            if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-                              error = 'البريد الالكتروني المدخل مسجل بالفعل';
+                      // if(imageUrl.isEmpty){
+                      //   error='الرجاء تحميل صورة رخصة القيادة';
+                      // } else{
+                        if(_formKey.currentState!.validate()){
+                          try{
+                            // if(imageUrl.isEmpty){
+                            //   imageUrl=null;
+                            // }
+                            dynamic result = await _auth.registerAsCoach(Fname, Lname,email, password, _age,phoneNumber,neighborhood,description,gender,'P',imageUrl);//await
+                            if(result == null) {
+                              setState(() {
+                                error = 'الرجاء التأكد من إدخال المعلومات بشكل صحيح';
+                              });
+                            }
+                            else  Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => notApproaved()),
+                            );
+                          }catch(signUpError){
+                            if(signUpError is PlatformException) {
+                              if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+                                error = 'البريد الالكتروني المدخل مسجل بالفعل';
+                              }
                             }
                           }
                         }
-                      }
+                     // }
 
                     }
                 ),

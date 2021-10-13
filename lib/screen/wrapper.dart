@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
-import 'package:meras/screen/Tranee/TRcategory.dart';
+import 'package:meras/screen/Trainee/TRcategory.dart';
 
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
@@ -17,7 +17,7 @@ import 'package:meras/controllers/MyUser.dart';
 
 import 'Admin/ADcategory.dart';
 import 'Admin/ADpages/ADhome.dart';
-import 'Tranee/TRpages/TRhome.dart';
+import 'Trainee/TRpages/TRhome.dart';
 import 'Verify.dart';
 import 'home/Chome.dart';
 
