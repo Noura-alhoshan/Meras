@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();//check the pull
   await Firebase.initializeApp();
 
 //App is terminated
