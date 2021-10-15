@@ -17,6 +17,7 @@ class _ADlistScreenState extends State<ADlistScreen> {
     super.initState();
   }
 
+  final count = 0;
   static const IconData swap_vert_rounded =
       IconData(0xf01fc, fontFamily: 'MaterialIcons');
 
