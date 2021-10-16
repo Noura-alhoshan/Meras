@@ -177,7 +177,7 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                  
                   child: Text(document['Phone Number'],
                   style: TextStyle(fontSize: 18, color: Colors.grey,decoration: TextDecoration.underline,)),
-                  onPressed: (){ launch("tel://$document['Phone Number']");}),
+                  onPressed: (){ launch("tel://$ph");}),
               Divider(color: Colors.deepPurple[900]),
               Container(
                 child: Column(children: <Widget>[
