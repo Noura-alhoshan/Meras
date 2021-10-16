@@ -18,8 +18,6 @@ class _ADlistScreenState extends State<ADlistScreen> {
   }
 
   final count = 0;
-  static const IconData swap_vert_rounded =
-      IconData(0xf01fc, fontFamily: 'MaterialIcons');
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
@@ -72,19 +70,6 @@ class _ADlistScreenState extends State<ADlistScreen> {
       extendBodyBehindAppBar: true,
       drawer: NavDraweradmin(),
       appBar: AppBar(
-        /*
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.swap_vert_rounded,
-              color: Colors.black,
-              size: 40,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],*/
         title: Text('قائمة المدربين قيد الانتظار'),
         backgroundColor: Colors.deepPurple[100],
       ),

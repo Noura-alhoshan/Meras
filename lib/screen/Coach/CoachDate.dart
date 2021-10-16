@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
@@ -14,6 +16,10 @@ class _CoachDate extends State<CoachDate> {
   late TimeOfDay time;
   late DateTime dateTime;
 
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  CollectionReference AvaDates =
+      FirebaseFirestore.instance.collection('TrainingDates');
+
   ///first null?
 
   @override
@@ -22,7 +28,7 @@ class _CoachDate extends State<CoachDate> {
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('DATE PICKER'),
+        title: Text('اختيار الاوقات المتاحة'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
@@ -54,7 +60,7 @@ class _CoachDate extends State<CoachDate> {
 
   String getText() {
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
-        ' ${dateTime.hour}:${dateTime.minute}';
+        ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 
   Widget Date() => ButtonWidget(
@@ -115,5 +121,19 @@ class _CoachDate extends State<CoachDate> {
       );
     });
     print(getText());
+    addDate();
+  }
+
+  Future<void> addDate() {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    // Call the user's CollectionReference to add a new user
+    return AvaDates.add({
+      'CID': uid, // John Doe
+      'DateTime': getText(), // Stokes and Sons
+    })
+        .then((value) => print("time Added"))
+        .catchError((error) => print("Failed to add time: $error"));
   }
 }
