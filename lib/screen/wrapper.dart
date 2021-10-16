@@ -3,18 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Trainee/TRcategory.dart';
-
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
-
-import 'package:meras/screen/home/home.dart';
 import 'package:meras/screen/authenticate/authenticate.dart';
-import 'package:meras/screen/home/navDrawer.dart';
 import 'package:meras/screen/home/rej.dart';
 import 'package:meras/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
-
 import 'Admin/ADcategory.dart';
 import 'Admin/ADpages/ADhome.dart';
 import 'Trainee/TRpages/TRhome.dart';
@@ -130,8 +125,8 @@ class Wrapper extends StatelessWidget {
           isTrainee(userid), // Future<bool> firstFuture() async {...}
           isAdmin(userid),
           isCoachA(userid),
-          isCoachP(userid) // Future<bool> secondFuture() async {...}
-          //... More futures
+          isCoachP(userid) 
+         
         ]),
         builder: (
           context,
@@ -142,7 +137,8 @@ class Wrapper extends StatelessWidget {
           if (!snapshot.hasData) {
             return Loading();
           }
-
+          // Access first Future's data:
+          // snapshot.data[0]
           if (snapshot.data![0])
             return TRcategory();
           else if (snapshot.data![1])
@@ -153,11 +149,8 @@ class Wrapper extends StatelessWidget {
             return notApproaved();
           else
             return Rhome();
-          // Access first Future's data:
-          // snapshot.data[0]
+        
 
-          // Access second Future's data:
-          // snapshot.data[1]
         });
   }
 }
