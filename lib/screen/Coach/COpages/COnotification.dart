@@ -6,10 +6,10 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 
 class COnotification extends StatefulWidget {
   @override
-  _ADlistScreenState createState() => _ADlistScreenState();
+  _COnotification createState() => _COnotification();
 }
 
-class _ADlistScreenState extends State<COnotification> {
+class _COnotification extends State<COnotification> {
   //final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
@@ -97,7 +97,7 @@ class _ADlistScreenState extends State<COnotification> {
             },
           )
         ],*/
-        title: Text('قائمة المدربين قيد الانتظار'),
+        title: Center(child: Text('التنبيهات')),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
