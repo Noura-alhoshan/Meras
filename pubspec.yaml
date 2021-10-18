@@ -82,6 +82,8 @@ flutter:
     - assets/images/Female.png
     - assets/images/trafficsigns.png
     - assets/images/test2.png
+    - assets/icons/DeleteIcon.png
+
 
 
   # To add assets to your application, add an assets section, like this:
