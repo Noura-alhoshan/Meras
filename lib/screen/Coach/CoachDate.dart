@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
@@ -34,11 +35,14 @@ class _CoachDate extends State<CoachDate> {
         title: Text('اختيار الاوقات المتاحة'),
         backgroundColor: Colors.deepPurple[100],
       ),
-      //  body: Container(
-      //   child: Center(
-      //      child: Date(),
-      //    ),
-      //  ),
+      /*
+      body: Container(
+        child: Center(
+          child: Date(),
+        ),
+      ), */
+
+      //   /*
       body: Container(
         child: SingleChildScrollView(
           child: BackgroundA(
@@ -60,7 +64,7 @@ class _CoachDate extends State<CoachDate> {
                 }),
           ),
         ),
-      ),
+      ), //*/
     );
   }
 
@@ -72,9 +76,20 @@ class _CoachDate extends State<CoachDate> {
       child: Card(
         child: ListTile(
           ///////////////////////////////////////////////
+          ///
           title: Text(
-            document['DateTime'],
-            style: TextStyle(height: 2.4, fontSize: 28),
+            document['DateTime'].toString().substring(16) == 'AM'
+                ? 'التاريخ:' +
+                    document['DateTime'].toString().substring(0, 10) +
+                    '  الوقت: ' +
+                    document['DateTime'].toString().substring(11, 16) +
+                    ' صباحا '
+                : 'التاريخ:' +
+                    document['DateTime'].toString().substring(0, 10) +
+                    '  الوقت: ' +
+                    document['DateTime'].toString().substring(11, 16) +
+                    ' مساءً',
+            style: TextStyle(height: 2.4, fontSize: 15),
             textAlign: TextAlign.right,
           ),
           leading: IconButton(
@@ -203,7 +218,8 @@ class _CoachDate extends State<CoachDate> {
 
   /// method 6
   String getText() {
-    return '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
-        ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+    return DateFormat('MM/dd/yyyy h:mm aa').format(dateTime);
+    // '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
+    //     ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 }
