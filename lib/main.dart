@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:meras/Controllers/NotificationsHandler.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/ADpages/ADlist.dart';
+import 'package:meras/screen/Coach/COpages/COnotification.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
 import 'screen/Admin/ADcategory.dart';
@@ -18,7 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();//check the pull
+  WidgetsFlutterBinding.ensureInitialized(); //check the pull
   await Firebase.initializeApp();
 
 //App is terminated
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: SignIn(), //this is a comment to test 
+        home: COnotification(), //this is a comment to test
 
         ///wrapper
       ),
