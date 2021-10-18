@@ -97,7 +97,7 @@ class _COnotification extends State<COnotification> {
             },
           )
         ],*/
-        title: Center(child: Text('التنبيهات')),
+        title: Text('التنبيهات'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
