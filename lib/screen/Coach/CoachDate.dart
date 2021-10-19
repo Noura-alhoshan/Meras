@@ -64,7 +64,7 @@ class _CoachDate extends State<CoachDate> {
                     stream: FirebaseFirestore.instance
                         .collection('Coach')
                         .doc(uid)
-                        .collection('test')
+                        .collection('Dates')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) return const Text('loading 7 ...');
@@ -158,7 +158,7 @@ class _CoachDate extends State<CoachDate> {
     final User? user = auth.currentUser;
     final uid = user!.uid;
     return AvaDates.doc(uid)
-        .collection('test')
+        .collection('Dates')
         .doc(a)
         .delete()
         .then((value) => print("time deleted"))
@@ -170,7 +170,7 @@ class _CoachDate extends State<CoachDate> {
     final User? user = auth.currentUser;
     final uid = user!.uid;
     return AvaDates.doc(uid)
-        .collection("test")
+        .collection("Dates")
         .add({'DateTime': getText() + getday()})
         .then((value) => print("time added"))
         .catchError((error) => print("Failed to add time: $error"));
