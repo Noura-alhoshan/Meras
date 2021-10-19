@@ -47,11 +47,12 @@ class _CoachDate extends State<CoachDate> {
       body: Column(children: <Widget>[
         Expanded(
           child: Center(
-            // child: SingleChildScrollView(
-            // child: BackgroundA(
-            child: Date(),
-            // ),
-            //  ),
+            child: Container(
+              child: SingleChildScrollView(
+                // child: BackgroundA(
+                child: Date(),
+              ),
+            ),
           ),
         ),
         // Container(height: 40, color: Colors.grey),
@@ -68,6 +69,8 @@ class _CoachDate extends State<CoachDate> {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) return const Text('loading 7 ...');
                       return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(), //<--here
+
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) => _buildListItem(
                             context, (snapshot.data!).docs[index]),
@@ -252,9 +255,9 @@ class _CoachDate extends State<CoachDate> {
         return 'الأثنين';
       case 'Tuesday':
         return 'الثلاثاء';
-      case 'Thursday':
-        return 'الأربعاء';
       case 'Wednesday':
+        return 'الأربعاء';
+      case 'Thursday':
         return 'الخميس';
       case 'Friday':
         return 'الجمعة';
