@@ -17,6 +17,9 @@ class _CoachDate extends State<CoachDate> {
   late DateTime date;
   late TimeOfDay time;
   late DateTime dateTime;
+  late DateTime day;
+  late String day1;
+  late String day2;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
@@ -43,28 +46,42 @@ class _CoachDate extends State<CoachDate> {
       ), */
 
       //   /*
-      body: Container(
-        child: SingleChildScrollView(
-          child: BackgroundA(
-            child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('Coach')
-                    .doc(uid)
-                    .collection('test')
-                    .snapshots(),
-                //   .where(['CID'], isEqualTo: uid)
-                //   .snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('loading 7 ...');
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) =>
-                        _buildListItem(context, (snapshot.data!).docs[index]),
-                  );
-                }),
+      body: Column(children: <Widget>[
+        Expanded(
+          child: Center(
+            // child: SingleChildScrollView(
+            // child: BackgroundA(
+            child: Date(),
+            // ),
+            //  ),
           ),
         ),
-      ), //*/
+        // Container(height: 40, color: Colors.grey),
+        Expanded(
+          child: Container(
+            child: SingleChildScrollView(
+              child: BackgroundA(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('Coach')
+                        .doc(uid)
+                        .collection('test')
+                        .snapshots(),
+                    //   .where(['CID'], isEqualTo: uid)
+                    //   .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) return const Text('loading 7 ...');
+                      return ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) => _buildListItem(
+                            context, (snapshot.data!).docs[index]),
+                      );
+                    }),
+              ),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 
@@ -72,24 +89,30 @@ class _CoachDate extends State<CoachDate> {
     return SingleChildScrollView(
         child: Container(
       height: 100,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
       child: Card(
         child: ListTile(
           ///////////////////////////////////////////////
           ///
           title: Text(
-            document['DateTime'].toString().substring(16) == 'AM'
-                ? 'التاريخ:' +
+            document['DateTime'].toString().substring(16, 18) == 'AM'
+                ? 'يوم ' +
+                    getday1(document['DateTime'].toString()) +
+                    ' ' +
                     document['DateTime'].toString().substring(0, 10) +
-                    '  الوقت: ' +
+                    '\n'
+                        '  الوقت: ' +
                     document['DateTime'].toString().substring(11, 16) +
                     ' صباحا '
-                : 'التاريخ:' +
+                : 'يوم ' +
+                    getday1(document['DateTime'].toString()) +
+                    ' ' +
                     document['DateTime'].toString().substring(0, 10) +
-                    '  الوقت: ' +
+                    '\n'
+                        '  الوقت: ' +
                     document['DateTime'].toString().substring(11, 16) +
-                    ' مساءً',
-            style: TextStyle(height: 2.4, fontSize: 15),
+                    ' مساءً ',
+            style: TextStyle(height: 1.5, fontSize: 19),
             textAlign: TextAlign.right,
           ),
           leading: IconButton(
@@ -124,6 +147,29 @@ class _CoachDate extends State<CoachDate> {
     ));
   }
 
+  String getday1(String a) {
+    //day = dateTime;
+    ///day1 = DateFormat('EEEE').format(day);
+    switch (a.substring(18)) {
+      case 'Saturday':
+        return 'السبت';
+      case 'Sunday':
+        return 'الأحد';
+      case 'Monday':
+        return 'الأثنين';
+      case 'Tuesday':
+        return 'الثلاثاء';
+      case 'Thursday':
+        return 'الأربعاء';
+      case 'Wednesday':
+        return 'الخميس';
+      case 'Friday':
+        return 'الجمعة';
+      default:
+        return 'no day';
+    }
+  }
+
   Widget Date() => ButtonWidget(
         colorr: red,
         text: 'DATE',
@@ -151,7 +197,7 @@ class _CoachDate extends State<CoachDate> {
     final uid = user!.uid;
     return AvaDates.doc(uid)
         .collection("test")
-        .add({'DateTime': getText()})
+        .add({'DateTime': getText() + getday()})
         .then((value) => print("time added"))
         .catchError((error) => print("Failed to add time: $error"));
 
@@ -179,7 +225,7 @@ class _CoachDate extends State<CoachDate> {
         time.minute,
       );
     });
-    print(getText());
+    print(getText() + getday());
     addDate();
   }
 
@@ -219,6 +265,13 @@ class _CoachDate extends State<CoachDate> {
   /// method 6
   String getText() {
     return DateFormat('MM/dd/yyyy h:mm aa').format(dateTime);
+    // '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
+    //     ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+  }
+
+  String getday() {
+    day = dateTime;
+    return DateFormat('EEEE').format(day);
     // '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
     //     ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
