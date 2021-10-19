@@ -18,7 +18,7 @@ class TRlessons extends StatelessWidget {
             backgroundColor: Colors.deepPurple[100],
             bottom: TabBar(
               tabs: [
-                Tab(text: 'المرفوضة'),
+                Tab(text: 'المرفوضة/الملغاة'),
                 Tab(
                   text: 'المعلقة',
                 ),
