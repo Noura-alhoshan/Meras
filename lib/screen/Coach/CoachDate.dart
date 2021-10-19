@@ -18,8 +18,6 @@ class _CoachDate extends State<CoachDate> {
   late TimeOfDay time;
   late DateTime dateTime;
   late DateTime day;
-  late String day1;
-  late String day2;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
@@ -67,8 +65,6 @@ class _CoachDate extends State<CoachDate> {
                         .doc(uid)
                         .collection('test')
                         .snapshots(),
-                    //   .where(['CID'], isEqualTo: uid)
-                    //   .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) return const Text('loading 7 ...');
                       return ListView.builder(
@@ -92,12 +88,10 @@ class _CoachDate extends State<CoachDate> {
       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
       child: Card(
         child: ListTile(
-          ///////////////////////////////////////////////
-          ///
           title: Text(
             document['DateTime'].toString().substring(16, 18) == 'AM'
                 ? 'يوم ' +
-                    getday1(document['DateTime'].toString()) +
+                    getArabicdays(document['DateTime'].toString()) +
                     ' ' +
                     document['DateTime'].toString().substring(0, 10) +
                     '\n'
@@ -105,7 +99,7 @@ class _CoachDate extends State<CoachDate> {
                     document['DateTime'].toString().substring(11, 16) +
                     ' صباحا '
                 : 'يوم ' +
-                    getday1(document['DateTime'].toString()) +
+                    getArabicdays(document['DateTime'].toString()) +
                     ' ' +
                     document['DateTime'].toString().substring(0, 10) +
                     '\n'
@@ -147,29 +141,6 @@ class _CoachDate extends State<CoachDate> {
     ));
   }
 
-  String getday1(String a) {
-    //day = dateTime;
-    ///day1 = DateFormat('EEEE').format(day);
-    switch (a.substring(18)) {
-      case 'Saturday':
-        return 'السبت';
-      case 'Sunday':
-        return 'الأحد';
-      case 'Monday':
-        return 'الأثنين';
-      case 'Tuesday':
-        return 'الثلاثاء';
-      case 'Thursday':
-        return 'الأربعاء';
-      case 'Wednesday':
-        return 'الخميس';
-      case 'Friday':
-        return 'الجمعة';
-      default:
-        return 'no day';
-    }
-  }
-
   Widget Date() => ButtonWidget(
         colorr: red,
         text: 'DATE',
@@ -178,7 +149,7 @@ class _CoachDate extends State<CoachDate> {
         },
       );
 
-  ////methods  METHOD1: deleteDate, METHOD2:addDate, METHOD3:pickDateTime ,METHOD4:pickTime, METHOD5:pickDate, METHOD6:getText
+  ////methods  METHOD1: deleteDate, METHOD2:addDate, METHOD3:pickDateTime ,METHOD4:pickTime, METHOD5:pickDate, METHOD6:getText, METHOD7:getday, METHOD8:getArabicdays
   /// method 1
   Future<void> deleteDate(String a) {
     final User? user = auth.currentUser;
@@ -200,13 +171,6 @@ class _CoachDate extends State<CoachDate> {
         .add({'DateTime': getText() + getday()})
         .then((value) => print("time added"))
         .catchError((error) => print("Failed to add time: $error"));
-
-    /*AvaDates.add({
-      'CID': uid,
-      'DateTime': getText(),
-    })
-        .then((value) => print("time Deleted"))
-        .catchError((error) => print("Failed to delete time: $error"));*/
   }
 
   /// method 3
@@ -269,10 +233,33 @@ class _CoachDate extends State<CoachDate> {
     //     ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 
+  /// method 7
   String getday() {
     day = dateTime;
     return DateFormat('EEEE').format(day);
     // '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
     //     ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+  }
+
+  /// method 8
+  String getArabicdays(String a) {
+    switch (a.substring(18)) {
+      case 'Saturday':
+        return 'السبت';
+      case 'Sunday':
+        return 'الأحد';
+      case 'Monday':
+        return 'الأثنين';
+      case 'Tuesday':
+        return 'الثلاثاء';
+      case 'Thursday':
+        return 'الأربعاء';
+      case 'Wednesday':
+        return 'الخميس';
+      case 'Friday':
+        return 'الجمعة';
+      default:
+        return 'no day';
+    }
   }
 }
