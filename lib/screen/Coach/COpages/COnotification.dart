@@ -33,7 +33,7 @@ class _COnotification extends State<COnotification> {
                     textAlign: TextAlign.right,
                   ),
                   subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (document['DateTime'] != null)
                         Text(
