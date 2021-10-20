@@ -92,7 +92,7 @@ class _CoachDate extends State<CoachDate> {
       child: Card(
         child: ListTile(
           title: Text(
-            document['DateTime'].toString().substring(16, 18) == 'AM'
+            document['DateTime'].toString().substring(17, 19) == 'AM'
                 ? 'يوم ' +
                     getArabicdays(document['DateTime'].toString()) +
                     ' ' +
@@ -231,7 +231,7 @@ class _CoachDate extends State<CoachDate> {
 
   /// method 6
   String getText() {
-    return DateFormat('MM/dd/yyyy h:mm aa').format(dateTime);
+    return DateFormat('MM/dd/yyyy hh:mm aa').format(dateTime);
     // '${dateTime.day}/${dateTime.month}/${dateTime.year}  ' +
     //     ' ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
@@ -246,7 +246,7 @@ class _CoachDate extends State<CoachDate> {
 
   /// method 8
   String getArabicdays(String a) {
-    switch (a.substring(18)) {
+    switch (a.substring(19)) {
       case 'Saturday':
         return 'السبت';
       case 'Sunday':
