@@ -28,7 +28,7 @@ class _COnotification extends State<COnotification> {
               child: Card(
                 child: ListTile(
                   title: Text(
-                    document['Fname'] + ' ' + document['Lname'],
+                    document['CoachName'] + ' ' + document['CoachName2'],
                     style: TextStyle(height: 2, fontSize: 15),
                     textAlign: TextAlign.right,
                   ),
@@ -45,16 +45,16 @@ class _COnotification extends State<COnotification> {
                       //   style: TextStyle(height: 2, fontSize: 11),
                       //   textAlign: TextAlign.right,
                       // ),
-                      Text(
-                        document['Des'],
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                      ),
+                      // Text(
+                      //   document['Des'],
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      // ),
                     ],
                   ),
-                  trailing: document['Gender'] == 'أنثى'
-                      ? Image.asset("assets/images/Female.png")
-                      : Image.asset("assets/images/driver-male.jpg"),
+                  // trailing: document['Gender'] == 'أنثى'
+                  //     ? Image.asset("assets/images/Female.png")
+                  //     : Image.asset("assets/images/driver-male.jpg"),
                   // leading: ElevatedButton(
                   //   child: Text('معلومات المدرب   '),
                   //   onPressed: () {
