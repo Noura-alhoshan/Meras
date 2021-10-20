@@ -35,16 +35,13 @@ class _COnotification extends State<COnotification> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      // if (document['Time'] != null)
-                      // Text(
-                      //   'التاريخ :' +
-                      //       document['Time']
-                      //           .toDate()
-                      //           .toString()
-                      //           .substring(1, 10),
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      // ),
+                      if (document['DateTime'] != null)
+                        Text(
+                          'التاريخ :' +
+                              document['DateTime'].toString().substring(0, 10),
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                        ),
                       // Text(
                       //   document['Des'],
                       //   style: TextStyle(height: 2, fontSize: 11),
