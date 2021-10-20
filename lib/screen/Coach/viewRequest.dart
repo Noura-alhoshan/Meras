@@ -26,6 +26,7 @@ class ViewLessonRequest extends StatefulWidget {
 
 Color red = Color(0xFFFFCDD2);
 Color green = Color(0xFFC8E6C9);
+Color opurple = Color(0xFF311B92);
 
 class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
   final ScrollController _scrollController = ScrollController();
@@ -77,14 +78,14 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
       alignment: const Alignment(-0.1, -0.5),
       child: Container(
       width: 300,
-      height: 600,
+      height: 500,
       
       padding: EdgeInsets.only(bottom: 10, top: 0),
       decoration: 
      BoxDecoration(
      
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
                 color: Colors.black12,
@@ -110,7 +111,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
             // ),
            
       Container(
-        height: 508,
+        height: 478,/////////////////////////////
         child: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
@@ -125,7 +126,33 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
             //  height: 1200,
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
             child: Column(children: <Widget>[
-              // Icon(ic)
+               new ListTile(
+                    //leading: const Icon(Icons.today),
+                    title: Text(
+            document['DateTime'].toString().substring(16, 18) == 'AM'
+                ? 'يوم ' +
+                    getArabicdays(document['DateTime'].toString()) +
+                    ' ' +
+                    document['DateTime'].toString().substring(0, 10) +
+                    '\n'
+                        '  الوقت: ' +
+                    document['DateTime'].toString().substring(11, 16) +
+                    ' صباحا '
+                : 'يوم ' +
+                    getArabicdays(document['DateTime'].toString()) +
+                    ' ' +
+                    document['DateTime'].toString().substring(0, 10) +
+                    '\n'
+                        '  الوقت: ' +
+                    document['DateTime'].toString().substring(11, 16) +
+                    ' مساءً ',
+            style: TextStyle(height: 1.5, fontSize: 19),
+            textAlign: TextAlign.right,
+          ),
+                    //subtitle: Text('February 20, 1980'),
+                    trailing: const Icon(Icons.calendar_today_rounded,size: 60, color: Colors.deepPurple,) ,
+                  ),
+                  
                Divider(color: Colors.deepPurple[900]),
               Text("معلومات المتدرب",
                 style: TextStyle(
@@ -179,7 +206,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                            child: Text(
                               document['Gender'],
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: Colors.grey,
                               ),
                               textAlign: TextAlign.right,
@@ -190,7 +217,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                            child:
                             Text(
                               'الجنس',
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(fontSize: 18.0),
                               textAlign: TextAlign.end,
                             )
                           ),
@@ -208,12 +235,12 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                            child:
                             Text(document['Age'].toString(),
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.grey,), textAlign: TextAlign.right,)
+                                    TextStyle(fontSize: 16, color: Colors.grey,), textAlign: TextAlign.right,)
                           ),
                            Container(
                            padding: EdgeInsets.all(2.0),
                            child:
-                            Text('العمر', style: TextStyle(fontSize: 20.0), textAlign: TextAlign.right,)
+                            Text('العمر', style: TextStyle(fontSize: 18.0), textAlign: TextAlign.right,)
                            ),
                         ]),
                         TableRow(children: [
@@ -229,13 +256,13 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                            child:
                             Text(document['Neighborhood'],
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.grey),textAlign: TextAlign.right,)
+                                    TextStyle(fontSize: 16, color: Colors.grey),textAlign: TextAlign.right,)
                           ),
                            Container(
                            padding: EdgeInsets.all(0),
                            child:
                             Text('المنطقة السكنية',
-                                style: TextStyle(fontSize: 20.0),textAlign: TextAlign.right,)
+                                style: TextStyle(fontSize: 18.0),textAlign: TextAlign.right,)
                           ),
                         ]),
                       ],
@@ -342,7 +369,26 @@ void nav1() async {
 
 
 
-
+ String getArabicdays(String a) {
+    switch (a.substring(18)) {
+      case 'Saturday':
+        return 'السبت';
+      case 'Sunday':
+        return 'الأحد';
+      case 'Monday' :
+        return 'الأثنين';
+      case 'Tuesday':
+        return 'الثلاثاء';
+      case 'Wednesday':
+        return 'الأربعاء';
+      case 'Thursday':
+        return 'الخميس';
+      case 'Friday':
+        return 'الجمعة';
+      default:
+        return 'no day';
+    }
+  }
 
 
 
