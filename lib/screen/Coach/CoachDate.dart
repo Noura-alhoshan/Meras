@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
+import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
@@ -33,7 +34,9 @@ class _CoachDate extends State<CoachDate> {
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('اختيار الاوقات المتاحة'),
+        title: Text('إضافة موعد جديد'
+            // textAlign: TextAlign.center,
+            ),
         backgroundColor: Colors.deepPurple[100],
       ),
       /*
@@ -44,9 +47,32 @@ class _CoachDate extends State<CoachDate> {
       ), */
 
       //   /*
-      body: Column(children: <Widget>[
+      body: Container(
+        child: BackgroundA(
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 20)),
+
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
+                Date(),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
+                // buildCard(),
+                Text(
+                  'المواعيد المتاحة خلال السبعة ايام القادمة',
+                  style: TextStyle(height: 2, fontSize: 18),
+                  textAlign: TextAlign.right,
+                ),
+                //Padding(
+                //     padding:
+                //          EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
+                /*Column(children: <Widget>[
         Expanded(
-          child: Center(
+          /*  child: Center(
             child: Container(
               child: SingleChildScrollView(
                 // child: BackgroundA(
@@ -54,99 +80,147 @@ class _CoachDate extends State<CoachDate> {
               ),
             ),
           ),
-        ),
-        // Container(height: 40, color: Colors.grey),
-        Expanded(
+       */ // ),
           child: Container(
             child: SingleChildScrollView(
               child: BackgroundA(
-                child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('Coach')
-                        .doc(uid)
-                        .collection('Dates')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) return const Text('loading 7 ...');
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(), //<--here
-
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) => _buildListItem(
-                            context, (snapshot.data!).docs[index]),
-                      );
-                    }),
+                child: Row(children: <Widget>[
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
+                  Center(child: Date()),
+                  SizedBox(width: 24),
+                  Center(child: Date()),
+                ]
+                    // child: Date(),
+                    ),
               ),
             ),
           ),
         ),
-      ]),
+                             
+        // Container(height: 40, color: Colors.grey),
+
+        */
+
+                Expanded(
+                  child: Container(
+                    child: SingleChildScrollView(
+                      child: BackgroundC(
+                        child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection('Coach')
+                                .doc(uid)
+                                .collection('Dates')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData)
+                                return const Text('loading 7 ...');
+                              return ListView.builder(
+                                physics:
+                                    const NeverScrollableScrollPhysics(), //<--here
+
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, index) => _buildListItem(
+                                    context, (snapshot.data!).docs[index]),
+                              );
+                            }),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
+    //  ]),
+    //  );
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
-        child: Container(
-      height: 100,
-      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-      child: Card(
-        child: ListTile(
-          title: Text(
-            document['DateTime'].toString().substring(17, 19) == 'AM'
-                ? 'يوم ' +
-                    getArabicdays(document['DateTime'].toString()) +
-                    ' ' +
-                    document['DateTime'].toString().substring(0, 10) +
-                    '\n'
-                        '  الوقت: ' +
-                    document['DateTime'].toString().substring(11, 16) +
-                    ' صباحا '
-                : 'يوم ' +
-                    getArabicdays(document['DateTime'].toString()) +
-                    ' ' +
-                    document['DateTime'].toString().substring(0, 10) +
-                    '\n'
-                        '  الوقت: ' +
-                    document['DateTime'].toString().substring(11, 16) +
-                    ' مساءً ',
-            style: TextStyle(height: 1.5, fontSize: 19),
-            textAlign: TextAlign.right,
-          ),
-          leading: IconButton(
-            icon: Image.asset("assets/icons/DeleteIcon.png"),
-            iconSize: 50,
-            onPressed: () async {
-              var baseDialog = BaseAlertDialog(
-                  title: "",
-                  content: "هل أنت متأكد من حذف الموعد؟",
-                  yesOnPressed: () async {
-                    deleteDate(document.id); ////
+      child: Container(
+        height: 170,
+        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
 
-                    Navigator.of(context, rootNavigator: true).pop('dialog');
-                  },
-                  noOnPressed: () {
-                    Navigator.of(context, rootNavigator: true).pop('dialog');
-                  },
-                  yes: "نعم",
-                  no: "لا");
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => baseDialog);
-            },
+        ///
+        child: Card(
+          //  elevation: 4.0,
+          child: Column(
+            children: [
+              Container(
+                decoration: new BoxDecoration(color: Colors.deepPurple[100]),
+                child: ListTile(
+                  title: Text(
+                      'يوم ' + getArabicdays(document['DateTime'].toString()),
+                      textAlign: TextAlign.right,
+                      style: TextStyle(height: 1.5, fontSize: 19)),
+                  //subtitle: Text(subheading),
+                  leading: IconButton(
+                    icon: Image.asset("assets/icons/DeleteIcon.png"),
+                    iconSize: 30,
+                    onPressed: () async {
+                      var baseDialog = BaseAlertDialog(
+                          title: "",
+                          content: "هل أنت متأكد من حذف الموعد؟",
+                          yesOnPressed: () async {
+                            deleteDate(document.id); ////
+
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                          },
+                          noOnPressed: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                          },
+                          yes: "نعم",
+                          no: "لا");
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => baseDialog);
+                    },
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.centerRight,
+                child: Text(
+                  document['DateTime'].toString().substring(17, 19) == 'AM'
+                      ? 'التاريخ:' +
+                          //   getArabicdays(document['DateTime'].toString()) +
+                          ' ' +
+                          document['DateTime'].toString().substring(0, 10) +
+                          '\n'
+                              '  الوقت: ' +
+                          document['DateTime'].toString().substring(11, 16) +
+                          ' صباحا '
+                      : 'يوم ' +
+                          getArabicdays(document['DateTime'].toString()) +
+                          ' ' +
+                          document['DateTime'].toString().substring(0, 10) +
+                          '\n'
+                              '  الوقت: ' +
+                          document['DateTime'].toString().substring(11, 16) +
+                          ' مساءً ',
+                  style: TextStyle(height: 1.5, fontSize: 19),
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ],
           ),
         ),
-        elevation: 6,
-        shadowColor: Colors.deepPurple[500],
-        shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide(color: Colors.white, width: 1)),
+
+        ///
       ),
-    ));
+    );
   }
 
   Widget Date() => ButtonWidget(
-        colorr: red,
-        text: 'DATE',
+        colorr: green,
+        text: '+ إضافة ',
         onClicked: () {
           pickDateTime(context);
         },
@@ -264,5 +338,32 @@ class _CoachDate extends State<CoachDate> {
       default:
         return 'no day';
     }
+  }
+
+  Card buildCard() {
+    var supportingText =
+        'Beautiful home to rent, recently refurbished with modern appliances...';
+    return Card(
+        elevation: 4.0,
+        child: Column(
+          children: [
+            Container(
+              decoration: new BoxDecoration(color: Colors.deepPurple[100]),
+              child: ListTile(
+                title: Text(
+                  'السبت',
+                  textAlign: TextAlign.right,
+                ),
+                //subtitle: Text(subheading),
+                leading: Icon(Icons.favorite_outline),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(16.0),
+              alignment: Alignment.centerLeft,
+              child: Text('التاريخ'),
+            ),
+          ],
+        ));
   }
 }
