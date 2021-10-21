@@ -113,7 +113,8 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                       return '                  الرجاء إدخال الأسم الأول';
                     } else if (val!.length == 1) {
                       return '        الرجاء إدخال الأسم الأول بشكل صحيح';
-                    } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val)) {
+                    } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val) &
+                        RegExp(r'^[\p{Arabic}\s\p{N}]+$').hasMatch(val)) {
                       return '  الرجاء إدخال اسم أول صحيح بدون رموز خاصة';
                     }
                   },
@@ -129,7 +130,8 @@ class _RegisterAsTraineeState extends State<RegisterAsTrainee> {
                       return '                  الرجاء إدخال الأسم الأخير';
                     } else if (val!.length == 1) {
                       return '        الرجاء إدخال الأسم الأخير بشكل صحيح';
-                    } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val)) {
+                    } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val) &
+                        RegExp(r'^[\p{Arabic}\s\p{N}]+$').hasMatch(val)) {
                       return '  الرجاء إدخال اسم أخير صحيح بدون رموز خاصة';
                     }
                   },
