@@ -39,7 +39,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                       ? Image.asset("assets/images/Female.png")
                       : Image.asset("assets/images/driver-male.jpg"),
                   leading: ElevatedButton(
-                    child: Text('معلومات المدرب   '),
+                    child: Text('تقديم طلب تدريب '),
                     onPressed: () {
                       //nav(document.id); //for next sprint
                     },

@@ -32,54 +32,117 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                       textAlign: TextAlign.right,
                     ),
                     subtitle: Column(children: [
-                      Text(
-                        'الحي:' + ' ' + document['Neighborhood'],
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                        // style: TextStyle(fontWeight: FontWeight.bold),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          'الحي:' + ' ' + document['Neighborhood'],
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text(
-                        'تاريخ الطلب:' + ' ' + document['reqDate'],
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                        // style: TextStyle(fontWeight: FontWeight.bold),
+                      // Text(
+                      //   'الحي:' + ' ' + document['Neighborhood'],
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      //   // style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          'تاريخ الطلب:' + ' ' + document['reqDate'],
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text(
-                        'تاريخ التدريب :' +
-                            ' ' +
-                            document['DateTime'].toString().substring(0, 10),
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                        // style: TextStyle(fontWeight: FontWeight.bold),
+                      // Text(
+                      //   'تاريخ الطلب:' + ' ' + document['reqDate'],
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      //   // style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          'تاريخ التدريب :' +
+                              ' ' +
+                              document['DateTime'].toString().substring(0, 10),
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text(
-                        document['DateTime'].toString().substring(
-                                19, document['DateTime'].toString().length) +
-                            ' ' +
-                            ': يوم التدريب',
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                        // style: TextStyle(fontWeight: FontWeight.bold),
+                      // Text(
+                      //   'تاريخ التدريب :' +
+                      //       ' ' +
+                      //       document['DateTime'].toString().substring(0, 10),
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      //   // style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          document['DateTime'].toString().substring(
+                                  19, document['DateTime'].toString().length) +
+                              ' ' +
+                              ': يوم التدريب',
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text(
-                        document['DateTime'].toString().substring(17, 19) +
-                            ' ' +
-                            'الوقت :' +
-                            ' ' +
-                            document['DateTime'].toString().substring(11, 17),
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                        // style: TextStyle(fontWeight: FontWeight.bold),
+                      // Text(
+                      //   document['DateTime'].toString().substring(
+                      //           19, document['DateTime'].toString().length) +
+                      //       ' ' +
+                      //       ': يوم التدريب',
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      //   // style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          document['DateTime'].toString().substring(17, 19) +
+                              ' ' +
+                              'الوقت :' +
+                              ' ' +
+                              document['DateTime'].toString().substring(11, 17),
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text(
-                        'رقم جوال المدرب :' + ' ' + document['CoachPhone'],
-                        style: TextStyle(height: 2, fontSize: 11),
-                        textAlign: TextAlign.right,
-                        // style: TextStyle(fontWeight: FontWeight.bold),
+                      // Text(
+                      //   document['DateTime'].toString().substring(17, 19) +
+                      //       ' ' +
+                      //       'الوقت :' +
+                      //       ' ' +
+                      //       document['DateTime'].toString().substring(11, 17),
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      //   // style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          'رقم جوال المدرب :' + ' ' + document['CoachPhone'],
+                          style: TextStyle(height: 2, fontSize: 11),
+                          textAlign: TextAlign.right,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
+                      // Text(
+                      //   'رقم جوال المدرب :' + ' ' + document['CoachPhone'],
+                      //   style: TextStyle(height: 2, fontSize: 11),
+                      //   textAlign: TextAlign.right,
+                      //   // style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
                       //trailing: Image.asset("assets/images/req.png")
                     ]),
-                    trailing: Image.asset("assets/images/rejected.png")
+                    trailing: Image.asset("assets/images/rej2.png")
                     //: Image.asset("assets/images/driver-male.jpg"),
                     // leading: ElevatedButton(
                     //   child: Text('معلومات المدرب   '),

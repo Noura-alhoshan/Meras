@@ -4,6 +4,8 @@ import 'package:meras/screen/Trainee/TRpages/acceptedLessons.dart';
 import 'package:meras/screen/Trainee/TRpages/rejectedLessons.dart';
 import 'package:meras/screen/Trainee/TRpages/pendingLessons.dart';
 
+import '../../../constants.dart';
+
 class TRlessons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class TRlessons extends StatelessWidget {
                 ),
                 Tab(text: 'المقبولة'),
               ],
+              indicatorColor: kPrimaryColor,
+              unselectedLabelColor: Colors.white54,
             ),
             title: Text('قائمة الدروس'),
           ),
