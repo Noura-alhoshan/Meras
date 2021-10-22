@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: TRnotification(), //this is a comment to test
+        home: TRcategory(), //this is a comment to test
 
         ///wrapper
       ),

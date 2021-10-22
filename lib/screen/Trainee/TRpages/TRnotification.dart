@@ -28,7 +28,11 @@ class _TRnotification extends State<TRnotification> {
               child: Card(
                 child: ListTile(
                   title: Text(
-                    document['CoachName'] + ' ' + document['CoachName2'],
+                    "طلبك قيد الانتظار مع المدرب" +
+                        " " +
+                        document['CoachName'] +
+                        ' ' +
+                        document['CoachName2'],
                     style: TextStyle(height: 2, fontSize: 15),
                     textAlign: TextAlign.right,
                   ),
