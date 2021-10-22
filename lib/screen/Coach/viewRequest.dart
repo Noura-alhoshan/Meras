@@ -107,7 +107,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                   // ),
 
                   Container(
-                    height: 478, /////////////////////////////
+                    height: 488, /////////////////////////////
                     child: SingleChildScrollView(
                       child: Container(
                         decoration: BoxDecoration(
@@ -265,7 +265,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       Container(
                                           padding: EdgeInsets.all(2.0),
                                           child: Text(
-                                            'الجنس',
+                                            ':الجنس',
                                             style: TextStyle(fontSize: 18.0),
                                             textAlign: TextAlign.end,
                                           )),
