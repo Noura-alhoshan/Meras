@@ -1,7 +1,28 @@
 import * as functions from "firebase-functions";
 import * as admin from 'firebase-admin';
 admin.initializeApp();
+export const sendNotificationToTrainee = functions.firestore.document('Requests').onCreate(async(snapshot,context)=>{
+  let notificationdata=snapshot.data();
+  let  payloadData = {
+    title:'قبول',
+    message:notificationdata.Status=='P' ? 'طلبك قيد الانتظار مع المدرب' : notificationdata.Status=='D' ? 'تم رفض طلبك مع المدرب' : 'تم قبول طلبك مع المدرب' + ' ' + notificationdata.Fname + ' ' + notificationdata.Lname + '؟',
+    };
 
+    
+    var payload = {
+      data: payloadData,
+    };
+
+    return await admin
+    .messaging()
+    .sendToDevice(notificationdata.token, payload)
+    .then((response) => {
+      console.log('Pushed All Notifications');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 export const notificationsTrigger = functions.firestore
   .document('Coach/{userId}')
   .onCreate((snapshot, context) => {
