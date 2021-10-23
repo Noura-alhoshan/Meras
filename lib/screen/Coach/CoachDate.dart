@@ -63,7 +63,7 @@ class _CoachDate extends State<CoachDate> {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
                 // buildCard(),
                 Text(
-                  'المواعيد المتاحة خلال السبعة ايام القادمة',
+                  'المواعيد المتاحة خلال الاسبوع القادم',
                   style: TextStyle(height: 2, fontSize: 18),
                   textAlign: TextAlign.right,
                 ),
