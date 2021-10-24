@@ -42,6 +42,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                     child: Text('تقديم طلب تدريب '),
                     onPressed: () {
                       //nav(document.id); //for next sprint
+                      //ADDING METHOD nav
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
