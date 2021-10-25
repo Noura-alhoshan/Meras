@@ -154,7 +154,7 @@ class _PendingLessonsState extends State<PendingLessons> {
                       //nav(document.id); //for next sprint
                       var baseDialog = BaseAlertDialog(
                           title: "",
-                          content: "هل أنت متأكد الإلغاء؟",
+                          content: "هل أنت متأكد من الإلغاء؟",
                           yesOnPressed: () async {
                             await FirebaseFirestore.instance
                                 .collection('Requests')
