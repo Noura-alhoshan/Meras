@@ -211,6 +211,11 @@ class _CoachDate extends State<CoachDate> {
               ),
             ],
           ),
+          elevation: 6,
+          shadowColor: Colors.deepPurple[500],
+          shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(color: Colors.white, width: 1)),
         ),
 
         ///
