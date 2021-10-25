@@ -1,26 +1,26 @@
 class MyUser {
 
   final String uid;
-  
-  MyUser({ required this.uid });//added required keyword
+  //final String? Fname;
+  MyUser({ required this.uid});//added required keyword
 
 } 
 
 
 
-class UserData {
+class TraineeData {
 
-  final String uid;
-  final String? Fname;
-  final String? Lname;
-  final String? Email;
-  final String? Pass;
-  final int? Age;//is it string?
-  final String? Gender;
-  final String? City;
-  final String? Neighborhood;
+  late final String uid;
+  late final String? Tname;
+   //final String? Lname;
+  late final String? Phone;
+  //final String? Pass;
+  late final int? Age;//is it string?
+  late final String? Gender;
+  //final String? City;
+  //final String? Neighborhood;
 
-  UserData({ required this.uid, this.Fname, this.Lname, this.Email, 
-             this.Pass, this.Age, this.Gender, this.City,this.Neighborhood,  });
+  TraineeData({ required this.uid, this.Tname, this.Phone, 
+             this.Age, this.Gender,});// this.City,this.Neighborhood,  
 
 }
