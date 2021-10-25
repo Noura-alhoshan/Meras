@@ -4,7 +4,7 @@ admin.initializeApp();
 export const sendNotificationToTrainee = functions.firestore.document('Requests').onCreate(async(snapshot,context)=>{
   let notificationdata=snapshot.data();
   let  payloadData = {
-    title:'قبول',
+    title:'حالة طلب التدريب',
     message:notificationdata.Status=='P' ? 'طلبك قيد الانتظار مع المدرب' : notificationdata.Status=='D' ? 'تم رفض طلبك مع المدرب' : 'تم قبول طلبك مع المدرب' + ' ' + notificationdata.Fname + ' ' + notificationdata.Lname + '؟',
     };
 
@@ -23,6 +23,7 @@ export const sendNotificationToTrainee = functions.firestore.document('Requests'
       console.log(err);
     });
 });
+
 export const notificationsTrigger = functions.firestore
   .document('Coach/{userId}')
   .onCreate((snapshot, context) => {
