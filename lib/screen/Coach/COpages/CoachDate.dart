@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
-import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
+import 'package:meras/screen/Coach/widget/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
@@ -19,6 +19,8 @@ class _CoachDate extends State<CoachDate> {
   late TimeOfDay time;
   late DateTime dateTime;
   late DateTime day;
+  //static const IconData clear_rounded =
+  //    IconData(0xf645, fontFamily: 'MaterialIcons');
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
@@ -151,7 +153,9 @@ class _CoachDate extends State<CoachDate> {
           child: Column(
             children: [
               Container(
-                decoration: new BoxDecoration(color: Colors.deepPurple[100]),
+                decoration: new BoxDecoration(
+                    //  borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.deepPurple[100]),
                 child: ListTile(
                   title: Text(
                       'يوم ' + getArabicdays(document['DateTime'].toString()),
@@ -159,8 +163,10 @@ class _CoachDate extends State<CoachDate> {
                       style: TextStyle(height: 1.5, fontSize: 19)),
                   //subtitle: Text(subheading),
                   leading: IconButton(
-                    icon: Image.asset("assets/icons/DeleteIcon.png"),
+                    icon: Icon(Icons
+                        .clear_rounded), // Image.asset("assets/icons/delete-icon1.jpg"),
                     iconSize: 30,
+                    color: Colors.deepOrange[800],
                     onPressed: () async {
                       var baseDialog = BaseAlertDialog(
                           title: "",
@@ -213,6 +219,7 @@ class _CoachDate extends State<CoachDate> {
           ),
           elevation: 6,
           shadowColor: Colors.deepPurple[500],
+
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide(color: Colors.white, width: 1)),

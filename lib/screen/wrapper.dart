@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Trainee/TRcategory.dart';
-import 'package:meras/screen/Coach/CoachDate.dart';
 
 import 'package:meras/screen/authenticate/NotApproaved.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
@@ -18,6 +17,7 @@ import 'package:meras/controllers/MyUser.dart';
 
 import 'Admin/ADcategory.dart';
 import 'Admin/ADpages/ADhome.dart';
+import 'Coach/COcategory.dart';
 import 'Trainee/TRpages/TRhome.dart';
 import 'Verify.dart';
 import 'home/Chome.dart';
@@ -149,7 +149,7 @@ class Wrapper extends StatelessWidget {
           else if (snapshot.data![1])
             return ADcategory();
           else if (snapshot.data![2])
-            return CoachDate(); //////////// noura test
+            return COcategory();
           else if (snapshot.data![3])
             return notApproaved();
           else
@@ -162,8 +162,6 @@ class Wrapper extends StatelessWidget {
         });
   }
 }
-
-
 
 //  class Wrapper extends StatelessWidget {
 //   const Wrapper({Key? key}) : super(key: key);
