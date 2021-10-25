@@ -66,12 +66,8 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
   }
 
   Widget _build(BuildContext context, DocumentSnapshot document) {
-    final String ph = document['Phone Number'];
-    // Image im = new Image.network(
-    //   document['URL'],
-    //   height: 230.0,
-    //   width: 250.0,
-    // );
+    final String ph = document['TPhone Number'];
+
     return BackgroundA(
       child: Align(
         alignment: const Alignment(-0.1, -0.5),
@@ -255,9 +251,9 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       Container(
                                           padding: EdgeInsets.all(2.0),
                                           child: Text(
-                                             document['Fname'] +
-                                  ' ' +
-                                  document['Lname'],
+                                             document['Tname'],
+                                  // ' ' +
+                                  // document['Lname'],
                                             style: TextStyle(
                                               fontSize: 17.5,
                                               color: Colors.grey,
@@ -296,7 +292,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                    //const Text('Gradient',);
                                   launch("tel://$ph");
                                 },
-                                 child: Text( document['Phone Number'],)
+                                 child: Text( document['TPhone Number'],)
                                     
                                     ) ,
                                       ),
@@ -316,7 +312,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       Container(
                                         padding: EdgeInsets.all(2.0),
                                         child: Text(
-                                          document['Gender'],
+                                          document['TGender'],
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.grey,
@@ -344,11 +340,12 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       Container(
                                           padding: EdgeInsets.all(2.0),
                                           child: Text(
-                                            document['Age'].toString(),
+                                            document['TAge'].toString()+"  سنة " ,
                                             style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.grey,
                                             ),
+                                             textDirection: TextDirection.rtl,
                                             textAlign: TextAlign.right,
                                           )),
                                       Container(
@@ -393,7 +390,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                         horizontal: 14, vertical: 5)),
                                 Center(child: Accept(document)),
                                 SizedBox(width: 24),
-                                Center(child: Reject(document)),
+                                Center(child: Reject(document,document['Cid'],document['DateTime']),),
                               ]),
                             ]),
                           ),
@@ -408,20 +405,23 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
     );
   }
 
-  Widget Reject(DocumentSnapshot document) => ButtonWidget(
+  Widget Reject(DocumentSnapshot document, String cid, String apdate) => ButtonWidget(
         colorr: red,
         text: 'رفض',
         onClicked: () async {
           var baseDialog = BaseAlertDialog(
               title: "",
-              content: "هل أنت متأكد من رفض الدرس",
+              content: "هل أنت متأكد من رفض الدرس؟",
               yesOnPressed: () async {
                 await FirebaseFirestore.instance
                     .collection('Requests')
                     .doc(widget.id)
                     .update({'Status': 'D'});
+                     Map<String, dynamic> DataDemo = {
+                         "DateTime": apdate};
+                  FirebaseFirestore.instance.collection('Coach').doc(cid).collection('Dates').doc().set(DataDemo);
 
-                // deleteUser();
+                Navigator.of(context, rootNavigator: true).pop('dialog');
                 nav1();
               },
               noOnPressed: () {
@@ -447,8 +447,8 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                     .doc(widget.id)
                     .update({'Status': 'A'});
 
+                Navigator.of(context, rootNavigator: true).pop('dialog');//////////////////////////////////??????
                 nav1();
-                Navigator.of(context, rootNavigator: true).pop('dialog');
               },
               noOnPressed: () {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -474,7 +474,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
       case 'Sunday':
         return 'الأحد';
       case 'Monday':
-        return 'الأثنين';
+        return 'الإثنين';
       case 'Tuesday':
         return 'الثلاثاء';
       case 'Wednesday':
