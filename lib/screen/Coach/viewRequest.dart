@@ -77,7 +77,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
         alignment: const Alignment(-0.1, -0.5),
         child: Container(
           width: 300,
-          height: 500,
+          height: 480,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -107,7 +107,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                   // ),
 
                   Container(
-                    height: 488, /////////////////////////////
+                    height: 470, /////////////////////////////
                     child: SingleChildScrollView(
                       child: Container(
                         decoration: BoxDecoration(
@@ -185,68 +185,131 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                             textAlign: TextAlign.left,
                           ),
 
-                          new ListTile(
-                            //leading: const Icon(Icons.today),
-                            title: Text(
-                              '          ' +
-                                  document['Fname'] +
-                                  ' ' +
-                                  document['Lname'] +
-                                  ' ',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontSize: 18,
-                                // color: kPrimaryColor,
-                              ),
-                            ),
+                          // new ListTile(
+                          //   //leading: const Icon(Icons.today),
+                          //   title: Text(
+                          //     '          ' +
+                          //         document['Fname'] +
+                          //         ' ' +
+                          //         document['Lname'] +
+                          //         ' ',
+                          //     textAlign: TextAlign.right,
+                          //     style: TextStyle(
+                          //       fontSize: 18,
+                          //       // color: kPrimaryColor,
+                          //     ),
+                          //   ),
 
-                            trailing: document['Gender'] == 'أنثى'
-                                ? Image.asset(
-                                    "assets/images/FemaleNoBackg.png",
-                                  )
-                                : Image.asset("assets/images/driver-male.jpg"),
-                          ),
-
-                          // Text(
-                          //   document['Email'],
-                          //   textAlign: TextAlign.center,
-                          //   style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+                          //   // trailing: document['Gender'] == 'أنثى'
+                          //   //     ? Image.asset(
+                          //   //         "assets/images/FemaleNoBackg.png",
+                          //   //       )
+                          //   //     : Image.asset("assets/images/driver-male.jpg"),
                           // ),
-                          new ListTile(
-                            //leading: const Icon(Icons.today),
-                            title: TextButton(
-                                child: Text(document['Phone Number'],
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey,
-                                      decoration: TextDecoration.underline,
-                                    )),
-                                onPressed: () {
-                                  launch("tel://$ph");
-                                }),
-                            trailing: Icon(
-                              Icons.phone_enabled_rounded,
-                              size: 40,
-                              color: Colors.deepPurple,
-                            ),
-                          ),
+
+                          // // Text(
+                          // //   document['Email'],
+                          // //   textAlign: TextAlign.center,
+                          // //   style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+                          // // ),
+                          // new ListTile(
+                          //   //leading: const Icon(Icons.today),
+                          //   title: TextButton(
+                          //     style: TextButton.styleFrom(
+                          //      padding: const EdgeInsets.all(-90),
+                          //     textStyle: TextStyle(
+                          //            fontSize: 16,
+                          //            // color: Colors.grey,
+                          //             decoration: TextDecoration.underline,
+                          //     )
+                          //     ),
+                          //       onPressed: () {  
+                          //          //const Text('Gradient',);
+                          //         launch("tel://$ph");
+                          //       },
+                          //        child: Text( document['Phone Number'],)
+                                    
+                          //           ) ,
+                          //   trailing: Icon(
+                          //     Icons.phone_enabled_rounded,
+                          //     size: 40,
+                          //     color: Colors.deepPurple,
+                          //   ),
+                          // ),
+
+
+                          //here is the table ################################################################3
                           Container(
                             child: Column(children: <Widget>[
                               Container(
                                 margin: EdgeInsets.all(20),
                                 child: Table(
-                                  defaultColumnWidth: FixedColumnWidth(120.0),
+                                  defaultColumnWidth: FixedColumnWidth(108.0),
                                   border: TableBorder.all(
-                                      color: Colors.white,
+                                      color: Colors.white, 
                                       style: BorderStyle.solid,
                                       width: 0),
+
                                   children: [
                                     TableRow(children: [
-                                      Column(children: [Text('')]),
-                                      Column(children: [
-                                        Text('')
-                                      ]), //Column(children:[Text('')]),
+                                      Container(
+                                          padding: EdgeInsets.all(2.0),
+                                          child: Text(
+                                             document['Fname'] +
+                                  ' ' +
+                                  document['Lname'],
+                                            style: TextStyle(
+                                              fontSize: 17.5,
+                                              color: Colors.grey,
+                                            ),
+                                            textAlign: TextAlign.right,
+                                          )),
+                                     
+                                    
+                                        Container(
+                                          padding: EdgeInsets.all(2.0),
+                                          child: Text(
+                                            ':الاسم',
+                                            style: TextStyle(fontSize: 18.0),
+                                            textAlign: TextAlign.end,
+                                          )),
+                                      
+                                      //Column(children: [Text('')]),
+                                     // Column(children: [
+                                       // Text('')
+                                     ]), //Column(children:[Text('')]),
+                                          TableRow(children: [
+                                      //Column(children:[Text('')]),
+
+                                      Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: TextButton(
+                              style: TextButton.styleFrom(
+                               padding: const EdgeInsets.all(-90),
+                              textStyle: TextStyle(
+                                     fontSize: 16,
+                                     // color: Colors.grey,
+                                      decoration: TextDecoration.underline,
+                              )
+                              ),
+                                onPressed: () {  
+                                   //const Text('Gradient',);
+                                  launch("tel://$ph");
+                                },
+                                 child: Text( document['Phone Number'],)
+                                    
+                                    ) ,
+                                      ),
+
+                                      Container(
+                                          padding: EdgeInsets.all(2.0),
+                                          child: Text(
+                                            ':رقم الجوال',
+                                            style: TextStyle(fontSize: 18.0),
+                                            textAlign: TextAlign.end,
+                                          )),
                                     ]),
+
                                     TableRow(children: [
                                       //Column(children:[Text('')]),
 
@@ -270,12 +333,12 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                             textAlign: TextAlign.end,
                                           )),
                                     ]),
-                                    TableRow(children: [
-                                      Column(children: [Text('')]),
-                                      Column(children: [
-                                        Text('')
-                                      ]), //Column(children:[Text('')]),
-                                    ]),
+                                    // TableRow(children: [
+                                    //   Column(children: [Text('')]),
+                                    //   Column(children: [
+                                    //     Text('')
+                                    //   ]), //Column(children:[Text('')]),
+                                    // ]),
                                     TableRow(children: [
                                       //Column(children:[Text('')]),
                                       Container(
@@ -291,17 +354,17 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       Container(
                                           padding: EdgeInsets.all(2.0),
                                           child: Text(
-                                            'العمر',
+                                            ':العمر',
                                             style: TextStyle(fontSize: 18.0),
                                             textAlign: TextAlign.right,
                                           )),
                                     ]),
-                                    TableRow(children: [
-                                      Column(children: [Text('')]),
-                                      Column(children: [
-                                        Text('')
-                                      ]), //Column(children:[Text('')]),
-                                    ]),
+                                    // TableRow(children: [
+                                    //   Column(children: [Text('')]),
+                                    //   Column(children: [
+                                    //     Text('')
+                                    //   ]), //Column(children:[Text('')]),
+                                    // ]),
                                     // TableRow(children: [
                                     //   // Column(children:[Text('')]),
                                     //   Container(
