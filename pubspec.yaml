@@ -82,6 +82,9 @@ flutter:
     - assets/images/Female.png
     - assets/images/trafficsigns.png
     - assets/images/test2.png
+    - assets/images/acc.png
+    - assets/images/req.png
+    - assets/images/rej2.png
 
 
   # To add assets to your application, add an assets section, like this:
