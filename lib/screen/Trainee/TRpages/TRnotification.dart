@@ -20,6 +20,14 @@ class _TRnotification extends State<TRnotification> {
       IconData(0xf01fc, fontFamily: 'MaterialIcons');
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    DateTime t;
+    try {
+      t = DateTime.parse(document["DateTime"]);
+    } catch (e) {
+      t = DateTime.now();
+    }
+
+    print("Time ${t}");
     return SingleChildScrollView(
         child: Container(
       height: 100,
@@ -46,9 +54,7 @@ class _TRnotification extends State<TRnotification> {
             children: [
               if (document['DateTime'] != null)
                 Text(
-                  document['DateTime'].toString().substring(0, 10) +
-                      " " +
-                      document['DateTime'].toString().substring(11, 19),
+                  "${t.month}/${t.day}/${t.year} ${t.hour}:${t.minute}",
                   style: TextStyle(height: 1.5, fontSize: 11),
                   textAlign: TextAlign.right,
                 ),
@@ -118,6 +124,7 @@ class _TRnotification extends State<TRnotification> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) return const Text('loading 7 ...');
+                  print("**********************");
                   print(snapshot.data!.docs.length);
 
                   return ListView.builder(

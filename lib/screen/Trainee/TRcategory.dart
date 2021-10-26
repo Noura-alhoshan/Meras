@@ -49,7 +49,7 @@ class _State extends State<TRcategory> {
                       child: Container(
                         padding: EdgeInsets.all(1.5),
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
+                            shape: BoxShape.circle, color: Colors.grey),
                         child: Text(
                           '10',
                           style: TextStyle(color: Colors.white, fontSize: 10),
