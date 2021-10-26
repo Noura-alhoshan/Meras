@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RequestLessonPage extends StatefulWidget {
+  RequestLessonPage(String icd);
+
   //const RequestLessonPage({ Key? key }) : super(key: key);
 
   @override

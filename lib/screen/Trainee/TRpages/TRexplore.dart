@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/Trainee/TRpages/requestPage.dart';
 import 'package:meras/screen/home/navDrawer.dart';
+
+import 'DraftF.dart';
 
 class TRexploreScreen extends StatefulWidget {
   @override
@@ -41,8 +44,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                   leading: ElevatedButton(
                     child: Text('تقديم طلب تدريب '),
                     onPressed: () {
-                      //nav(document.id); //for next sprint
-                      //ADDING METHOD nav
+                      nav(document.id);
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
@@ -95,12 +97,12 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     );
   }
 
-  /* void nav(String icd) async {
+  void nav(String icd) async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return TestScreen(icd);
+        return CoachDate();
       }),
     );
-  }*/ //for next sprint
+  } //for next sprint
 }
