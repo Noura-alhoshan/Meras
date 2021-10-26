@@ -65,6 +65,7 @@ class _WelcomeAlertState extends State<WelcomeAlert> {
                         ),
                         //backgroundColor: Colors.deepPurple[50],
                         actions: <Widget>[
+                          Center( child:
                           TextButton(
                             child: const Text(
                               'إغلاق',
@@ -79,7 +80,7 @@ class _WelcomeAlertState extends State<WelcomeAlert> {
                               );
                               // MaterialPageRoute(builder: (context) => SignIn());
                             },
-                          ),
+                          ),)
                         ],
                       )
                     ],

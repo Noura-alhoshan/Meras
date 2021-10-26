@@ -76,6 +76,7 @@ class _notapproavedState extends State<notApproaved> {
                         ),
                         //backgroundColor: Colors.deepPurple[50],
                         actions: <Widget>[
+                          Center( child:
                           TextButton(
                             child: const Text(
                               'إغلاق',
@@ -93,7 +94,7 @@ class _notapproavedState extends State<notApproaved> {
                               //SystemNavigator.pop();
                               // glovar=1;
                             },
-                          ),
+                          ),)
                         ],
                       )
                     ],

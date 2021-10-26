@@ -62,6 +62,7 @@ class Verify extends StatelessWidget  {
                         ),
                         //backgroundColor: Colors.deepPurple[50],
                         actions: <Widget>[
+                          Center(child:
                           TextButton(
                             child: const Text(
                               'إغلاق',
@@ -80,7 +81,7 @@ class Verify extends StatelessWidget  {
                               //SystemNavigator.pop();
                               // glovar=1;
                             },
-                          ),
+                          ),)
                         ],
                       )
                     ],
