@@ -6,6 +6,7 @@ import 'package:flutter/painting.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/services/google_auth_api.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
@@ -38,6 +39,8 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      // extendBodyBehindAppBar: true,
+       extendBody: true,
       appBar: AppBar(
         title: Text(
           '                          معلومات الدرس',
@@ -53,7 +56,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Loading(); //it was text 7.....
             return ListView.builder(
-              controller: _scrollController,
+              // controller: _scrollController,
 
               //  physics: const NeverScrollableScrollPhysics(), //<--here
               itemCount: 1,
@@ -69,11 +72,12 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
     final String ph = document['TPhone Number'];
 
     return BackgroundA(
+      
       child: Align(
-        alignment: const Alignment(-0.1, -0.5),
+        alignment: const Alignment(0, -0.4),
         child: Container(
           width: 300,
-          height: 480,
+          height: 455,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -90,322 +94,241 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
               ]),
           child: Padding(
             padding: EdgeInsets.only(left: 0, right: 0, top: 0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  // Text("معلومات المتدرب",
-                  //     style: TextStyle(
-                  //         fontSize: 23,
-                  //         //fontFamily: "Poppins-Bold",
-                  //         letterSpacing: .6)),
-                  // SizedBox(
-                  //   height:30,
-                  // ),
-
-                  Container(
-                    height: 470, /////////////////////////////
-                    child: SingleChildScrollView(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: [
-                            Colors.deepPurple.shade50,
-                            Colors.white10,
-                          ],
-                        )),
-                        //  height: 1200,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 00),
-                        child: Column(children: <Widget>[
-                          SizedBox(
-                            height: 6,
-                          ),
-                          new ListTile(
-                            //leading: const Icon(Icons.today),
-                            title: Text(
-                              document['DateTime']
-                                          .toString()
-                                          .substring(17, 19) ==
-                                      'AM'
-                                  ? 'يوم ' +
-                                      getArabicdays(
-                                          document['DateTime'].toString()) +
-                                      ' ' +
-                                      document['DateTime']
-                                          .toString()
-                                          .substring(0, 10) +
-                                      '\n'
-                                          '  الوقت: ' +
-                                      document['DateTime']
-                                          .toString()
-                                          .substring(11, 16) +
-                                      ' صباحا '
-                                  : 'يوم ' +
-                                      getArabicdays(
-                                          document['DateTime'].toString()) +
-                                      ' ' +
-                                      document['DateTime']
-                                          .toString()
-                                          .substring(0, 10) +
-                                      '\n'
-                                          '  الوقت: ' +
-                                      document['DateTime']
-                                          .toString()
-                                          .substring(11, 16) +
-                                      ' مساءً ',
-                              style: TextStyle(height: 1.5, fontSize: 17.6),
-                              textAlign: TextAlign.right,
-                            ),
-                            //subtitle: Text('February 20, 1980'),
-                            trailing: Icon(
-                              Icons.calendar_today_rounded,
-                              size: 60,
-                              color: Colors.deepPurple,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Divider(color: Colors.deepPurple[900]),
-
-                          Text(
-                            " معلومات المتدرب",
-                            style: TextStyle(
-                              fontSize: 23,
-                              //fontFamily: "Poppins-Bold",
-                              letterSpacing: .6,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-
-                          // new ListTile(
-                          //   //leading: const Icon(Icons.today),
-                          //   title: Text(
-                          //     '          ' +
-                          //         document['Fname'] +
-                          //         ' ' +
-                          //         document['Lname'] +
-                          //         ' ',
-                          //     textAlign: TextAlign.right,
-                          //     style: TextStyle(
-                          //       fontSize: 18,
-                          //       // color: kPrimaryColor,
-                          //     ),
-                          //   ),
-
-                          //   // trailing: document['Gender'] == 'أنثى'
-                          //   //     ? Image.asset(
-                          //   //         "assets/images/FemaleNoBackg.png",
-                          //   //       )
-                          //   //     : Image.asset("assets/images/driver-male.jpg"),
-                          // ),
-
-                          // // Text(
-                          // //   document['Email'],
-                          // //   textAlign: TextAlign.center,
-                          // //   style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-                          // // ),
-                          // new ListTile(
-                          //   //leading: const Icon(Icons.today),
-                          //   title: TextButton(
-                          //     style: TextButton.styleFrom(
-                          //      padding: const EdgeInsets.all(-90),
-                          //     textStyle: TextStyle(
-                          //            fontSize: 16,
-                          //            // color: Colors.grey,
-                          //             decoration: TextDecoration.underline,
-                          //     )
-                          //     ),
-                          //       onPressed: () {  
-                          //          //const Text('Gradient',);
-                          //         launch("tel://$ph");
-                          //       },
-                          //        child: Text( document['Phone Number'],)
-                                    
-                          //           ) ,
-                          //   trailing: Icon(
-                          //     Icons.phone_enabled_rounded,
-                          //     size: 40,
-                          //     color: Colors.deepPurple,
-                          //   ),
-                          // ),
-
-
-                          //here is the table ################################################################3
-                          Container(
-                            child: Column(children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.all(20),
-                                child: Table(
-                                  defaultColumnWidth: FixedColumnWidth(108.0),
-                                  border: TableBorder.all(
-                                      color: Colors.white, 
-                                      style: BorderStyle.solid,
-                                      width: 0),
-
-                                  children: [
-                                    TableRow(children: [
-                                      Container(
-                                          padding: EdgeInsets.all(2.0),
-                                          child: Text(
-                                             document['Tname'],
-                                  // ' ' +
-                                  // document['Lname'],
-                                            style: TextStyle(
-                                              fontSize: 17.5,
-                                              color: Colors.grey,
-                                            ),
-                                            textAlign: TextAlign.right,
-                                          )),
-                                     
-                                    
-                                        Container(
-                                          padding: EdgeInsets.all(2.0),
-                                          child: Text(
-                                            ':الاسم',
-                                            style: TextStyle(fontSize: 18.0),
-                                            textAlign: TextAlign.end,
-                                          )),
-                                      
-                                      //Column(children: [Text('')]),
-                                     // Column(children: [
-                                       // Text('')
-                                     ]), //Column(children:[Text('')]),
-                                          TableRow(children: [
-                                      //Column(children:[Text('')]),
-
-                                      Container(
-                                        padding: EdgeInsets.all(2.0),
-                                        child: TextButton(
-                              style: TextButton.styleFrom(
-                               padding: const EdgeInsets.all(-90),
-                              textStyle: TextStyle(
-                                     fontSize: 16,
-                                     // color: Colors.grey,
-                                      decoration: TextDecoration.underline,
-                              )
-                              ),
-                                onPressed: () {  
-                                   //const Text('Gradient',);
-                                  launch("tel://$ph");
-                                },
-                                 child: Text( document['TPhone Number'],)
-                                    
-                                    ) ,
-                                      ),
-
-                                      Container(
-                                          padding: EdgeInsets.all(2.0),
-                                          child: Text(
-                                            ':رقم الجوال',
-                                            style: TextStyle(fontSize: 18.0),
-                                            textAlign: TextAlign.end,
-                                          )),
-                                    ]),
-
-                                    TableRow(children: [
-                                      //Column(children:[Text('')]),
-
-                                      Container(
-                                        padding: EdgeInsets.all(2.0),
-                                        child: Text(
-                                          document['TGender'],
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.grey,
-                                          ),
-                                          textAlign: TextAlign.right,
-                                        ),
-                                      ),
-
-                                      Container(
-                                          padding: EdgeInsets.all(2.0),
-                                          child: Text(
-                                            ':الجنس',
-                                            style: TextStyle(fontSize: 18.0),
-                                            textAlign: TextAlign.end,
-                                          )),
-                                    ]),
-                                    // TableRow(children: [
-                                    //   Column(children: [Text('')]),
-                                    //   Column(children: [
-                                    //     Text('')
-                                    //   ]), //Column(children:[Text('')]),
-                                    // ]),
-                                    TableRow(children: [
-                                      //Column(children:[Text('')]),
-                                      Container(
-                                          padding: EdgeInsets.all(2.0),
-                                          child: Text(
-                                            document['TAge'].toString()+"  سنة " ,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.grey,
-                                            ),
-                                             textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.right,
-                                          )),
-                                      Container(
-                                          padding: EdgeInsets.all(2.0),
-                                          child: Text(
-                                            ':العمر',
-                                            style: TextStyle(fontSize: 18.0),
-                                            textAlign: TextAlign.right,
-                                          )),
-                                    ]),
-                                    // TableRow(children: [
-                                    //   Column(children: [Text('')]),
-                                    //   Column(children: [
-                                    //     Text('')
-                                    //   ]), //Column(children:[Text('')]),
-                                    // ]),
-                                    // TableRow(children: [
-                                    //   // Column(children:[Text('')]),
-                                    //   Container(
-                                    //    padding: EdgeInsets.all(0),
-                                    //    child:
-                                    //     Text(document['Neighborhood'],
-                                    //         style:
-                                    //             TextStyle(fontSize: 16, color: Colors.grey),textAlign: TextAlign.right,)
-                                    //   ),
-                                    //   //  Container(
-                                    //   //  padding: EdgeInsets.all(0),
-                                    //   //  child:
-                                    //   //   Text('المنطقة السكنية',
-                                    //   //       style: TextStyle(fontSize: 18.0),textAlign: TextAlign.right,)
-                                    //   // ),
-                                    // ]),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 24,
-                              ),
-                              Row(children: <Widget>[
-                                Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 14, vertical: 5)),
-                                Center(child: Accept(document)),
-                                SizedBox(width: 24),
-                                Center(child: Reject(document,document['Cid'],document['DateTime']),),
-                              ]),
-                            ]),
-                          ),
-                        ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+                    Widget>[
+              Container(
+                height: 440, /////////////////////////////
+                //child: SingleChildScrollView(
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Colors.deepPurple.shade50,
+                      Colors.white10,
+                    ],
+                  )),
+                  //  height: 1200,
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
+                  child: Column(children: <Widget>[
+                    SizedBox(
+                      height: 6,
+                    ),
+                    new ListTile(
+                      //leading: const Icon(Icons.today),
+                      title: Text(
+                        document['DateTime'].toString().substring(17, 19) ==
+                                'AM'
+                            ? 'يوم ' +
+                                getArabicdays(document['DateTime'].toString()) +
+                                ' ' +
+                                document['DateTime']
+                                    .toString()
+                                    .substring(0, 10) +
+                                '\n'
+                                    '  الوقت: ' +
+                                document['DateTime']
+                                    .toString()
+                                    .substring(11, 16) +
+                                ' صباحا '
+                            : 'يوم ' +
+                                getArabicdays(document['DateTime'].toString()) +
+                                ' ' +
+                                document['DateTime']
+                                    .toString()
+                                    .substring(0, 10) +
+                                '\n'
+                                    '  الوقت: ' +
+                                document['DateTime']
+                                    .toString()
+                                    .substring(11, 16) +
+                                ' مساءً ',
+                        style: TextStyle(height: 2.2, fontSize: 17.6),
+                        textAlign: TextAlign.right,
+                      ),
+                      //subtitle: Text('February 20, 1980'),
+                      trailing: IconButton(
+                        icon: Icon(Icons.calendar_today_rounded),
+                        iconSize: 64,
+                        color: Colors.deepPurple[400],
+                        onPressed: () {},
                       ),
                     ),
-                  ),
-                ]),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(color: Colors.deepPurple[900]),
+
+                    Text(
+                      "معلومات المتدرب  ",
+                      style: TextStyle(
+                        fontSize: 23,
+                        //fontFamily: "Poppins-Bold",
+                        letterSpacing: .6,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+
+                    //here is the table ################################################################3
+                    Container(
+                      child: Column(children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(20),
+                          child: Table(
+                            defaultColumnWidth: FixedColumnWidth(108.0),
+                            border: TableBorder.all(
+                                color: Colors.white,
+                                style: BorderStyle.solid,
+                                width: 0),
+                            children: [
+                              TableRow(children: [
+                                Container(
+                                    padding: EdgeInsets.all(1.0),
+                                    child: Text(
+                                      document['Tname'],
+                                      // ' ' +
+                                      // document['Lname'],
+                                      style: TextStyle(
+                                        fontSize: 17.5,
+                                        color: Colors.grey,
+                                      ),
+                                      textAlign: TextAlign.right,
+                                    )),
+
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':الاسم',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+
+                                //Column(children: [Text('')]),
+                                // Column(children: [
+                                // Text('')
+                              ]), //Column(children:[Text('')]),
+                              
+                              TableRow(children: [
+                                //Column(children:[Text('')]),
+
+                                Container(
+                                  padding: EdgeInsets.all(2.0),
+                                  child: Text(
+                                    document['TGender'],
+                                    style: TextStyle(
+                                      height: 2.3,
+                                      fontSize: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':الجنس',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
+                              // TableRow(children: [
+                              //   Column(children: [Text('')]),
+                              //   Column(children: [
+                              //     Text('')
+                              //   ]), //Column(children:[Text('')]),
+                              // ]),
+                              TableRow(children: [
+                                //Column(children:[Text('')]),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      document['TAge'].toString() + "  سنة ",
+                                      style: TextStyle(
+                                        height: 1.65,
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':العمر',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.right,
+                                    )),
+                              ]),
+
+                              TableRow(children: [
+                                Container(
+                                  height: 35,
+                                  padding: EdgeInsets.all(2.0),
+                                  child: TextButton(
+                                      style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.all(-90),
+                                          textStyle: TextStyle(
+                                            fontSize: 16,
+                                            // color: Colors.grey,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          )),
+                                      onPressed: () {
+                                        //const Text('Gradient',);
+                                        launch("tel://$ph");
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          document['TPhone Number'],
+                                        ),
+                                      )),
+                                ),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':رقم الجوال',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
+
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        Row(children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 5)),
+                          Center(child: Accept(document)),
+                          SizedBox(width: 24),
+                          Center(
+                            child: Reject(document, document['Cid'],
+                                document['DateTime']),
+                          ),
+                        ]),
+                      ]),
+                    ),
+                  ]),
+                ),
+              ),
+              //),
+            ]),
           ),
         ),
       ),
     );
   }
 
-  Widget Reject(DocumentSnapshot document, String cid, String apdate) => ButtonWidget(
+  Widget Reject(DocumentSnapshot document, String cid, String apdate) =>
+      ButtonWidget(
         colorr: red,
         text: 'رفض',
         onClicked: () async {
@@ -417,12 +340,29 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                     .collection('Requests')
                     .doc(widget.id)
                     .update({'Status': 'D'});
-                     Map<String, dynamic> DataDemo = {
-                         "DateTime": apdate};
-                  FirebaseFirestore.instance.collection('Coach').doc(cid).collection('Dates').doc().set(DataDemo);
+                Map<String, dynamic> DataDemo = {"DateTime": apdate};
+                FirebaseFirestore.instance
+                    .collection('Coach')
+                    .doc(cid)
+                    .collection('Dates')
+                    .doc()
+                    .set(DataDemo);
 
                 Navigator.of(context, rootNavigator: true).pop('dialog');
-                nav1();
+                var baseDialog = SignleBaseAlertDialog(
+                    title: "",
+                    content: "تم رفض الدرس بنجاح",
+                    yesOnPressed: () async {
+                      Navigator.of(context, rootNavigator: true).pop(
+                          'dialog'); //////////////////////////////////??????
+                      nav1();
+                    },
+                    yes: "إغلاق",
+                    //no: "لا"
+                    );
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => baseDialog);
               },
               noOnPressed: () {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -447,8 +387,24 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                     .doc(widget.id)
                     .update({'Status': 'A'});
 
-                Navigator.of(context, rootNavigator: true).pop('dialog');//////////////////////////////////??????
-                nav1();
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+
+                var baseDialog = SignleBaseAlertDialog(
+                    title: "",
+                    content: "تم قبول الدرس بنجاح",
+                    yesOnPressed: () async {
+                      Navigator.of(context, rootNavigator: true).pop(
+                          'dialog'); //////////////////////////////////??????
+                      nav1();
+                    },
+                    
+                    yes: "إغلاق",
+                   );
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        baseDialog); //////////////////////////////////??????
+                // nav1();
               },
               noOnPressed: () {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -462,9 +418,13 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
 
   void nav1() async {
     // Navigator.pushNamed(context, '/ADcategory'); //nn
-    Navigator.of(context).pop();
+
     // Navigator.of(context, rootNavigator: true)
     //     .pop('dialog'); ////////////////////////// to be ubdated
+    // Navigator.of(context, rootNavigator: true)
+    //                 .pop('dialog');
+
+    Navigator.of(context).pop();
   }
 
   String getArabicdays(String a) {
