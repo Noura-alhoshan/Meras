@@ -231,8 +231,6 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                     )),
                               ]),
                               TableRow(children: [
-                                //Column(children:[Text('')]),
-
                                 Container(
                                   padding: EdgeInsets.all(2.0),
                                   child: Text(
