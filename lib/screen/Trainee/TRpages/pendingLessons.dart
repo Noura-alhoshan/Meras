@@ -171,15 +171,16 @@ class _PendingLessonsState extends State<PendingLessons> {
                   leading: ElevatedButton(
                     child: Text('إلغاء'),
                     onPressed: () async {
-                      //nav(document.id); //for next sprint
                       var baseDialog = BaseAlertDialog(
                           title: "",
-                          content: "هل أنت متأكد الإلغاء؟",
+                          content: "هل أنت متأكد لإلغاء الطلب؟",
                           yesOnPressed: () async {
                             await FirebaseFirestore.instance
                                 .collection('Requests')
                                 .doc(document.id)
                                 .update({'Status': 'D'});
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
                           },
                           noOnPressed: () {
                             Navigator.of(context, rootNavigator: true)
@@ -198,17 +199,6 @@ class _PendingLessonsState extends State<PendingLessons> {
                         primary: Color(0xFF6F35A5),
                         textStyle: TextStyle(fontSize: 16)),
                   ),
-                  //: Image.asset("assets/images/driver-male.jpg"),
-                  // leading: ElevatedButton(
-                  //   child: Text('معلومات المدرب   '),
-                  //   onPressed: () {
-                  //     //nav(document.id); //for next sprint
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //       shape: StadiumBorder(),
-                  //       primary: Color(0xFF6F35A5),
-                  //       textStyle: TextStyle(fontSize: 16)),
-                  // ),
                 ),
                 elevation: 6,
                 shadowColor: Colors.deepPurple[500],
