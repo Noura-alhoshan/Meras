@@ -30,7 +30,7 @@ class COlist extends StatelessWidget {
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Text('قائمة الطلبات'),
+            title: Text('قائمة طلبات التدريب'),
           ),
           body: TabBarView(
             children: [

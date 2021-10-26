@@ -154,7 +154,7 @@ class _CoachDate extends State<CoachDate> {
             children: [
               Container(
                 decoration: new BoxDecoration(
-                    //  borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Colors.deepPurple[100]),
                 child: ListTile(
                   title: Text(
@@ -255,6 +255,7 @@ class _CoachDate extends State<CoachDate> {
   Future<void> addDate() {
     final User? user = auth.currentUser;
     final uid = user!.uid;
+
     return AvaDates.doc(uid)
         .collection("Dates")
         .add({'DateTime': getText() + getday()})
