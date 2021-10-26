@@ -3,14 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
-import 'package:meras/screen/Admin/services/google_auth_api.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
-import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -98,7 +94,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
                     Widget>[
               Container(
-                height: 440, /////////////////////////////
+                height: 440, ////////////////////////////////////////////////////////////////
                 //child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
@@ -150,9 +146,9 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                       ),
                       //subtitle: Text('February 20, 1980'),
                       trailing: IconButton(
-                        icon: Icon(Icons.calendar_today_rounded),
+                        icon: Icon(Icons.today_rounded),
                         iconSize: 64,
-                        color: Colors.deepPurple[400],
+                        color: Colors.purple[900],
                         onPressed: () {},
                       ),
                     ),
@@ -164,10 +160,11 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                     Text(
                       "معلومات المتدرب  ",
                       style: TextStyle(
-                        fontSize: 23,
+                        fontSize: 22.5,
                         //fontFamily: "Poppins-Bold",
                         letterSpacing: .6,
                         fontWeight: FontWeight.bold,
+                        color: Colors.purple[900]
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -194,6 +191,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       style: TextStyle(
                                         fontSize: 17.5,
                                         color: Colors.grey,
+                                        height: 1.3
                                       ),
                                       textAlign: TextAlign.right,
                                     )),
@@ -209,47 +207,16 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                 //Column(children: [Text('')]),
                                 // Column(children: [
                                 // Text('')
-                              ]), //Column(children:[Text('')]),
-                              
-                              TableRow(children: [
-                                //Column(children:[Text('')]),
-
-                                Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    document['TGender'],
-                                    style: TextStyle(
-                                      height: 2.3,
-                                      fontSize: 16,
-                                      color: Colors.grey,
-                                    ),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ),
-
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      ':الجنس',
-                                      style: TextStyle(fontSize: 18.0),
-                                      textAlign: TextAlign.end,
-                                    )),
                               ]),
-                              // TableRow(children: [
-                              //   Column(children: [Text('')]),
-                              //   Column(children: [
-                              //     Text('')
-                              //   ]), //Column(children:[Text('')]),
-                              // ]),
-                              TableRow(children: [
+                                   TableRow(children: [
                                 //Column(children:[Text('')]),
                                 Container(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
                                       document['TAge'].toString() + "  سنة ",
                                       style: TextStyle(
-                                        height: 1.65,
-                                        fontSize: 16,
+                                        height: 1.49,
+                                        fontSize: 16.3,
                                         color: Colors.grey,
                                       ),
                                       textDirection: TextDirection.rtl,
@@ -263,6 +230,38 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                                       textAlign: TextAlign.right,
                                     )),
                               ]),
+                              TableRow(children: [
+                                //Column(children:[Text('')]),
+
+                                Container(
+                                  padding: EdgeInsets.all(2.0),
+                                  child: Text(
+                                    document['TGender'],
+                                    style: TextStyle(
+                                    height: 1.99,
+                                        fontSize: 16.37,
+                                      color: Colors.grey,
+                                      //height: 1
+                                    ),
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':الجنس', 
+                                      style: TextStyle(fontSize: 18.0,),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
+                              // TableRow(children: [
+                              //   Column(children: [Text('')]),
+                              //   Column(children: [
+                              //     Text('')
+                              //   ]), //Column(children:[Text('')]),
+                              // ]),
+                         
 
                               TableRow(children: [
                                 Container(
@@ -327,6 +326,9 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
     );
   }
 
+
+  
+
   Widget Reject(DocumentSnapshot document, String cid, String apdate) =>
       ButtonWidget(
         colorr: red,
@@ -374,6 +376,8 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
         },
       );
 
+
+
   Widget Accept(DocumentSnapshot document) => ButtonWidget(
         colorr: green,
         text: 'قبول',
@@ -417,12 +421,6 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
       );
 
   void nav1() async {
-    // Navigator.pushNamed(context, '/ADcategory'); //nn
-
-    // Navigator.of(context, rootNavigator: true)
-    //     .pop('dialog'); ////////////////////////// to be ubdated
-    // Navigator.of(context, rootNavigator: true)
-    //                 .pop('dialog');
 
     Navigator.of(context).pop();
   }
@@ -448,3 +446,11 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
     }
   }
 }
+
+
+    // Navigator.pushNamed(context, '/ADcategory'); //nn
+
+    // Navigator.of(context, rootNavigator: true)
+    //     .pop('dialog'); ////////////////////////// to be ubdated
+    // Navigator.of(context, rootNavigator: true)
+    //                 .pop('dialog');
