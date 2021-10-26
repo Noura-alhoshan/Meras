@@ -8,6 +8,7 @@ import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/Trainee/TRpages/acceptedLessons.dart';
 import 'package:meras/screen/Trainee/TRpages/rejectedLessons.dart';
 import 'package:meras/screen/Trainee/TRpages/pendingLessons.dart';
+import 'package:random_string/random_string.dart';
 import '../../../constants.dart';
 //check the pull request
 
@@ -29,13 +30,15 @@ class RequestButton extends StatelessWidget {
         text: "حجز",
         press: () {
           var baseDialog = BaseAlertDialog(
-              title: "",
-              content: "هل أنت متأكد من حجز الموعد؟",
+            title: "",
+            content: "هل أنت متأكد من حجز الموعد؟",
               //او نخليها هل انت متاكد من حجز الدرس؟
 
-              yesOnPressed: () {
-                Request('0000', '0000', '0000', '000000000000000000000', '0000',
-                    '0000'); //change the parameters ;)
+            yesOnPressed: () {
+              Request1('0000', '0000', '0000', '000000000000000000000', '0000', '0000','mmm'); //change the parameters ;)
+
+
+
                 Navigator.of(context, rootNavigator: true).pop('dialog');
               },
               noOnPressed: () {
@@ -49,15 +52,18 @@ class RequestButton extends StatelessWidget {
   }
 }
 
-Request(
+Request1(
   //coach info
-  String Cid, //document['id']
+  String Cid, //document['id'] Noura will send you this id from the list, so make it as an attribute to the class. See class coachProfile_admin.dart for more info
   String CoachName, //document['Fname']
   String CoachName2, // document['Lname']
   String Cphone, //document['Phone Number']
   String Neighborhood, //document['Neighborhood']
-  String DateNTime, //document['DateTime']
-) async {
+  String DateNTime,
+  String Dateid, //document['DateTime'] ? I'm not sure if this how you read from subcollection
+) async 
+
+{
   DateTime now = new DateTime.now();
   DateTime date = new DateTime(now.year, now.month, now.day);
   String dd = DateFormat('MM/dd/yyyy').format(date);
@@ -81,6 +87,7 @@ Request(
 
   CollectionReference Collection =
       FirebaseFirestore.instance.collection('Requests');
+      String lid= randomAlpha(20);
   Map<String, dynamic> RequestDataDemo = {
     //coach info
     'Cid': Cid,
@@ -100,8 +107,40 @@ Request(
     'reqDate': dd,
     'Status': 'P',
     'DateTime': DateNTime,
+    'Lid': lid,//Lesson id, Leena needs it 
   };
-  Collection.doc().set(RequestDataDemo);
+  Collection.doc(lid).set(RequestDataDemo);
+
+
+
+// await  FirebaseFirestore.instance.collection('Coach').doc(Cid).collection("Dates").get().then((value) {
+//       value.docs.forEach((element) {
+//         FirebaseFirestore.instance.collection('Coach')
+//             .doc('rR3m3ViSYcO21IV4va4Xb41XFuz2')//Cid
+//             .collection("Dates")
+//             //.where('DateTime', isEqualTo: DateNTime)
+//             .doc(element.id)
+            
+//             .delete()
+//             .then((value) => print(element.id));
+//             print('hhhhhhhhhhhhhhhhhhhhhhhhh');
+//       });
+//     });
+//FieldPath fff;
+await  FirebaseFirestore.instance
+        .collection('Coach').doc(Cid)///$Cid/Dates
+        .collection('Dates')
+        .doc(Dateid)
+        .delete()
+        .then((value) => print("time deleted"))
+        .catchError((error) => print("Failed to delete time: $error"));
+        // print(dsk.docs[1].data()) ;
+//print(dsk['DateTime']);
+          //if (value['DateTime']==DateNTime)
+
+    
+
+
 }
 
 
