@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
+import 'DraftF.dart';
+
 class TRexploreScreen extends StatefulWidget {
   @override
   _TRexploreScreenState createState() => _TRexploreScreenState();
@@ -41,7 +43,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                   leading: ElevatedButton(
                     child: Text('معلومات المدرب   '),
                     onPressed: () {
-                      //nav(document.id); //for next sprint
+                      nav(document.id); //for next sprint
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
@@ -94,12 +96,12 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     );
   }
 
-  /* void nav(String icd) async {
+  void nav(String icd) async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return TestScreen(icd);
+        return CoachDate(icd);
       }),
     );
-  }*/ //for next sprint
+  } //for next sprint
 }

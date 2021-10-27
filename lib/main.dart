@@ -7,13 +7,9 @@ import 'package:get/get.dart';
 import 'package:meras/Controllers/NotificationsHandler.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/ADpages/ADlist.dart';
-import 'package:meras/screen/Trainee/TRpages/TRlessons.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
 import 'screen/Admin/ADcategory.dart';
-import 'screen/Trainee/TRpages/DraftF.dart';
-import 'screen/Trainee/TRpages/SendRequest.dart';
-import 'screen/Trainee/TRpages/acceptedLessons.dart';
 import 'screen/wrapper.dart';
 import 'package:meras/services/auth.dart';
 //import 'package:meras/screen/wrapper.dart';
@@ -22,7 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();//check the pull
+  WidgetsFlutterBinding.ensureInitialized(); //check the pull
   await Firebase.initializeApp();
 
 //App is terminated
@@ -64,10 +60,8 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: //TRlessons(),
-        // AcceptedLessons(),
-      // SignIn(), //this is a comment to test 
-      CoachDate(),
+        home: SignIn(), //this is a comment to test
+
         ///wrapper
       ),
     );

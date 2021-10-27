@@ -15,6 +15,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'SendRequest.dart';
 
 class CoachDate extends StatefulWidget {
+  final String id;
+  CoachDate(this.id);
   @override
   _CoachDate createState() => _CoachDate();
 }
@@ -62,11 +64,11 @@ class _CoachDate extends State<CoachDate> {
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
   final String ph = document['Phone Number'];
-  Image im = new Image.network(
-    document['URL'],
-    height: 230.0,
-    width: 250.0,
-  );
+  // Image im = new Image.network(
+  //   document['URL'],
+  //   height: 230.0,
+  //   width: 250.0,
+  // );
   return BackgroundA(
     child: Container(
       height: 900,
