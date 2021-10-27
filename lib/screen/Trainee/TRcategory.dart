@@ -38,8 +38,32 @@ class _State extends State<TRcategory> {
         },
         items: [
           BottomNavyBarItem(
-              icon: Icon(Icons.notifications_active_sharp),
-              title: Text('التنبيهات'),
+              icon: SizedBox(
+                width: 34,
+                child: Stack(
+                  children: [
+                    Icon(Icons.notifications_active_sharp),
+                    Positioned(
+                      top: 0,
+                      left: 20,
+                      child: Container(
+                        padding: EdgeInsets.all(1.5),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.grey),
+                        child: Text(
+                          '10',
+                          style: TextStyle(color: Colors.white, fontSize: 10),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              title: Stack(
+                children: [
+                  Text('التنبيهات'),
+                ],
+              ),
               activeColor: Colors.pink),
           BottomNavyBarItem(
               icon: Icon(Icons.car_repair),

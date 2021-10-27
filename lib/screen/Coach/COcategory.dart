@@ -1,8 +1,8 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'COpages/COexplore.dart';
+import 'COpages/COschedule.dart';
 import 'COpages/COhome.dart';
-import 'COpages/COlessons.dart';
+import 'COpages/COlist.dart';
 
 //import 'package:meras_sprint1/TRpages/TRhome.dart';
 
@@ -18,9 +18,9 @@ class _State extends State<COcategory> {
     return Scaffold(
       extendBody: true,
       body: selectedIndex == 0
-          ? COlessons()
+          ? COlist()
           : selectedIndex == 1
-              ? COexplore()
+              ? COschedule()
               : selectedIndex == 2
                   ? COhome()
                   : COhome(),
@@ -39,7 +39,7 @@ class _State extends State<COcategory> {
               activeColor: Colors.pink),
           BottomNavyBarItem(
               icon: Icon(Icons.perm_contact_calendar),
-              title: Text(''),
+              title: Text('المواعيد'),
               activeColor: Colors.purple),
           BottomNavyBarItem(
               icon: Icon(Icons.home),

@@ -8,7 +8,10 @@ import 'package:meras/Controllers/NotificationsHandler.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/ADpages/ADlist.dart';
 import 'package:meras/screen/Coach/COcategory.dart';
+import 'package:meras/screen/Coach/viewRequest.dart';
 import 'package:meras/screen/Trainee/TRcategory.dart';
+import 'package:meras/screen/Trainee/TRpages/DraftF.dart';
+import 'package:meras/screen/Trainee/TRpages/SendRequest.dart';
 import 'package:meras/screen/Trainee/TRpages/TRnotification.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
@@ -63,7 +66,9 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: TRnotification(), //this is a comment to test
+        home: ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"),
+        //ViewLessonRequest(
+        //"BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
         ///wrapper
       ),

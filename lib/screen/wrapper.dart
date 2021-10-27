@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Trainee/TRcategory.dart';
@@ -29,8 +30,12 @@ Future<bool> isTrainee(dynamic userid) async {
       .where(FieldPath.documentId, isEqualTo: userid)
       .get()
       .then((querySnapshot) {
-    querySnapshot.docs.forEach((value) {
-      if (value.data()['Type'].toString() == 'Trainee') yesno = true;
+    querySnapshot.docs.forEach((value) async {
+      if (value.data()['Type'].toString() == 'Trainee') {
+        yesno = true;
+        await checkToken(value.data()['notificationTokens'] ?? [],
+            value.data()['ID'], 'trainees');
+      }
     });
   });
   if (yesno)
@@ -63,15 +68,31 @@ Future<bool> isCoachA(dynamic userid) async {
       .where(FieldPath.documentId, isEqualTo: userid)
       .get()
       .then((querySnapshot) {
-    querySnapshot.docs.forEach((value) {
+    querySnapshot.docs.forEach((value) async {
       if (value.data()['Type'].toString() == 'Coach' &&
-          value.data()['Status'].toString() == 'A') yesno = true;
+          value.data()['Status'].toString() == 'A') {
+        yesno = true;
+        await checkToken(value.data()['notificationTokens'] ?? [],
+            value.data()['ID'], 'Coach');
+      }
     });
   });
   if (yesno)
     return true;
   else
     return false; //2
+}
+
+Future<void> checkToken(List<String> tokens, String userId, String type) async {
+  FirebaseMessaging.instance.getToken().then((token) async {
+    if (!tokens.contains(token)) {
+      tokens.add(token!);
+      await FirebaseFirestore.instance
+          .collection(type)
+          .doc(userId)
+          .update({'notificationTokens': tokens});
+    }
+  });
 }
 
 Future<bool> isCoachP(dynamic userid) async {
