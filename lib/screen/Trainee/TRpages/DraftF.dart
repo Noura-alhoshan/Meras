@@ -1,22 +1,29 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/SingleBaseAlertDialog.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
+import 'package:meras/screen/Coach/widget/BackgroundC.dart';
 //import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../constants.dart';
 import 'SendRequest.dart';
 
 class CoachDate extends StatefulWidget {
-  final String id;
-  CoachDate(this.id);
+  late final String id;
+  CoachDate(String icd) {
+    this.id = icd;
+  }
   @override
   _CoachDate createState() => _CoachDate();
 }
@@ -36,11 +43,18 @@ class _CoachDate extends State<CoachDate> {
     // final User? user = auth.currentUser;
     // final uid = user!.uid;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      //drawer: NavDrawer(),
+      appBar: AppBar(
+        title: Text('حجز درس جديد'
+            // textAlign: TextAlign.center,
+            ),
+        backgroundColor: Colors.deepPurple[100],
+      ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('Coach')
-              .where(FieldPath.documentId,
-                  isEqualTo: 'rR3m3ViSYcO21IV4va4Xb41XFuz2') //widget.id
+              .where(FieldPath.documentId, isEqualTo: widget.id) //widget.id
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Loading(); //it was text 7.....
@@ -61,6 +75,7 @@ class _CoachDate extends State<CoachDate> {
 //    1. show the coach info
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
+  String sp = '           ';
   final String ph = document['Phone Number'];
   // Image im = new Image.network(
   //   document['URL'],
@@ -72,20 +87,33 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
       height: 900,
       child: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Colors.deepPurple.shade50,
-              Colors.white10,
-            ],
-          )),
+          // decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //   begin: Alignment.topRight,
+          //   end: Alignment.bottomLeft,
+          //   colors: [
+          //     Colors.deepPurple.shade50,
+          //     Colors.white10,
+          //   ],
+          // )),
           //  height: 1200,
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
           child: Column(children: <Widget>[
+            Text(' '),
+            document['Gender'] == 'أنثى'
+                ? Image.asset(
+                    "assets/images/Female.png",
+                    height: 100.0,
+                    width: 100.0,
+                  )
+                : Image.asset(
+                    "assets/images/driver-male.jpg",
+                    height: 100.0,
+                    width: 100.0,
+                  ),
+            Text(' '),
             Text(
-              document['Fname'] + ' ' + document['Lname'] + '  ',
+              ' ' + document['Fname'] + ' ' + document['Lname'] + '  ',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 23,
@@ -104,118 +132,96 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                 child: Text(document['Phone Number'],
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.grey,
+                      color: Colors.blue,
                       decoration: TextDecoration.underline,
                     )),
                 onPressed: () {
                   launch("tel://$ph");
                 }),
-            Divider(color: Colors.deepPurple[900]),
-            Container(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: Table(
-                    defaultColumnWidth: FixedColumnWidth(120.0),
-                    border: TableBorder.all(
-                        color: Colors.white,
-                        style: BorderStyle.solid,
-                        width: 0),
-                    children: [
-                      TableRow(children: [
-                        Column(children: [Text('')]),
-                        Column(children: [
-                          Text('')
-                        ]), //Column(children:[Text('')]),
-                      ]),
-                      TableRow(children: [
-                        //Column(children:[Text('')]),
-
-                        Container(
-                          padding: EdgeInsets.all(2.0),
-                          child: Text(
-                            document['Gender'],
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.grey,
-                            ),
-                            textAlign: TextAlign.right,
-                          ),
-                        ),
-
-                        Container(
-                            padding: EdgeInsets.all(2.0),
-                            child: Text(
-                              'الجنس',
-                              style: TextStyle(fontSize: 20.0),
-                              textAlign: TextAlign.end,
-                            )),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [Text('')]),
-                        Column(children: [
-                          Text('')
-                        ]), //Column(children:[Text('')]),
-                      ]),
-                      TableRow(children: [
-                        //Column(children:[Text('')]),
-                        Container(
-                            padding: EdgeInsets.all(2.0),
-                            child: Text(
-                              document['Age'].toString(),
+            Center(
+                child: Card(
+              color: Colors.deepPurple[50],
+              child: Padding(
+                  padding: EdgeInsets.only(
+                      top: 6.0, left: 2.0, right: 6.0, bottom: 6.0),
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      accentColor: Colors.deepPurple[100],
+                      unselectedWidgetColor: kPrimaryColor?.withOpacity(0.8),
+                    ),
+                    child: ExpansionTile(
+                      iconColor: kPrimaryColor,
+                      backgroundColor: Colors.deepPurple[50],
+                      title: Text(
+                        'معلومات المدرب',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(sp + ' الجنس: ' + document['Gender'],
                               style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey,
+                                fontSize: 19,
+                                color: Colors.black,
                               ),
-                              textAlign: TextAlign.right,
-                            )),
-                        Container(
-                            padding: EdgeInsets.all(2.0),
-                            child: Text(
-                              'العمر',
-                              style: TextStyle(fontSize: 20.0),
-                              textAlign: TextAlign.right,
-                            )),
-                      ]),
-                      TableRow(children: [
-                        Column(children: [Text('')]),
-                        Column(children: [
-                          Text('')
-                        ]), //Column(children:[Text('')]),
-                      ]),
-                      TableRow(children: [
-                        // Column(children:[Text('')]),
-                        Container(
-                            padding: EdgeInsets.all(0),
-                            child: Text(
-                              document['Neighborhood'],
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                              textAlign: TextAlign.right,
-                            )),
-                        Container(
-                            padding: EdgeInsets.all(0),
-                            child: Text(
-                              'المنطقة السكنية',
-                              style: TextStyle(fontSize: 20.0),
-                              textAlign: TextAlign.right,
-                            )),
-                      ]),
-                    ],
-                  ),
-                ),
-              ]),
-            ),
+                              textAlign: TextAlign.right),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                              sp + '  العمر: ' + document['Age'].toString(),
+                              style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.right),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                              sp +
+                                  ' المنطقة السكنية: ' +
+                                  document['Neighborhood'],
+                              style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.right),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(sp + ' الوصف: ' + document['Discerption'],
+                              style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.right),
+                        ),
+                      ],
+                    ),
+                  )),
+            )),
 
+            Divider(color: Colors.deepPurple[900]),
+
+            Text('مواعيد التدريب المتاحة للمدرب',
+                style: TextStyle(
+                    fontSize: 23,
+                    // color: kPrimaryColor,
+                    fontWeight: FontWeight.bold)),
 
             //iterate over the subcollection
             Container(
               child: SingleChildScrollView(
-                child: BackgroundA(
+                child: BackgroundC(
                   child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
                           .collection('Coach')
-                          .doc('rR3m3ViSYcO21IV4va4Xb41XFuz2') //widget.id
+                          .doc(document.id) //widget.id
                           .collection('Dates')
                           .snapshots(),
                       builder: (context, snapshot) {
@@ -259,43 +265,65 @@ Widget _buildListItem(
 ) {
   return SingleChildScrollView(
     child: Container(
-      height: 170,
+      height: 160,
       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
 
       ///
       child: Card(
-        //  elevation: 4.0,
+        //elevation: 4.0,
         child: Column(
           children: [
             Container(
-              decoration: new BoxDecoration(color: Colors.deepPurple[100]),
+              decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.deepPurple[100]),
               child: ListTile(
-                title: Text('يوم ' + document['DateTime'].toString(),
+                title: Text(
+                    'يوم ' + getArabicdays(document['DateTime'].toString()),
                     textAlign: TextAlign.right,
-                    style: TextStyle(height: 1.5, fontSize: 11)),
+                    style: TextStyle(height: 1.5, fontSize: 15)),
                 //subtitle: Text(subheading),
-                leading: IconButton(
-                    icon: Image.asset("assets/images/acc.png"),
-                    iconSize: 30,
+                leading: ElevatedButton(
+                    child: Text('حجز'),
+                    style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        primary: Color(0xFF6F35A5),
+                        textStyle: TextStyle(fontSize: 16)),
                     onPressed: () async {
-                       var baseDialog = BaseAlertDialog(
-            title: "",
-            content: "هل أنت متأكد من حجز الموعد؟",
-              //او نخليها هل انت متاكد من حجز الدرس؟
+                      var baseDialog = BaseAlertDialog(
+                          title: "",
+                          content: "هل أنت متأكد من حجز الموعد؟",
+                          //او نخليها هل انت متاكد من حجز الدرس؟
 
-            yesOnPressed: () {
-                      print(document.id);
-                      Request1(iid, fname, lname, phone, n,
-                          document['DateTime'], document.id);
-                           Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              noOnPressed: () {
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              yes: "نعم",
-              no: "لا");
-          showDialog(
-              context: context, builder: (BuildContext context) => baseDialog);
+                          yesOnPressed: () {
+                            print(document.id);
+                            Request1(iid, fname, lname, phone, n,
+                                document['DateTime'], document.id);
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                            var baseDialog2 = SignleBaseAlertDialog(
+                              title: '',
+                              content:
+                                  "تم طلب موعد الدرس بنجاح، يمكنك مشاهدته في قائمة الدروس قيد الانتظار",
+                              yesOnPressed: () async {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop('dialog');
+                              },
+                              yes: "إغلاق",
+                            );
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => baseDialog2);
+                          },
+                          noOnPressed: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                          },
+                          yes: "نعم",
+                          no: "لا");
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => baseDialog);
                     }),
               ),
             ),
@@ -320,15 +348,41 @@ Widget _buildListItem(
                             '  الوقت: ' +
                         document['DateTime'].toString().substring(11, 16) +
                         ' مساءً ',
-                style: TextStyle(height: 1.5, fontSize: 19),
+                style: TextStyle(height: 1.5, fontSize: 14),
                 textAlign: TextAlign.right,
               ),
             ),
           ],
         ),
+        elevation: 6,
+        shadowColor: Colors.deepPurple[500],
+        shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: BorderSide(color: Colors.white, width: 1)),
       ),
 
       ///
     ),
   );
+}
+
+String getArabicdays(String a) {
+  switch (a.substring(19)) {
+    case 'Saturday':
+      return 'السبت';
+    case 'Sunday':
+      return 'الأحد';
+    case 'Monday':
+      return 'الأثنين';
+    case 'Tuesday':
+      return 'الثلاثاء';
+    case 'Wednesday':
+      return 'الأربعاء';
+    case 'Thursday':
+      return 'الخميس';
+    case 'Friday':
+      return 'الجمعة';
+    default:
+      return 'no day';
+  }
 }

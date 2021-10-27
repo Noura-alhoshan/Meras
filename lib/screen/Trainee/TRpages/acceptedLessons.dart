@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,7 +42,7 @@ class _AcceptedLessonsState extends State<AcceptedLessons> {
                           ' ' +
                           document['CoachName2'],
                       style: TextStyle(height: 2, fontSize: 15),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.right,
                     ),
                     subtitle: Column(children: [
                       Align(
@@ -63,22 +64,15 @@ class _AcceptedLessonsState extends State<AcceptedLessons> {
                       Align(
                         alignment: Alignment.topRight,
                         child: Text(
-                          'تاريخ التدريب :' +
+                          'تاريخ التدريب:' +
                               ' ' +
-                              document['DateTime'].toString().substring(0, 10),
+                              document['DateTime'].toString().substring(0, 10) +
+                              ' ',
                           style: TextStyle(height: 2, fontSize: 13),
                           textAlign: TextAlign.right,
                           // style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      // Text(
-                      //   'تاريخ التدريب :' +
-                      //       ' ' +
-                      //       document['DateTime'].toString().substring(0, 10),
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
                       Align(
                         alignment: Alignment.topRight,
                         child: Text(
@@ -203,7 +197,7 @@ class _AcceptedLessonsState extends State<AcceptedLessons> {
               stream:
                   FirebaseFirestore.instance.collection('Requests').snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('loading 7 ...');
+                if (!snapshot.hasData) return Loading();
                 return ListView.builder(
                   //physics: const NeverScrollableScrollPhysics(), //<--here
                   //controller: _scrollController,

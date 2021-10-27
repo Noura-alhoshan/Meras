@@ -12,7 +12,6 @@ import 'package:random_string/random_string.dart';
 import '../../../constants.dart';
 //check the pull request
 
-
 late DateTime day;
 late DateTime dateTime;
 late String Tname;
@@ -30,14 +29,13 @@ class RequestButton extends StatelessWidget {
         text: "حجز",
         press: () {
           var baseDialog = BaseAlertDialog(
-            title: "",
-            content: "هل أنت متأكد من حجز الموعد؟",
+              title: "",
+              content: "هل أنت متأكد من حجز الموعد؟",
               //او نخليها هل انت متاكد من حجز الدرس؟
 
-            yesOnPressed: () {
-              Request1('0000', '0000', '0000', '000000000000000000000', '0000', '0000','mmm'); //change the parameters ;)
-
-
+              yesOnPressed: () {
+                Request1('0000', '0000', '0000', '000000000000000000000',
+                    '0000', '0000', 'mmm'); //change the parameters ;)
 
                 Navigator.of(context, rootNavigator: true).pop('dialog');
               },
@@ -54,16 +52,16 @@ class RequestButton extends StatelessWidget {
 
 Request1(
   //coach info
-  String Cid, //document['id'] Noura will send you this id from the list, so make it as an attribute to the class. See class coachProfile_admin.dart for more info
+  String
+      Cid, //document['id'] Noura will send you this id from the list, so make it as an attribute to the class. See class coachProfile_admin.dart for more info
   String CoachName, //document['Fname']
   String CoachName2, // document['Lname']
   String Cphone, //document['Phone Number']
   String Neighborhood, //document['Neighborhood']
   String DateNTime,
-  String Dateid, //document['DateTime'] ? I'm not sure if this how you read from subcollection
-) async 
-
-{
+  String
+      Dateid, //document['DateTime'] ? I'm not sure if this how you read from subcollection
+) async {
   DateTime now = new DateTime.now();
   DateTime date = new DateTime(now.year, now.month, now.day);
   String dd = DateFormat('MM/dd/yyyy').format(date);
@@ -87,7 +85,7 @@ Request1(
 
   CollectionReference Collection =
       FirebaseFirestore.instance.collection('Requests');
-      String lid= randomAlpha(20);
+  String lid = randomAlpha(20);
   Map<String, dynamic> RequestDataDemo = {
     //coach info
     'Cid': Cid,
@@ -104,14 +102,12 @@ Request1(
     'TGender': Tgender,
 
     //request info
-    'reqDate': dd,
+    'reqDate': FieldValue.serverTimestamp(),
     'Status': 'P',
     'DateTime': DateNTime,
-    'Lid': lid,//Lesson id, Leena needs it 
+    'Lid': lid, //Lesson id, Leena needs it
   };
   Collection.doc(lid).set(RequestDataDemo);
-
-
 
 // await  FirebaseFirestore.instance.collection('Coach').doc(Cid).collection("Dates").get().then((value) {
 //       value.docs.forEach((element) {
@@ -120,38 +116,27 @@ Request1(
 //             .collection("Dates")
 //             //.where('DateTime', isEqualTo: DateNTime)
 //             .doc(element.id)
-            
+
 //             .delete()
 //             .then((value) => print(element.id));
 //             print('hhhhhhhhhhhhhhhhhhhhhhhhh');
 //       });
 //     });
 //FieldPath fff;
-await  FirebaseFirestore.instance
-        .collection('Coach').doc(Cid)///$Cid/Dates
-        .collection('Dates')
-        .doc(Dateid)
-        .delete()
-        .then((value) => print("time deleted"))
-        .catchError((error) => print("Failed to delete time: $error"));
-        // print(dsk.docs[1].data()) ;
+  await FirebaseFirestore.instance
+      .collection('Coach')
+      .doc(Cid)
+
+      ///$Cid/Dates
+      .collection('Dates')
+      .doc(Dateid)
+      .delete()
+      .then((value) => print("time deleted"))
+      .catchError((error) => print("Failed to delete time: $error"));
+  // print(dsk.docs[1].data()) ;
 //print(dsk['DateTime']);
-          //if (value['DateTime']==DateNTime)
-
-    
-
-
+  //if (value['DateTime']==DateNTime)
 }
-
-
-
-
-
-
-
-
-
-
 
 //    print(
 // //DateTime.fromMicrosecondsSinceEpoch(time.microsecondsSinceEpoch));

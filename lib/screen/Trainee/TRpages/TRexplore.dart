@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/Trainee/TRpages/requestPage.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
 import 'DraftF.dart';
@@ -41,7 +42,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                       ? Image.asset("assets/images/Female.png")
                       : Image.asset("assets/images/driver-male.jpg"),
                   leading: ElevatedButton(
-                    child: Text('معلومات المدرب   '),
+                    child: Text('تقديم طلب تدريب'),
                     onPressed: () {
                       nav(document.id); //for next sprint
                     },
@@ -101,7 +102,8 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
       context,
       MaterialPageRoute(builder: (context) {
         return CoachDate(icd);
+        //return RequestLessonPage(icd);
       }),
     );
-  } //for next sprint
+  }
 }

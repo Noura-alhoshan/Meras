@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:meras/screen/home/navDrawer.dart';
-import 'package:meras/screen/Trainee/TRpages/acceptedLessons.dart';
-import 'package:meras/screen/Trainee/TRpages/rejectedLessons.dart';
-import 'package:meras/screen/Trainee/TRpages/pendingLessons.dart';
 
 import '../../../constants.dart';
-import 'acceptedLessons.dart';
+import 'requests/PendingRequest.dart';
+import 'requests/acceptedRequest.dart';
+import 'requests/rejectedRequest.dart';
 
-class TRlessons extends StatelessWidget {
+class COlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,25 +21,25 @@ class TRlessons extends StatelessWidget {
             backgroundColor: Colors.deepPurple[100],
             bottom: TabBar(
               tabs: [
-                Tab(text: 'المرفوضة/الملغاة'),
+                Tab(text: 'المرفوضة'),
                 Tab(
-                  text: 'قيد الانتظار',
+                  text: 'المعلقة',
                 ),
                 Tab(text: 'المقبولة'),
               ],
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Text('قائمة الدروس'),
+            title: Text('قائمة الطلبات'),
           ),
           body: TabBarView(
             children: [
               // Text('المرفوضة'),
               // Text('المعلقة'),
               // Text('المقبولة'),
-              new RejectedLessons(),
-              new PendingLessons(),
-              new AcceptedLessons(),
+              new RejectedRequest(),
+              new PendingRequest(),
+              new AcceptedRequest(),
             ],
           ),
         ),

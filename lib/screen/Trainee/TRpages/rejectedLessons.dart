@@ -25,7 +25,8 @@ class _RejectedLessonsState extends State<RejectedLessons> {
     final String ph = document['CoachPhone'];
     return SingleChildScrollView(
       child: (document['Tid'] == auth1.currentUser!.uid &&
-              document['Status'] == 'D')
+                  document['Status'] == 'D' ||
+              document['Status'] == 'C')
           ? Container(
               height: 210,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
