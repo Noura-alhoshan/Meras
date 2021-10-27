@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/components/rounded_input_field.dart';
 import 'package:meras/constants.dart';
@@ -78,8 +79,7 @@ class _ResetScreenState extends State<ResetScreen> {
                         valid = true;
                       } catch (error) {
                          print(error.toString());
-                        if (error.toString()=='[firebase_auth/unknown] Given String is empty or null'
-                        || error.toString()=="LateInitializationError: Field '_email@995216385' has not been initialized.")
+                        if (error.toString()=="LateInitializationError: Field '_email@86216385' has not been initialized." || error.toString()=='[firebase_auth/unknown] Given String is empty or null' )
                         setState(() {
                           eror = 'الرجاء إدخال البريد الإلكتروني';
                         });
@@ -95,7 +95,7 @@ class _ResetScreenState extends State<ResetScreen> {
                         valid = false;
                       }
                       if (valid) {
-                        var baseDialog = BaseAlertDialog(
+                        var baseDialog = SignleBaseAlertDialog(
                             title: "",
                             content:
                                 "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني   ",
@@ -106,11 +106,9 @@ class _ResetScreenState extends State<ResetScreen> {
                               // Navigator.pop( context,
                               //   MaterialPageRoute(builder: (context) => SignIn()),);
                             },
-                            noOnPressed: () {
-                              //Navigator.of(context, rootNavigator: true).pop('dialog');
-                            },
+                           
                             yes: "إغلاق",
-                            no: "");
+                            );
                         showDialog(
                             context: context,
                             builder: (BuildContext context) => baseDialog);

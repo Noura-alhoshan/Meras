@@ -158,7 +158,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                     Divider(color: Colors.deepPurple[900]),
 
                     Text(
-                      "معلومات المتدرب  ",
+                      "معلومات المتعلم ",
                       style: TextStyle(
                         fontSize: 22.5,
                         //fontFamily: "Poppins-Bold",
