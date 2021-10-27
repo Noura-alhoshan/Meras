@@ -20,9 +20,9 @@ export const sendNotificationToTrainee = functions.firestore.document('Requests/
     console.log(`Tid: ${requestData['Status']}`);
     let msg ="";
     if(requestData['Status'] == "D"){
-      msg = "تم رفضك مع المدرب";
+      msg = "تم رفض طلب تدريبك مع المدرب";
     }else{
-      msg ="تم قبولك مع المدرب" ;
+      msg ="تم قبول طلب تدريبك مع المدرب" ;
     }
     // const msg = requestData['Status'] === 'D' ? 'تم قبول طلبك مع المدرب' : 'تم رفض طلبك مع المدرب';
     console.log(`Tid: ${msg}`);
@@ -61,7 +61,7 @@ export const sendNotificationToCoach = functions.firestore.document('Requests/{u
   }
   console.log(`Cid: ${tokens}`);
   let payloadData = {
-    title: 'متدرب قيد الانتظار',
+    title: 'متعلم قيد الانتظار',
 
     message: 'هل تريد تدريب' + ' ' + requestdata["Tname"] + '؟',
   };

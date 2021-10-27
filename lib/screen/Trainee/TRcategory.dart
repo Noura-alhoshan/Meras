@@ -49,7 +49,7 @@ class _State extends State<TRcategory> {
                       child: Container(
                         padding: EdgeInsets.all(1.5),
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.grey),
+                            shape: BoxShape.circle, color: Colors.red),
                         child: Text(
                           '10',
                           style: TextStyle(color: Colors.white, fontSize: 10),
@@ -64,7 +64,7 @@ class _State extends State<TRcategory> {
                   Text('التنبيهات'),
                 ],
               ),
-              activeColor: Colors.pink),
+              activeColor: Colors.blue),
           BottomNavyBarItem(
               icon: Icon(Icons.car_repair),
               title: Text('الدروس'),
@@ -72,7 +72,7 @@ class _State extends State<TRcategory> {
           BottomNavyBarItem(
               icon: Icon(Icons.search),
               title: Text('المدربين'),
-              activeColor: Colors.blue),
+              activeColor: Colors.red),
           BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),
