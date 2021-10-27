@@ -152,12 +152,12 @@ class _PendingLessonsState extends State<PendingLessons> {
                     onPressed: () async {
                       var baseDialog = BaseAlertDialog(
                           title: "",
-                          content: "هل أنت متأكد لإلغاء الطلب؟",
+                          content: "هل أنت متأكد من إلغاء طلب الدرس؟",
                           yesOnPressed: () async {
                             await FirebaseFirestore.instance
                                 .collection('Requests')
                                 .doc(document.id)
-                                .update({'Status': 'D'});
+                                .update({'Status': 'C'});
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');
                             var baseDialog2 = SignleBaseAlertDialog(

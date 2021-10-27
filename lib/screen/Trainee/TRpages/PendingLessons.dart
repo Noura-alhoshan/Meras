@@ -152,7 +152,7 @@ class _PendingLessonsState extends State<PendingLessons> {
                     child: Text('إلغاء'),
                     onPressed: () async {
                       //nav(document.id); //for next sprint
-                      var baseDialog = BaseAlertDialog(
+                          content: "هل أنت متأكد من إلغاء طلب الدرس؟",
                           title: "",
                           content: "هل أنت متأكد من الإلغاء؟",
                           yesOnPressed: () async {
