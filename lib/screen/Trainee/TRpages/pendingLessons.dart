@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/components/SingleBaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -52,12 +53,6 @@ class _PendingLessonsState extends State<PendingLessons> {
                         // style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Text(
-                    //   'الحي:' + ' ' + document['Neighborhood'],
-                    //   style: TextStyle(height: 2, fontSize: 11),
-                    //   textAlign: TextAlign.right,
-                    //   // style: TextStyle(fontWeight: FontWeight.bold),
-                    // ),
 
                     Align(
                       alignment: Alignment.topRight,
@@ -82,15 +77,7 @@ class _PendingLessonsState extends State<PendingLessons> {
                         // style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Text(
-                    //   document['DateTime'].toString().substring(
-                    //           19, document['DateTime'].toString().length) +
-                    //       ' ' +
-                    //       ': يوم التدريب',
-                    //   style: TextStyle(height: 2, fontSize: 11),
-                    //   textAlign: TextAlign.right,
-                    //   // style: TextStyle(fontWeight: FontWeight.bold),
-                    // ),
+
                     Align(
                       alignment: Alignment.topRight,
                       child: Text(
@@ -115,16 +102,7 @@ class _PendingLessonsState extends State<PendingLessons> {
                         // style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Text(
-                    //   document['DateTime'].toString().substring(17, 19) +
-                    //       ' ' +
-                    //       'الوقت :' +
-                    //       ' ' +
-                    //       document['DateTime'].toString().substring(11, 17),
-                    //   style: TextStyle(height: 2, fontSize: 11),
-                    //   textAlign: TextAlign.right,
-                    //   // style: TextStyle(fontWeight: FontWeight.bold),
-                    // ),
+
                     Row(children: [
                       Text('          '),
                       Container(
@@ -246,7 +224,7 @@ class _PendingLessonsState extends State<PendingLessons> {
               stream:
                   FirebaseFirestore.instance.collection('Requests').snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('loading 7 ...');
+                if (!snapshot.hasData) return Loading();
                 return ListView.builder(
                   //physics: const NeverScrollableScrollPhysics(), //<--here
                   //controller: _scrollController,
