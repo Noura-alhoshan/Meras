@@ -139,12 +139,6 @@ class _PendingLessonsState extends State<PendingLessons> {
                         // style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Text(
-                    //   'رقم جوال المدرب :' + ' ' + document['CoachPhone'],
-                    //   style: TextStyle(height: 2, fontSize: 11),
-                    //   textAlign: TextAlign.right,
-                    //   // style: TextStyle(fontWeight: FontWeight.bold),
-                    // ),
                     //trailing: Image.asset("assets/images/req.png")
                   ]),
                   trailing: Image.asset("assets/images/req.png"),
@@ -153,8 +147,6 @@ class _PendingLessonsState extends State<PendingLessons> {
                     onPressed: () async {
                       //nav(document.id); //for next sprint
                           content: "هل أنت متأكد من إلغاء طلب الدرس؟",
-                          title: "",
-                          content: "هل أنت متأكد من الإلغاء؟",
                           yesOnPressed: () async {
                             await FirebaseFirestore.instance
                                 .collection('Requests')
@@ -178,17 +170,6 @@ class _PendingLessonsState extends State<PendingLessons> {
                         primary: Color(0xFF6F35A5),
                         textStyle: TextStyle(fontSize: 16)),
                   ),
-                  //: Image.asset("assets/images/driver-male.jpg"),
-                  // leading: ElevatedButton(
-                  //   child: Text('معلومات المدرب   '),
-                  //   onPressed: () {
-                  //     //nav(document.id); //for next sprint
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //       shape: StadiumBorder(),
-                  //       primary: Color(0xFF6F35A5),
-                  //       textStyle: TextStyle(fontSize: 16)),
-                  // ),
                 ),
                 elevation: 6,
                 shadowColor: Colors.deepPurple[500],
