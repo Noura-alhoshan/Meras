@@ -221,8 +221,10 @@ class _PendingLessonsState extends State<PendingLessons> {
       child: SingleChildScrollView(
         child: BackgroundA(
           child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('Requests').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('Requests')
+                  .orderBy('reqDate')
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return Loading();
                 return ListView.builder(

@@ -137,8 +137,10 @@ class _RejectedLessonsState extends State<RejectedLessons> {
       child: SingleChildScrollView(
         child: BackgroundA(
           child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('Requests').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('Requests')
+                  .orderBy('reqDate')
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return const Text('loading 7 ...');
                 return ListView.builder(

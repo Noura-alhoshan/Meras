@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -128,16 +126,44 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
             SizedBox(
                 // height: 10,
                 ),
-            TextButton(
-                child: Text(document['Phone Number'],
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                    )),
-                onPressed: () {
-                  launch("tel://$ph");
-                }),
+
+            Row(
+              children: [
+                Text('                                 '),
+                TextButton(
+                    child: Text(
+                      document['Phone Number'],
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                    onPressed: () {
+                      launch("tel://$ph");
+                    }),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(':للتواصل',
+                      style: TextStyle(fontSize: 18, color: Colors.grey[700])),
+                ),
+              ],
+            ),
+            // Text('للتواصل:',
+            //     style: TextStyle(
+            //       fontSize: 18,
+            //     )),
+            // TextButton(
+            //     child: Text(document['Phone Number'],
+            //         style: TextStyle(
+            //           fontSize: 18,
+            //           color: Colors.blue,
+            //           decoration: TextDecoration.underline,
+            //         )),
+            //     onPressed: () {
+            //       launch("tel://$ph");
+            //     }),
             Center(
                 child: Card(
               color: Colors.deepPurple[50],
@@ -147,7 +173,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                   child: Theme(
                     data: Theme.of(context).copyWith(
                       accentColor: Colors.deepPurple[100],
-                      unselectedWidgetColor: kPrimaryColor?.withOpacity(0.8),
+                      unselectedWidgetColor: kPrimaryColor.withOpacity(0.8),
                     ),
                     child: ExpansionTile(
                       iconColor: kPrimaryColor,
@@ -161,46 +187,115 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                             fontWeight: FontWeight.bold),
                       ),
                       children: <Widget>[
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(sp + ' الجنس: ' + document['Gender'],
-                              style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.black,
-                              ),
-                              textAlign: TextAlign.right),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                              sp + '  العمر: ' + document['Age'].toString(),
-                              style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.black,
-                              ),
-                              textAlign: TextAlign.right),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                              sp +
-                                  ' المنطقة السكنية: ' +
-                                  document['Neighborhood'],
-                              style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.black,
-                              ),
-                              textAlign: TextAlign.right),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(sp + ' الوصف: ' + document['Discerption'],
-                              style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.black,
-                              ),
-                              textAlign: TextAlign.right),
-                        ),
+                        Container(
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(20),
+                                child: Table(
+                                  defaultColumnWidth: FixedColumnWidth(170.0),
+                                  border: TableBorder.all(
+                                      color: Colors.white,
+                                      style: BorderStyle.none,
+                                      width: 0),
+                                  children: [
+                                    TableRow(children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(1.0),
+                                        child: Text(document['Gender'],
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              color: Colors.black,
+                                            ),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ' :الجنس',
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      )
+                                    ]),
+                                    TableRow(children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(1.0),
+                                        child: Text(document['Age'].toString(),
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              //height: 1.49,
+                                              color: Colors.black,
+                                            ),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ' :العمر',
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      )
+                                    ]),
+                                    TableRow(children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(1.0),
+                                        child: Text(document['Neighborhood'],
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              //height: 1.49,
+                                              color: Colors.black,
+                                            ),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ' :المنطقة السكنية',
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      )
+                                    ]),
+                                    TableRow(children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(1.0),
+                                        child: Text(document['Discerption'],
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              //height: 1.49,
+                                              color: Colors.black,
+                                            ),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ' :الوصف',
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      )
+                                    ]),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   )),
@@ -225,8 +320,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                           .collection('Dates')
                           .snapshots(),
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData)
-                          return const Text('loading 7 ...');
+                        if (!snapshot.hasData) return Loading();
                         return ListView.builder(
                           physics:
                               const NeverScrollableScrollPhysics(), //<--here
