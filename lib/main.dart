@@ -1,6 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
@@ -18,14 +17,17 @@ import 'package:meras/screen/home/home.dart';
 import 'screen/Admin/ADcategory.dart';
 import 'screen/wrapper.dart';
 import 'package:meras/services/auth.dart';
-//import 'package:meras/screen/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //check the pull
   await Firebase.initializeApp();
+
+  //Get Storage initialised
+  await GetStorage.init();
 
 //App is terminated
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
@@ -43,6 +45,15 @@ void main() async {
   initializeLocalNotification();
   AwesomeNotifications().actionStream.listen((receivedNotification) {
     Get.to(ADlistScreen());
+    // GetStorage().write("NewNotification", false);
+  });
+
+  AwesomeNotifications().createdStream.listen((event) async {
+    GetStorage().write("NewNotification", true);
+  });
+
+  AwesomeNotifications().dismissedStream.listen((event) {
+    // GetStorage().write("NewNotification", false);
   });
   FirebaseMessaging.instance.getToken().then((token) {
     print(token);
@@ -66,8 +77,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: //RequestButton(),
-            ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"),
+        home: TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
         //ViewLessonRequest(
         //"BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
