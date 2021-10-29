@@ -73,13 +73,7 @@ class _CoachDate extends State<CoachDate> {
 //    1. show the coach info
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
-  String sp = '           ';
   final String ph = document['Phone Number'];
-  // Image im = new Image.network(
-  //   document['URL'],
-  //   height: 230.0,
-  //   width: 250.0,
-  // );
   return BackgroundA(
     child: Container(
       height: 900,
