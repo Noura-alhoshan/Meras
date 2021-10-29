@@ -46,7 +46,8 @@ class DatabaseService {
       'Phone Number': phoneNumber,
       'Neighborhood': neighborhood,
       'Gender': gender,
-      'Type': 'Trainee'
+      'Type': 'Trainee',
+      'ID': traineee.uid,
     };
     traineeCollection.doc(traineee.uid).set(traineeDataDemo);
   }
@@ -87,7 +88,8 @@ class DatabaseService {
         'Status': status,
         'URL': url,
         'Time': FieldValue.serverTimestamp(),
-        'Type':'Coach'
+        'Type':'Coach',
+        'ID': co.uid,
       };
     coachesCollection.doc(co.uid).set(traineeDataDemo);
   }

@@ -77,7 +77,8 @@ final _formKey = GlobalKey<FormState>();
           ),
         ),
         //backgroundColor: Colors.deepPurple[50],
-        actions: <Widget>[
+        actions: <Widget>[ 
+          Center( child:
           TextButton(
             child: const Text('إغلاق', style:TextStyle(color: Colors.deepPurple, fontSize: 16.0) , ),
             onPressed: () async {
@@ -88,7 +89,7 @@ final _formKey = GlobalKey<FormState>();
                   //SystemNavigator.pop(); 
                  // glovar=1;
             },
-          ),
+          ),)
         ],
         
       )],
