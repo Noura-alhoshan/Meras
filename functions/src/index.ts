@@ -81,29 +81,6 @@ export const sendNotificationToCoach = functions.firestore.document('Requests/{u
     });
 
 });
-// export const sendNotificationToCoach = functions.firestore.document('Requests').onCreate(async(snapshot,context)=>{
-//   let notificationdata=snapshot.data();
-//   let  payloadData = {
-//     title:'طلب تدريب قيد الانتظار',
-//     message:'هل تريد تدريب المتدرب',
-
-//     };
-
-
-//     var payload = {
-//       data: payloadData,
-//     };
-
-//     return await admin
-//     .messaging()
-//     .sendToDevice(notificationdata.token, payload)
-//     .then((response) => {
-//       console.log('Pushed All Notifications');
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
 
 export const notificationsTrigger = functions.firestore
   .document('Coach/{userId}')
