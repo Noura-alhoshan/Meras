@@ -79,16 +79,6 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
       height: 900,
       child: SingleChildScrollView(
         child: Container(
-          // decoration: BoxDecoration(
-          //     gradient: LinearGradient(
-          //   begin: Alignment.topRight,
-          //   end: Alignment.bottomLeft,
-          //   colors: [
-          //     Colors.deepPurple.shade50,
-          //     Colors.white10,
-          //   ],
-          // )),
-          //  height: 1200,
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
           child: Column(children: <Widget>[
             Text(' '),
@@ -144,20 +134,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                 ),
               ],
             ),
-            // Text('للتواصل:',
-            //     style: TextStyle(
-            //       fontSize: 18,
-            //     )),
-            // TextButton(
-            //     child: Text(document['Phone Number'],
-            //         style: TextStyle(
-            //           fontSize: 18,
-            //           color: Colors.blue,
-            //           decoration: TextDecoration.underline,
-            //         )),
-            //     onPressed: () {
-            //       launch("tel://$ph");
-            //     }),
+
             Center(
                 child: Card(
               color: Colors.deepPurple[50],
@@ -187,7 +164,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                               Container(
                                 margin: EdgeInsets.all(20),
                                 child: Table(
-                                  defaultColumnWidth: FixedColumnWidth(170.0),
+                                  defaultColumnWidth: FixedColumnWidth(150.0),
                                   border: TableBorder.all(
                                       color: Colors.white,
                                       style: BorderStyle.none,
@@ -208,7 +185,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         child: Text(
                                           ' :الجنس',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 18,
                                             color: Colors.black,
                                           ),
                                           textAlign: TextAlign.end,
@@ -220,7 +197,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         padding: EdgeInsets.all(1.0),
                                         child: Text(document['Age'].toString(),
                                             style: TextStyle(
-                                              fontSize: 19,
+                                              fontSize: 18,
                                               //height: 1.49,
                                               color: Colors.black,
                                             ),
@@ -231,7 +208,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         child: Text(
                                           ' :العمر',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 18,
                                             color: Colors.black,
                                           ),
                                           textAlign: TextAlign.end,
@@ -243,7 +220,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         padding: EdgeInsets.all(1.0),
                                         child: Text(document['Neighborhood'],
                                             style: TextStyle(
-                                              fontSize: 19,
+                                              fontSize: 18,
                                               //height: 1.49,
                                               color: Colors.black,
                                             ),
@@ -254,7 +231,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         child: Text(
                                           ' :المنطقة السكنية',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 18,
                                             color: Colors.black,
                                           ),
                                           textAlign: TextAlign.end,
@@ -266,7 +243,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         padding: EdgeInsets.all(1.0),
                                         child: Text(document['Discerption'],
                                             style: TextStyle(
-                                              fontSize: 19,
+                                              fontSize: 18,
                                               //height: 1.49,
                                               color: Colors.black,
                                             ),
@@ -277,7 +254,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                         child: Text(
                                           ' :الوصف',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 18,
                                             color: Colors.black,
                                           ),
                                           textAlign: TextAlign.end,
@@ -293,6 +270,11 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                       ],
                     ),
                   )),
+              elevation: 6,
+              shadowColor: Colors.deepPurple[500],
+              shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide(color: Colors.white, width: 1)),
             )),
 
             Divider(color: Colors.deepPurple[900]),
@@ -421,15 +403,15 @@ Widget _buildListItem(
               child: Text(
                 document['DateTime'].toString().substring(17, 19) == 'AM'
                     ? 'التاريخ:' +
-                        //   getArabicdays(document['DateTime'].toString()) +
+                        //getArabicdays(document['DateTime'].toString()) +
                         ' ' +
                         document['DateTime'].toString().substring(0, 10) +
                         '\n'
                             '  الوقت: ' +
                         document['DateTime'].toString().substring(11, 16) +
                         ' صباحا '
-                    : 'يوم ' +
-                        document['DateTime'].toString() +
+                    : 'التاريخ:' +
+                        //document['DateTime'].toString() +
                         ' ' +
                         document['DateTime'].toString().substring(0, 10) +
                         '\n'

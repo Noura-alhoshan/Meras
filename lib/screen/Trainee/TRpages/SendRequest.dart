@@ -28,24 +28,23 @@ class RequestButton extends StatelessWidget {
     return RoundedButton(
         text: "حجز",
         press: () {
-          var baseDialog = BaseAlertDialog(
-              title: "",
-              content: "هل أنت متأكد من حجز الموعد؟",
-              //او نخليها هل انت متاكد من حجز الدرس؟
+          // var baseDialog = BaseAlertDialog(
+          //   title: "",
+          //   content: "هل أنت متأكد من حجز الموعد؟",
+          //     //او نخليها هل انت متاكد من حجز الدرس؟
 
-              yesOnPressed: () {
-                Request1('0000', '0000', '0000', '000000000000000000000',
-                    '0000', '0000', 'mmm'); //change the parameters ;)
+          //   yesOnPressed: () {
+          //     Request1('0000', '0000', '0000', '000000000000000000000', '0000', '0000','mmm'); //change the parameters ;)
 
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              noOnPressed: () {
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              yes: "نعم",
-              no: "لا");
-          showDialog(
-              context: context, builder: (BuildContext context) => baseDialog);
+          //       Navigator.of(context, rootNavigator: true).pop('dialog');
+          //     },
+          //     noOnPressed: () {
+          //       Navigator.of(context, rootNavigator: true).pop('dialog');
+          //     },
+          //     yes: "نعم",
+          //     no: "لا");
+          // showDialog(
+          //     context: context, builder: (BuildContext context) => baseDialog);
         });
   }
 }

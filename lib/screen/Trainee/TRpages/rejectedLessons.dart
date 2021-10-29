@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants.dart';
+import 'TRviewPenRequest.dart';
+import 'TRviewRejRequest.dart';
+import 'package:meras/screen/Trainee/TRpages/TRviewRejRequest.dart';
 
 class RejectedLessons extends StatefulWidget {
   //const RejectedLessons({ Key? key }) : super(key: key);
@@ -28,7 +32,7 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                   document['Status'] == 'D' ||
               document['Status'] == 'C')
           ? Container(
-              height: 210,
+              height: 100,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Card(
                 child: ListTile(
@@ -41,65 +45,72 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                       textAlign: TextAlign.right,
                     ),
                     subtitle: Column(children: [
+                      // Align(
+                      //   alignment: Alignment.topRight,
+                      //   child: Text(
+                      //     'الحي:' + ' ' + document['Neighborhood'],
+                      //     style: TextStyle(height: 2, fontSize: 13),
+                      //     textAlign: TextAlign.right,
+                      //     // style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
+                      // Align(
+                      //   alignment: Alignment.topRight,
+                      //   child: Text(
+                      //     'الموعد: يوم ' +
+                      //         getArabicdays(document['DateTime'].toString()) +
+                      //         // 'تاريخ التدريب :' +
+                      //         ' ' +
+                      //         document['DateTime'].toString().substring(0, 10),
+                      //     style: TextStyle(height: 2, fontSize: 13),
+                      //     textAlign: TextAlign.right,
+                      //     // style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
+                      // Align(
+                      //   alignment: Alignment.topRight,
+                      //   child: Text(
+                      //     'يوم التدريب: ' +
+                      //         ' ' +
+                      //         getArabicdays(document['DateTime'].toString()),
+                      //     style: TextStyle(height: 2, fontSize: 13),
+                      //     textAlign: TextAlign.right,
+                      //     // style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
+                      // Align(
+                      //   alignment: Alignment.topRight,
+                      //   child: Text(
+                      //     document['DateTime'].toString().substring(17, 19) ==
+                      //             'AM'
+                      //         ? 'الوقت: ' +
+                      //             ' ' +
+                      //             document['DateTime']
+                      //                 .toString()
+                      //                 .substring(11, 17) +
+                      //             ' ' +
+                      //             'صباحًا'
+                      //         : 'الوقت: ' +
+                      //             ' ' +
+                      //             document['DateTime']
+                      //                 .toString()
+                      //                 .substring(11, 17) +
+                      //             ' ' +
+                      //             'مساءً',
+                      //     style: TextStyle(height: 2, fontSize: 13),
+                      //     textAlign: TextAlign.right,
+                      //     // style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
                       Align(
                         alignment: Alignment.topRight,
                         child: Text(
-                          'الحي:' + ' ' + document['Neighborhood'],
-                          style: TextStyle(height: 2, fontSize: 13),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'تاريخ التدريب :' +
+                          'تاريخ الطلب:' +
                               ' ' +
-                              document['DateTime'].toString().substring(0, 10),
-                          style: TextStyle(height: 2, fontSize: 13),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'يوم التدريب: ' +
-                              ' ' +
-                              getArabicdays(document['DateTime'].toString()),
-                          style: TextStyle(height: 2, fontSize: 13),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          document['DateTime'].toString().substring(17, 19) ==
-                                  'AM'
-                              ? 'الوقت: ' +
-                                  ' ' +
-                                  document['DateTime']
-                                      .toString()
-                                      .substring(11, 17) +
-                                  ' ' +
-                                  'صباحًا'
-                              : 'الوقت: ' +
-                                  ' ' +
-                                  document['DateTime']
-                                      .toString()
-                                      .substring(11, 17) +
-                                  ' ' +
-                                  'مساءًا',
-                          style: TextStyle(height: 2, fontSize: 13),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'تاريخ الطلب:' + ' ' + document['reqDate'],
+                              document['reqDate']
+                                  .toDate()
+                                  .toString()
+                                  .substring(0, 10),
                           style: TextStyle(
                               height: 2, fontSize: 10, color: kPrimaryColor),
                           textAlign: TextAlign.right,
@@ -107,7 +118,17 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                         ),
                       ),
                     ]),
-                    trailing: Image.asset("assets/images/rej2.png")),
+                    trailing: Image.asset("assets/images/rej2.png"),
+                    leading: ElevatedButton(
+                      child: Text('التفاصيل'),
+                      onPressed: () async {
+                        nav(document.id);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          primary: Color(0xFF6F35A5),
+                          textStyle: TextStyle(fontSize: 16)),
+                    )),
                 elevation: 6,
                 shadowColor: Colors.deepPurple[500],
                 shape: OutlineInputBorder(
@@ -142,7 +163,7 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                   .orderBy('reqDate')
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('loading 7 ...');
+                if (!snapshot.hasData) return Loading();
                 return ListView.builder(
                   //physics: const NeverScrollableScrollPhysics(), //<--here
                   //controller: _scrollController,
@@ -156,6 +177,15 @@ class _RejectedLessonsState extends State<RejectedLessons> {
       ),
     );
     //);
+  }
+
+  void nav(String icd) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return ViewRejectedRequest(icd);
+      }),
+    );
   }
 }
 
