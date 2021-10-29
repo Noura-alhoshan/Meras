@@ -1,10 +1,8 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'COpages/COexplore.dart';
+import 'COpages/COschedule.dart';
 import 'COpages/COhome.dart';
-import 'COpages/COlessons.dart';
-import 'COpages/COnotification.dart';
+import 'COpages/COlist.dart';
 
 //import 'package:meras_sprint1/TRpages/TRhome.dart';
 
@@ -20,14 +18,12 @@ class _State extends State<COcategory> {
     return Scaffold(
       extendBody: true,
       body: selectedIndex == 0
-          ? COnotification()
+          ? COlist()
           : selectedIndex == 1
-              ? COlessons()
+              ? COschedule()
               : selectedIndex == 2
-                  ? COexplore()
-                  : selectedIndex == 3
-                      ? COhome()
-                      : COhome(),
+                  ? COhome()
+                  : COhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
@@ -38,21 +34,17 @@ class _State extends State<COcategory> {
         },
         items: [
           BottomNavyBarItem(
-              icon: Icon(Icons.notifications_active_sharp),
-              title: Text('التنبيهات'),
+              icon: Icon(Icons.list_alt),
+              title: Text('الطلبات'),
               activeColor: Colors.pink),
           BottomNavyBarItem(
-              icon: Icon(Icons.car_repair),
-              title: Text('الدروس'),
+              icon: Icon(Icons.perm_contact_calendar),
+              title: Text('المواعيد'),
               activeColor: Colors.purple),
-          BottomNavyBarItem(
-              icon: Icon(Icons.search),
-              title: Text('المدربين'),
-              activeColor: Colors.blue),
           BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),
-              activeColor: Colors.green),
+              activeColor: Colors.blue),
         ],
       ),
     );

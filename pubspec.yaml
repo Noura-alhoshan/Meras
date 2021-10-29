@@ -40,6 +40,7 @@ dependencies:
   google_sign_in: ^5.0.4
   awesome_notifications:
   firebase_messaging:
+  get_storage:
   get:
   url_launcher:
 
@@ -71,6 +72,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/logo.png
+    - assets/icons/
     - assets/images/def.jpg
     - assets/images/main_top.png
     - assets/images/main_bottom.png
