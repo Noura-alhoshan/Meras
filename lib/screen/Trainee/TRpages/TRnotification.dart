@@ -4,6 +4,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/services/navDraweradmin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
@@ -80,7 +81,7 @@ class _TRnotification extends State<TRnotification> {
                       ),
                       if (document['reqDate'] != null)
                         Text(
-                          "${reqDate.month}/${reqDate.day}/${reqDate.year} ${reqDate.hour}:${reqDate.minute} ${TimeOfDay.fromDateTime(reqDate).period == DayPeriod.am ? "AM" : "PM"}",
+                          "${reqDate.month}/${reqDate.day}/${reqDate.year} ${DateFormat.jm().format(reqDate)}",
                           style: TextStyle(height: 1.5, fontSize: 11),
                           textAlign: TextAlign.right,
                         ),

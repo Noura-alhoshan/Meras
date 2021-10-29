@@ -54,7 +54,7 @@ class _State extends State<TRcategory> {
         selectedIndex: selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
         onItemSelected: (index) async {
-          GetStorage().write("NewNotification", false);
+          if (index == 0) GetStorage().write("NewNotification", false);
           setState(() {
             selectedIndex = index;
           });
