@@ -24,14 +24,14 @@ class COlist extends StatelessWidget {
               tabs: [
                 Tab(text: 'المرفوضة'),
                 Tab(
-                  text: 'المعلقة',
+                  text: 'قيد الأنتظار',
                 ),
                 Tab(text: 'المقبولة'),
               ],
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Text('قائمة طلبات التدريب'),
+            title: Text('        قائمة طلبات التدريب'),
           ),
           body: TabBarView(
             children: [

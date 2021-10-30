@@ -43,7 +43,7 @@ class _CoachDate extends State<CoachDate> {
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('إضافة موعد جديد'
+        title: Text('          إضافة موعد جديد'
             // textAlign: TextAlign.center,
             ),
         backgroundColor: Colors.deepPurple[100],

@@ -23,6 +23,7 @@ class _RejectedRequestState extends State<RejectedRequest> {
 
   FirebaseAuth auth = FirebaseAuth.instance;
   Color red = Color(0xFFFFCDD2);
+  Color green = Color(0xFFC8E6C9);
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     final User? user = auth.currentUser;
@@ -33,7 +34,7 @@ class _RejectedRequestState extends State<RejectedRequest> {
             //    child: document['Status'] == 'P'
             //  ?
             child: Container(
-          height: 120,
+          height: 135,
           padding: EdgeInsets.symmetric(vertical: 9, horizontal: 10),
           child: Card(
             //  elevation: 4.0,
@@ -50,7 +51,7 @@ class _RejectedRequestState extends State<RejectedRequest> {
                     title: Text(' مرفوض',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                            height: -1, fontSize: 18, color: Colors.white)),
+                            height: -1, fontSize: 16, color: Colors.white)),
                   ),
                 ),
                 Container(
@@ -59,28 +60,28 @@ class _RejectedRequestState extends State<RejectedRequest> {
                   child: ListTile(
                     title: Text(
                       document['Tname'], //+ ' ' + document['Lname'],
-                      style: TextStyle(height: 2, fontSize: 15),
+                      style: TextStyle(height: 1, fontSize: 15),
                       textAlign: TextAlign.right,
                     ),
-                    // subtitle: Text(
-                    //  'التاريخ :' + document['Time'].toDate().toString().substring(1, 10),
-                    //   style: TextStyle(height: 2, fontSize: 11),
-                    //   textAlign: TextAlign.right,
-                    // ),
+                    subtitle: Text(
+                      'العمر :' + document['TAge'].toString(),
+                      style: TextStyle(height: 1, fontSize: 15),
+                      textAlign: TextAlign.right,
+                    ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                        EdgeInsets.symmetric(vertical: 4.5, horizontal: 7.0),
                     trailing: document['TGender'] == 'أنثى'
                         ? Image.asset("assets/images/TF.png")
                         : Image.asset("assets/images/TM.png"),
                     leading: ElevatedButton(
-                      child: Text(' تفاصيل الطلب  '),
+                      child: Text('التفاصيل  '),
                       onPressed: () {
                         nav(document.id);
                       },
                       style: ElevatedButton.styleFrom(
                           shape: StadiumBorder(),
                           primary: Color(0xFF6F35A5),
-                          textStyle: TextStyle(fontSize: 16)),
+                          textStyle: TextStyle(fontSize: 12)),
                     ),
                   ),
                   //
@@ -112,8 +113,10 @@ class _RejectedRequestState extends State<RejectedRequest> {
       child: SingleChildScrollView(
         child: BackgroundLO(
           child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('Requests').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('Requests')
+                  .orderBy('reqDate', descending: false)
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return Loading();
                 return ListView.builder(

@@ -39,7 +39,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          '                          تفاصيل الطلب',
+          '             تفاصيل الطلب',
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.deepPurple[100],
@@ -328,7 +328,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
         onClicked: () async {
           var baseDialog = BaseAlertDialog(
               title: "",
-              content: "هل أنت متأكد من رفض الدرس؟",
+              content: "هل أنت متأكد من رفض الطلب؟",
               yesOnPressed: () async {
                 await FirebaseFirestore.instance
                     .collection('Requests')
@@ -345,7 +345,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
                 var baseDialog = SignleBaseAlertDialog(
                   title: "",
-                  content: "تم رفض الدرس بنجاح",
+                  content: "تم رفض الطلب بنجاح",
                   yesOnPressed: () async {
                     Navigator.of(context, rootNavigator: true)
                         .pop('dialog'); //////////////////////////////////??????
@@ -374,7 +374,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
         onClicked: () async {
           var baseDialog = BaseAlertDialog(
               title: "",
-              content: "هل أنت متأكد من قبول الدرس؟",
+              content: "هل أنت متأكد من قبول الطلب؟",
               yesOnPressed: () async {
                 await FirebaseFirestore.instance
                     .collection('Requests')
@@ -385,7 +385,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
 
                 var baseDialog = SignleBaseAlertDialog(
                   title: "",
-                  content: "تم قبول الدرس بنجاح",
+                  content: "تم قبول الطلب بنجاح",
                   yesOnPressed: () async {
                     Navigator.of(context, rootNavigator: true)
                         .pop('dialog'); //////////////////////////////////??????

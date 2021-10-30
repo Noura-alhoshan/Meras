@@ -29,13 +29,15 @@ class BaseAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     String space = '                       ';
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      contentPadding: EdgeInsets.only(top: 24.0),
       content: new Text(this._content,
           style: TextStyle(
             fontSize: 15.7,
-            //fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white, //fontWeight: FontWeight.bold,
       //shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
       actions: <Widget>[
         new FlatButton(
