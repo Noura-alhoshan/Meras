@@ -46,8 +46,12 @@ class _TRnotification extends State<TRnotification> {
       reqDate = DateTime.now();
     }
 
+    TimeOfDay reqTime = TimeOfDay.fromDateTime(reqDate);
+
+    NumberFormat format = NumberFormat("00");
+
     return Container(
-      height: 100,
+      height: 120,
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       child: Card(
         elevation: 6,
@@ -65,6 +69,7 @@ class _TRnotification extends State<TRnotification> {
                 child: SizedBox.expand(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         (document['Status'] == 'P'
@@ -86,10 +91,19 @@ class _TRnotification extends State<TRnotification> {
                           style: TextStyle(height: 1.5, fontSize: 11),
                           textAlign: TextAlign.right,
                         ),
-                      Text(
-                        "${DateFormat.jm().format(reqDate)}",
-                        style: TextStyle(height: 1.5, fontSize: 11),
-                        textAlign: TextAlign.right,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            " ${reqTime.period == DayPeriod.am ? 'مساء' : 'صباحا'}",
+                            style: TextStyle(height: 1.5, fontSize: 11),
+                            textAlign: TextAlign.right,
+                          ),
+                          Text(
+                              " ${format.format(reqTime.hourOfPeriod)}:${format.format(reqTime.minute)}",
+                              style: TextStyle(height: 1.5, fontSize: 11),
+                              textAlign: TextAlign.right),
+                        ],
                       ),
                     ],
                   ),
