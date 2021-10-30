@@ -26,10 +26,10 @@ class BackgroundLO extends StatelessWidget {
           ),
           Positioned(
             top: 50,
-            left: 128,
+            left: 106,
             child: Text(
-              'لا يوجد طلبات حاليه ',
-              style: TextStyle(height: 2, fontSize: 19),
+              'لا يوجد طلبات حالية ',
+              style: TextStyle(height: 2, fontSize: 19, color: Colors.grey),
             ),
           ),
           Positioned(

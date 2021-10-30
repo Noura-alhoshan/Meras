@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meras/screen/Coach/widget/BackgroundLo.dart';
 
 import 'viewRequest.dart';
 import 'viewRequest2.dart';
@@ -109,7 +110,7 @@ class _RejectedRequestState extends State<RejectedRequest> {
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-        child: BackgroundA(
+        child: BackgroundLO(
           child: StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection('Requests').snapshots(),

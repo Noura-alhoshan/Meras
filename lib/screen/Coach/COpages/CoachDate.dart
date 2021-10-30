@@ -21,6 +21,9 @@ class _CoachDate extends State<CoachDate> {
   late TimeOfDay time;
   late DateTime dateTime;
   late DateTime day;
+  late bool S = false;
+  late String date1;
+
   //static const IconData clear_rounded =
   //    IconData(0xf645, fontFamily: 'MaterialIcons');
 
@@ -115,7 +118,7 @@ class _CoachDate extends State<CoachDate> {
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
       child: Container(
-        height: 170,
+        height: 160,
         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
 
         ///
@@ -130,9 +133,10 @@ class _CoachDate extends State<CoachDate> {
                     color: Colors.deepPurple[100]),
                 child: ListTile(
                   title: Text(
+                      //  istrue(document['DateTime'].toString()) + i need to do this one
                       'يوم ' + getArabicdays(document['DateTime'].toString()),
                       textAlign: TextAlign.right,
-                      style: TextStyle(height: 1.5, fontSize: 19)),
+                      style: TextStyle(height: 1.5, fontSize: 15)),
                   //subtitle: Text(subheading),
                   leading: IconButton(
                     icon: Icon(Icons
@@ -196,7 +200,7 @@ class _CoachDate extends State<CoachDate> {
                               '  الوقت: ' +
                           document['DateTime'].toString().substring(11, 16) +
                           ' مساءً ',
-                  style: TextStyle(height: 1.5, fontSize: 19),
+                  style: TextStyle(height: 1.5, fontSize: 14),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -223,6 +227,12 @@ class _CoachDate extends State<CoachDate> {
         },
       );
 
+  Future<void> istrue(String a) async {
+    if (date1 == a) {
+      S = true;
+    }
+  }
+
   ////methods  METHOD1: deleteDate, METHOD2:addDate, METHOD3:pickDateTime ,METHOD4:pickTime, METHOD5:pickDate, METHOD6:getText, METHOD7:getday, METHOD8:getArabicdays
   /// method 1
   Future<void> deleteDate(String a) {
@@ -240,10 +250,10 @@ class _CoachDate extends State<CoachDate> {
   Future<void> addDate() {
     final User? user = auth.currentUser;
     final uid = user!.uid;
-
+    date1 = getText() + getday();
     return AvaDates.doc(uid)
         .collection("Dates")
-        .add({'DateTime': getText() + getday()})
+        .add({'DateTime': date1})
         .then((value) => print("time added"))
         .catchError((error) => print("Failed to add time: $error"));
   }

@@ -39,7 +39,7 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          '                          معلومات الدرس',
+          '                          تفاصيل الطلب',
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.deepPurple[100],
