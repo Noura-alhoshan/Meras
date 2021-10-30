@@ -28,6 +28,7 @@ class _RejectedLessonsState extends State<RejectedLessons> {
   FirebaseAuth auth1 = FirebaseAuth.instance;
   Color red = Color(0xFFFFCDD2);
   Color green = Color(0xFFC8E6C9);
+  final ScrollController _scrollController = ScrollController();
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     final DateTime dd2 = document['reqDate'].toDate();

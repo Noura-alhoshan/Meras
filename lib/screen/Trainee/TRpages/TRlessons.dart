@@ -15,7 +15,7 @@ class TRlessons extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          //extendBodyBehindAppBar: true,
+          extendBodyBehindAppBar: true,
           drawer: NavDrawer(),
           appBar: AppBar(
             backgroundColor: Colors.deepPurple[100],
