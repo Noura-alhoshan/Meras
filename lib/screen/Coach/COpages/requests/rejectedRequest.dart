@@ -5,8 +5,8 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/screen/Coach/widget/BackgroundLo.dart';
 
-import 'viewRequest.dart';
-import 'viewRequest2.dart';
+import '../viewRequest.dart';
+import '../viewRequest2.dart';
 
 class RejectedRequest extends StatefulWidget {
   //const RejectedLessons({ Key? key }) : super(key: key);

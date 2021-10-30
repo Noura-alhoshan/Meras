@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Coach/widget/BackgroundLo.dart';
 
-import 'viewRequest.dart';
+import '../viewRequest.dart';
 
 class PendingRequest extends StatefulWidget {
   //const PendingLessons({ Key? key }) : super(key: key);
