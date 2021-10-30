@@ -13,19 +13,19 @@ import 'package:url_launcher/url_launcher.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 //final FirebaseFirestore fuser = FirebaseFirestore.instance;
 
-class ViewLessonRequest extends StatefulWidget {
+class ViewLessonRequest2 extends StatefulWidget {
   final String id;
-  ViewLessonRequest(this.id);
+  ViewLessonRequest2(this.id);
 
   @override
-  _ADcoachProfileScreenState createState() => _ADcoachProfileScreenState();
+  _ADcoachProfileScreen2State createState() => _ADcoachProfileScreen2State();
 }
 
 Color red = Color(0xFFFFCDD2);
 Color green = Color(0xFFC8E6C9);
 Color opurple = Color(0xFF311B92);
 
-class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
+class _ADcoachProfileScreen2State extends State<ViewLessonRequest2> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -297,17 +297,6 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                         SizedBox(
                           height: 24,
                         ),
-                        Row(children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 5)),
-                          Center(child: Accept(document)),
-                          SizedBox(width: 24),
-                          Center(
-                            child: Reject(document, document['Cid'],
-                                document['DateTime']),
-                          ),
-                        ]),
                       ]),
                     ),
                   ]),
@@ -319,98 +308,6 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
         ),
       ),
     );
-  }
-
-  Widget Reject(DocumentSnapshot document, String cid, String apdate) =>
-      ButtonWidget(
-        colorr: red,
-        text: 'رفض',
-        onClicked: () async {
-          var baseDialog = BaseAlertDialog(
-              title: "",
-              content: "هل أنت متأكد من رفض الطلب؟",
-              yesOnPressed: () async {
-                await FirebaseFirestore.instance
-                    .collection('Requests')
-                    .doc(widget.id)
-                    .update({'Status': 'D'});
-                Map<String, dynamic> DataDemo = {"DateTime": apdate};
-                FirebaseFirestore.instance
-                    .collection('Coach')
-                    .doc(cid)
-                    .collection('Dates')
-                    .doc()
-                    .set(DataDemo);
-
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-                var baseDialog = SignleBaseAlertDialog(
-                  title: "",
-                  content: "تم رفض الطلب بنجاح",
-                  yesOnPressed: () async {
-                    Navigator.of(context, rootNavigator: true)
-                        .pop('dialog'); //////////////////////////////////??????
-                    nav1();
-                  },
-                  yes: "إغلاق",
-                  //no: "لا"
-                );
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => baseDialog);
-              },
-              noOnPressed: () {
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              yes: "نعم",
-              no: "لا");
-          showDialog(
-              context: context, builder: (BuildContext context) => baseDialog);
-        },
-      );
-
-  Widget Accept(DocumentSnapshot document) => ButtonWidget(
-        colorr: green,
-        text: 'قبول',
-        onClicked: () async {
-          var baseDialog = BaseAlertDialog(
-              title: "",
-              content: "هل أنت متأكد من قبول الطلب؟",
-              yesOnPressed: () async {
-                await FirebaseFirestore.instance
-                    .collection('Requests')
-                    .doc(widget.id)
-                    .update({'Status': 'A'});
-
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-
-                var baseDialog = SignleBaseAlertDialog(
-                  title: "",
-                  content: "تم قبول الطلب بنجاح",
-                  yesOnPressed: () async {
-                    Navigator.of(context, rootNavigator: true)
-                        .pop('dialog'); //////////////////////////////////??????
-                    nav1();
-                  },
-                  yes: "إغلاق",
-                );
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        baseDialog); //////////////////////////////////??????
-                // nav1();
-              },
-              noOnPressed: () {
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              yes: "نعم",
-              no: "لا");
-          showDialog(
-              context: context, builder: (BuildContext context) => baseDialog);
-        },
-      );
-
-  void nav1() async {
-    Navigator.of(context).pop();
   }
 
   String getArabicdays(String a) {
@@ -442,5 +339,3 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
     //     .pop('dialog'); ////////////////////////// to be ubdated
     // Navigator.of(context, rootNavigator: true)
     //                 .pop('dialog');
-
-    ///meeeeeeeeeeeeeee 
