@@ -227,10 +227,30 @@ class _CoachDate extends State<CoachDate> {
         },
       );
 
-  Future<void> istrue(String a) async {
-    if (date1 == a) {
-      S = true;
+  Future<bool> isTrue() async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    //  return (date1 == a);
+    var count = 0;
+    FirebaseFirestore.instance
+        .collection('Coach')
+        .doc(uid)
+        .collection('Dates')
+        .get()
+        .then((querySnapshot) async {
+      //async
+
+      querySnapshot.docs.forEach((value) {
+        if (value.data()['DateTime'].toString() == date1) {
+          count = count + 1;
+        }
+      });
+    });
+    if (count == 0) {
+      return true;
     }
+    return false;
   }
 
   ////methods  METHOD1: deleteDate, METHOD2:addDate, METHOD3:pickDateTime ,METHOD4:pickTime, METHOD5:pickDate, METHOD6:getText, METHOD7:getday, METHOD8:getArabicdays
@@ -251,6 +271,7 @@ class _CoachDate extends State<CoachDate> {
     final User? user = auth.currentUser;
     final uid = user!.uid;
     date1 = getText() + getday();
+    print(isTrue()); ///////////////////////////////////////
     return AvaDates.doc(uid)
         .collection("Dates")
         .add({'DateTime': date1})
@@ -283,6 +304,7 @@ class _CoachDate extends State<CoachDate> {
         title: "",
         content: "هل أنت متأكد من إضافة الموعد؟",
         yesOnPressed: () async {
+          date1 = getText() + getday();
           print(getText() + getday());
           addDate();
           Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -435,3 +457,39 @@ class _CoachDate extends State<CoachDate> {
 
   }*/ // what if i  call another page ?
 }
+/*
+  Widget _bbuild(
+    BuildContext context,
+  ) {
+    //final Puser = Provider.of<MyUser?>(context);
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
+    dynamic userid = user!.uid;
+
+    return FutureBuilder<List<bool>>(
+        future: Future.wait([
+          isTrue(),
+        ]),
+        builder: (
+          context,
+          // List of booleans(results of all futures above)
+          AsyncSnapshot<List<bool>> snapshot,
+        ) {
+          // Check hasData once for all futures.
+          if (!snapshot.hasData) {
+            return Loading();
+          }
+
+          if (snapshot.data![0])
+            return addDate();
+          else
+            return null;
+          // Access first Future's data:
+          // snapshot.data[0]
+
+          // Access second Future's data:
+          // snapshot.data[1]
+        });
+  }
+}
+*/
