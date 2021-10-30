@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
@@ -33,6 +34,8 @@ class _CoachDate extends State<CoachDate> {
     final uid = user!.uid;
 
     return Scaffold(
+      extendBody: true,
+
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
@@ -116,8 +119,7 @@ class _CoachDate extends State<CoachDate> {
                                 .collection('Dates')
                                 .snapshots(),
                             builder: (context, snapshot) {
-                              if (!snapshot.hasData)
-                                return const Text('loading 7 ...');
+                              if (!snapshot.hasData) return Loading();
                               return ListView.builder(
                                 physics:
                                     const NeverScrollableScrollPhysics(), //<--here
@@ -154,7 +156,8 @@ class _CoachDate extends State<CoachDate> {
             children: [
               Container(
                 decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20.0)),
                     color: Colors.deepPurple[100]),
                 child: ListTile(
                   title: Text(
@@ -222,7 +225,7 @@ class _CoachDate extends State<CoachDate> {
 
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: Colors.white, width: 1)),
+              borderSide: BorderSide(color: Colors.transparent, width: 1)),
         ),
 
         ///

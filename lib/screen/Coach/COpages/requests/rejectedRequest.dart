@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'viewRequest.dart';
+import 'viewRequest2.dart';
 
 class RejectedRequest extends StatefulWidget {
   //const RejectedLessons({ Key? key }) : super(key: key);
@@ -16,182 +20,101 @@ class _RejectedRequestState extends State<RejectedRequest> {
     super.initState();
   }
 
-  FirebaseAuth auth1 = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  Color red = Color(0xFFFFCDD2);
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-    return SingleChildScrollView(
-      child: (document['Tid'] == auth1.currentUser!.uid &&
-              document['Status'] == 'D')
-          ? Container(
-              height: 225,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Card(
-                child: ListTile(
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    if (document['Cid'] == uid) {
+      if (document['Status'] == 'D') {
+        return SingleChildScrollView(
+            //    child: document['Status'] == 'P'
+            //  ?
+            child: Container(
+          height: 120,
+          padding: EdgeInsets.symmetric(vertical: 9, horizontal: 10),
+          child: Card(
+            //  elevation: 4.0,
+            child: Column(
+              children: [
+                Container(
+                  height: 25,
+                  decoration: new BoxDecoration(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20.0)),
+                      //borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Colors.redAccent[100]),
+                  child: ListTile(
+                    title: Text(' مرفوض',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            height: -1, fontSize: 18, color: Colors.white)),
+                  ),
+                ),
+                Container(
+                  // padding: EdgeInsets.all(16.0),
+
+                  child: ListTile(
                     title: Text(
-                      'المدرب: ' +
-                          document['CoachName'] +
-                          ' ' +
-                          document['CoachName2'],
+                      document['Tname'], //+ ' ' + document['Lname'],
                       style: TextStyle(height: 2, fontSize: 15),
                       textAlign: TextAlign.right,
                     ),
-                    subtitle: Column(children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'الحي:' + ' ' + document['Neighborhood'],
-                          style: TextStyle(height: 2, fontSize: 11),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // Text(
-                      //   'الحي:' + ' ' + document['Neighborhood'],
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'تاريخ الطلب:' + ' ' + document['reqDate'],
-                          style: TextStyle(height: 2, fontSize: 11),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // Text(
-                      //   'تاريخ الطلب:' + ' ' + document['reqDate'],
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'تاريخ التدريب :' +
-                              ' ' +
-                              document['DateTime'].toString().substring(0, 10),
-                          style: TextStyle(height: 2, fontSize: 11),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // Text(
-                      //   'تاريخ التدريب :' +
-                      //       ' ' +
-                      //       document['DateTime'].toString().substring(0, 10),
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          document['DateTime'].toString().substring(
-                                  19, document['DateTime'].toString().length) +
-                              ' ' +
-                              ': يوم التدريب',
-                          style: TextStyle(height: 2, fontSize: 11),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // Text(
-                      //   document['DateTime'].toString().substring(
-                      //           19, document['DateTime'].toString().length) +
-                      //       ' ' +
-                      //       ': يوم التدريب',
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          document['DateTime'].toString().substring(17, 19) +
-                              ' ' +
-                              'الوقت :' +
-                              ' ' +
-                              document['DateTime'].toString().substring(11, 17),
-                          style: TextStyle(height: 2, fontSize: 11),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // Text(
-                      //   document['DateTime'].toString().substring(17, 19) +
-                      //       ' ' +
-                      //       'الوقت :' +
-                      //       ' ' +
-                      //       document['DateTime'].toString().substring(11, 17),
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          'رقم جوال المدرب :' + ' ' + document['CoachPhone'],
-                          style: TextStyle(height: 2, fontSize: 11),
-                          textAlign: TextAlign.right,
-                          // style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // Text(
-                      //   'رقم جوال المدرب :' + ' ' + document['CoachPhone'],
-                      //   style: TextStyle(height: 2, fontSize: 11),
-                      //   textAlign: TextAlign.right,
-                      //   // style: TextStyle(fontWeight: FontWeight.bold),
-                      // ),
-                      //trailing: Image.asset("assets/images/req.png")
-                    ]),
-                    trailing: Image.asset("assets/images/rej2.png")
-                    //: Image.asset("assets/images/driver-male.jpg"),
-                    // leading: ElevatedButton(
-                    //   child: Text('معلومات المدرب   '),
-                    //   onPressed: () {
-                    //     //nav(document.id); //for next sprint
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //       shape: StadiumBorder(),
-                    //       primary: Color(0xFF6F35A5),
-                    //       textStyle: TextStyle(fontSize: 16)),
+                    // subtitle: Text(
+                    //  'التاريخ :' + document['Time'].toDate().toString().substring(1, 10),
+                    //   style: TextStyle(height: 2, fontSize: 11),
+                    //   textAlign: TextAlign.right,
                     // ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                    trailing: document['TGender'] == 'أنثى'
+                        ? Image.asset("assets/images/TF.png")
+                        : Image.asset("assets/images/TM.png"),
+                    leading: ElevatedButton(
+                      child: Text(' تفاصيل الطلب  '),
+                      onPressed: () {
+                        nav(document.id);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          primary: Color(0xFF6F35A5),
+                          textStyle: TextStyle(fontSize: 16)),
                     ),
-                elevation: 6,
-                shadowColor: Colors.deepPurple[500],
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(18),
-                    borderSide: BorderSide(color: Colors.white, width: 1)),
-              ),
-            )
-          : null,
+                  ),
+                  //
+                ),
+              ],
+            ),
+            elevation: 6,
+            shadowColor: Colors.deepPurple[500],
+
+            shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide(color: Colors.transparent, width: 1)),
+          ),
+        )
+            // : null,
+            );
+      }
+    }
+    return SingleChildScrollView(
+      //    child: document['Status'] == 'P'
+      //  ?
+      child: Container(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Scaffold(
-        //   extendBodyBehindAppBar: true,
-        //drawer: NavDrawer(),
-        // appBar: AppBar(
-        //   title: Text(
-        //     'قائمة المدربين المتاحين',
-        //     textDirection: TextDirection.rtl,
-        //   ),
-        //   backgroundColor: Colors.deepPurple[100],
-        // ),
-        // body:
-        Container(
+    return Container(
       child: SingleChildScrollView(
         child: BackgroundA(
           child: StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection('Requests').snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('loading 7 ...');
+                if (!snapshot.hasData) return Loading();
                 return ListView.builder(
                   //physics: const NeverScrollableScrollPhysics(), //<--here
                   //controller: _scrollController,
@@ -205,5 +128,14 @@ class _RejectedRequestState extends State<RejectedRequest> {
       ),
     );
     //);
+  }
+
+  void nav(String icd) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return ViewLessonRequest2(icd);
+      }),
+    );
   }
 }
