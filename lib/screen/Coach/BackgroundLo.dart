@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+
+class BackgroundLO extends StatelessWidget {
+  final Widget child;
+  const BackgroundLO({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      width: double.infinity,
+      height: size.height,
+      child: Stack(
+        // alignment: Alignment.center,
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            left: 0,
+            child: Image.asset(
+              "assets/images/main_top.png",
+              width: size.width * 0.35,
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 106,
+            child: Text(
+              'لا يوجد طلبات حالية ',
+              style: TextStyle(height: 2, fontSize: 19, color: Colors.grey),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Image.asset(
+              "assets/images/login_bottom.png",
+              width: size.width * 0.8,
+            ),
+          ),
+          child,
+        ],
+      ),
+    );
+  }
+}
