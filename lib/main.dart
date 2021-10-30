@@ -7,7 +7,6 @@ import 'package:meras/Controllers/NotificationsHandler.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/ADpages/ADlist.dart';
 import 'package:meras/screen/Coach/COcategory.dart';
-import 'package:meras/screen/Coach/viewRequest.dart';
 import 'package:meras/screen/Trainee/TRcategory.dart';
 import 'package:meras/screen/Trainee/TRpages/DraftF.dart';
 import 'package:meras/screen/Trainee/TRpages/SendRequest.dart';
@@ -71,18 +70,19 @@ class MyApp extends StatelessWidget {
       initialData: null,
       value: AuthService().user,
       child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        //title: 'Flutter Auth',
-        theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        home: TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
-        //ViewLessonRequest(
-        //"BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
+          debugShowCheckedModeBanner: false,
+          //title: 'Flutter Auth',
+          theme: ThemeData(
+            primaryColor: kPrimaryColor,
+            scaffoldBackgroundColor: Colors.white,
+          ),
+          home:
+              SignIn() //TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+          //ViewLessonRequest(
+          //"BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
-        ///wrapper
-      ),
+          ///wrapper
+          ),
     );
   }
 }

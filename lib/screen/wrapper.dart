@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
 import 'Admin/ADcategory.dart';
 import 'Admin/ADpages/ADhome.dart';
+import 'Coach/COcategory.dart';
 import 'Trainee/TRpages/TRhome.dart';
 import 'Verify.dart';
 import 'home/Chome.dart';
@@ -159,12 +160,12 @@ class Wrapper extends StatelessWidget {
 
           if (snapshot.data![0])
             return TRcategory(
-              traineeId: userid,
+              traineeId: '',
             );
           else if (snapshot.data![1])
             return ADcategory();
           else if (snapshot.data![2])
-            return Chome();
+            return COcategory();
           else if (snapshot.data![3])
             return notApproaved();
           else
@@ -177,3 +178,40 @@ class Wrapper extends StatelessWidget {
         });
   }
 }
+
+//  class Wrapper extends StatelessWidget {
+//   const Wrapper({Key? key}) : super(key: key);
+
+//   @override
+//  Widget build(BuildContext context)  {
+//     final user = Provider.of<MyUser?>(context); // i added ? even tho there was no error
+//     //print(user);//////////////////////////////////////////////////
+//     FirebaseAuth auth = FirebaseAuth.instance;
+//     User? getid = auth.currentUser;
+//     dynamic userid = getid?.uid;
+// bool yesno=true;
+//      if (user == null) {
+//        print ('im here in null');
+//       return authenticate(); //homescreen
+//      }
+
+// //     if (getid!.emailVerified == false){
+// //       print ('im here in not');
+// //       return Verify();
+// //  }
+
+//   else
+//         if (isTrainee(userid))
+//         return Thome();
+
+//   else
+//         if (isAdmin(userid))
+//         return home();
+
+//   else
+//     print ('im here in else home');
+//       return Chome();
+//   }
+//  }
+
+// // Future.delayed(Duration(seconds: 1),isTrainee () {

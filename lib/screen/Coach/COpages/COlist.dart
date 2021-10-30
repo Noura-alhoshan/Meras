@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
 import '../../../constants.dart';
-import 'requests/PendingRequest.dart';
-import 'requests/acceptedRequest.dart';
-import 'requests/rejectedRequest.dart';
+import 'PendingRequest.dart';
+import 'acceptedRequest.dart';
+import 'rejectedRequest.dart';
 
 class COlist extends StatelessWidget {
   @override

@@ -7,9 +7,10 @@ import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
-import 'package:meras/screen/Coach/widget/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
+
+import '../BackgroundC.dart';
 
 class CoachDate extends StatefulWidget {
   @override

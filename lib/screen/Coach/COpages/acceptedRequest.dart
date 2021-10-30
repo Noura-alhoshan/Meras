@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meras/screen/Coach/widget/BackgroundLo.dart';
 
-import '../viewRequest.dart';
-import '../viewRequest2.dart';
+import '../BackgroundLo.dart';
+import 'viewRequest2.dart';
 
 class AcceptedRequest extends StatefulWidget {
   //const AcceptedLessons({ Key? key }) : super(key: key);

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
-import 'package:meras/components/SingleBaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo2.dart';
