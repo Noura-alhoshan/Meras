@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
 import 'package:meras/screen/home/navDrawer.dart';
+import 'BackgroundLo2.dart';
+
+import 'DraftF.dart';
 
 class TRexploreScreen extends StatefulWidget {
   @override
@@ -41,7 +45,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                   leading: ElevatedButton(
                     child: Text('معلومات المدرب   '),
                     onPressed: () {
-                      //nav(document.id); //for next sprint
+                      nav(document.id); //for next sprint
                     },
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
@@ -62,18 +66,19 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
+      // extendBody: true,
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text(
-          'قائمة المدربين المتاحين',
+          'قائمة المدربين المتاحين          ',
           textDirection: TextDirection.rtl,
         ),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
         child: SingleChildScrollView(
-          child: BackgroundA(
+          child: BackgroundLO22(
             child: StreamBuilder<QuerySnapshot>(
                 stream:
                     FirebaseFirestore.instance.collection('Coach').snapshots(),
@@ -94,12 +99,13 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     );
   }
 
-  /* void nav(String icd) async {
+  void nav(String icd) async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return TestScreen(icd);
+        return CoachDate(icd);
+        //return RequestLessonPage(icd);
       }),
     );
-  }*/ //for next sprint
+  }
 }
