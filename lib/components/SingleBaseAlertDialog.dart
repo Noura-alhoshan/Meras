@@ -34,7 +34,7 @@ class SignleBaseAlertDialog extends StatelessWidget {
       content: new Text(this._content,
           style: TextStyle(
             fontSize: 15.7,
-            fontWeight: FontWeight.bold,
+            //fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center),
       backgroundColor: Colors.white,
