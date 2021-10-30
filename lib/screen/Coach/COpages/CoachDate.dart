@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
@@ -25,6 +26,7 @@ class _CoachDate extends State<CoachDate> {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
+  final ScrollController _scrollController = ScrollController();
 
   ///first null?
 
@@ -34,8 +36,7 @@ class _CoachDate extends State<CoachDate> {
     final uid = user!.uid;
 
     return Scaffold(
-      extendBody: true,
-
+      //extendBody: true,
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
@@ -44,96 +45,64 @@ class _CoachDate extends State<CoachDate> {
             ),
         backgroundColor: Colors.deepPurple[100],
       ),
-      /*
       body: Container(
-        child: Center(
-          child: Date(),
-        ),
-      ), */
+        child: SingleChildScrollView(
+          child: BackgroundA(
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 20)),
 
-      //   /*
-      body: Container(
-        child: BackgroundA(
-          child: SafeArea(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 20)),
-
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
-                Date(),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
-                // buildCard(),
-                Text(
-                  'المواعيد المتاحة خلال الاسبوع القادم',
-                  style: TextStyle(height: 2, fontSize: 18),
-                  textAlign: TextAlign.right,
-                ),
-                //Padding(
-                //     padding:
-                //          EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
-                /*Column(children: <Widget>[
-        Expanded(
-          /*  child: Center(
-            child: Container(
-              child: SingleChildScrollView(
-                // child: BackgroundA(
-                child: Date(),
-              ),
-            ),
-          ),
-       */ // ),
-          child: Container(
-            child: SingleChildScrollView(
-              child: BackgroundA(
-                child: Row(children: <Widget>[
                   Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
-                  Center(child: Date()),
-                  SizedBox(width: 24),
-                  Center(child: Date()),
-                ]
-                    // child: Date(),
-                    ),
-              ),
-            ),
-          ),
-        ),
-                             
-        // Container(height: 40, color: Colors.grey),
+                  Date(),
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
+                  // buildCard(),
+                  Text(
+                    'المواعيد المتاحة خلال الاسبوع القادم',
+                    style: TextStyle(height: 2, fontSize: 18),
+                    textAlign: TextAlign.right,
+                  ),
 
-        */
+                  Expanded(
+                    child: Container(
+                      child: SingleChildScrollView(
+                        child: BackgroundC(
+                          child: Scrollbar(
+                            isAlwaysShown: true,
+                            controller: _scrollController,
+                            child: StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection('Coach')
+                                    .doc(uid)
+                                    .collection('Dates')
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) return Loading();
+                                  return ListView.builder(
+                                    controller: _scrollController,
 
-                Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      child: BackgroundC(
-                        child: StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection('Coach')
-                                .doc(uid)
-                                .collection('Dates')
-                                .snapshots(),
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData) return Loading();
-                              return ListView.builder(
-                                physics:
-                                    const NeverScrollableScrollPhysics(), //<--here
+                                    //      physics:
+                                    //          const NeverScrollableScrollPhysics(), //<--here
 
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (context, index) => _buildListItem(
-                                    context, (snapshot.data!).docs[index]),
-                              );
-                            }),
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) =>
+                                        _buildListItem(context,
+                                            (snapshot.data!).docs[index]),
+                                  );
+                                }),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -179,6 +148,19 @@ class _CoachDate extends State<CoachDate> {
 
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');
+                            var baseDialog = SignleBaseAlertDialog(
+                              title: "",
+                              content: "تم حذف الدرس بنجاح",
+                              yesOnPressed: () async {
+                                Navigator.of(context, rootNavigator: true).pop(
+                                    'dialog'); //////////////////////////////////??????
+                                //   nav1();
+                              },
+                              yes: "إغلاق",
+                            );
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => baseDialog);
                           },
                           noOnPressed: () {
                             Navigator.of(context, rootNavigator: true)
@@ -194,8 +176,8 @@ class _CoachDate extends State<CoachDate> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(16.0),
                 alignment: Alignment.centerRight,
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   document['DateTime'].toString().substring(17, 19) == 'AM'
                       ? 'التاريخ:' +
@@ -266,6 +248,10 @@ class _CoachDate extends State<CoachDate> {
         .catchError((error) => print("Failed to add time: $error"));
   }
 
+  void nav1() async {
+    Navigator.of(context).pop();
+  }
+
   /// method 3
   Future pickDateTime(BuildContext context) async {
     final date = await pickDate(context);
@@ -282,8 +268,37 @@ class _CoachDate extends State<CoachDate> {
         time.minute,
       );
     });
-    print(getText() + getday());
-    addDate();
+
+    var baseDialog = BaseAlertDialog(
+        title: "",
+        content: "هل أنت متأكد من إضافة الموعد؟",
+        yesOnPressed: () async {
+          print(getText() + getday());
+          addDate();
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+
+          var baseDialog = SignleBaseAlertDialog(
+            title: "",
+            content: "تم إضافة الموعد بنجاح",
+            yesOnPressed: () async {
+              Navigator.of(context, rootNavigator: true)
+                  .pop('dialog'); //////////////////////////////////??????
+              // nav1();
+            },
+            yes: "إغلاق",
+          );
+          showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  baseDialog); //////////////////////////////////??????
+          // nav1();
+        },
+        noOnPressed: () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+        yes: "نعم",
+        no: "لا");
+    showDialog(context: context, builder: (BuildContext context) => baseDialog);
   }
 
   /// method 4
@@ -382,4 +397,31 @@ class _CoachDate extends State<CoachDate> {
           ],
         ));
   }
+/*
+  Future<bool> doesNameAlreadyExist(String name) async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    final Stream<QuerySnapshot> result = await FirebaseFirestore.instance
+        .collection('Coach')
+        .doc(uid)
+        .collection('Dates')
+        .where('DateTime', isEqualTo: name)
+        .limit(1)
+        .snapshots();
+
+    // final List<DocumentSnapshot> documents = result.;
+    if (result.isEmpty == true) {
+      return Future<bool>.value(true);
+    } else {
+      return Future<bool>.value(false);
+    }
+    //documents.length == 1;
+  }
+  @override
+  Widget buildd(BuildContext context) {
+   final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+
+  }*/ // what if i  call another page ?
 }

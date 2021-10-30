@@ -15,6 +15,7 @@ class COlist extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
+          extendBody: true,
           //extendBodyBehindAppBar: true,
           drawer: NavDrawer(),
           appBar: AppBar(
@@ -37,6 +38,7 @@ class COlist extends StatelessWidget {
               // Text('المرفوضة'),
               // Text('المعلقة'),
               // Text('المقبولة'),
+
               new RejectedRequest(),
               new PendingRequest(),
               new AcceptedRequest(),
