@@ -9,6 +9,7 @@ import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:meras/screen/Coach/widget/BackgroundC.dart';
+import 'package:meras/screen/Trainee/TRpages/BackgroundC2.dart';
 //import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
@@ -44,7 +45,7 @@ class _CoachDate extends State<CoachDate> {
       extendBodyBehindAppBar: true,
       //drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('حجز درس جديد'
+        title: Text('               حجز موعد جديد'
             // textAlign: TextAlign.center,
             ),
         backgroundColor: Colors.deepPurple[100],
@@ -288,7 +289,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
             //iterate over the subcollection
             Container(
               child: SingleChildScrollView(
-                child: BackgroundC(
+                child: BackgroundC2(
                   child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
                           .collection('Coach')
@@ -345,13 +346,14 @@ Widget _buildListItem(
           children: [
             Container(
               decoration: new BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(20.0)),
                   color: Colors.deepPurple[100]),
               child: ListTile(
                 title: Text(
                     'يوم ' + getArabicdays(document['DateTime'].toString()),
                     textAlign: TextAlign.right,
-                    style: TextStyle(height: 1.5, fontSize: 15)),
+                    style: TextStyle(height: 1.5, fontSize: 16)),
                 //subtitle: Text(subheading),
                 leading: ElevatedButton(
                     child: Text('حجز'),
@@ -418,7 +420,7 @@ Widget _buildListItem(
                             '  الوقت: ' +
                         document['DateTime'].toString().substring(11, 16) +
                         ' مساءً ',
-                style: TextStyle(height: 1.5, fontSize: 14),
+                style: TextStyle(height: 1.5, fontSize: 14.8),
                 textAlign: TextAlign.right,
               ),
             ),
@@ -428,7 +430,7 @@ Widget _buildListItem(
         shadowColor: Colors.deepPurple[500],
         shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide(color: Colors.white, width: 1)),
+            borderSide: BorderSide(color: Colors.transparent, width: 1)),
       ),
 
       ///

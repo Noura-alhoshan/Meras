@@ -30,7 +30,7 @@ class TRlessons extends StatelessWidget {
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Text('قائمة الدروس'),
+            title: Text('                 قائمة الدروس'),
           ),
           body: TabBarView(
             children: [

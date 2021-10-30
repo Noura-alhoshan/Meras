@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
 import 'package:meras/screen/home/navDrawer.dart';
+import 'BackgroundLo2.dart';
 
 import 'DraftF.dart';
 
@@ -41,7 +43,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                       ? Image.asset("assets/images/Female.png")
                       : Image.asset("assets/images/driver-male.jpg"),
                   leading: ElevatedButton(
-                    child: Text('تقديم طلب تدريب'),
+                    child: Text('معلومات المدرب   '),
                     onPressed: () {
                       nav(document.id); //for next sprint
                     },
@@ -64,18 +66,19 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
+      // extendBody: true,
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text(
-          'قائمة المدربين المتاحين',
+          'قائمة المدربين المتاحين          ',
           textDirection: TextDirection.rtl,
         ),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
         child: SingleChildScrollView(
-          child: BackgroundA(
+          child: BackgroundLO22(
             child: StreamBuilder<QuerySnapshot>(
                 stream:
                     FirebaseFirestore.instance.collection('Coach').snapshots(),
