@@ -1,8 +1,9 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'COpages/COschedule.dart';
+import 'package:meras/screen/Coach/COpages/COlist.dart';
 import 'COpages/COhome.dart';
 import 'COpages/COlist.dart';
+import 'COpages/CoachDate.dart';
 
 //import 'package:meras_sprint1/TRpages/TRhome.dart';
 
@@ -20,7 +21,7 @@ class _State extends State<COcategory> {
       body: selectedIndex == 0
           ? COlist()
           : selectedIndex == 1
-              ? COschedule()
+              ? CoachDate()
               : selectedIndex == 2
                   ? COhome()
                   : COhome(),
