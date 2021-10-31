@@ -143,7 +143,7 @@ class _TRnotification extends State<TRnotification> {
             },
           )
         ],*/
-        title: Text('التنبيهات'),
+        title: Center(child: Text('التنبيهات')),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Container(
