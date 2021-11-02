@@ -27,15 +27,14 @@ class _AcceptedLessonsState extends State<AcceptedLessons> {
   FirebaseAuth auth1 = FirebaseAuth.instance;
   Color red = Color(0xFFFFCDD2);
   Color green = Color(0xFFC8E6C9);
-
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     final DateTime dd2 = document['reqDate'].toDate();
     final String reqDate = DateFormat('MM/dd/yyyy').format(dd2);
     final String ph = document['CoachPhone'];
     // Image im = new Image.network(
-    //   document['URL'],
-    //   height: 230.0,
-    //   width: 250.0,
+    // document['URL'],
+    // height: 230.0,
+    // width: 250.0,
     // );
     return SingleChildScrollView(
         child: (document['Tid'] == auth1.currentUser!.uid &&
@@ -60,7 +59,7 @@ class _AcceptedLessonsState extends State<AcceptedLessons> {
                               style: TextStyle(
                                   height: -1,
                                   fontSize: 16,
-                                  color: Colors.white)),
+                                  color: Colors.green[900])),
                         ),
                       ),
                       Container(

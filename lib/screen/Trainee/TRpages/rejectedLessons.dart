@@ -55,7 +55,9 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                         title: Text(' مرفوض/ملغى',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                                height: -1, fontSize: 16, color: Colors.white)),
+                                height: -1,
+                                fontSize: 16,
+                                color: Colors.red[900])),
                       ),
                     ),
                     Container(
@@ -113,14 +115,14 @@ class _RejectedLessonsState extends State<RejectedLessons> {
   Widget build(BuildContext context) {
     return
         // Scaffold(
-        //   extendBodyBehindAppBar: true,
+        // extendBodyBehindAppBar: true,
         //drawer: NavDrawer(),
         // appBar: AppBar(
-        //   title: Text(
-        //     'قائمة المدربين المتاحين',
-        //     textDirection: TextDirection.rtl,
-        //   ),
-        //   backgroundColor: Colors.deepPurple[100],
+        // title: Text(
+        // 'قائمة المدربين المتاحين',
+        // textDirection: TextDirection.rtl,
+        // ),
+        // backgroundColor: Colors.deepPurple[100],
         // ),
         // body:
         Container(

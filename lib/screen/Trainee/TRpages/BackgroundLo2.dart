@@ -25,10 +25,10 @@ class BackgroundLO2 extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 50,
+            top: 195,
             left: 106,
             child: Text(
-              '       لا يوجد طلبات حالية                     ',
+              ' لا يوجد طلبات حالية ',
               style: TextStyle(height: 2, fontSize: 19, color: Colors.grey),
             ),
           ),

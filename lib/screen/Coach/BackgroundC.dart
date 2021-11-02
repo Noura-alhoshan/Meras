@@ -25,6 +25,14 @@ class BackgroundC extends StatelessWidget {
           //   ),
           //   ),
           Positioned(
+            top: 50,
+            left: 106,
+            child: Text(
+              'لا يوجد مواعيد متاحة ',
+              style: TextStyle(height: 2, fontSize: 19, color: Colors.grey),
+            ),
+          ),
+          Positioned(
             bottom: 0,
             right: 0,
             child: Image.asset(

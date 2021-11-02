@@ -70,19 +70,17 @@ class MyApp extends StatelessWidget {
       initialData: null,
       value: AuthService().user,
       child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          //title: 'Flutter Auth',
-          theme: ThemeData(
-            primaryColor: kPrimaryColor,
-            scaffoldBackgroundColor: Colors.white,
-          ),
-          home:
-              SignIn() //TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
-          //ViewLessonRequest(
-          //"BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
+        debugShowCheckedModeBanner: false,
+        //title: 'Flutter Auth',
+        theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+        //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
-          ///wrapper
-          ),
+        ///wrapper
+      ),
     );
   }
 }

@@ -33,7 +33,7 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          '                  تفاصيل الطلب',
+          ' تفاصيل الطلب',
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.deepPurple[100],
@@ -48,7 +48,7 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
             return ListView.builder(
               // controller: _scrollController,
 
-              //  physics: const NeverScrollableScrollPhysics(), //<--here
+              // physics: const NeverScrollableScrollPhysics(), //<--here
               itemCount: 1,
 
               itemBuilder: (context, index) =>
@@ -100,7 +100,7 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
                       Colors.white10,
                     ],
                   )),
-                  //  height: 1200,
+                  // height: 1200,
                   padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
                   child: Column(children: <Widget>[
                     SizedBox(
@@ -118,7 +118,7 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
                                     .toString()
                                     .substring(0, 10) +
                                 '\n'
-                                    '  الوقت: ' +
+                                    ' الوقت: ' +
                                 document['DateTime']
                                     .toString()
                                     .substring(11, 16) +
@@ -130,7 +130,7 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
                                     .toString()
                                     .substring(0, 10) +
                                 '\n'
-                                    '  الوقت: ' +
+                                    ' الوقت: ' +
                                 document['DateTime']
                                     .toString()
                                     .substring(11, 16) +
@@ -170,9 +170,9 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
                           child: Table(
                             defaultColumnWidth: FixedColumnWidth(108.0),
                             // border: TableBorder.all(
-                            //     color: Colors.white,
-                            //     style: BorderStyle.solid,
-                            //     width: 0),
+                            // color: Colors.white,
+                            // style: BorderStyle.solid,
+                            // width: 0),
                             children: [
                               TableRow(children: [
                                 Container(
@@ -292,6 +292,7 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
         return 'الخميس';
       case 'Friday':
         return 'الجمعة';
+
       default:
         return 'no day';
     }

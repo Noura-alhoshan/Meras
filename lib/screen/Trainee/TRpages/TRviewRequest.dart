@@ -34,7 +34,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          '                  تفاصيل الطلب',
+          ' تفاصيل الطلب',
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.deepPurple[100],
@@ -49,7 +49,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
             return ListView.builder(
               // controller: _scrollController,
 
-              //  physics: const NeverScrollableScrollPhysics(), //<--here
+              // physics: const NeverScrollableScrollPhysics(), //<--here
               itemCount: 1,
 
               itemBuilder: (context, index) =>
@@ -101,7 +101,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                       Colors.white10,
                     ],
                   )),
-                  //  height: 1200,
+                  // height: 1200,
                   padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
                   child: Column(children: <Widget>[
                     SizedBox(
@@ -119,7 +119,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                     .toString()
                                     .substring(0, 10) +
                                 '\n'
-                                    '  الوقت: ' +
+                                    ' الوقت: ' +
                                 document['DateTime']
                                     .toString()
                                     .substring(11, 16) +
@@ -131,7 +131,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                     .toString()
                                     .substring(0, 10) +
                                 '\n'
-                                    '  الوقت: ' +
+                                    ' الوقت: ' +
                                 document['DateTime']
                                     .toString()
                                     .substring(11, 16) +
@@ -171,9 +171,9 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                           child: Table(
                             defaultColumnWidth: FixedColumnWidth(108.0),
                             // border: TableBorder.all(
-                            //     color: Colors.white,
-                            //     style: BorderStyle.solid,
-                            //     width: 0),
+                            // color: Colors.white,
+                            // style: BorderStyle.solid,
+                            // width: 0),
                             children: [
                               TableRow(children: [
                                 Container(
@@ -226,34 +226,34 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                     )),
                               ]),
                               // TableRow(children: [
-                              //   Container(
-                              //     padding: EdgeInsets.all(2.0),
-                              //     child: Text(
-                              //       document['Gender'],
-                              //       style: TextStyle(
-                              //         height: 1.99,
-                              //         fontSize: 16.37,
-                              //         color: Colors.grey,
-                              //         //height: 1
-                              //       ),
-                              //       textAlign: TextAlign.right,
-                              //     ),
-                              //   ),
-                              //   Container(
-                              //       padding: EdgeInsets.all(2.0),
-                              //       child: Text(
-                              //         ':الجنس',
-                              //         style: TextStyle(
-                              //           fontSize: 18.0,
-                              //         ),
-                              //         textAlign: TextAlign.end,
-                              //       )),
+                              // Container(
+                              // padding: EdgeInsets.all(2.0),
+                              // child: Text(
+                              // document['Gender'],
+                              // style: TextStyle(
+                              // height: 1.99,
+                              // fontSize: 16.37,
+                              // color: Colors.grey,
+                              // //height: 1
+                              // ),
+                              // textAlign: TextAlign.right,
+                              // ),
+                              // ),
+                              // Container(
+                              // padding: EdgeInsets.all(2.0),
+                              // child: Text(
+                              // ':الجنس',
+                              // style: TextStyle(
+                              // fontSize: 18.0,
+                              // ),
+                              // textAlign: TextAlign.end,
+                              // )),
                               // ]),
                               // TableRow(children: [
-                              //   Column(children: [Text('')]),
-                              //   Column(children: [
-                              //     Text('')
-                              //   ]), //Column(children:[Text('')]),
+                              // Column(children: [Text('')]),
+                              // Column(children: [
+                              // Text('')
+                              // ]), //Column(children:[Text('')]),
                               // ]),
 
                               TableRow(children: [
@@ -295,15 +295,15 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                           height: 24,
                         ),
                         // Row(children: <Widget>[
-                        //   Padding(
-                        //       padding: EdgeInsets.symmetric(
-                        //           horizontal: 12, vertical: 5)),
-                        //   Center(child: Accept(document)),
-                        //   SizedBox(width: 24),
-                        //   Center(
-                        //     child: Reject(document, document['Cid'],
-                        //         document['DateTime']),
-                        //   ),
+                        // Padding(
+                        // padding: EdgeInsets.symmetric(
+                        // horizontal: 12, vertical: 5)),
+                        // Center(child: Accept(document)),
+                        // SizedBox(width: 24),
+                        // Center(
+                        // child: Reject(document, document['Cid'],
+                        // document['DateTime']),
+                        // ),
                         // ]),
                         ElevatedButton(
                           child: Text('الدفع'),

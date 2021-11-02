@@ -44,7 +44,7 @@ class _CoachDate extends State<CoachDate> {
       extendBodyBehindAppBar: true,
       //drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('               حجز موعد جديد'
+        title: Text(' حجز موعد جديد'
             // textAlign: TextAlign.center,
             ),
         backgroundColor: Colors.deepPurple[100],
@@ -59,7 +59,7 @@ class _CoachDate extends State<CoachDate> {
             return ListView.builder(
               // controller: _scrollController,
 
-              //  physics: const NeverScrollableScrollPhysics(), //<--here
+              // physics: const NeverScrollableScrollPhysics(), //<--here
               itemCount: 1,
 
               itemBuilder: (context, index) =>
@@ -70,7 +70,7 @@ class _CoachDate extends State<CoachDate> {
   }
 }
 
-//    1. show the coach info
+// 1. show the coach info
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
   final String ph = document['Phone Number'];
@@ -95,7 +95,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                   ),
             Text(' '),
             Text(
-              ' ' + document['Fname'] + ' ' + document['Lname'] + '  ',
+              ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 23,
@@ -113,7 +113,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
 
             Row(
               children: [
-                Text('                                 '),
+                Text(' '),
                 TextButton(
                     child: Text(
                       document['Phone Number'],
@@ -322,7 +322,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
   );
 }
 
-//    2. show the coach dates
+// 2. show the coach dates
 
 Widget _buildListItem(
   BuildContext context,
@@ -408,7 +408,7 @@ Widget _buildListItem(
                         ' ' +
                         document['DateTime'].toString().substring(0, 10) +
                         '\n'
-                            '  الوقت: ' +
+                            ' الوقت: ' +
                         document['DateTime'].toString().substring(11, 16) +
                         ' صباحا '
                     : 'التاريخ:' +
@@ -416,7 +416,7 @@ Widget _buildListItem(
                         ' ' +
                         document['DateTime'].toString().substring(0, 10) +
                         '\n'
-                            '  الوقت: ' +
+                            ' الوقت: ' +
                         document['DateTime'].toString().substring(11, 16) +
                         ' مساءً ',
                 style: TextStyle(height: 1.5, fontSize: 14.8),

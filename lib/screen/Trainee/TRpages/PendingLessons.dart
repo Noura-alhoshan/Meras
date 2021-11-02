@@ -20,7 +20,7 @@ class PendingLessons extends StatefulWidget {
 }
 
 class _PendingLessonsState extends State<PendingLessons> {
-  String sp = '                 ';
+  String sp = ' ';
   @override
   void initState() {
     super.initState();
@@ -55,7 +55,9 @@ class _PendingLessonsState extends State<PendingLessons> {
                         title: Text(' قيد الانتظار',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                                height: -1, fontSize: 16, color: Colors.white)),
+                                height: -1,
+                                fontSize: 16,
+                                color: Colors.brown[700])),
                       ),
                     ),
                     Container(
@@ -84,10 +86,10 @@ class _PendingLessonsState extends State<PendingLessons> {
                             ),
                           ),
                           // ElevatedButton(
-                          //     onPressed: () {
-                          //       nav(document.id);
-                          //     },
-                          //     child: Text('التفاصيل')),
+                          // onPressed: () {
+                          // nav(document.id);
+                          // },
+                          // child: Text('التفاصيل')),
                           //trailing: Image.asset("assets/images/req.png")
                         ]),
                         contentPadding: EdgeInsets.symmetric(
