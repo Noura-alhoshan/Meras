@@ -76,7 +76,8 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+        home: SignIn(),
+        //TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
         //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
         ///wrapper

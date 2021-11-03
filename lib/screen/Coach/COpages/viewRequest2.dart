@@ -71,7 +71,7 @@ class _ADcoachProfileScreen2State extends State<ViewLessonRequest2> {
       child: Align(
         alignment: const Alignment(0, -0.4),
         child: Container(
-          width: 300,
+          width: 307,
           height: 455,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
