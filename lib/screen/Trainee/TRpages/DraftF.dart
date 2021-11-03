@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
@@ -13,7 +15,8 @@ import 'package:meras/screen/Trainee/TRpages/BackgroundC2.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 import '../../../constants.dart';
 import 'SendRequest.dart';
 
@@ -102,14 +105,37 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                   // color: kPrimaryColor,
                   fontWeight: FontWeight.bold),
             ),
-            Text(
-              document['Email'],
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-            ),
-            SizedBox(
-                // height: 10,
+            
+
+             Row(
+              children: [
+                Text(' '),
+                 Text(
+                      document['Price'] + ' ريال ',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: kPrimaryColor,
+                      
+                        //decoration: TextDecoration.underline,
+                      ),
+                       textDirection: ui.TextDirection.rtl,
+                      textAlign: TextAlign.right,
+
+                     // textDirection:,
+                    ),
+                   
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('  :سعر التدريب لساعتين',
+                      style: TextStyle(fontSize: 18, color: Colors.grey[700])),
                 ),
+              ],
+            ),
+
+            // SizedBox(
+            //     // height: 10,
+            //     ),
 
             Row(
               children: [
@@ -158,18 +184,83 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                             fontWeight: FontWeight.bold),
                       ),
                       children: <Widget>[
-                        Container(
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(20),
-                                child: Table(
-                                  defaultColumnWidth: FixedColumnWidth(150.0),
+
+Table(
+  columnWidths: {
+                0: FlexColumnWidth(5.2),
+                1: FlexColumnWidth(3),
+                //2: FlexColumnWidth(4),
+              },     
+                                  //defaultColumnWidth: FixedColumnWidth(190.0),
                                   border: TableBorder.all(
                                       color: Colors.white,
                                       style: BorderStyle.none,
                                       width: 0),
-                                  children: [
+                                  children: [ TableRow( children: <Widget>[
+                                      Container(//width: 400,
+                                        child:
+                                    Text(
+                                            document['Email'],
+                                            //textAlign: TextAlign.center,
+                                            style: 
+                                            TextStyle(
+                                               height: 1.54,
+                                               fontSize: 18, color: Colors.black),
+                                          ),),
+                                           Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ' :البريد الإلكتروني',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      )
+                                    ]),
+                                   
+                     
+                                  ],
+                                ),
+
+
+
+
+
+
+                        Container(
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                child: Table(
+                                  defaultColumnWidth: FixedColumnWidth(167.0),
+                                  border: TableBorder.all(
+                                      color: Colors.white,
+                                      style: BorderStyle.none,
+                                      width: 0),
+                                  children: [ 
+                                    //TableRow( children: <Widget>[
+                                    //   Container(width: 400,
+                                    //     child:
+                                    // Text(
+                                    //         document['Email'],
+                                    //         //textAlign: TextAlign.center,
+                                    //         style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+                                    //       ),),
+                                    //        Container(
+                                    //     padding: EdgeInsets.all(2.0),
+                                    //     child: Text(
+                                    //       ' :البريد الإلكتروني',
+                                    //       style: TextStyle(
+                                    //         fontSize: 18,
+                                    //         color: Colors.black,
+                                    //       ),
+                                    //       textAlign: TextAlign.end,
+                                    //     ),
+                                    //   )
+                                    // ]),
                                     TableRow(children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.all(1.0),
@@ -309,6 +400,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                               document['Lname'],
                               document['Phone Number'],
                               document['Neighborhood'],
+                              document['Price'],
                               (snapshot.data!).docs[index]),
                         );
                       }),
@@ -331,6 +423,7 @@ Widget _buildListItem(
   String lname,
   String phone,
   String n,
+  String price,
   DocumentSnapshot document,
 ) {
   return SingleChildScrollView(
@@ -368,7 +461,7 @@ Widget _buildListItem(
 
                           yesOnPressed: () {
                             print(document.id);
-                            Request1(iid, fname, lname, phone, n,
+                            Request1(iid, fname, lname, phone, n, price,
                                 document['DateTime'], document.id);
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');

@@ -56,10 +56,10 @@ Request1(
   String CoachName, //document['Fname']
   String CoachName2, // document['Lname']
   String Cphone, //document['Phone Number']
-  String Neighborhood, //document['Neighborhood']
+  String Neighborhood,
+  String price, //document['Neighborhood']
   String DateNTime,
-  String
-      Dateid, //document['DateTime'] ? I'm not sure if this how you read from subcollection
+  String Dateid, //document['DateTime'] ? I'm not sure if this how you read from subcollection
 ) async {
   DateTime now = new DateTime.now();
   DateTime date = new DateTime(now.year, now.month, now.day);
@@ -92,7 +92,7 @@ Request1(
     'CoachName2': CoachName2,
     'CoachPhone': Cphone,
     'Neighborhood': Neighborhood,
-
+    'Price':price,
     // trainee info
     'Tid': usernow!.uid,
     'Tname': Tname,
@@ -104,7 +104,8 @@ Request1(
     'reqDate': FieldValue.serverTimestamp(),
     'Status': 'P',
     'DateTime': DateNTime,
-    'Lid': lid, //Lesson id, Leena needs it
+    'Lid': lid,//Lesson id, Leena needs it
+    'Paid':'false' 
   };
   Collection.doc(lid).set(RequestDataDemo);
 

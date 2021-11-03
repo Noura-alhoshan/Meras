@@ -32,7 +32,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   @override
   void initState() {
     super.initState();
-    _controller.text = "0"; // Setting the initial value for the field.
+    _controller.text = "100"; // Setting the initial value for the field.
   }
   SingingCharacter? _character = SingingCharacter.lafayette;
 
@@ -259,7 +259,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
 
                 
  Text(
-                  ':اختر سعر التدريب للساعة',
+                  ':اختر سعر التدريب لساعتين',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16.0),
                 ),
@@ -267,60 +267,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
    Padding( padding: EdgeInsets.symmetric(horizontal: 120, vertical: 3),
    child:             
 //  NumberInputWithIncrementDecrement(
-//    scaleWidth: 1,
-//    scaleHeight:1,
-//       controller: TextEditingController(),
-//        min: 20,
-//        max: 500,
-//        initialValue: 20,
-//        incDecFactor:5,
-      
-//       numberFieldDecoration: InputDecoration(
-//         border: InputBorder.none,
-        
-//       ),
-//       //style: {Text('',TextStyle(fontSize: 15))},
-//       widgetContainerDecoration: BoxDecoration(
-        
-//         borderRadius: BorderRadius.all(
-//           Radius.circular(10)
-//         ),
-//         // border: Border.all(
-//         //   color: Col,
-//         //   width: 0,
-//         // )
-//       ),
-//       incIconDecoration: BoxDecoration(
-//        // color: kPrimaryLightColor,
-//         borderRadius: BorderRadius.only(
-//           bottomLeft: Radius.circular(30),
-//           bottomRight:  Radius.circular(30),
-//           topLeft:  Radius.circular(30),
-//           topRight:  Radius.circular(30),
-//         ),
-//       ),
-//       separateIcons: true,
-//       decIconDecoration: BoxDecoration(
-//         //color: kPrimaryLightColor,
-//         borderRadius: BorderRadius.only(
-//           bottomLeft: Radius.circular(30),
-//           bottomRight:  Radius.circular(30),
-//           topLeft:  Radius.circular(30),
-//           topRight:  Radius.circular(30),
-//         ),
-//       ),
-//       incIconSize: 28,
-//       decIconSize: 28,
-     
-//      // incIcon: Icons.plus,
-//       //decIcon: Icons.exposure,
-//       onChanged:(num p) {
-//         setState((){
-//                            String currentValue =TextEditingController().text;
-//                           price = currentValue;
-//                           print(price);
-//          });}
-//     ),
+
 Center(
           child: Container(
             width: 120.0,
@@ -369,7 +316,7 @@ Center(
                           onTap: () {
                             int currentValue = int.parse(_controller.text);
                             setState(() {
-                              currentValue= currentValue+5;
+                              currentValue= currentValue+10;
                                _controller.text =
                                 (currentValue < 500 ? currentValue : 500)
                                     .toString(); 
@@ -387,9 +334,9 @@ Center(
                           int currentValue = int.parse(_controller.text);
                           setState(() {
                             //print("hello state");
-                            currentValue= currentValue-5;
+                            currentValue= currentValue-10;
                             _controller.text =
-                                (currentValue > 25 ? currentValue : 25)
+                                (currentValue > 100 ? currentValue : 100)
                                     .toString(); 
                               // decrementing value
                           });
@@ -418,7 +365,7 @@ Center(
                     DropdownButton(
                       items: items.map((itemsName) {
                         return DropdownMenuItem(
-                            value: itemsName, child: Text(itemsName));
+                            value: itemsName, child: Center(child: Text(itemsName,textAlign: TextAlign.center,)));
                       }).toList(),
                       onChanged: (String? newValue) {
                         setState(() {

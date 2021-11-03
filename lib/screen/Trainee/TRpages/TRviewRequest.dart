@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
@@ -305,16 +308,26 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                         // document['DateTime']),
                         // ),
                         // ]),
-                        ElevatedButton(
-                          child: Text('الدفع'),
-                          onPressed: () {},
 
-                          // },
-                          style: ElevatedButton.styleFrom(
-                              shape: StadiumBorder(),
-                              primary: Color(0xFF6F35A5),
-                              textStyle: TextStyle(fontSize: 16)),
-                        ),
+                        if (document['Paid'] == 'false')
+                          ElevatedButton(
+                            child: Text('الدفع'),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                shape: StadiumBorder(),
+                                primary: Color(0xFF6F35A5),
+                                textStyle: TextStyle(fontSize: 16)),
+                          )
+                        else
+                          Center(
+                            child: Text(
+                              'تم الدفع',
+                              style: TextStyle(
+                                  fontSize: 18.5,
+                                  color: Colors.green[600],
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
                       ]),
                     ),
                     ////////////////////////end of the table
@@ -360,3 +373,16 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
     );
   }
 }
+
+Widget notPaid() => ElevatedButton(
+      child: Text('الدفع'),
+      onPressed: () {},
+
+      // },
+      style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+          primary: Color(0xFF6F35A5),
+          textStyle: TextStyle(fontSize: 16)),
+    );
+
+Widget Paid(DocumentSnapshot document) => Text('');
