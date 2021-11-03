@@ -53,7 +53,9 @@ class _PendingRequestState extends State<PendingRequest> {
                     title: Text(' قيد الأنتظار',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                            height: -1, fontSize: 16, color: Colors.white)),
+                            height: -1,
+                            fontSize: 16,
+                            color: Colors.brown[700])),
                   ),
                 ),
                 Container(

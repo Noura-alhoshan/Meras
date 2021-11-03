@@ -50,7 +50,7 @@ class _RejectedRequestState extends State<RejectedRequest> {
                     title: Text(' مرفوض',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                            height: -1, fontSize: 16, color: Colors.white)),
+                            height: -1, fontSize: 16, color: Colors.red[900])),
                   ),
                 ),
                 Container(

@@ -68,7 +68,7 @@ class _CoachDate extends State<CoachDate> {
                           EdgeInsets.symmetric(horizontal: 30, vertical: 5)),
                   // buildCard(),
                   Text(
-                    'المواعيد المتاحة خلال الاسبوع القادم',
+                    'المواعيد المتاحة خلال السبعة ايام القادمة',
                     style: TextStyle(height: 2, fontSize: 18),
                     textAlign: TextAlign.right,
                   ),
@@ -85,6 +85,7 @@ class _CoachDate extends State<CoachDate> {
                                     .collection('Coach')
                                     .doc(uid)
                                     .collection('Dates')
+                                    .orderBy('timestamp', descending: true)
                                     .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) return Loading();
@@ -131,13 +132,13 @@ class _CoachDate extends State<CoachDate> {
                 decoration: new BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(20.0)),
-                    color: Colors.deepPurple[100]),
+                    color: getWeekColors(document['DateTime'].toString())),
                 child: ListTile(
                   title: Text(
                       //  istrue(document['DateTime'].toString()) + i need to do this one
                       'يوم ' + getArabicdays(document['DateTime'].toString()),
                       textAlign: TextAlign.right,
-                      style: TextStyle(height: 1.5, fontSize: 15)),
+                      style: TextStyle(height: 1, fontSize: 16)),
                   //subtitle: Text(subheading),
                   leading: IconButton(
                     icon: Icon(Icons
@@ -155,7 +156,7 @@ class _CoachDate extends State<CoachDate> {
                                 .pop('dialog');
                             var baseDialog = SignleBaseAlertDialog(
                               title: "",
-                              content: "تم حذف الدرس بنجاح",
+                              content: "تم حذف الموعد بنجاح",
                               yesOnPressed: () async {
                                 Navigator.of(context, rootNavigator: true).pop(
                                     'dialog'); //////////////////////////////////??????
@@ -201,7 +202,7 @@ class _CoachDate extends State<CoachDate> {
                               '  الوقت: ' +
                           document['DateTime'].toString().substring(11, 16) +
                           ' مساءً ',
-                  style: TextStyle(height: 1.5, fontSize: 14),
+                  style: TextStyle(height: 1.5, fontSize: 16),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -275,7 +276,10 @@ class _CoachDate extends State<CoachDate> {
     print(isTrue()); ///////////////////////////////////////
     return AvaDates.doc(uid)
         .collection("Dates")
-        .add({'DateTime': date1})
+        .add({
+          'DateTime': date1,
+          "timestamp": DateTime.now(),
+        })
         .then((value) => print("time added"))
         .catchError((error) => print("Failed to add time: $error"));
   }
@@ -301,36 +305,20 @@ class _CoachDate extends State<CoachDate> {
       );
     });
 
-    var baseDialog = BaseAlertDialog(
-        title: "",
-        content: "هل أنت متأكد من إضافة الموعد؟",
-        yesOnPressed: () async {
-          date1 = getText() + getday();
-          print(getText() + getday());
-          addDate();
-          Navigator.of(context, rootNavigator: true).pop('dialog');
+    date1 = getText() + getday();
+    print(getText() + getday());
+    addDate();
 
-          var baseDialog = SignleBaseAlertDialog(
-            title: "",
-            content: "تم إضافة الموعد بنجاح",
-            yesOnPressed: () async {
-              Navigator.of(context, rootNavigator: true)
-                  .pop('dialog'); //////////////////////////////////??????
-              // nav1();
-            },
-            yes: "إغلاق",
-          );
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  baseDialog); //////////////////////////////////??????
-          // nav1();
-        },
-        noOnPressed: () {
-          Navigator.of(context, rootNavigator: true).pop('dialog');
-        },
-        yes: "نعم",
-        no: "لا");
+    var baseDialog = SignleBaseAlertDialog(
+      title: "",
+      content: "تم إضافة الموعد بنجاح",
+      yesOnPressed: () async {
+        Navigator.of(context, rootNavigator: true)
+            .pop('dialog'); //////////////////////////////////??????
+        // nav1();
+      },
+      yes: "إغلاق",
+    );
     showDialog(context: context, builder: (BuildContext context) => baseDialog);
   }
 
@@ -401,6 +389,27 @@ class _CoachDate extends State<CoachDate> {
         return 'الجمعة';
       default:
         return 'no day';
+    }
+  }
+
+  Color getWeekColors(String a) {
+    switch (a.substring(19)) {
+      case 'Saturday':
+        return Colors.blue.shade100;
+      case 'Sunday':
+        return Colors.red.shade100;
+      case 'Monday':
+        return Colors.deepPurple.shade100;
+      case 'Tuesday':
+        return Colors.yellow.shade100;
+      case 'Wednesday':
+        return Colors.teal.shade200;
+      case 'Thursday':
+        return Colors.orange.shade100;
+      case 'Friday':
+        return Colors.brown.shade100;
+      default:
+        return Colors.deepPurple.shade100;
     }
   }
 
