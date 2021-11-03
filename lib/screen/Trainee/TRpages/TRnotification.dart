@@ -9,6 +9,7 @@ import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/services/navDraweradmin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/home/navDrawer.dart';
 
 class TRnotification extends StatefulWidget {
   final String traineeId;
@@ -128,7 +129,7 @@ class _TRnotification extends State<TRnotification> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: NavDraweradmin(),
+      drawer: NavDrawer(),
       appBar: AppBar(
         /*
         actions: <Widget>[
