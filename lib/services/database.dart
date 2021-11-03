@@ -70,7 +70,8 @@ class DatabaseService {
       String description,
       String gender,
       String status,
-      String url
+      String url,
+      String price
       ) {
    
       CollectionReference coachesCollection =
@@ -90,6 +91,8 @@ class DatabaseService {
         'Time': FieldValue.serverTimestamp(),
         'Type':'Coach',
         'ID': co.uid,
+        'Price': price,
+        'CountDate':0,
       };
     coachesCollection.doc(co.uid).set(traineeDataDemo);
   }

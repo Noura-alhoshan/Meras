@@ -43,6 +43,7 @@ dependencies:
   get:
   url_launcher:
   get_storage:
+  number_inc_dec: ^0.8.0
 
 
   #uses-material-design: true

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:meras/components/name_rounded_input.dart';
 import 'package:meras/screen/authenticate/background2.dart';
@@ -17,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/services/database.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:number_inc_dec/number_inc_dec.dart';
 import 'NotApproaved.dart';
 
 class RegisterAsCoatch extends StatefulWidget {
@@ -28,6 +27,13 @@ class RegisterAsCoatch extends StatefulWidget {
 enum SingingCharacter { lafayette, jefferson }
 
 class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
+  TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.text = "0"; // Setting the initial value for the field.
+  }
   SingingCharacter? _character = SingingCharacter.lafayette;
 
   String dropdownValue = 'الرمال وماحولها';
@@ -65,6 +71,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   String neighborhood = 'الرمال وماحولها';
   String description = '';
   String gender = 'ذكر';
+  String price='';
   bool _passwordVisible = true;
 
   int _age = 0;
@@ -238,6 +245,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     setState(() => phoneNumber = val);
                   },
                 ),
+
                 RoundedInputField2(
                   hintText: sp + "               وصف",
                   validator: (val) => val!.isEmpty
@@ -247,7 +255,159 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     setState(() => description = val);
                   },
                 ),
-                SizedBox(height: 40.0),
+                SizedBox(height: 20.0),
+
+                
+ Text(
+                  ':اختر سعر التدريب للساعة',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+     SizedBox(height: 10.0),
+   Padding( padding: EdgeInsets.symmetric(horizontal: 120, vertical: 3),
+   child:             
+//  NumberInputWithIncrementDecrement(
+//    scaleWidth: 1,
+//    scaleHeight:1,
+//       controller: TextEditingController(),
+//        min: 20,
+//        max: 500,
+//        initialValue: 20,
+//        incDecFactor:5,
+      
+//       numberFieldDecoration: InputDecoration(
+//         border: InputBorder.none,
+        
+//       ),
+//       //style: {Text('',TextStyle(fontSize: 15))},
+//       widgetContainerDecoration: BoxDecoration(
+        
+//         borderRadius: BorderRadius.all(
+//           Radius.circular(10)
+//         ),
+//         // border: Border.all(
+//         //   color: Col,
+//         //   width: 0,
+//         // )
+//       ),
+//       incIconDecoration: BoxDecoration(
+//        // color: kPrimaryLightColor,
+//         borderRadius: BorderRadius.only(
+//           bottomLeft: Radius.circular(30),
+//           bottomRight:  Radius.circular(30),
+//           topLeft:  Radius.circular(30),
+//           topRight:  Radius.circular(30),
+//         ),
+//       ),
+//       separateIcons: true,
+//       decIconDecoration: BoxDecoration(
+//         //color: kPrimaryLightColor,
+//         borderRadius: BorderRadius.only(
+//           bottomLeft: Radius.circular(30),
+//           bottomRight:  Radius.circular(30),
+//           topLeft:  Radius.circular(30),
+//           topRight:  Radius.circular(30),
+//         ),
+//       ),
+//       incIconSize: 28,
+//       decIconSize: 28,
+     
+//      // incIcon: Icons.plus,
+//       //decIcon: Icons.exposure,
+//       onChanged:(num p) {
+//         setState((){
+//                            String currentValue =TextEditingController().text;
+//                           price = currentValue;
+//                           print(price);
+//          });}
+//     ),
+Center(
+          child: Container(
+            width: 120.0,
+            foregroundDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              // border: Border.all(
+              //   color: Colors.white,
+              //   width: 0.0,
+              // ),
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(8.0),
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(10.0),
+                      // ),
+                    ),
+                    controller: _controller,
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: false,
+                      signed: true,
+                    ),
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 38.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        
+                        child: InkWell(
+                          child: Icon(
+                            Icons.arrow_drop_up,
+                            size: 18.0,
+                          ),
+                          onTap: () {
+                            int currentValue = int.parse(_controller.text);
+                            setState(() {
+                              currentValue= currentValue+5;
+                               _controller.text =
+                                (currentValue < 500 ? currentValue : 500)
+                                    .toString(); 
+                              //_controller.text = (currentValue).toString(); // incrementing value
+                            });
+                          },
+                        ),
+                      ),
+                      InkWell(
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          size: 18.0,
+                        ),
+                        onTap: () {
+                          int currentValue = int.parse(_controller.text);
+                          setState(() {
+                            //print("hello state");
+                            currentValue= currentValue-5;
+                            _controller.text =
+                                (currentValue > 25 ? currentValue : 25)
+                                    .toString(); 
+                              // decrementing value
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      
+   ),
+  
+     SizedBox(height: 27.0),
+
+
                 Text(
                   ':اختر منطقتك السكنية أو المنطقة التي تريد التدرب فيها',
                   textAlign: TextAlign.center,
@@ -268,8 +428,8 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                       },
                       value: dropdownValue,
                       //isExpanded: true,
-                      icon: Icon(Icons.arrow_drop_down_circle),
-                      iconEnabledColor: Colors.deepPurple,
+                      icon: Icon(Icons.arrow_drop_down, ),
+                      iconEnabledColor: Colors.black,
                     )
                   ],
                 ),
@@ -364,7 +524,8 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                               description,
                               gender,
                               'P',
-                              imageUrl); //await
+                              imageUrl,
+                              _controller.text); //await
                           if (result == null) {
                             setState(() {
                               error =

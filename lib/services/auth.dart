@@ -87,7 +87,8 @@ class AuthService {
       String description,
       String gender,
       String status,
-      String url) async {
+      String url,
+      String price) async {
     try {
        UserCredential result = await _auth.createUserWithEmailAndPassword(
               email: email, password: password);
@@ -96,7 +97,7 @@ class AuthService {
           MyUser Coach = MyUser(uid: user1!.uid);
 
      await DatabaseService(uid: user1.uid).updateCoachesData(Coach, Fname,
-        Lname, email, password, age, phoneNumber, neighborhood,description, gender,status,url);
+        Lname, email, password, age, phoneNumber, neighborhood,description, gender,status,url,price);
 
          return user1;
     }
