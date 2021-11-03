@@ -52,7 +52,9 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                     title: Text(' مقبول',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                            height: -1, fontSize: 16, color: Colors.white)),
+                            height: -1,
+                            fontSize: 16,
+                            color: Colors.green[900])),
                   ),
                 ),
                 Container(
