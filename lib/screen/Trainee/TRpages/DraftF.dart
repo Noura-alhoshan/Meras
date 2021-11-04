@@ -105,26 +105,24 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                   // color: kPrimaryColor,
                   fontWeight: FontWeight.bold),
             ),
-            
 
-             Row(
+            Row(
               children: [
                 Text(' '),
-                 Text(
-                      document['Price'] + ' ريال ',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: kPrimaryColor,
-                      
-                        //decoration: TextDecoration.underline,
-                      ),
-                       textDirection: ui.TextDirection.rtl,
-                      textAlign: TextAlign.right,
+                Text(
+                  document['Price'] + ' ريال ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: kPrimaryColor,
 
-                     // textDirection:,
-                    ),
-                   
+                    //decoration: TextDecoration.underline,
+                  ),
+                  textDirection: ui.TextDirection.rtl,
+                  textAlign: TextAlign.right,
+
+                  // textDirection:,
+                ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text('  :سعر التدريب لساعتين',
@@ -154,7 +152,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                       launch("tel://$ph");
                     }),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.center,
                   child: Text(':للتواصل',
                       style: TextStyle(fontSize: 18, color: Colors.grey[700])),
                 ),
@@ -184,51 +182,44 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                             fontWeight: FontWeight.bold),
                       ),
                       children: <Widget>[
-
-Table(
-  columnWidths: {
-                0: FlexColumnWidth(5.2),
-                1: FlexColumnWidth(3),
-                //2: FlexColumnWidth(4),
-              },     
-                                  //defaultColumnWidth: FixedColumnWidth(190.0),
-                                  border: TableBorder.all(
-                                      color: Colors.white,
-                                      style: BorderStyle.none,
-                                      width: 0),
-                                  children: [ TableRow( children: <Widget>[
-                                      Container(//width: 400,
-                                        child:
-                                    Text(
-                                            document['Email'],
-                                            //textAlign: TextAlign.center,
-                                            style: 
-                                            TextStyle(
-                                               height: 1.54,
-                                               fontSize: 18, color: Colors.black),
-                                          ),),
-                                           Container(
-                                        padding: EdgeInsets.all(2.0),
-                                        child: Text(
-                                          ' :البريد الإلكتروني',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black,
-                                          ),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      )
-                                    ]),
-                                   
-                     
-                                  ],
+                        Table(
+                          columnWidths: {
+                            0: FlexColumnWidth(5.2),
+                            1: FlexColumnWidth(3),
+                            //2: FlexColumnWidth(4),
+                          },
+                          //defaultColumnWidth: FixedColumnWidth(190.0),
+                          border: TableBorder.all(
+                              color: Colors.white,
+                              style: BorderStyle.none,
+                              width: 0),
+                          children: [
+                            TableRow(children: <Widget>[
+                              Container(
+                                //width: 400,
+                                child: Text(
+                                  document['Email'],
+                                  //textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      height: 1.54,
+                                      fontSize: 18,
+                                      color: Colors.black),
                                 ),
-
-
-
-
-
-
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(2.0),
+                                child: Text(
+                                  ' :البريد الإلكتروني',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                              )
+                            ]),
+                          ],
+                        ),
                         Container(
                           child: Column(
                             children: [
@@ -240,7 +231,7 @@ Table(
                                       color: Colors.white,
                                       style: BorderStyle.none,
                                       width: 0),
-                                  children: [ 
+                                  children: [
                                     //TableRow( children: <Widget>[
                                     //   Container(width: 400,
                                     //     child:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meras/components/adminRounded_button.dart';
+import 'package:meras/screen/Admin/ADpages/manageGuidlines.dart';
 import 'package:meras/screen/Admin/services/navDraweradmin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -33,7 +34,12 @@ class ADhome extends StatelessWidget {
             child:
                 RoundedButtonAdmin(text: 'إدارة الإختبار القصير', press: () {}),
           ),
-          RoundedButtonAdmin(text: 'إدارة معلومات إشارات السير', press: () {}),
+          RoundedButtonAdmin(
+              text: 'إدارة معلومات إشارات السير',
+              press: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ManageGuidlines()));
+              }),
           // RoundedButtonAdmin(
           //     text: 'إضافة اختبار قصير',
           //     press: (){}
