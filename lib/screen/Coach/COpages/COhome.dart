@@ -109,18 +109,18 @@ class _HomePageState extends State<COhome> {
                   icon: new Image.asset('assets/images/trafficsigns.png'),
                 ),
               ),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 20.0),
-              Transform.scale(
-                scale: 11.0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: new Image.asset('assets/images/test2.png'),
-                ),
-              ),
+              SizedBox(height: 70.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 20.0),
+              // Transform.scale(
+              //   scale: 11.0,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: new Image.asset('assets/images/test2.png'),
+              //   ),
+              // ),
               // IconButton(
               //   icon: Image.asset('assets/images/test2.png'),
               //   iconSize: 350,
