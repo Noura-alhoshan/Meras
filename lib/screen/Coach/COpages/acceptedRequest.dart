@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meras/screen/Coach/COpages/viewRequestAccept.dart';
 
 import '../BackgroundLo.dart';
 import 'viewRequest2.dart';
@@ -63,14 +64,30 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                   child: ListTile(
                     title: Text(
                       document['Tname'], //+ ' ' + document['Lname'],
-                      style: TextStyle(height: 1, fontSize: 15),
+                      style: TextStyle(height: 1, fontSize: 16),
                       textAlign: TextAlign.right,
                     ),
-                    subtitle: Text(
-                      'العمر :' + document['TAge'].toString(),
-                      style: TextStyle(height: 1, fontSize: 15),
-                      textAlign: TextAlign.right,
-                    ),
+                    // shape: BoxShape.circle, color: Colors.red),
+
+                    subtitle: document['Paid'] == 'false'
+                        ? Text(
+                            'لم يتم الدفع',
+                            ////////////////////////// we should add field paid?
+                            style: TextStyle(
+                                height: 1,
+                                fontSize: 15,
+                                color: Colors.orange[900]),
+                            textAlign: TextAlign.right,
+                          )
+                        : Text(
+                            'تم الدفع',
+                            ////////////////////////// we should add field paid?
+                            style: TextStyle(
+                                height: 1,
+                                fontSize: 15,
+                                color: Colors.green[900]),
+                            textAlign: TextAlign.right,
+                          ),
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 4.5, horizontal: 7.0),
                     trailing: document['TGender'] == 'أنثى'
@@ -141,7 +158,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return ViewLessonRequest2(icd);
+        return ViewLessonRequestAccept(icd);
       }),
     );
   }
