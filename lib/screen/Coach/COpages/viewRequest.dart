@@ -342,6 +342,19 @@ class _ADcoachProfileScreenState extends State<ViewLessonRequest> {
                     .doc()
                     .set(DataDemo);
 
+                FirebaseFirestore.instance
+                    .collection('Coach')
+                    .doc(document['Cid'])
+                    .get()
+                    .then((DocumentSnapshot em) async {
+                  CollectionReference users =
+                      FirebaseFirestore.instance.collection('Coach');
+
+                  users
+                      .doc(document['Cid'])
+                      .update({'CountDate': em['CountDate'] + 1});
+                });
+
                 Navigator.of(context, rootNavigator: true).pop('dialog');
                 var baseDialog = SignleBaseAlertDialog(
                   title: "",

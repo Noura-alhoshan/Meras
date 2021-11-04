@@ -123,6 +123,15 @@ Request1(
 //       });
 //     });
 //FieldPath fff;
+  FirebaseFirestore.instance
+      .collection('Coach')
+      .doc(Cid)
+      .get()
+      .then((DocumentSnapshot em) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('Coach');
+
+    users.doc(Cid).update({'CountDate': em['CountDate'] - 1});
+  });
   await FirebaseFirestore.instance
       .collection('Coach')
       .doc(Cid)

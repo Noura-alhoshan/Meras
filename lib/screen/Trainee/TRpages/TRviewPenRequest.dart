@@ -284,7 +284,48 @@ class _ViewPendingRequestState extends State<ViewPendingRequest> {
                                   await FirebaseFirestore.instance
                                       .collection('Requests')
                                       .doc(document.id)
-                                      .update({'Status': 'C'});
+                                      .update({
+                                    'Status': 'C',
+                                  });
+                                  FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(document['Cid'])
+                                      .get()
+                                      .then((DocumentSnapshot em) async {
+                                    CollectionReference users =
+                                        FirebaseFirestore.instance
+                                            .collection('Coach');
+
+                                    users.doc(document['Cid']).update(
+                                        {'CountDate': em['CountDate'] + 1});
+                                  });
+
+//
+                                  FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(document['Cid'])
+                                      .get()
+                                      .then((DocumentSnapshot em) async {
+                                    CollectionReference users =
+                                        FirebaseFirestore.instance
+                                            .collection('Coach');
+
+                                    users.doc(document['Cid']).update(
+                                        {'CountDate': em['CountDate'] + 1});
+                                  });
+// str apdate = document['DateTime'] request
+                                  Map<String, dynamic> DataDemo = {
+                                    "DateTime": document['DateTime']
+                                  };
+                                  FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(document['Cid'])
+                                      .collection('Dates')
+                                      .doc()
+                                      .set(DataDemo);
+
+//
+
                                   Navigator.of(context, rootNavigator: true)
                                       .pop('dialog');
                                   var baseDialog2 = SignleBaseAlertDialog(

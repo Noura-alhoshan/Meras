@@ -85,7 +85,7 @@ class _CoachDate extends State<CoachDate> {
                                     .collection('Coach')
                                     .doc(uid)
                                     .collection('Dates')
-                                    .orderBy('timestamp', descending: true)
+                                    .orderBy('DateTime', descending: false)
                                     .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) return Loading();
@@ -229,6 +229,7 @@ class _CoachDate extends State<CoachDate> {
         },
       );
 
+/*
   Future<bool> isTrue() async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
@@ -254,12 +255,22 @@ class _CoachDate extends State<CoachDate> {
     }
     return false;
   }
-
+*/
   ////methods  METHOD1: deleteDate, METHOD2:addDate, METHOD3:pickDateTime ,METHOD4:pickTime, METHOD5:pickDate, METHOD6:getText, METHOD7:getday, METHOD8:getArabicdays
   /// method 1
   Future<void> deleteDate(String a) {
     final User? user = auth.currentUser;
     final uid = user!.uid;
+    FirebaseFirestore.instance
+        .collection('Coach')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot em) async {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('Coach');
+
+      users.doc(uid).update({'CountDate': em['CountDate'] - 1});
+    });
     return AvaDates.doc(uid)
         .collection('Dates')
         .doc(a)
@@ -272,18 +283,28 @@ class _CoachDate extends State<CoachDate> {
   Future<void> addDate() {
     final User? user = auth.currentUser;
     final uid = user!.uid;
-    date1 = getText() + getday();
-    print(isTrue()); ///////////////////////////////////////
+    FirebaseFirestore.instance
+        .collection('Coach')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot em) async {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('Coach');
+
+      users.doc(uid).update({'CountDate': em['CountDate'] + 1});
+    });
+
+    // date1 = getText() + getday();
     return AvaDates.doc(uid)
         .collection("Dates")
         .add({
           'DateTime': date1,
-          "timestamp": DateTime.now(),
         })
         .then((value) => print("time added"))
         .catchError((error) => print("Failed to add time: $error"));
   }
 
+//element.data()["price"];
   void nav1() async {
     Navigator.of(context).pop();
   }
@@ -311,7 +332,21 @@ class _CoachDate extends State<CoachDate> {
 
     var baseDialog = SignleBaseAlertDialog(
       title: "",
-      content: "تم إضافة الموعد بنجاح",
+      content: date1.toString().substring(17, 19) == 'AM'
+          ? "تم إضافة الموعد بتاريخ :" +
+              date1.toString().substring(0, 10) +
+              " والوقت: " +
+              date1.toString().substring(11, 16) +
+              " " +
+              " صباحا " +
+              "بنجاح "
+          : "تم إضافة الموعد بتاريخ :" +
+              date1.toString().substring(0, 10) +
+              " والوقت: " +
+              date1.toString().substring(11, 16) +
+              " " +
+              " مساءً " +
+              "بنجاح ",
       yesOnPressed: () async {
         Navigator.of(context, rootNavigator: true)
             .pop('dialog'); //////////////////////////////////??????

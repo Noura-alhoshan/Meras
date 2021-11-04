@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
 import 'package:meras/screen/home/navDrawer.dart';
@@ -22,7 +23,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return SingleChildScrollView(
-      child: document['Status'] == 'A'
+      child: ((document['Status'] == 'A') && (document['CountDate'] > 0))
           ? Container(
               height: 100,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -83,7 +84,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                 stream:
                     FirebaseFirestore.instance.collection('Coach').snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('loading 7 ...');
+                  if (!snapshot.hasData) return Loading();
                   return ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(), //<--here
                     //controller: _scrollController,
