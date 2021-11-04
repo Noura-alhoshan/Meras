@@ -12,6 +12,7 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../PaypalPayment.dart';
 import 'TRlessons.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -312,7 +313,22 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                         if (document['Paid'] == 'false')
                           ElevatedButton(
                             child: Text('الدفع'),
-                            onPressed: () {},
+                            onPressed: () {
+ Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => PaypalPayment(
+                              onFinish: (number) async {
+
+                                // payment done
+                                print('order id: '+number);
+
+                              },
+                            ),
+                          ),
+                        );
+
+
+                            },
                             style: ElevatedButton.styleFrom(
                                 shape: StadiumBorder(),
                                 primary: Color(0xFF6F35A5),

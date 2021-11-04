@@ -45,7 +45,7 @@ class _RejectedRequestState extends State<RejectedRequest> {
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(20.0)),
                       //borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Colors.redAccent[100]),
+                      color: red),
                   child: ListTile(
                     title: Text(' مرفوض',
                         textAlign: TextAlign.right,
