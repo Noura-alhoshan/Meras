@@ -118,7 +118,7 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
       );
 
   Widget _build(BuildContext context, DocumentSnapshot document) {
-    final String ph= document['Phone Number'];
+    final String ph = document['Phone Number'];
     Image im = new Image.network(
       document['URL'],
       height: 230.0,
@@ -171,13 +171,18 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
               SizedBox(
-               // height: 10,
-              ),
+                  // height: 10,
+                  ),
               TextButton(
-                 
                   child: Text(document['Phone Number'],
-                  style: TextStyle(fontSize: 18, color: Colors.grey,decoration: TextDecoration.underline,)),
-                  onPressed: (){ launch("tel://$ph");}),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
+                        decoration: TextDecoration.underline,
+                      )),
+                  onPressed: () {
+                    launch("tel://$ph");
+                  }),
               Divider(color: Colors.deepPurple[900]),
               Container(
                 child: Column(children: <Widget>[
@@ -198,27 +203,26 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                         ]),
                         TableRow(children: [
                           //Column(children:[Text('')]),
-                         
-                            Container(
-                           padding: EdgeInsets.all(2.0),
-                           child: Text(
+
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
                               document['Gender'],
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey,
                               ),
                               textAlign: TextAlign.right,
-                            ),),
-                          
-                          Container(
-                           padding: EdgeInsets.all(2.0),
-                           child:
-                            Text(
-                              'الجنس',
-                              style: TextStyle(fontSize: 20.0),
-                              textAlign: TextAlign.end,
-                            )
+                            ),
                           ),
+
+                          Container(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                'الجنس',
+                                style: TextStyle(fontSize: 20.0),
+                                textAlign: TextAlign.end,
+                              )),
                         ]),
                         TableRow(children: [
                           Column(children: [Text('')]),
@@ -228,18 +232,23 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                         ]),
                         TableRow(children: [
                           //Column(children:[Text('')]),
-                           Container(
-                           padding: EdgeInsets.all(2.0),
-                           child:
-                            Text(document['Age'].toString(),
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.grey,), textAlign: TextAlign.right,)
-                          ),
-                           Container(
-                           padding: EdgeInsets.all(2.0),
-                           child:
-                            Text('العمر', style: TextStyle(fontSize: 20.0), textAlign: TextAlign.right,)
-                           ),
+                          Container(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                document['Age'].toString(),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.grey,
+                                ),
+                                textAlign: TextAlign.right,
+                              )),
+                          Container(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                'العمر',
+                                style: TextStyle(fontSize: 20.0),
+                                textAlign: TextAlign.right,
+                              )),
                         ]),
                         TableRow(children: [
                           Column(children: [Text('')]),
@@ -250,30 +259,31 @@ class _ADcoachProfileScreenState extends State<ADcoachProfile> {
                         TableRow(children: [
                           // Column(children:[Text('')]),
                           Container(
-                           padding: EdgeInsets.all(0),
-                           child:
-                            Text(document['Neighborhood'],
+                              padding: EdgeInsets.all(0),
+                              child: Text(
+                                document['Neighborhood'],
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.grey),textAlign: TextAlign.right,)
-                          ),
-                           Container(
-                           padding: EdgeInsets.all(0),
-                           child:
-                            Text('المنطقة السكنية',
-                                style: TextStyle(fontSize: 20.0),textAlign: TextAlign.right,)
-                          ),
+                                    TextStyle(fontSize: 18, color: Colors.grey),
+                                textAlign: TextAlign.right,
+                              )),
+                          Container(
+                              padding: EdgeInsets.all(0),
+                              child: Text(
+                                'المنطقة السكنية',
+                                style: TextStyle(fontSize: 20.0),
+                                textAlign: TextAlign.right,
+                              )),
                         ]),
                       ],
                     ),
                   ),
-                   Container(
-                           padding: EdgeInsets.all(2),
-                           child:
-                  Text(
-                    'الوصف',
-                    style: TextStyle(fontSize: 20.0),
-                    textAlign: TextAlign.end,
-                  )),
+                  Container(
+                      padding: EdgeInsets.all(2),
+                      child: Text(
+                        'الوصف',
+                        style: TextStyle(fontSize: 20.0),
+                        textAlign: TextAlign.end,
+                      )),
                   //   ]),
                   // ]),
                   // TableRow(children: [

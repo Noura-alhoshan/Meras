@@ -34,6 +34,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
     super.initState();
     _controller.text = "100"; // Setting the initial value for the field.
   }
+
   SingingCharacter? _character = SingingCharacter.lafayette;
 
   String dropdownValue = 'الرمال وماحولها';
@@ -71,7 +72,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   String neighborhood = 'الرمال وماحولها';
   String description = '';
   String gender = 'ذكر';
-  String price='';
+  String price = '';
   bool _passwordVisible = true;
 
   int _age = 0;
@@ -82,27 +83,6 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
   String patttern = r'(^(?:[+0]966)?[0-9]{10}$)';
   String pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-  // void ageOnSubmitted(String value) {
-  //   try {
-  //     _age = int.parse(value);
-  //   } on FormatException catch(ex) {
-  //     setState(() {
-  //       _message = "من فضلك أدخل عمرك بشكل صحيح";
-  //     });
-  //   }
-  // }
-
-  // void enterMeras() {
-  //   setState(() {
-  //     if (_age > 17) {
-  //       _message = " ";
-  //     }
-  //     else {
-  //       _message = "العمر المسموح به ١٧ وأكثر";
-  //     }
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +115,7 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     }
                   },
                   onChanged: (val) {
-                    setState(() => Fname = val.trim());
+                    setState(() => Fname = val);
                   },
                 ),
                 NameRoundedInputField(
@@ -245,7 +225,6 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                     setState(() => phoneNumber = val);
                   },
                 ),
-
                 RoundedInputField2(
                   hintText: sp + "               وصف",
                   validator: (val) => val!.isEmpty
@@ -256,105 +235,103 @@ class _RegisterAsCoatchState extends State<RegisterAsCoatch> {
                   },
                 ),
                 SizedBox(height: 20.0),
-
-                
- Text(
+                Text(
                   ':اختر سعر التدريب لساعتين',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16.0),
                 ),
-     SizedBox(height: 10.0),
-   Padding( padding: EdgeInsets.symmetric(horizontal: 120, vertical: 3),
-   child:             
+                SizedBox(height: 10.0),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 120, vertical: 3),
+                  child:
 //  NumberInputWithIncrementDecrement(
 
-Center(
-          child: Container(
-            width: 120.0,
-            foregroundDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              // border: Border.all(
-              //   color: Colors.white,
-              //   width: 0.0,
-              // ),
-            ),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(8.0),
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10.0),
-                      // ),
-                    ),
-                    controller: _controller,
-                    keyboardType: TextInputType.numberWithOptions(
-                      decimal: false,
-                      signed: true,
-                    ),
-                    inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 38.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        
-                        child: InkWell(
-                          child: Icon(
-                            Icons.arrow_drop_up,
-                            size: 18.0,
+                      Center(
+                    child: Container(
+                      width: 120.0,
+                      foregroundDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        // border: Border.all(
+                        //   color: Colors.white,
+                        //   width: 0.0,
+                        // ),
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(8.0),
+                                // border: OutlineInputBorder(
+                                //   borderRadius: BorderRadius.circular(10.0),
+                                // ),
+                              ),
+                              controller: _controller,
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: false,
+                                signed: true,
+                              ),
+                              inputFormatters: <TextInputFormatter>[
+                                WhitelistingTextInputFormatter.digitsOnly
+                              ],
+                            ),
                           ),
-                          onTap: () {
-                            int currentValue = int.parse(_controller.text);
-                            setState(() {
-                              currentValue= currentValue+10;
-                               _controller.text =
-                                (currentValue < 500 ? currentValue : 500)
-                                    .toString(); 
-                              //_controller.text = (currentValue).toString(); // incrementing value
-                            });
-                          },
-                        ),
+                          Container(
+                            height: 38.0,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  child: InkWell(
+                                    child: Icon(
+                                      Icons.arrow_drop_up,
+                                      size: 18.0,
+                                    ),
+                                    onTap: () {
+                                      int currentValue =
+                                          int.parse(_controller.text);
+                                      setState(() {
+                                        currentValue = currentValue + 10;
+                                        _controller.text = (currentValue < 500
+                                                ? currentValue
+                                                : 500)
+                                            .toString();
+                                        //_controller.text = (currentValue).toString(); // incrementing value
+                                      });
+                                    },
+                                  ),
+                                ),
+                                InkWell(
+                                  child: Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 18.0,
+                                  ),
+                                  onTap: () {
+                                    int currentValue =
+                                        int.parse(_controller.text);
+                                    setState(() {
+                                      //print("hello state");
+                                      currentValue = currentValue - 10;
+                                      _controller.text = (currentValue > 100
+                                              ? currentValue
+                                              : 100)
+                                          .toString();
+                                      // decrementing value
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      InkWell(
-                        child: Icon(
-                          Icons.arrow_drop_down,
-                          size: 18.0,
-                        ),
-                        onTap: () {
-                          int currentValue = int.parse(_controller.text);
-                          setState(() {
-                            //print("hello state");
-                            currentValue= currentValue-10;
-                            _controller.text =
-                                (currentValue > 100 ? currentValue : 100)
-                                    .toString(); 
-                              // decrementing value
-                          });
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      
-   ),
-  
-     SizedBox(height: 27.0),
-
-
+                SizedBox(height: 27.0),
                 Text(
                   ':اختر منطقتك السكنية أو المنطقة التي تريد التدرب فيها',
                   textAlign: TextAlign.center,
@@ -365,7 +342,12 @@ Center(
                     DropdownButton(
                       items: items.map((itemsName) {
                         return DropdownMenuItem(
-                            value: itemsName, child: Center(child: Text(itemsName,textAlign: TextAlign.center,)));
+                            value: itemsName,
+                            child: Center(
+                                child: Text(
+                              itemsName,
+                              textAlign: TextAlign.center,
+                            )));
                       }).toList(),
                       onChanged: (String? newValue) {
                         setState(() {
@@ -375,7 +357,9 @@ Center(
                       },
                       value: dropdownValue,
                       //isExpanded: true,
-                      icon: Icon(Icons.arrow_drop_down, ),
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                      ),
                       iconEnabledColor: Colors.black,
                     )
                   ],
@@ -561,7 +545,7 @@ Center(
         //Upload to Firebase
         var snapshot = await _storage
             .ref()
-            .child('Coaches Licenses/license')
+            .child('Coaches Licenses/${image.path}')
             .putFile(file);
 
         var downloadUrl = await snapshot.ref.getDownloadURL();

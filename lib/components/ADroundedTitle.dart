@@ -5,15 +5,15 @@ import 'package:flutter/src/services/text_formatter.dart';
 import 'package:meras/components/text_field_container.dart';
 import 'package:meras/constants.dart';
 
-class RoundedInputField2 extends StatelessWidget {
+class ADroundedTitle extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final FormFieldValidator validator;
   final ValueChanged<String> onChanged;
-  const RoundedInputField2({
+  const ADroundedTitle({
     Key? key,
     required this.hintText,
-    this.icon = Icons.person,
+    this.icon = Icons.article_rounded,
     required this.onChanged,
     required this.validator,
   }) : super(key: key);
