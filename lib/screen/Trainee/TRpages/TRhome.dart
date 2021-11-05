@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:meras/screen/Trainee/TRpages/TRny.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -83,6 +85,17 @@ class _HomePageState extends State<TRhome> {
                     fontSize: 17,
                     color: Colors.black),
               ),
+
+              // SizedBox(height: 50.0),
+              // SizedBox(height: 50.0),
+              // SizedBox(height: 40.0),
+              // Center(
+              //   child:
+              //       RoundedButtonAdmin(text: 'إرشادات القيادة', press: () {}),
+
+              // ),
+              // RoundedButtonAdmin(text: 'اختبر معلوماتك', press: () {}),
+
               //SizedBox(height: 20.0),
               // RoundedHomeButton(
               //     text: 'إشارات السير',
@@ -98,9 +111,9 @@ class _HomePageState extends State<TRhome> {
               //   iconSize: 350,
               //   onPressed: () {},
               // ),
-              SizedBox(height: 50.0),
               SizedBox(height: 20.0),
-              SizedBox(height: 20.0),
+              // SizedBox(height: 20.0),
+              // SizedBox(height: 20.0),
               // Transform.scale(
               //   scale: 11.0,
               //   child: IconButton(
@@ -109,61 +122,68 @@ class _HomePageState extends State<TRhome> {
               //   ),
               // ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                // child: TextButton(
-                //     onPressed: () {
-
-                //     },
-                //     style: ButtonStyle(
-                //         minimumSize: MaterialStateProperty.all(Size(120, 80)),
-                //         shape: MaterialStateProperty.all<OutlinedBorder>(
-                //             RoundedRectangleBorder(
-                //                 borderRadius: BorderRadius.circular(20))),
-                //         backgroundColor: MaterialStateProperty.all(
-                //             Colors.purple.withOpacity(0.4))),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.center,
-                //       children: [
-                //         Text('اشارات السير',
-                //             style: TextStyle(
-                //                 color: Colors.black,
-                //                 fontSize: 22,
-                //                 fontWeight: FontWeight.w600)),
-                //         SizedBox(width: 30),
-                //         Image.asset('assets/icons/Picture1.png',
-                //             width: 40, height: 40)
-                //       ],
-                //     )),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                child: TextButton(
+                    onPressed: () {
+                      Get.to(TRny());
+                    },
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(29))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.deepPurple[50])),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'إرشادات القيادة',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(width: 30),
+                        Image.asset('assets/icons/SteeringWheel.png',
+                            width: 60, height: 60)
+                      ],
+                    )),
               ),
-              SizedBox(height: 30),
+              // SizedBox(height: 1),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                // child: TextButton(
-                //     onPressed: () {},
-                //     style: ButtonStyle(
-                //         minimumSize: MaterialStateProperty.all(Size(120, 70)),
-                //         backgroundColor: MaterialStateProperty.all(
-                //             Colors.purple.withOpacity(0.4))),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.center,
-                //       children: [
-                //         Text('اشارات السير',
-                //             style: TextStyle(
-                //                 color: Colors.black,
-                //                 fontSize: 18,
-                //                 fontWeight: FontWeight.w600)),
-                //         SizedBox(width: 10),
-                //         Image.asset('assets/icons/Picture2.png',
-                //             width: 40, height: 40)
-                //       ],
-                //     )),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                child: TextButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(29))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.deepPurple[50])),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('اختبر معلوماتك',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500)),
+                        SizedBox(width: 30),
+                        Image.asset('assets/icons/Test.png',
+                            width: 60, height: 60)
+                      ],
+                    )),
               ),
 
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 20.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 20.0),
               // Transform.scale(
               //   scale: 11.0,
               //   child: IconButton(
