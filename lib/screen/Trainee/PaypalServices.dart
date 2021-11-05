@@ -6,11 +6,11 @@ import 'package:http_auth/http_auth.dart';
 class PaypalServices {
 
   String domain = "https://api.sandbox.paypal.com"; // for sandbox mode
-//  String domain = "https://api.paypal.com"; // for production mode
+//  String domain = "https://api.paypal.com"; // for production mode (I won't use it)
 
-  // change clientId and secret with your own, provided by paypal
-  String clientId = 'Ab4vS4vmfQFgUuQMH49F9Uy3L1FdNHtfGrASCyjNijm_EkHWCFM96ex0la-YFbwavw41R3rTKU3k_Bbm';
-  String secret = 'EDjvPfYgTYqdYWR2BfOiBW4dz_jeeuadqH7Z98pZMDvY33PcViiooqYFWVPFSGbfKBfNOb3LnroSI1hv';
+  
+  String clientId = 'AXPJLwJq4o_lGcTIMiv-dUjFDN1YGbmLa9MB4n_E7XqSDsQNwSYxmLB7cO6h-fgQ8uFFFZH8z0JrbVRK';
+  String secret = 'EABonTVaH7xCvByxqFWEH_XM898x0N6kYJpENmLYOarzOvNaqY_TSbKvzu_ND9wKMDeJUz2bcr4MQeLV';
 
   // for getting the access token from Paypal
   Future<String?> getAccessToken() async {

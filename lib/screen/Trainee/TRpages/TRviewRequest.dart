@@ -292,9 +292,33 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
-                            ],
+             TableRow(children: [
+                               Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                       document['Price'] + ' ريال ',
+                                      style: TextStyle(
+                                        height: 1.49,
+                                        fontSize: 16.3,
+                                        color: Colors.grey,
+                                      ),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':السعر',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
+                            ],        
                           ),
                         ),
+
+
+                        
                         SizedBox(
                           height: 24,
                         ),
@@ -314,7 +338,13 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                           ElevatedButton(
                             child: Text('الدفع'),
                             onPressed: () {
- Navigator.of(context).push(
+
+
+                                var baseDialog = BaseAlertDialog(
+                    title: "",
+                    content: " 'سوف يتم تحويلك لخدمة 'باي بال"+ "\nلدفع مبلغ "+   document['Price'] + ' ريال '+ "\nهل أنت متأكد من إتمام العملية؟",
+                    yesOnPressed: () async {
+                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) => PaypalPayment(
                               onFinish: (number) async {
@@ -327,7 +357,21 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                           ),
                         );
 
+                      //print("hellppp");
+                      Navigator.of(context, rootNavigator: true).pop('dialog');//عكستهم
+                      //Navigator.of(context).push(
+                             //  MaterialPageRoute(builder: (context) => SignIn()),//CHANGE IT
+                             //); 
+                    },
 
+                    noOnPressed: () {
+                      Navigator.of(context, rootNavigator: true).pop('dialog');
+                    },
+                    yes: "نعم",
+                    no: "لا");
+                showDialog(context: context, builder: (BuildContext context) => baseDialog);
+                          
+                       
                             },
                             style: ElevatedButton.styleFrom(
                                 shape: StadiumBorder(),
@@ -401,4 +445,3 @@ Widget notPaid() => ElevatedButton(
           textStyle: TextStyle(fontSize: 16)),
     );
 
-Widget Paid(DocumentSnapshot document) => Text('');
