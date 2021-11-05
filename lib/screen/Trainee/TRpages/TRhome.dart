@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
 import 'package:meras/services/auth.dart';
@@ -15,7 +16,6 @@ import 'package:meras/screen/authenticate/background2.dart';
 
 class TRhome extends StatefulWidget {
   TRhome();
-
   AuthService aut = AuthService();
   //final String? userId;
 
@@ -42,9 +42,8 @@ class _HomePageState extends State<TRhome> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
-        //title: Text('Side menu'),
+        title: Text('                 الصفحة الرئيسية'),
         backgroundColor: Colors.deepPurple[100],
-        //backgroundColor: kPrimaryColor,
       ),
       body: SingleChildScrollView(
         child: Background(
@@ -102,25 +101,76 @@ class _HomePageState extends State<TRhome> {
               SizedBox(height: 50.0),
               SizedBox(height: 20.0),
               SizedBox(height: 20.0),
-              Transform.scale(
-                scale: 11.0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: new Image.asset('assets/images/trafficsigns.png'),
-                ),
+              // Transform.scale(
+              //   scale: 11.0,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: new Image.asset('assets/images/trafficsigns.png'),
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                // child: TextButton(
+                //     onPressed: () {
+
+                //     },
+                //     style: ButtonStyle(
+                //         minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                //         shape: MaterialStateProperty.all<OutlinedBorder>(
+                //             RoundedRectangleBorder(
+                //                 borderRadius: BorderRadius.circular(20))),
+                //         backgroundColor: MaterialStateProperty.all(
+                //             Colors.purple.withOpacity(0.4))),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Text('اشارات السير',
+                //             style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontSize: 22,
+                //                 fontWeight: FontWeight.w600)),
+                //         SizedBox(width: 30),
+                //         Image.asset('assets/icons/Picture1.png',
+                //             width: 40, height: 40)
+                //       ],
+                //     )),
               ),
+              SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                // child: TextButton(
+                //     onPressed: () {},
+                //     style: ButtonStyle(
+                //         minimumSize: MaterialStateProperty.all(Size(120, 70)),
+                //         backgroundColor: MaterialStateProperty.all(
+                //             Colors.purple.withOpacity(0.4))),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Text('اشارات السير',
+                //             style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontSize: 18,
+                //                 fontWeight: FontWeight.w600)),
+                //         SizedBox(width: 10),
+                //         Image.asset('assets/icons/Picture2.png',
+                //             width: 40, height: 40)
+                //       ],
+                //     )),
+              ),
+
               SizedBox(height: 40.0),
               SizedBox(height: 40.0),
               SizedBox(height: 40.0),
               SizedBox(height: 40.0),
               SizedBox(height: 20.0),
-              Transform.scale(
-                scale: 11.0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: new Image.asset('assets/images/test2.png'),
-                ),
-              ),
+              // Transform.scale(
+              //   scale: 11.0,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: new Image.asset('assets/images/test2.png'),
+              //   ),
+              // ),
               // IconButton(
               //   icon: Image.asset('assets/images/test2.png'),
               //   iconSize: 350,

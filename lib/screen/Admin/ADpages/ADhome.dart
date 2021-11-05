@@ -12,7 +12,7 @@ class ADhome extends StatelessWidget {
       extendBodyBehindAppBar: true,
       drawer: NavDraweradmin(),
       appBar: AppBar(
-        title: Text('الصفحة الرئيسية'),
+        title: Center(child: Text('الصفحة الرئيسية')),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: Column(

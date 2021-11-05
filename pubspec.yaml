@@ -76,7 +76,7 @@ flutter:
     - assets/images/main_top.png
     - assets/images/main_bottom.png
     - assets/images/login_bottom.png
-    - assets/icons/login.svg
+    - assets/icons/
     - assets/images/signup_top.png
     - assets/images/logo1.png
     - assets/images/driver-male.jpg
