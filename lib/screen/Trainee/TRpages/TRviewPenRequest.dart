@@ -257,6 +257,30 @@ class _ViewPendingRequestState extends State<ViewPendingRequest> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
+
+
+
+                              TableRow(children: [
+                               Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                       document['Price'] + ' ريال ',
+                                      style: TextStyle(
+                                        height: 1.49,
+                                        fontSize: 16.3,
+                                        color: Colors.grey,
+                                      ),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':السعر',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
                             ],
                           ),
                         ),
@@ -284,48 +308,7 @@ class _ViewPendingRequestState extends State<ViewPendingRequest> {
                                   await FirebaseFirestore.instance
                                       .collection('Requests')
                                       .doc(document.id)
-                                      .update({
-                                    'Status': 'C',
-                                  });
-                                  FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(document['Cid'])
-                                      .get()
-                                      .then((DocumentSnapshot em) async {
-                                    CollectionReference users =
-                                        FirebaseFirestore.instance
-                                            .collection('Coach');
-
-                                    users.doc(document['Cid']).update(
-                                        {'CountDate': em['CountDate'] + 1});
-                                  });
-
-//
-                                  FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(document['Cid'])
-                                      .get()
-                                      .then((DocumentSnapshot em) async {
-                                    CollectionReference users =
-                                        FirebaseFirestore.instance
-                                            .collection('Coach');
-
-                                    users.doc(document['Cid']).update(
-                                        {'CountDate': em['CountDate'] + 1});
-                                  });
-// str apdate = document['DateTime'] request
-                                  Map<String, dynamic> DataDemo = {
-                                    "DateTime": document['DateTime']
-                                  };
-                                  FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(document['Cid'])
-                                      .collection('Dates')
-                                      .doc()
-                                      .set(DataDemo);
-
-//
-
+                                      .update({'Status': 'C'});
                                   Navigator.of(context, rootNavigator: true)
                                       .pop('dialog');
                                   var baseDialog2 = SignleBaseAlertDialog(
