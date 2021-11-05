@@ -12,6 +12,7 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../PaypalPayment.dart';
 import 'TRlessons.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -291,28 +292,76 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
-                            ],
+             TableRow(children: [
+                               Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                       document['Price'] + ' ريال ',
+                                      style: TextStyle(
+                                        height: 1.49,
+                                        fontSize: 16.3,
+                                        color: Colors.grey,
+                                      ),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':السعر',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
+                            ],        
                           ),
                         ),
+
+
+                        
                         SizedBox(
                           height: 24,
                         ),
-                        // Row(children: <Widget>[
-                        // Padding(
-                        // padding: EdgeInsets.symmetric(
-                        // horizontal: 12, vertical: 5)),
-                        // Center(child: Accept(document)),
-                        // SizedBox(width: 24),
-                        // Center(
-                        // child: Reject(document, document['Cid'],
-                        // document['DateTime']),
-                        // ),
-                        // ]),
+                 
 
                         if (document['Paid'] == 'false')
                           ElevatedButton(
                             child: Text('الدفع'),
-                            onPressed: () {},
+                            onPressed: () {
+
+
+                 var baseDialog = BaseAlertDialog(
+                    title: "",
+                    content: " 'سوف يتم تحويلك لخدمة 'باي بال"+ "\nلدفع مبلغ "+   document['Price'] + ' ريال '+ "\nهل أنت متأكد من إتمام العملية؟",
+                    yesOnPressed: () async {
+                         
+                         //هذي للدفع
+                        //  Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (BuildContext context) => PaypalPayment(
+                        //       onFinish: (number) async {
+
+                        //         // payment done
+                        //         print('order id: '+number);
+
+                        //       },
+                        //     ),
+                        //   ),
+                        // );
+
+                      //print("hellppp");
+                      Navigator.of(context, rootNavigator: true).pop('dialog');
+                    },
+
+                    noOnPressed: () {
+                      Navigator.of(context, rootNavigator: true).pop('dialog');
+                    },
+                    yes: "نعم",
+                    no: "لا");
+                showDialog(context: context, builder: (BuildContext context) => baseDialog);
+                          
+                       
+                            },
                             style: ElevatedButton.styleFrom(
                                 shape: StadiumBorder(),
                                 primary: Color(0xFF6F35A5),
@@ -385,4 +434,3 @@ Widget notPaid() => ElevatedButton(
           textStyle: TextStyle(fontSize: 16)),
     );
 
-Widget Paid(DocumentSnapshot document) => Text('');
