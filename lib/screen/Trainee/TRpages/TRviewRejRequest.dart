@@ -256,6 +256,34 @@ class _ViewRejectedRequestState extends State<ViewRejectedRequest> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
+
+                    TableRow(children: [
+                               Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                       document['Price'] + ' ريال ',
+                                      style: TextStyle(
+                                        height: 1.49,
+                                        fontSize: 16.3,
+                                        color: Colors.grey,
+                                      ),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':السعر',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
+                        
+
+
+
+
+
                             ],
                           ),
                         ),
