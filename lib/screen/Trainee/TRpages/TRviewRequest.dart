@@ -9,10 +9,11 @@ import 'package:flutter/rendering.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
-import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //import '../PaypalPayment.dart';
+
+import 'Rate.dart';
 import 'TRlessons.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -27,6 +28,8 @@ class ViewLessonsInfo extends StatefulWidget {
 
 class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
   final ScrollController _scrollController = ScrollController();
+
+  late int rating = 0;
 
   void initState() {
     super.initState();
@@ -71,7 +74,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
         alignment: const Alignment(0, -0.4),
         child: Container(
           width: 307,
-          height: 455,
+          height: 560,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -93,7 +96,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                     Widget>[
               Container(
                 height:
-                    440, ////////////////////////////////////////////////////////////////
+                    550, ////////////////////////////////////////////////////////////////
                 //child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
@@ -229,37 +232,6 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.right,
                                     )),
                               ]),
-                              // TableRow(children: [
-                              // Container(
-                              // padding: EdgeInsets.all(2.0),
-                              // child: Text(
-                              // document['Gender'],
-                              // style: TextStyle(
-                              // height: 1.99,
-                              // fontSize: 16.37,
-                              // color: Colors.grey,
-                              // //height: 1
-                              // ),
-                              // textAlign: TextAlign.right,
-                              // ),
-                              // ),
-                              // Container(
-                              // padding: EdgeInsets.all(2.0),
-                              // child: Text(
-                              // ':الجنس',
-                              // style: TextStyle(
-                              // fontSize: 18.0,
-                              // ),
-                              // textAlign: TextAlign.end,
-                              // )),
-                              // ]),
-                              // TableRow(children: [
-                              // Column(children: [Text('')]),
-                              // Column(children: [
-                              // Text('')
-                              // ]), //Column(children:[Text('')]),
-                              // ]),
-
                               TableRow(children: [
                                 Container(
                                   height: 35,
@@ -313,11 +285,29 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
+                              TableRow(children: [
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      document['Rate'].toString(),
+                                      style: TextStyle(
+                                        height: 1.49,
+                                        fontSize: 16.3,
+                                        color: Colors.grey,
+                                      ),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text(
+                                      ':تقييمك الحالي',
+                                      style: TextStyle(fontSize: 18.0),
+                                      textAlign: TextAlign.end,
+                                    )),
+                              ]),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 24,
                         ),
                         if (document['Paid'] == 'false')
                           ElevatedButton(
@@ -366,15 +356,65 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                 textStyle: TextStyle(fontSize: 16)),
                           )
                         else
-                          Center(
-                            child: Text(
-                              'تم الدفع',
-                              style: TextStyle(
-                                  fontSize: 18.5,
-                                  color: Colors.green[600],
-                                  fontWeight: FontWeight.bold),
+                          Column(children: <Widget>[
+                            Container(
+                              //  height: 25,
+                              //   width: 70,
+                              child: Text(
+                                ' : قيم تجربتك مع المدرب',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
                             ),
-                          )
+
+                            Container(
+                              // height: 44,
+                              //width: 110,
+                              child: StarRating(
+                                rating: rating,
+                                onRatingChanged: (rating) =>
+                                    setState(() => this.rating = rating),
+                                color: Colors.amberAccent.shade400,
+                              ),
+                            ),
+
+//FirebaseFirestore s=FirebaseFirestore.collection('Requests')
+                            //             .where(FieldPath.documentId, isEqualTo: widget.id)
+                            //            .snapshots();
+
+                            //   Container(child: Text(update(document['Rate']))),
+                            ElevatedButton(
+                              child: Text(
+                                'حفظ التقييم',
+                              ),
+                              //  disabledColor:
+                              onPressed: () {
+                                FirebaseFirestore.instance
+                                    .collection('Requests')
+                                    .doc(widget.id)
+                                    .update({'Rate': rating});
+                                print(rating);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  shape: StadiumBorder(),
+                                  primary: Color(0xFF6F35A5),
+                                  textStyle: TextStyle(fontSize: 16)),
+                            ),
+                            ElevatedButton(
+                              child: Text(' تم الدفع',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.green[800])),
+                              //  disabledColor:
+                              onPressed: null,
+                              style: ElevatedButton.styleFrom(
+                                shape: StadiumBorder(),
+                                onSurface: Colors.greenAccent[700],
+                              ),
+                            ),
+                          ]),
                       ]),
                     ),
                     ////////////////////////end of the table

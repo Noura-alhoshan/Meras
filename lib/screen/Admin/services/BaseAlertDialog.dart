@@ -30,10 +30,10 @@ class BaseAlertDialog extends StatelessWidget {
     String space = '                       ';
     return AlertDialog(
       shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            contentPadding: EdgeInsets.only(top: 24.0),
+          borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      contentPadding: EdgeInsets.only(top: 24.0),
       content: new Text(this._content,
-          style: TextStyle( 
+          style: TextStyle(
             fontSize: 15.7,
             //fontWeight: FontWeight.bold,
           ),
