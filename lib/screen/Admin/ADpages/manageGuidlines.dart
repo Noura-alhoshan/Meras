@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/screen/Admin/ADpages/addGuidlines.dart';
+import 'package:meras/screen/Admin/ADpages/editGuidlines.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/authenticate/background.dart';
 
@@ -80,8 +81,8 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                 child: Center(
                   child: FlatButton(
                     onPressed: () => {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => AddGuidlines()))
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EditGuidlines()))
                     },
                     padding: EdgeInsets.all(5.0),
                     child: Center(
