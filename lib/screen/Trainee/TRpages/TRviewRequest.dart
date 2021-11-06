@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
@@ -74,7 +75,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
         alignment: const Alignment(0, -0.4),
         child: Container(
           width: 307,
-          height: 560,
+          height: 590,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -96,7 +97,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                     Widget>[
               Container(
                 height:
-                    550, ////////////////////////////////////////////////////////////////
+                    580, ////////////////////////////////////////////////////////////////
                 //child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
@@ -289,7 +290,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                 Container(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                      document['Rate'].toString(),
+                                      document['TRate'].toString(),
                                       style: TextStyle(
                                         height: 1.49,
                                         fontSize: 16.3,
@@ -369,6 +370,9 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                 textAlign: TextAlign.start,
                               ),
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
 
                             Container(
                               // height: 44,
@@ -380,7 +384,9 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                 color: Colors.amberAccent.shade400,
                               ),
                             ),
-
+                            SizedBox(
+                              height: 5,
+                            ),
 //FirebaseFirestore s=FirebaseFirestore.collection('Requests')
                             //             .where(FieldPath.documentId, isEqualTo: widget.id)
                             //            .snapshots();
@@ -392,19 +398,64 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                               ),
                               //  disabledColor:
                               onPressed: () {
+                                if (document['TRate'] == 0) {
+                                  FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(document['Cid'])
+                                      .get()
+                                      .then((DocumentSnapshot em) async {
+                                    CollectionReference users =
+                                        FirebaseFirestore.instance
+                                            .collection('Coach');
+
+                                    users.doc(document['Cid']).update(
+                                        {'ReqCount': em['ReqCount'] + 1});
+                                  });
+
+                                  FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(document['Cid'])
+                                      .get()
+                                      .then((DocumentSnapshot em) async {
+                                    CollectionReference users =
+                                        FirebaseFirestore.instance
+                                            .collection('Coach');
+                                    if (em['Rate'] > 0) {
+                                      print("here1");
+                                      var num1 = (rating - em['Rate']);
+                                      print(
+                                          "this rate here1 " + num1.toString());
+
+                                      users.doc(document['Cid']).update({
+                                        'Rate': (em['Rate'] +
+                                            ((num1) / em['ReqCount']))
+                                      });
+                                    } else {
+                                      print("here2 is zero");
+
+                                      users
+                                          .doc(document['Cid'])
+                                          .update({'Rate': rating});
+                                    }
+                                  });
+                                }
                                 FirebaseFirestore.instance
                                     .collection('Requests')
                                     .doc(widget.id)
-                                    .update({'Rate': rating});
+                                    .update({'TRate': rating});
                                 print(rating);
                               },
+
                               style: ElevatedButton.styleFrom(
                                   shape: StadiumBorder(),
                                   primary: Color(0xFF6F35A5),
                                   textStyle: TextStyle(fontSize: 16)),
                             ),
+                            SizedBox(
+                              height: 15,
+                            ),
                             ElevatedButton(
-                              child: Text(' تم الدفع',
+                              child: Text('   تم الدفع  ',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.green[800])),
                               //  disabledColor:
