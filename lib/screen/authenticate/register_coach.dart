@@ -561,7 +561,7 @@ Center(
         //Upload to Firebase
         var snapshot = await _storage
             .ref()
-            .child('Coaches Licenses/license')
+            .child('Coaches Licenses/${image.path}')
             .putFile(file);
 
         var downloadUrl = await snapshot.ref.getDownloadURL();
