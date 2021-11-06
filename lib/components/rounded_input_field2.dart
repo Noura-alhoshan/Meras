@@ -38,7 +38,7 @@ class RoundedInputField2 extends StatelessWidget {
         ),
         //maxLength: 8,
         inputFormatters: [
-          new LengthLimitingTextInputFormatter(350),
+          new LengthLimitingTextInputFormatter(150),
         ],
       ),
     );
