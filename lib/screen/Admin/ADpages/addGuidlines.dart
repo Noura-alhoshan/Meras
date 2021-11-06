@@ -9,6 +9,7 @@ import 'package:meras/components/ADroundedTitle.dart';
 import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/constants.dart';
+import 'package:meras/screen/Admin/ADpages/ADhome.dart';
 import 'package:meras/screen/Admin/ADpages/manageGuidlines.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/authenticate/background2.dart';
@@ -50,7 +51,7 @@ class _AddGuidlinesState extends State<AddGuidlines> {
   String imageUrl = '';
 
   String title = '';
-  String type = 'Y';
+  String type = 'W';
   String sp = '      ';
 
   @override
@@ -118,6 +119,17 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                         setState(() {
                           dropdownValue = newValue!;
                           type = newValue;
+                          if (dropdownValue.contains('الإشارات التحذيرية')) {
+                            type = 'W';
+                          } else if (dropdownValue
+                              .contains('الإشارات التنظيمية - الممنوعات')) {
+                            type = 'N';
+                          } else if (dropdownValue
+                              .contains('الإشارات التنظيمية - الإجبارية')) {
+                            type = 'Y';
+                          } else {
+                            type = 'G';
+                          }
                         });
                       },
                       value: dropdownValue,
@@ -183,6 +195,9 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                               title: "",
                               content: "هل أنت متأكد من إضافة إشارة السير؟",
                               yesOnPressed: () async {
+                                // if(type){
+
+                                // }
                                 addGuidlines(uid, title, type, imageUrl);
                                 var baseDialog2 = SignleBaseAlertDialog(
                                   title: '',
@@ -272,7 +287,7 @@ class _AddGuidlinesState extends State<AddGuidlines> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return ManageGuidlines();
+        return ADhome();
         //return RequestLessonPage(icd);
       }),
     );
