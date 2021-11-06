@@ -10,6 +10,7 @@ import 'package:meras/screen/Coach/COcategory.dart';
 import 'package:meras/screen/Trainee/TRcategory.dart';
 import 'package:meras/screen/Trainee/TRpages/DraftF.dart';
 import 'package:meras/screen/Trainee/TRpages/SendRequest.dart';
+import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/Trainee/TRpages/TRnotification.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         home:
+            // TRguidelines(),
             //SignIn(),
             // ADcategory(),
             TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),

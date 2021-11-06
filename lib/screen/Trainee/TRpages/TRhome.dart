@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/Trainee/TRpages/TRny.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,6 @@ import 'package:meras/services/auth.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/screen/authenticate/background2.dart';
-
-//this home page will be edited to fit our app, this one is just for testing ^_^
-
-// CollectionReference firevar = FirebaseFirestore.instance.collection('users');
 
 class TRhome extends StatefulWidget {
   TRhome();
@@ -126,7 +123,7 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(TRny());
+                      Get.to(TRguidelines());
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
