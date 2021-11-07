@@ -35,55 +35,58 @@ class _TRwarning extends State<TRwarning> {
       ),
       body: SingleChildScrollView(
         child: Background(
-          child: Column(children: <Widget>[
-            Container(
-              height: 120,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Card(
-                elevation: 6,
-                shadowColor: Colors.deepPurple[500],
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(18),
-                    borderSide: BorderSide(color: Colors.white, width: 1)),
-                child: Container(
-                  height: 150,
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 8,
-                        child: SizedBox.expand(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "الإشارات التحذيرية",
-                                style: TextStyle(height: 2.5, fontSize: 25),
-                                // maxLines: 1,
-                                textAlign: TextAlign.right,
-                              ),
-                            ],
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 120,
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Card(
+                  elevation: 6,
+                  shadowColor: Colors.deepPurple[500],
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      borderSide: BorderSide(color: Colors.white, width: 1)),
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 8,
+                          child: SizedBox.expand(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "الإشارات التحذيرية",
+                                  style: TextStyle(height: 2.5, fontSize: 25),
+                                  // maxLines: 1,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Image.asset('assets/icons/Warning.png',
-                              width: 70, height: 70),
+                        Flexible(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Image.asset('assets/icons/Warning.png',
+                                width: 70, height: 70),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 40.0),
-            SizedBox(height: 50.0),
-            SizedBox(height: 50.0),
-          ], crossAxisAlignment: CrossAxisAlignment.stretch),
+              SizedBox(height: 160.0),
+              SizedBox(height: 150.0),
+              SizedBox(height: 160.0),
+              SizedBox(height: 160.0),
+            ],
+          ),
         ),
       ),
     );

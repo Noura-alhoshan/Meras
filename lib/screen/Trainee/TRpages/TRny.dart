@@ -30,7 +30,7 @@ class TRny extends StatelessWidget {
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            // title: Text('إرشادات القيادة'),
+            title: Center(child: Text('الإرشادات التنظيمية ')),
           ),
           // body: TabBarView(
           //   children: [
