@@ -72,7 +72,7 @@ class _TRgeneral extends State<TRgeneral> {
                           flex: 2,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: Image.asset('assets/icons/TrafficLight.png',
+                            child: Image.asset('assets/icons/TrafficLight1.png',
                                 width: 70, height: 70),
                           ),
                         ),

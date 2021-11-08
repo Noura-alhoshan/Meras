@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../constants.dart';
 
 class TRny extends StatelessWidget {
@@ -30,7 +31,14 @@ class TRny extends StatelessWidget {
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Center(child: Text('الإرشادات التنظيمية ')),
+            title: Center(
+                child: Row(
+              children: [
+                IconButton(onPressed: Get.back, icon: Icon(Icons.arrow_back)),
+                SizedBox(width: 50),
+                Center(child: Text('الإرشادات التنظيمية ')),
+              ],
+            )),
           ),
           // body: TabBarView(
           //   children: [

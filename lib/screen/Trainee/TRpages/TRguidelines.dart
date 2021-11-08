@@ -79,7 +79,7 @@ class _TRguidelines extends State<TRguidelines> {
                             child: Padding(
                               padding: const EdgeInsets.all(2.0),
                               child: Image.asset(
-                                  'assets/icons/TrafficLight.png',
+                                  'assets/icons/TrafficLight1.png',
                                   width: 70,
                                   height: 70),
                             ),
@@ -129,7 +129,7 @@ class _TRguidelines extends State<TRguidelines> {
                             flex: 2,
                             child: Padding(
                               padding: const EdgeInsets.all(2.0),
-                              child: Image.asset('assets/icons/Warning.png',
+                              child: Image.asset('assets/icons/Warning1.png',
                                   width: 70, height: 70),
                             ),
                           ),

@@ -143,7 +143,7 @@ class _HomePageState extends State<TRhome> {
                               fontWeight: FontWeight.w500),
                         ),
                         SizedBox(width: 30),
-                        Image.asset('assets/icons/SteeringWheel.png',
+                        Image.asset('assets/icons/SteeringWheel1.png',
                             width: 60, height: 60)
                       ],
                     )),
@@ -170,7 +170,7 @@ class _HomePageState extends State<TRhome> {
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500)),
                         SizedBox(width: 30),
-                        Image.asset('assets/icons/Test.png',
+                        Image.asset('assets/icons/Test1.png',
                             width: 60, height: 60)
                       ],
                     )),
