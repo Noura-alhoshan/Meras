@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants.dart';
+import 'card_list_widget.dart';
 
 class TRny extends StatelessWidget {
   @override
@@ -40,16 +41,14 @@ class TRny extends StatelessWidget {
               ],
             )),
           ),
-          // body: TabBarView(
-          //   children: [
-          //     // Text('المرفوضة'),
-          //     // Text('المعلقة'),
-          //     // Text('المقبولة'),
-          //     new RejectedLessons(),
-          //     new PendingLessons(),
-          //     new AcceptedLessons(),
-          //   ],
-          // ),
+          body: TabBarView(
+            children: [
+              CardListWidget(type: 'N'),
+              CardListWidget(
+                type: 'Y',
+              ),
+            ],
+          ),
         ),
       ),
     );
