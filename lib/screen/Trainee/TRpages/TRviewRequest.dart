@@ -322,17 +322,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                         SizedBox(
                           height: 24,
                         ),
-                        // Row(children: <Widget>[
-                        // Padding(
-                        // padding: EdgeInsets.symmetric(
-                        // horizontal: 12, vertical: 5)),
-                        // Center(child: Accept(document)),
-                        // SizedBox(width: 24),
-                        // Center(
-                        // child: Reject(document, document['Cid'],
-                        // document['DateTime']),
-                        // ),
-                        // ]),
+                 
 
                         if (document['Paid'] == 'false')
                           ElevatedButton(
@@ -340,10 +330,12 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             onPressed: () {
 
 
-                                var baseDialog = BaseAlertDialog(
+                 var baseDialog = BaseAlertDialog(
                     title: "",
                     content: " 'سوف يتم تحويلك لخدمة 'باي بال"+ "\nلدفع مبلغ "+   document['Price'] + ' ريال '+ "\nهل أنت متأكد من إتمام العملية؟",
                     yesOnPressed: () async {
+                         
+                         //هذي للدفع
                          Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) => PaypalPayment(
@@ -358,10 +350,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                         );
 
                       //print("hellppp");
-                      Navigator.of(context, rootNavigator: true).pop('dialog');//عكستهم
-                      //Navigator.of(context).push(
-                             //  MaterialPageRoute(builder: (context) => SignIn()),//CHANGE IT
-                             //); 
+                      Navigator.of(context, rootNavigator: true).pop('dialog');
                     },
 
                     noOnPressed: () {
