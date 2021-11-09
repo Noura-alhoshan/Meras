@@ -75,7 +75,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
         alignment: const Alignment(0, -0.4),
         child: Container(
           width: 307,
-          height: 590,
+          height: 570,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -97,7 +97,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                     Widget>[
               Container(
                 height:
-                    580, ////////////////////////////////////////////////////////////////
+                    560, ////////////////////////////////////////////////////////////////
                 //child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
@@ -111,373 +111,442 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                   )),
                   // height: 1200,
                   padding: EdgeInsets.symmetric(vertical: 0, horizontal: 00),
-                  child: Column(children: <Widget>[
-                    SizedBox(
-                      height: 6,
-                    ),
-                    new ListTile(
-                      //leading: const Icon(Icons.today),
-                      title: Text(
-                        document['DateTime'].toString().substring(17, 19) ==
-                                'AM'
-                            ? 'يوم ' +
-                                getArabicdays(document['DateTime'].toString()) +
-                                ' ' +
-                                document['DateTime']
-                                    .toString()
-                                    .substring(0, 10) +
-                                '\n'
-                                    ' الوقت: ' +
-                                document['DateTime']
-                                    .toString()
-                                    .substring(11, 16) +
-                                ' صباحا '
-                            : 'يوم ' +
-                                getArabicdays(document['DateTime'].toString()) +
-                                ' ' +
-                                document['DateTime']
-                                    .toString()
-                                    .substring(0, 10) +
-                                '\n'
-                                    ' الوقت: ' +
-                                document['DateTime']
-                                    .toString()
-                                    .substring(11, 16) +
-                                ' مساءً ',
-                        style: TextStyle(height: 2.2, fontSize: 17.6),
-                        textAlign: TextAlign.right,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 6,
                       ),
-                      //subtitle: Text('February 20, 1980'),
-                      trailing: IconButton(
-                        icon: Icon(Icons.today_rounded),
-                        iconSize: 64,
-                        color: Colors.purple[900],
-                        onPressed: () {},
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Divider(color: Colors.deepPurple[900]),
-
-                    Text(
-                      "معلومات المدرب ",
-                      style: TextStyle(
-                          fontSize: 22.5,
-                          //fontFamily: "Poppins-Bold",
-                          letterSpacing: .6,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.purple[900]),
-                      textAlign: TextAlign.left,
-                    ),
-
-                    //here is the table ################################################################3
-                    Container(
-                      child: Column(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(20),
-                          child: Table(
-                            defaultColumnWidth: FixedColumnWidth(108.0),
-                            // border: TableBorder.all(
-                            // color: Colors.white,
-                            // style: BorderStyle.solid,
-                            // width: 0),
-                            children: [
-                              TableRow(children: [
-                                Container(
-                                    padding: EdgeInsets.all(1.0),
-                                    child: Text(
-                                      document['CoachName'] +
-                                          ' ' +
-                                          document['CoachName2'],
-                                      // ' ' +
-                                      // document['Lname'],
-                                      style: TextStyle(
-                                          fontSize: 17.5,
-                                          color: Colors.grey,
-                                          height: 1.3),
-                                      textAlign: TextAlign.right,
-                                    )),
-
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      ':الاسم',
-                                      style: TextStyle(fontSize: 18.0),
-                                      textAlign: TextAlign.end,
-                                    )),
-
-                                //Column(children: [Text('')]),
-                                // Column(children: [
-                                // Text('')
-                              ]),
-                              TableRow(children: [
-                                //Column(children:[Text('')]),
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      document['Neighborhood'],
-                                      style: TextStyle(
-                                        height: 1.49,
-                                        fontSize: 16.3,
-                                        color: Colors.grey,
-                                      ),
-                                      textDirection: TextDirection.rtl,
-                                      textAlign: TextAlign.right,
-                                    )),
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      ':الحي السكني',
-                                      style: TextStyle(fontSize: 18.0),
-                                      textAlign: TextAlign.right,
-                                    )),
-                              ]),
-                              TableRow(children: [
-                                Container(
-                                  height: 35,
-                                  padding: EdgeInsets.all(2.0),
-                                  child: TextButton(
-                                      style: TextButton.styleFrom(
-                                          padding: const EdgeInsets.all(-90),
-                                          textStyle: TextStyle(
-                                            fontSize: 16,
-                                            // color: Colors.grey,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          )),
-                                      onPressed: () {
-                                        //const Text('Gradient',);
-                                        launch("tel://$ph");
-                                      },
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          document['CoachPhone'],
-                                        ),
-                                      )),
-                                ),
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      ':رقم الجوال',
-                                      style: TextStyle(fontSize: 18.0),
-                                      textAlign: TextAlign.end,
-                                    )),
-                              ]),
-                              TableRow(children: [
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      document['Price'] + ' ريال ',
-                                      style: TextStyle(
-                                        height: 1.49,
-                                        fontSize: 16.3,
-                                        color: Colors.grey,
-                                      ),
-                                      textDirection: TextDirection.rtl,
-                                      textAlign: TextAlign.right,
-                                    )),
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      ':السعر',
-                                      style: TextStyle(fontSize: 18.0),
-                                      textAlign: TextAlign.end,
-                                    )),
-                              ]),
-                              TableRow(children: [
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      document['TRate'].toString(),
-                                      style: TextStyle(
-                                        height: 1.49,
-                                        fontSize: 16.3,
-                                        color: Colors.grey,
-                                      ),
-                                      textDirection: TextDirection.rtl,
-                                      textAlign: TextAlign.right,
-                                    )),
-                                Container(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text(
-                                      ':تقييمك الحالي',
-                                      style: TextStyle(fontSize: 18.0),
-                                      textAlign: TextAlign.end,
-                                    )),
-                              ]),
-                            ],
-                          ),
+                      new ListTile(
+                        //leading: const Icon(Icons.today),
+                        title: Text(
+                          document['DateTime'].toString().substring(17, 19) ==
+                                  'AM'
+                              ? 'يوم ' +
+                                  getArabicdays(
+                                      document['DateTime'].toString()) +
+                                  ' ' +
+                                  document['DateTime']
+                                      .toString()
+                                      .substring(0, 10) +
+                                  '\n'
+                                      ' الوقت: ' +
+                                  document['DateTime']
+                                      .toString()
+                                      .substring(11, 16) +
+                                  ' صباحا '
+                              : 'يوم ' +
+                                  getArabicdays(
+                                      document['DateTime'].toString()) +
+                                  ' ' +
+                                  document['DateTime']
+                                      .toString()
+                                      .substring(0, 10) +
+                                  '\n'
+                                      ' الوقت: ' +
+                                  document['DateTime']
+                                      .toString()
+                                      .substring(11, 16) +
+                                  ' مساءً ',
+                          style: TextStyle(height: 2.2, fontSize: 17.6),
+                          textAlign: TextAlign.right,
                         ),
-                        if (document['Paid'] == 'false')
-                          ElevatedButton(
-                            child: Text('الدفع'),
-                            onPressed: () {
-                              var baseDialog = BaseAlertDialog(
-                                  title: "",
-                                  content: " 'سوف يتم تحويلك لخدمة 'باي بال" +
-                                      "\nلدفع مبلغ " +
-                                      document['Price'] +
-                                      ' ريال ' +
-                                      "\nهل أنت متأكد من إتمام العملية؟",
-                                  yesOnPressed: () async {
-                                    //هذي للدفع
-                                    //  Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //     builder: (BuildContext context) => PaypalPayment(
-                                    //       onFinish: (number) async {
+                        //subtitle: Text('February 20, 1980'),
+                        trailing: IconButton(
+                          icon: Icon(Icons.today_rounded),
+                          iconSize: 64,
+                          color: Colors.purple[900],
+                          onPressed: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Divider(color: Colors.deepPurple[900]),
 
-                                    //         // payment done
-                                    //         print('order id: '+number);
+                      Text(
+                        "معلومات المدرب ",
+                        style: TextStyle(
+                            fontSize: 22.5,
+                            //fontFamily: "Poppins-Bold",
+                            letterSpacing: .6,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.purple[900]),
+                        textAlign: TextAlign.left,
+                      ),
 
-                                    //       },
-                                    //     ),
-                                    //   ),
-                                    // );
-
-                                    //print("hellppp");
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop('dialog');
-                                  },
-                                  noOnPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop('dialog');
-                                  },
-                                  yes: "نعم",
-                                  no: "لا");
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      baseDialog);
-                            },
-                            style: ElevatedButton.styleFrom(
-                                shape: StadiumBorder(),
-                                primary: Color(0xFF6F35A5),
-                                textStyle: TextStyle(fontSize: 16)),
-                          )
-                        else
-                          Column(children: <Widget>[
+                      //here is the table ################################################################3
+                      Container(
+                        child: Column(
+                          children: <Widget>[
                             Container(
-                              //  height: 25,
-                              //   width: 70,
-                              child: Text(
-                                ' : قيم تجربتك مع المدرب',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
+                              margin: EdgeInsets.all(20),
+                              child: Table(
+                                defaultColumnWidth: FixedColumnWidth(108.0),
+                                // border: TableBorder.all(
+                                // color: Colors.white,
+                                // style: BorderStyle.solid,
+                                // width: 0),
+                                children: [
+                                  TableRow(children: [
+                                    Container(
+                                        padding: EdgeInsets.all(1.0),
+                                        child: Text(
+                                          document['CoachName'] +
+                                              ' ' +
+                                              document['CoachName2'],
+                                          // ' ' +
+                                          // document['Lname'],
+                                          style: TextStyle(
+                                              fontSize: 17.5,
+                                              color: Colors.grey,
+                                              height: 1.3),
+                                          textAlign: TextAlign.right,
+                                        )),
+
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ':الاسم',
+                                          style: TextStyle(fontSize: 18.0),
+                                          textAlign: TextAlign.end,
+                                        )),
+
+                                    //Column(children: [Text('')]),
+                                    // Column(children: [
+                                    // Text('')
+                                  ]),
+                                  TableRow(children: [
+                                    //Column(children:[Text('')]),
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          document['Neighborhood'],
+                                          style: TextStyle(
+                                            height: 1.49,
+                                            fontSize: 16.3,
+                                            color: Colors.grey,
+                                          ),
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.right,
+                                        )),
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ':الحي السكني',
+                                          style: TextStyle(fontSize: 18.0),
+                                          textAlign: TextAlign.right,
+                                        )),
+                                  ]),
+                                  TableRow(children: [
+                                    Container(
+                                      height: 35,
+                                      padding: EdgeInsets.all(2.0),
+                                      child: TextButton(
+                                          style: TextButton.styleFrom(
+                                              padding:
+                                                  const EdgeInsets.all(-90),
+                                              textStyle: TextStyle(
+                                                fontSize: 16,
+                                                // color: Colors.grey,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                              )),
+                                          onPressed: () {
+                                            //const Text('Gradient',);
+                                            launch("tel://$ph");
+                                          },
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Text(
+                                              document['CoachPhone'],
+                                            ),
+                                          )),
+                                    ),
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ':رقم الجوال',
+                                          style: TextStyle(fontSize: 18.0),
+                                          textAlign: TextAlign.end,
+                                        )),
+                                  ]),
+                                  TableRow(children: [
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          document['Price'] + ' ريال ',
+                                          style: TextStyle(
+                                            height: 1.49,
+                                            fontSize: 16.3,
+                                            color: Colors.grey,
+                                          ),
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.right,
+                                        )),
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ':السعر',
+                                          style: TextStyle(fontSize: 18.0),
+                                          textAlign: TextAlign.end,
+                                        )),
+                                  ]),
+                                  TableRow(children: [
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          document['TRate'].toString(),
+                                          style: TextStyle(
+                                            height: 1.49,
+                                            fontSize: 16.3,
+                                            color: Colors.grey,
+                                          ),
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.right,
+                                        )),
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ':تقييمك الحالي',
+                                          style: TextStyle(fontSize: 18.0),
+                                          textAlign: TextAlign.end,
+                                        )),
+                                  ]),
+                                ],
+                              ),
+                            ),
+                            if (document['Paid'] == 'false')
+                              ElevatedButton(
+                                child: Text('الدفع'),
+                                onPressed: () {
+                                  var baseDialog = BaseAlertDialog(
+                                      title: "",
+                                      content:
+                                          " 'سوف يتم تحويلك لخدمة 'باي بال" +
+                                              "\nلدفع مبلغ " +
+                                              document['Price'] +
+                                              ' ريال ' +
+                                              "\nهل أنت متأكد من إتمام العملية؟",
+                                      yesOnPressed: () async {
+                                        //هذي للدفع
+                                        //  Navigator.of(context).push(
+                                        //   MaterialPageRoute(
+                                        //     builder: (BuildContext context) => PaypalPayment(
+                                        //       onFinish: (number) async {
+
+                                        //         // payment done
+                                        //         print('order id: '+number);
+
+                                        //       },
+                                        //     ),
+                                        //   ),
+                                        // );
+
+                                        //print("hellppp");
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop('dialog');
+                                      },
+                                      noOnPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop('dialog');
+                                      },
+                                      yes: "نعم",
+                                      no: "لا");
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          baseDialog);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    shape: StadiumBorder(),
+                                    primary: Color(0xFF6F35A5),
+                                    textStyle: TextStyle(fontSize: 16)),
+                              )
+                            else
+                              Column(children: <Widget>[
+                                if (document['IsRate'] == 'false')
+                                  Container(
+                                    child: Column(children: <Widget>[
+                                      Table(columnWidths: {
+                                        0: FlexColumnWidth(10),
+                                        1: FlexColumnWidth(25),
+                                        //2: FlexColumnWidth(4),
+                                      }, children: [
+                                        TableRow(children: [
+                                          Container(),
+                                          Container(
+                                            //  height: 25,
+                                            //   width: 70,
+                                            child: Text(
+                                              ' : قيم تجربتك مع المدرب    .',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.black,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 35,
+                                          ),
+                                        ]),
+                                        TableRow(children: [
+                                          Container(),
+                                          Container(
+                                            // height: 44,
+                                            //width: 110,
+                                            child: StarRating(
+                                              rating: rating,
+                                              onRatingChanged: (rating) =>
+                                                  setState(() =>
+                                                      this.rating = rating),
+                                              color:
+                                                  Colors.amberAccent.shade400,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                        ]),
+                                      ]),
+                                      Container(
+                                        child: ElevatedButton(
+                                          child: Text(
+                                            'حفظ التقييم',
+                                          ),
+                                          //  disabledColor:
+                                          onPressed: () {
+                                            if (document['TRate'] == 0) {
+                                              FirebaseFirestore.instance
+                                                  .collection('Coach')
+                                                  .doc(document['Cid'])
+                                                  .get()
+                                                  .then((DocumentSnapshot
+                                                      em) async {
+                                                CollectionReference users =
+                                                    FirebaseFirestore.instance
+                                                        .collection('Coach');
+
+                                                users
+                                                    .doc(document['Cid'])
+                                                    .update({
+                                                  'ReqCount': em['ReqCount'] + 1
+                                                });
+                                              });
+
+                                              FirebaseFirestore.instance
+                                                  .collection('Coach')
+                                                  .doc(document['Cid'])
+                                                  .get()
+                                                  .then((DocumentSnapshot
+                                                      em) async {
+                                                CollectionReference users =
+                                                    FirebaseFirestore.instance
+                                                        .collection('Coach');
+                                                if (em['Rate'] > 0) {
+                                                  print("here1");
+                                                  var num1 =
+                                                      (rating - em['Rate']);
+                                                  print("this rate here1 " +
+                                                      num1.toString());
+
+                                                  users
+                                                      .doc(document['Cid'])
+                                                      .update({
+                                                    'Rate': (em['Rate'] +
+                                                        ((num1) /
+                                                            em['ReqCount']))
+                                                  });
+                                                } else {
+                                                  print("here2 is zero");
+
+                                                  users
+                                                      .doc(document['Cid'])
+                                                      .update({'Rate': rating});
+                                                }
+                                              });
+                                            }
+                                            FirebaseFirestore.instance
+                                                .collection('Requests')
+                                                .doc(widget.id)
+                                                .update({'TRate': rating});
+                                            print(rating);
+                                            FirebaseFirestore.instance
+                                                .collection('Requests')
+                                                .doc(widget.id)
+                                                .update({'IsRate': 'true'});
+                                          },
+
+                                          style: ElevatedButton.styleFrom(
+                                              shape: StadiumBorder(),
+                                              primary: Color(0xFF6F35A5),
+                                              textStyle:
+                                                  TextStyle(fontSize: 16)),
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+
+                                //FirebaseFirestore s=FirebaseFirestore.collection('Requests')
+                                //             .where(FieldPath.documentId, isEqualTo: widget.id)
+                                //            .snapshots();
+
+                                //   Container(child: Text(update(document['Rate']))),
+
+                                //  SizedBox(
+                                //  height: 15,
+                                // ),
+
+                                ElevatedButton(
+                                  child: Text('   تم الدفع  ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.green[800])),
+                                  //  disabledColor:
+                                  onPressed: null,
+                                  style: ElevatedButton.styleFrom(
+                                    shape: StadiumBorder(),
+                                    onSurface: Colors.greenAccent[700],
+                                  ),
                                 ),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
+                              ]),
+                          ],
+                        ),
+                      ),
 
-                            Container(
-                              // height: 44,
-                              //width: 110,
-                              child: StarRating(
-                                rating: rating,
-                                onRatingChanged: (rating) =>
-                                    setState(() => this.rating = rating),
-                                color: Colors.amberAccent.shade400,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-//FirebaseFirestore s=FirebaseFirestore.collection('Requests')
-                            //             .where(FieldPath.documentId, isEqualTo: widget.id)
-                            //            .snapshots();
-
-                            //   Container(child: Text(update(document['Rate']))),
-                            ElevatedButton(
-                              child: Text(
-                                'حفظ التقييم',
-                              ),
-                              //  disabledColor:
-                              onPressed: () {
-                                if (document['TRate'] == 0) {
-                                  FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(document['Cid'])
-                                      .get()
-                                      .then((DocumentSnapshot em) async {
-                                    CollectionReference users =
-                                        FirebaseFirestore.instance
-                                            .collection('Coach');
-
-                                    users.doc(document['Cid']).update(
-                                        {'ReqCount': em['ReqCount'] + 1});
-                                  });
-
-                                  FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(document['Cid'])
-                                      .get()
-                                      .then((DocumentSnapshot em) async {
-                                    CollectionReference users =
-                                        FirebaseFirestore.instance
-                                            .collection('Coach');
-                                    if (em['Rate'] > 0) {
-                                      print("here1");
-                                      var num1 = (rating - em['Rate']);
-                                      print(
-                                          "this rate here1 " + num1.toString());
-
-                                      users.doc(document['Cid']).update({
-                                        'Rate': (em['Rate'] +
-                                            ((num1) / em['ReqCount']))
-                                      });
-                                    } else {
-                                      print("here2 is zero");
-
-                                      users
-                                          .doc(document['Cid'])
-                                          .update({'Rate': rating});
-                                    }
-                                  });
-                                }
-                                FirebaseFirestore.instance
-                                    .collection('Requests')
-                                    .doc(widget.id)
-                                    .update({'TRate': rating});
-                                print(rating);
-                              },
-
-                              style: ElevatedButton.styleFrom(
-                                  shape: StadiumBorder(),
-                                  primary: Color(0xFF6F35A5),
-                                  textStyle: TextStyle(fontSize: 16)),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            ElevatedButton(
-                              child: Text('   تم الدفع  ',
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.green[800])),
-                              //  disabledColor:
-                              onPressed: null,
-                              style: ElevatedButton.styleFrom(
-                                shape: StadiumBorder(),
-                                onSurface: Colors.greenAccent[700],
-                              ),
-                            ),
-                          ]),
-                      ]),
-                    ),
-                    ////////////////////////end of the table
-                  ]),
+                      ////////////////////////end of the table
+                    ],
+                  ),
                 ),
               ),
-              //),
             ]),
           ),
         ),
       ),
     );
+  }
+
+//// not working
+  void getrate(String cid) {
+    print("is it working ?");
+    FirebaseFirestore.instance
+        .collection('Coach')
+        .doc(cid)
+        .get()
+        .then((DocumentSnapshot em) async {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('Coach');
+      print("is it working ? -- " + em['Rate'].toString().length.toString());
+
+      if (em['Rate'].toString().length > 4)
+        users.doc(cid).update({
+          'Rate': int.parse(['Rate'].toString().substring(0, 4))
+        });
+
+      // int a = int.parse(['Rate'].toString().substring(0, 4));
+    });
   }
 
   String getArabicdays(String a) {

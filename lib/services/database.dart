@@ -90,7 +90,7 @@ class DatabaseService {
       'Price': price,
       'CountDate': 0,
       'Rate': 0.0,
-      'ReqCount': 0,
+      'ReqCount': 1,
     };
     coachesCollection.doc(co.uid).set(traineeDataDemo);
   }

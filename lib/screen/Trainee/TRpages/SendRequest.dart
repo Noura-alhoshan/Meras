@@ -109,6 +109,7 @@ Request1(
     'Lid': lid, //Lesson id, Leena needs it
     'Paid': 'false',
     'TRate': 0,
+    'ّIsRate': 'false',
   };
   Collection.doc(lid).set(RequestDataDemo);
 

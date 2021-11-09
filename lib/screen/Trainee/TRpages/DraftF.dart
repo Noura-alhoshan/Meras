@@ -202,7 +202,8 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                     TableRow(children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.all(1.0),
-                                        child: Text(document['Rate'].toString(),
+                                        child: Text(
+                                            document['Rate'].toStringAsFixed(2),
                                             style: TextStyle(
                                               fontSize: 19,
                                               color: Colors.black,

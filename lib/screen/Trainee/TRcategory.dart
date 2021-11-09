@@ -2,10 +2,14 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../main.dart';
 import 'TRpages/TRexplore.dart';
 import 'TRpages/TRhome.dart';
 import 'TRpages/TRlessons.dart';
 import 'TRpages/TRnotification.dart';
+import 'TRpages/TRxplre2.dart';
+import 'TRpages/TRxplre3.dart';
+import 'TRpages/teeeeeeeeee.dart';
 
 class TRcategory extends StatefulWidget {
   final String traineeId;
@@ -40,16 +44,18 @@ class _State extends State<TRcategory> {
     return Scaffold(
       extendBody: true,
       body: selectedIndex == 0
-          ? TRnotification(
-              traineeId: widget.traineeId,
-            )
+          ? TRexplore3Screen()
           : selectedIndex == 1
               ? TRlessons()
               : selectedIndex == 2
                   ? TRexploreScreen()
                   : selectedIndex == 3
-                      ? TRhome()
-                      : TRhome(),
+                      ? MyAppa() //TRhome()
+                      : selectedIndex == 4 //
+                          ? TRexplore2Screen() //
+                          : TRexplore2Screen(), //
+
+      // : TRhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
@@ -103,6 +109,10 @@ class _State extends State<TRcategory> {
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),
               activeColor: Colors.green),
+          BottomNavyBarItem(
+              icon: Icon(Icons.search),
+              title: Text('2المدربين'),
+              activeColor: Colors.red),
         ],
       ),
     );

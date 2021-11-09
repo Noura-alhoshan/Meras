@@ -35,8 +35,11 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                     textAlign: TextAlign.right,
                   ),
                   subtitle: Text(
-                    'الحي:' + ' ' + document['Neighborhood'],
-                    style: TextStyle(height: 2, fontSize: 11),
+                    'تقييم المدرب:' +
+                        ' ' +
+                        document['Rate'].toString().substring(0, 4),
+
+                    style: TextStyle(height: 2, fontSize: 12),
                     textAlign: TextAlign.right,
                     // style: TextStyle(fontWeight: FontWeight.bold),
                   ),
