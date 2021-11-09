@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/screen/Admin/ADpages/editDetails.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 
@@ -51,7 +52,7 @@ class _EditGuidlinesState extends State<EditGuidlines> {
           leading: ElevatedButton(
             child: Text('تعديل'),
             onPressed: () {
-              // nav(document.id);
+              nav(document.id);
             },
             style: ElevatedButton.styleFrom(
                 shape: StadiumBorder(),
@@ -109,5 +110,14 @@ class _EditGuidlinesState extends State<EditGuidlines> {
       default:
         return 'no type';
     }
+  }
+
+  void nav(String id) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return EditDetails(id);
+      }),
+    );
   }
 }

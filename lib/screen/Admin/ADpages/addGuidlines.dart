@@ -60,12 +60,10 @@ class _AddGuidlinesState extends State<AddGuidlines> {
     final uid = user!.uid;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      //drawer: NavDraweradmin(),
       appBar: AppBar(
         title: Text('إضافة إشارات سير جديدة'),
         backgroundColor: Colors.deepPurple[100],
       ),
-
       body: SingleChildScrollView(
         child: BackgroundA(
           child: Form(
@@ -82,13 +80,14 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                   child: ADroundedTitle(
                     hintText: sp + "        وصف إشارة السير",
                     validator: (val) {
-                      // if (val!.isEmpty) {
-                      //   return '                  الرجاء إدخال الوصف';
-                      // } else if (val!.length == 1) {
-                      //   return '        الرجاء إدخال الوصف بشكل صحيح';
-                      // } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val)) {
-                      //   return '  الرجاء إدخال وصف صحيح بدون رموز خاصة';
-                      // }
+                      if (val!.isEmpty) {
+                        return '                  الرجاء إدخال الوصف';
+                      } else if (val!.length == 1) {
+                        return '        الرجاء إدخال الوصف بشكل صحيح';
+                      } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val) &&
+                          !RegExp(r'^[\u0621-\u064A]+$').hasMatch(val)) {
+                        return '  الرجاء إدخال وصف صحيح بدون رموز خاصة';
+                      }
                     },
                     onChanged: (val) {
                       setState(() => title = val);
@@ -138,7 +137,7 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                         Icons.arrow_drop_down,
                       ),
                       iconEnabledColor: kPrimaryColor,
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(height: 40.0),
@@ -198,7 +197,7 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                                 // if(type){
 
                                 // }
-                                addGuidlines(uid, title, type, imageUrl);
+                                addGuidlines(title, type, imageUrl);
                                 var baseDialog2 = SignleBaseAlertDialog(
                                   title: '',
                                   content: "تم إضافة إشارة السير بنجاح",
@@ -273,14 +272,15 @@ class _AddGuidlinesState extends State<AddGuidlines> {
     }
   }
 
-  addGuidlines(String uid, String title, String type, String url) async {
+  addGuidlines(String title, String type, String url) async {
+    String id = randomAlpha(20);
     Map<String, dynamic> GuidlinesDataDemo = {
-      'ID': uid,
+      'ID': id,
       'Title': title,
       'Type': type,
       'PicLink': url,
     };
-    Collection.doc().set(GuidlinesDataDemo);
+    Collection.doc(id).set(GuidlinesDataDemo);
   }
 
   void nav() async {
