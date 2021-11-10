@@ -7,8 +7,7 @@ class ButtonWidgetEdit extends StatelessWidget {
 
   final Color colorr;
 
-  const ButtonWidgetEdit(
-    show, {
+  const ButtonWidgetEdit({
     Key? key,
     required this.text,
     required this.onClicked,
