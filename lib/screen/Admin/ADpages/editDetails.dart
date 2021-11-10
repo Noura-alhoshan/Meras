@@ -4,13 +4,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/rounded_button.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/services/editTitle_alert.dart';
-import 'package:meras/screen/Admin/services/editType_alert.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Admin/widget/button_widget_edit.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../../../constants.dart';
 
 class EditDetails extends StatefulWidget {
   final String id;
@@ -32,6 +34,7 @@ var items = [
   'الإشارات العامة'
 ];
 String type = 'W';
+var val = 'W';
 
 class _EditDetailsState extends State<EditDetails> {
   void initState() {
@@ -148,7 +151,7 @@ class _EditDetailsState extends State<EditDetails> {
 
   Widget EditImage(DocumentSnapshot document) => ButtonWidgetEdit(
         colorr: purple,
-        text: 'تعديل الصورة',
+        text: 'تعديل',
         onClicked: () async {
           await uploadImage();
           var baseDialog = BaseAlertDialog(
@@ -174,7 +177,7 @@ class _EditDetailsState extends State<EditDetails> {
 
   Widget EditTitle(DocumentSnapshot document) => ButtonWidgetEdit(
         colorr: purple,
-        text: 'تعديل الوصف',
+        text: 'تعديل',
         onClicked: () async {
           var baseDialog = EditAlertDialog(
             title: 'تعديل الوصف',
@@ -205,43 +208,142 @@ class _EditDetailsState extends State<EditDetails> {
         },
       );
 
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<void> showInformationDialig(
+      BuildContext context, DocumentSnapshot document) async {
+    bool isSelected = false;
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
+              contentPadding: EdgeInsets.only(
+                top: 24.0,
+              ),
+              content: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('تغيير النوع'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '                     الإشارات التحذيرية',
+                            textAlign: TextAlign.right,
+                          ),
+                          Radio(
+                              value: 'W',
+                              groupValue: val,
+                              onChanged: (value) {
+                                setState(() {
+                                  val = value.toString();
+                                  type = val;
+                                });
+                              }),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('          الإشارات التنظيمية - الممنوعات'),
+                          Radio(
+                              value: 'N',
+                              groupValue: val,
+                              onChanged: (value) {
+                                setState(() {
+                                  val = value.toString();
+                                  type = val;
+                                });
+                              }),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('            الإشارات التنظيمية - الإجبارية'),
+                          Radio(
+                              value: 'Y',
+                              groupValue: val,
+                              onChanged: (value) {
+                                setState(() {
+                                  val = value.toString();
+                                  type = val;
+                                });
+                              }),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('                     الإشارات العامة'),
+                          ),
+
+                          //Text('الإشارات العامة'),
+                          Radio(
+                              value: 'G',
+                              groupValue: val,
+                              onChanged: (value) {
+                                setState(() {
+                                  val = value.toString();
+                                  type = val;
+                                });
+                              }),
+                        ],
+                      ),
+                    ],
+                  )),
+              actions: <Widget>[
+                new FlatButton(
+                  child: Text(
+                    'إلغاء',
+                    style: TextStyle(fontSize: 15.3),
+                    textAlign: TextAlign.left,
+                  ),
+                  textColor: Colors.deepPurple[900],
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                ),
+                SizedBox(
+                  width: 45,
+                ),
+                new FlatButton(
+                  child: Text(
+                    'حفظ          ',
+                    style: TextStyle(fontSize: 15.3),
+                    textAlign: TextAlign.left,
+                  ),
+                  textColor: Colors.deepPurple[900],
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection('Guidlines')
+                        .doc(widget.id)
+                        .update({'Type': type});
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+        });
+  }
+
   Widget EditType(DocumentSnapshot document) => ButtonWidgetEdit(
         colorr: purple,
-        text: 'تعديل النوع',
+        text: 'تعديل',
         onClicked: () async {
-          var baseDialog = EditAlertType(
-              title: 'تعديل النوع',
-              content: " ",
-              onChange: (value) {
-                setState(() {
-                  //   dropdownValue = value;
-                  //   if (dropdownValue.contains('الإشارات التحذيرية')) {
-                  //     type = 'W';
-                  //   } else if (dropdownValue
-                  //       .contains('الإشارات التنظيمية - الممنوعات')) {
-                  //     type = 'N';
-                  //   } else if (dropdownValue
-                  //       .contains('الإشارات التنظيمية - الإجبارية')) {
-                  //     type = 'Y';
-                  //   } else {
-                  //     type = 'G';
-                  //   }
-                  type = value;
-                });
-              },
-              yesOnPressed: () async {
-                await FirebaseFirestore.instance
-                    .collection('Guidlines')
-                    .doc(widget.id)
-                    .update({'Type': type});
-              },
-              noOnPressed: () {
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              yes: "حفظ",
-              no: "إلغاء");
-          showDialog(
-              context: context, builder: (BuildContext context) => baseDialog);
+          await showInformationDialig(context, document);
+          // await FirebaseFirestore.instance
+          //     .collection('Guidlines')
+          //     .doc(widget.id)
+          //     .update({'Type': type});
         },
       );
 

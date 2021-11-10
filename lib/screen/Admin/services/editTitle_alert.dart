@@ -68,9 +68,6 @@ class EditAlertDialog extends StatelessWidget {
             borderSide: BorderSide(color: kPrimaryColor),
           ),
         ),
-        inputFormatters: [
-          new LengthLimitingTextInputFormatter(10),
-        ],
       ),
 
       backgroundColor: Colors.white,
