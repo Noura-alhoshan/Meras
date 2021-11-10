@@ -84,10 +84,10 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                         return '                  الرجاء إدخال الوصف';
                       } else if (val!.length == 1) {
                         return '        الرجاء إدخال الوصف بشكل صحيح';
-                      } else if (!RegExp(r"^[a-zA-Z0-9]+$").hasMatch(val) &&
-                          !RegExp(r'^[\u0621-\u064A]+$').hasMatch(val)) {
-                        return '  الرجاء إدخال وصف صحيح بدون رموز خاصة';
                       }
+                      // else if (RegExp(r'^[\u0621-\u064A]+$').hasMatch(val)) {
+                      //   return '  الرجاء إدخال وصف صحيح بدون رموز خاصة';
+                      // }
                     },
                     onChanged: (val) {
                       setState(() => title = val);

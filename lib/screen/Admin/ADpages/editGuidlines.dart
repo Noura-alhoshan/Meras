@@ -22,7 +22,7 @@ class _EditGuidlinesState extends State<EditGuidlines> {
     Image im = new Image.network(
       document['PicLink'],
       height: 100.0,
-      width: 50.0,
+      width: 60.0,
     );
     return SingleChildScrollView(
         child: Container(
@@ -32,12 +32,12 @@ class _EditGuidlinesState extends State<EditGuidlines> {
         child: ListTile(
           title: Text(
             document['Title'],
-            style: TextStyle(height: 2, fontSize: 17),
+            style: TextStyle(height: 1, fontSize: 15),
             textAlign: TextAlign.right,
           ),
           subtitle: Text(
             'النوع :' + ' ' + getType(document['Type']),
-            style: TextStyle(height: 2, fontSize: 14),
+            style: TextStyle(height: 1, fontSize: 14),
             textAlign: TextAlign.right,
           ),
           trailing: ClipRRect(
@@ -57,7 +57,7 @@ class _EditGuidlinesState extends State<EditGuidlines> {
             style: ElevatedButton.styleFrom(
                 shape: StadiumBorder(),
                 primary: Color(0xFF6F35A5),
-                textStyle: TextStyle(fontSize: 16)),
+                textStyle: TextStyle(fontSize: 14)),
           ),
         ),
         elevation: 6,
@@ -77,7 +77,7 @@ class _EditGuidlinesState extends State<EditGuidlines> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
-          'إشارات السير',
+          'إشارات السير                                        ',
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.deepPurple[100],
