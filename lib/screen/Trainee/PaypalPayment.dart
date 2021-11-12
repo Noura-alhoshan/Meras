@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -12,16 +13,28 @@ import 'PaypalServices.dart';
 class PaypalPayment extends StatefulWidget {
   final Function onFinish;
 
-  PaypalPayment({required this.onFinish});
+  final String COID;
 
+  final double Cprice;
+
+  PaypalPayment({required this.onFinish, required this.COID , required this.Cprice});
+
+// PaypalPaymentState(double nnn){
+//   this.COID=nnn;
+// }
   @override
   State<StatefulWidget> createState() {
     return PaypalPaymentState();
   }
 }
 
+//double ciid= COID;
+
+
+
 class PaypalPaymentState extends State<PaypalPayment> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  //double ciid=COID;
    String? checkoutUrl;//added late and ?
    String? executeUrl;//added late and ?
    String? accessToken;
@@ -30,11 +43,13 @@ class PaypalPaymentState extends State<PaypalPayment> {
   // you can change default currency according to your need
   Map<dynamic,dynamic> defaultCurrency = {"symbol": "USD ", "decimalDigits": 2, "symbolBeforeTheNumber": true, "currency": "USD"};
 
-  bool isEnableShipping = false;
-  bool isEnableAddress = false;
+  bool isEnableShipping = false;//true 
+  bool isEnableAddress = false;//true
 
-  String returnURL = 'return.example.com';
-  String cancelURL= 'cancel.example.com';
+
+///to be changed 
+  String returnURL = 'example.com';
+  String cancelURL= 'cancel.example.com'; 
 
 
   @override
@@ -88,7 +103,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
 
 
     // checkout invoice details
-    String totalAmount = '1.99';//////////////////////////////
+    String totalAmount = '1.99';//widget.Cprice.toString();//////////////////////////////
     String subTotalAmount = '1.99';
     String shippingCost = '0';
     int shippingDiscountCost = 0;
@@ -107,7 +122,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
       "transactions": [
         {
           "amount": {
-            "total": totalAmount,
+            "total": totalAmount,//widget.Cprice.toStringAsFixed(2),
             "currency": defaultCurrency["currency"],
             "details": {
               "subtotal": subTotalAmount,
@@ -149,7 +164,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
     print('sosoooo');
     print(checkoutUrl);
 
@@ -184,6 +199,11 @@ class PaypalPaymentState extends State<PaypalPayment> {
                 print("IM HERE BABE2");
               }
              // Navigator.of(context).pop();
+             
+             
+              print(widget.Cprice);////////////////////////////////////////////////////
+
+
               print("IM HERE BABE3");
                  var baseDialog = BaseAlertDialog(
                     title: "",
@@ -226,10 +246,10 @@ class PaypalPaymentState extends State<PaypalPayment> {
               onPressed: () {
                 Navigator.of(context).pop();
               }),
-          backgroundColor: Colors.black12,
+          backgroundColor: Colors.black12,//////////////////////
           elevation: 0.0,
         ),
-        body: Center(child: Container(child: CircularProgressIndicator())),
+        body: Center(child: Container(child: Loading())),
       );
     }
   }

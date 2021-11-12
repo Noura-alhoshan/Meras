@@ -59,6 +59,7 @@ dependencies:
   http_auth: ^1.0.1
   webview_flutter: 2.1.2
   shared_preferences: ^2.0.8
+  stripe_payment: ^1.1.4
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../PaypalPayment.dart';
+import '../payment.dart';
 import 'TRlessons.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -30,6 +33,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
 
   void initState() {
     super.initState();
+    StripeServices.init();//////////////////////////////////////////////////////////////////////
   }
 
   @override
@@ -329,28 +333,67 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             child: Text('الدفع'),
                             onPressed: () {
 
-
+double newpD1= ((double.parse(document['Price'])));///3.75); //*100);//.toString();//.toString();
+double newpD= newpD1*100;
+int newpI = newpD.toInt();
+String newp= newpI.toString();
+print(newp);
                  var baseDialog = BaseAlertDialog(
-                    title: "",
-                    content: " 'سوف يتم تحويلك لخدمة 'باي بال"+ "\nلدفع مبلغ "+   document['Price'] + ' ريال '+ "\nهل أنت متأكد من إتمام العملية؟",
+                    title: "",//اقول خدمة؟؟؟؟ظ
+                    content: " 'سوف يتم تحويلك لخدمة 'سترايب "+ "\nلدفع مبلغ "+ document['Price'] + 'ريال '+ "\nهل أنت متأكد من إتمام العملية؟",
                     yesOnPressed: () async {
-                         
-                         //هذي للدفع
-                         Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => PaypalPayment(
-                              onFinish: (number) async {
+                       Navigator.of(context, rootNavigator: true).pop('dialog');
+                         /////////////////////////////////////
+                       var response= await StripeServices.payNowHandler(amount: newp , currency: 'SAR');
+                      print("response ${response.message}" );
 
-                                // payment done
-                                print('order id: '+number);
+                    if (response.message == 'Transaction succeful'){
+                         var baseDialog = SignleBaseAlertDialog(
+                          title: "",
+                          content: "تم دفع مبلغ ${document['Price']} ريال بنجاح",
+                          yesOnPressed: () async {
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog'); //////////////////////////////////??????
+                            //nav1();
+                          },
+                          yes: "إغلاق",
+                  //no: "لا"
+                );
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => baseDialog);
+                    await FirebaseFirestore.instance
+                    .collection('Requests')
+                    .doc(widget.id)
+                    .update({'Paid': 'true'});
 
-                              },
-                            ),
-                          ),
-                        );
 
-                      //print("hellppp");
-                      Navigator.of(context, rootNavigator: true).pop('dialog');
+double theadded= double.parse(document['Price']);
+        FirebaseFirestore.instance.collection("Coach").doc(document['Cid']).get().then((querySnapshot) async {
+       double ddd= querySnapshot.data()!['Earn'];
+       ddd= ddd+theadded;
+        FirebaseFirestore.instance.collection("Coach").doc(document['Cid']).update({'Earn': ddd});
+          });
+}//end if
+
+else{
+    var baseDialog = SignleBaseAlertDialog(
+                          title: "",
+                          content: ".تمت مقاطعة عملية الدفع \n يرجى المحاولة مرة أخرى",
+                          yesOnPressed: () async {
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog'); //////////////////////////////////??????
+                            //nav1();
+                          },
+                          yes: "إغلاق",
+                  //no: "لا"
+                );
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => baseDialog);
+}
+                      //Navigator.of(context, rootNavigator: true).pop('dialog');
+
                     },
 
                     noOnPressed: () {
@@ -359,8 +402,8 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                     yes: "نعم",
                     no: "لا");
                 showDialog(context: context, builder: (BuildContext context) => baseDialog);
-                          
-                       
+
+
                             },
                             style: ElevatedButton.styleFrom(
                                 shape: StadiumBorder(),
@@ -434,3 +477,43 @@ Widget notPaid() => ElevatedButton(
           textStyle: TextStyle(fontSize: 16)),
     );
 
+
+AddEarn(String wid,double newprice) async {
+double ddd=0.0;
+ FirebaseFirestore.instance.collection("Coach").doc(wid).get().then((querySnapshot) async {
+        ddd= querySnapshot.data()!['Earn'];
+        FirebaseFirestore.instance.collection("Coach").doc(wid).update({'Earn': ddd+newprice});
+      });
+
+
+
+// var getC= FirebaseFirestore.instance
+//               .collection('Coach').doc(wid).get();
+//               //.where(FieldPath.documentId, isEqualTo: wid)
+//              // .get();
+//         double Cdata = getC.data()['Status'];
+//         //data.documents[0]['Earnings'] ;
+
+
+
+
+}
+
+
+
+ //هذي للدفع
+                         //TO DO: send the price and id 
+                        //  Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (BuildContext context) => PaypalPayment(
+                        //       onFinish: (number) async {
+                        //         // payment done
+                        //         print('order id: '+number);
+                        //       },
+
+                        //       COID: document['Cid'].toString(),
+                        //       Cprice: (double.parse (document['Price']))/3.75 ,
+                        //     ),
+                        //   ),
+                        // );
+                      //print("hellppp");
