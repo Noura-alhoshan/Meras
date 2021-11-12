@@ -49,7 +49,7 @@ class CardListWidget extends StatelessWidget {
                       Text(
                         doc.data()['Title'],
                         style: TextStyle(
-                            height: 1, fontSize: 25, color: Colors.black),
+                            height: 1, fontSize: 17, color: Colors.black),
                         // maxLines: 1,
                         textAlign: TextAlign.right,
                       ),
@@ -61,8 +61,10 @@ class CardListWidget extends StatelessWidget {
                 flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Image.network(doc.data()['PicLink'],
-                      fit: BoxFit.cover, width: 60, height: 60),
+                  child: Image.network(
+                    doc.data()['PicLink'],
+                    // fit: BoxFit.cover, width: 60, height: 60
+                  ),
                 ),
               ),
             ],
