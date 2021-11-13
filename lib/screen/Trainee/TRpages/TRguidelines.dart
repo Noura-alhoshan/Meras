@@ -32,7 +32,7 @@ class _TRguidelines extends State<TRguidelines> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('إرشادات القيادة')),
+        title: Center(child: Text('إشارات السير ')),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(

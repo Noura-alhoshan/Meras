@@ -136,7 +136,7 @@ class _HomePageState extends State<COhome> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'إرشادات القيادة',
+                          'إشارات السير ',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 19,
