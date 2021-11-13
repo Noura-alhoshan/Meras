@@ -22,9 +22,11 @@ import 'SendRequest.dart';
 
 class CoachDate extends StatefulWidget {
   late final String id;
+
   CoachDate(String icd) {
     this.id = icd;
   }
+
   @override
   _CoachDate createState() => _CoachDate();
 }
@@ -97,14 +99,29 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     width: 100.0,
                   ),
             Text(' '),
-            Text(
-              ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 23,
-                  // color: kPrimaryColor,
-                  fontWeight: FontWeight.bold),
-            ),
+
+            Row(children: [
+              Text(
+                document['Rate'].toStringAsFixed(2),
+                style: TextStyle(
+                    fontSize: 16,
+                    // color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              Icon(
+                Icons.star_rate,
+                color: Colors.orange,
+                size: 30.0,
+              ),
+              Text(
+                ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 23,
+                    // color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+            ]),
 
             Row(
               children: [
@@ -182,44 +199,6 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                             fontWeight: FontWeight.bold),
                       ),
                       children: <Widget>[
-                        /*  Table(
-                          columnWidths: {
-                            0: FlexColumnWidth(5.2),
-                            1: FlexColumnWidth(3),
-                            //2: FlexColumnWidth(4),
-                          },
-                          //defaultColumnWidth: FixedColumnWidth(190.0),
-                          border: TableBorder.all(
-                              color: Colors.white,
-                              style: BorderStyle.none,
-                              width: 0),
-                          children: [
-                            TableRow(children: <Widget>[
-                              Container(
-                                //width: 400,
-                                child: Text(
-                                  document['Email'],
-                                  //textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      height: 1.54,
-                                      fontSize: 18,
-                                      color: Colors.black),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  ' :البريد الإلكتروني',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.start,
-                                ),
-                              )
-                            ]),
-                          ],
-                        ), */
                         Container(
                           child: Column(
                             children: [
@@ -237,26 +216,29 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                       style: BorderStyle.none,
                                       width: 0),
                                   children: [
-                                    //TableRow( children: <Widget>[
-                                    //   Container(width: 400,
-                                    //     child:
-                                    // Text(
-                                    //         document['Email'],
-                                    //         //textAlign: TextAlign.center,
-                                    //         style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-                                    //       ),),
-                                    //        Container(
-                                    //     padding: EdgeInsets.all(2.0),
-                                    //     child: Text(
-                                    //       ' :البريد الإلكتروني',
-                                    //       style: TextStyle(
-                                    //         fontSize: 18,
-                                    //         color: Colors.black,
-                                    //       ),
-                                    //       textAlign: TextAlign.end,
-                                    //     ),
-                                    //   )
-                                    // ]),
+                                    TableRow(children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(1.0),
+                                        child: Text(
+                                            document['Rate'].toStringAsFixed(2),
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              color: Colors.black,
+                                            ),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ' :التقييم',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      )
+                                    ]),
                                     TableRow(children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.all(1.0),
@@ -404,6 +386,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                           .collection('Coach')
                           .doc(document.id) //widget.id
                           .collection('Dates')
+                          .orderBy('DateTime', descending: false)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) return Loading();
@@ -420,6 +403,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                               document['Phone Number'],
                               document['Neighborhood'],
                               document['Price'],
+                              document['Rate'],
                               (snapshot.data!).docs[index]),
                         );
                       }),
@@ -443,6 +427,7 @@ Widget _buildListItem(
   String phone,
   String n,
   String price,
+  int Rate,
   DocumentSnapshot document,
 ) {
   return SingleChildScrollView(
@@ -481,7 +466,7 @@ Widget _buildListItem(
                           yesOnPressed: () {
                             print(document.id);
                             Request1(iid, fname, lname, phone, n, price,
-                                document['DateTime'], document.id);
+                                document['DateTime'], document.id, Rate);
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');
                             var baseDialog2 = SignleBaseAlertDialog(
