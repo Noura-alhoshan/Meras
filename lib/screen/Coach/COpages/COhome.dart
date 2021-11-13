@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
+import 'package:meras/screen/Trainee/TRpages/TRny.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -9,13 +13,8 @@ import 'package:meras/screen/home/navDrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/screen/authenticate/background2.dart';
 
-//this home page will be edited to fit our app, this one is just for testing ^_^
-
-// CollectionReference firevar = FirebaseFirestore.instance.collection('users');
-
 class COhome extends StatefulWidget {
   COhome();
-
   AuthService aut = AuthService();
   //final String? userId;
 
@@ -42,9 +41,8 @@ class _HomePageState extends State<COhome> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
-        //title: Text('Side menu'),
+        title: Text('                 الصفحة الرئيسية'),
         backgroundColor: Colors.deepPurple[100],
-        //backgroundColor: kPrimaryColor,
       ),
       body: SingleChildScrollView(
         child: Background(
@@ -84,6 +82,17 @@ class _HomePageState extends State<COhome> {
                     fontSize: 17,
                     color: Colors.black),
               ),
+
+              // SizedBox(height: 50.0),
+              // SizedBox(height: 50.0),
+              // SizedBox(height: 40.0),
+              // Center(
+              //   child:
+              //       RoundedButtonAdmin(text: 'إرشادات القيادة', press: () {}),
+
+              // ),
+              // RoundedButtonAdmin(text: 'اختبر معلوماتك', press: () {}),
+
               //SizedBox(height: 20.0),
               // RoundedHomeButton(
               //     text: 'إشارات السير',
@@ -99,28 +108,86 @@ class _HomePageState extends State<COhome> {
               //   iconSize: 350,
               //   onPressed: () {},
               // ),
-              SizedBox(height: 50.0),
               SizedBox(height: 20.0),
-              SizedBox(height: 20.0),
-              Transform.scale(
-                scale: 11.0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: new Image.asset('assets/images/trafficsigns.png'),
-                ),
+              // SizedBox(height: 20.0),
+              // SizedBox(height: 20.0),
+              // Transform.scale(
+              //   scale: 11.0,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: new Image.asset('assets/images/trafficsigns.png'),
+              //   ),
+              // ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                child: TextButton(
+                    onPressed: () {
+                      Get.to(TRguidelines());
+                    },
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(29))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.deepPurple[50])),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'إرشادات القيادة',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(width: 30),
+                        Image.asset('assets/icons/SteeringWheel1.png',
+                            width: 60, height: 60)
+                      ],
+                    )),
               ),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 40.0),
-              SizedBox(height: 20.0),
-              Transform.scale(
-                scale: 11.0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: new Image.asset('assets/images/test2.png'),
-                ),
+              // SizedBox(height: 1),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                child: TextButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(29))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.deepPurple[50])),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('اختبر معلوماتك',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500)),
+                        SizedBox(width: 30),
+                        Image.asset('assets/icons/Test1.png',
+                            width: 60, height: 60)
+                      ],
+                    )),
               ),
+
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 40.0),
+              // SizedBox(height: 20.0),
+              // Transform.scale(
+              //   scale: 11.0,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: new Image.asset('assets/images/test2.png'),
+              //   ),
+              // ),
               // IconButton(
               //   icon: Image.asset('assets/images/test2.png'),
               //   iconSize: 350,
