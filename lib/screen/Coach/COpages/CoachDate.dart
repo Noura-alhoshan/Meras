@@ -8,7 +8,7 @@ import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
-import 'package:meras/screen/home/navDrawer.dart';
+import 'package:meras/screen/home/CnavDrawer.dart';
 
 import '../BackgroundC.dart';
 
@@ -42,7 +42,7 @@ class _CoachDate extends State<CoachDate> {
     return Scaffold(
       //extendBody: true,
       extendBodyBehindAppBar: true,
-      drawer: NavDrawer(),
+      drawer: CNavDrawer(),
       appBar: AppBar(
         title: Text('          إضافة موعد جديد'
             // textAlign: TextAlign.center,

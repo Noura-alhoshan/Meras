@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,8 +12,6 @@ import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../PaypalPayment.dart';
 import '../payment.dart';
 import 'TRlessons.dart';
 
@@ -33,7 +30,8 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
 
   void initState() {
     super.initState();
-    StripeServices.init();//////////////////////////////////////////////////////////////////////
+    StripeServices
+        .init(); //////////////////////////////////////////////////////////////////////
   }
 
   @override
@@ -296,11 +294,11 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
-             TableRow(children: [
-                               Container(
+                              TableRow(children: [
+                                Container(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                       document['Price'] + ' ريال ',
+                                      document['Price'] + ' ريال ',
                                       style: TextStyle(
                                         height: 1.49,
                                         fontSize: 16.3,
@@ -317,93 +315,111 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
-                            ],        
+                            ],
                           ),
                         ),
-
-
-                        
                         SizedBox(
                           height: 24,
                         ),
-                 
-
                         if (document['Paid'] == 'false')
                           ElevatedButton(
                             child: Text('الدفع'),
                             onPressed: () {
+                              double newpD1 =
+                                  ((double.parse(document['Price'])));
 
-double newpD1= ((double.parse(document['Price'])));///3.75); //*100);//.toString();//.toString();
-double newpD= newpD1*100;
-int newpI = newpD.toInt();
-String newp= newpI.toString();
-print(newp);
-                 var baseDialog = BaseAlertDialog(
-                    title: "",//اقول خدمة؟؟؟؟ظ
-                    content: " 'سوف يتم تحويلك لخدمة 'سترايب "+ "\nلدفع مبلغ "+ document['Price'] + 'ريال '+ "\nهل أنت متأكد من إتمام العملية؟",
-                    yesOnPressed: () async {
-                       Navigator.of(context, rootNavigator: true).pop('dialog');
-                         /////////////////////////////////////
-                       var response= await StripeServices.payNowHandler(amount: newp , currency: 'SAR');
-                      print("response ${response.message}" );
+                              ///3.75); //*100);//.toString();//.toString();
+                              double newpD = newpD1 * 100;
+                              int newpI = newpD.toInt();
+                              String newp = newpI.toString();
+                              print(newp);
+                              var baseDialog = BaseAlertDialog(
+                                  title: "", //اقول خدمة؟؟؟؟
+                                  content: " 'سوف يتم تحويلك لخدمة 'سترايب " +
+                                      "\nلدفع مبلغ " +
+                                      document['Price'] +
+                                      'ريال ' +
+                                      "\nهل أنت متأكد من إتمام العملية؟",
+                                  yesOnPressed: () async {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop('dialog');
+                                    ////////////////////////////////////////////////////////////API call 
+                                    var response =
+                                        await StripeServices.payNowHandler(
+                                            amount: newp, currency: 'SAR');
+                                    print("response ${response.message}");
+ 
+                                    if (response.message == 'Transaction succeful') {
+                                      var baseDialog = SignleBaseAlertDialog(
+                                        title: "",
+                                        content:
+                                            "تم دفع مبلغ ${document['Price']} ريال بنجاح",
+                                        yesOnPressed: () async {
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pop(
+                                                  'dialog'); //////////////////////////////////??????
+                                        },
+                                        yes: "إغلاق",
+                                      );
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              baseDialog);
+                                      await FirebaseFirestore.instance
+                                          .collection('Requests')
+                                          .doc(widget.id)
+                                          .update({'Paid': 'true'});
 
-                    if (response.message == 'Transaction succeful'){
-                         var baseDialog = SignleBaseAlertDialog(
-                          title: "",
-                          content: "تم دفع مبلغ ${document['Price']} ريال بنجاح",
-                          yesOnPressed: () async {
-                            Navigator.of(context, rootNavigator: true)
-                                .pop('dialog'); //////////////////////////////////??????
-                            //nav1();
-                          },
-                          yes: "إغلاق",
-                  //no: "لا"
-                );
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => baseDialog);
-                    await FirebaseFirestore.instance
-                    .collection('Requests')
-                    .doc(widget.id)
-                    .update({'Paid': 'true'});
+                                      double theadded =
+                                          double.parse(document['Price']);
+                                      FirebaseFirestore.instance
+                                          .collection("Coach")
+                                          .doc(document['Cid'])
+                                          .get()
+                                          .then((querySnapshot) async {
+                                        double ddd =
+                                            querySnapshot.data()!['Earn'];
+                                        ddd = ddd + theadded;
+                                        FirebaseFirestore.instance
+                                            .collection("Coach")
+                                            .doc(document['Cid'])
+                                            .update({'Earn': ddd});
+                                      });
+                                    } //end if
 
-
-double theadded= double.parse(document['Price']);
-        FirebaseFirestore.instance.collection("Coach").doc(document['Cid']).get().then((querySnapshot) async {
-       double ddd= querySnapshot.data()!['Earn'];
-       ddd= ddd+theadded;
-        FirebaseFirestore.instance.collection("Coach").doc(document['Cid']).update({'Earn': ddd});
-          });
-}//end if
-
-else{
-    var baseDialog = SignleBaseAlertDialog(
-                          title: "",
-                          content: ".تمت مقاطعة عملية الدفع \n يرجى المحاولة مرة أخرى",
-                          yesOnPressed: () async {
-                            Navigator.of(context, rootNavigator: true)
-                                .pop('dialog'); //////////////////////////////////??????
-                            //nav1();
-                          },
-                          yes: "إغلاق",
-                  //no: "لا"
-                );
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => baseDialog);
-}
-                      //Navigator.of(context, rootNavigator: true).pop('dialog');
-
-                    },
-
-                    noOnPressed: () {
-                      Navigator.of(context, rootNavigator: true).pop('dialog');
-                    },
-                    yes: "نعم",
-                    no: "لا");
-                showDialog(context: context, builder: (BuildContext context) => baseDialog);
-
-
+                                    else {
+                                      var baseDialog = SignleBaseAlertDialog(
+                                        title: "",
+                                        content:
+                                            ".تمت مقاطعة عملية الدفع \n يرجى المحاولة مرة أخرى",
+                                        yesOnPressed: () async {
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pop(
+                                                  'dialog'); //////////////////////////////////??????
+                                          //nav1();
+                                        },
+                                        yes: "إغلاق",
+                                        //no: "لا"
+                                      );
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              baseDialog);
+                                    }
+                                    //Navigator.of(context, rootNavigator: true).pop('dialog');
+                                  },
+                                  noOnPressed: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop('dialog');
+                                  },
+                                  yes: "نعم",
+                                  no: "لا");
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      baseDialog);
                             },
                             style: ElevatedButton.styleFrom(
                                 shape: StadiumBorder(),
@@ -464,39 +480,6 @@ else{
       }),
     );
   }
-}
-
-Widget notPaid() => ElevatedButton(
-      child: Text('الدفع'),
-      onPressed: () {},
-
-      // },
-      style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
-          primary: Color(0xFF6F35A5),
-          textStyle: TextStyle(fontSize: 16)),
-    );
-
-
-AddEarn(String wid,double newprice) async {
-double ddd=0.0;
- FirebaseFirestore.instance.collection("Coach").doc(wid).get().then((querySnapshot) async {
-        ddd= querySnapshot.data()!['Earn'];
-        FirebaseFirestore.instance.collection("Coach").doc(wid).update({'Earn': ddd+newprice});
-      });
-
-
-
-// var getC= FirebaseFirestore.instance
-//               .collection('Coach').doc(wid).get();
-//               //.where(FieldPath.documentId, isEqualTo: wid)
-//              // .get();
-//         double Cdata = getC.data()['Status'];
-//         //data.documents[0]['Earnings'] ;
-
-
-
-
 }
 
 
