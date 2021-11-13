@@ -176,9 +176,11 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                                     ? FirebaseFirestore.instance
                                         .collection('Coach')
                                         .where("Fname", isEqualTo: name)
+                                        .orderBy("Rate", descending: true)
                                         .snapshots()
                                     : FirebaseFirestore.instance
                                         .collection("Coach")
+                                        .orderBy("Rate", descending: true)
                                         .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) return Loading();
@@ -439,6 +441,7 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
               itemBuilder: (context, index) {
                 DocumentSnapshot data = snapshot.data!.docs[index];
                 return Container(
+
                     //  setday((data['DateTime'].substring(19))),
                     );
 
