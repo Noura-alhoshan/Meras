@@ -16,8 +16,7 @@ class NavDrawer extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context)  {
-//dynamic mailID = _auth.getEmail();
-//String mail= mailID.toString();
+
     return  Container(
       height: 650,
       width: 250,
@@ -43,15 +42,15 @@ class NavDrawer extends StatelessWidget  {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('الملف الشخصي'),
+              trailing: Icon(Icons.person),
+              title: Text('الملف الشخصي',textAlign: TextAlign.end,),
               onTap: () => null,
             ),
 
             Divider(),
             ListTile(
-              title: Text('تسجيل الخروج'),
-              leading: Icon(Icons.exit_to_app),
+              title: Text('تسجيل الخروج',textAlign: TextAlign.end,),
+              trailing: Icon(Icons.exit_to_app),
               onTap: ()  {
 
                 var baseDialog = BaseAlertDialog(
