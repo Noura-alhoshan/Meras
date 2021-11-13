@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:meras/screen/home/CnavDrawer.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -40,7 +41,7 @@ class _HomePageState extends State<COhome> {
 
     //print(widget.userId);//updated
     return Scaffold(
-      drawer: NavDrawer(),
+     drawer: CNavDrawer(),
       appBar: AppBar(
         //title: Text('Side menu'),
         backgroundColor: Colors.deepPurple[100],

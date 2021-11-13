@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meras/screen/home/CnavDrawer.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
 class COschedule extends StatelessWidget {
@@ -6,7 +7,7 @@ class COschedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: NavDrawer(),
+      drawer: CNavDrawer(),
       appBar: AppBar(
         title: Text('المواعيد'),
         backgroundColor: Colors.deepPurple[100],
