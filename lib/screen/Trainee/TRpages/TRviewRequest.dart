@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -318,6 +319,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             ],
                           ),
                         ),
+                       
                         SizedBox(
                           height: 24,
                         ),
@@ -333,6 +335,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                               int newpI = newpD.toInt();
                               String newp = newpI.toString();
                               print(newp);
+                              String desc= "اسم المتدرب: ${document['Tname']} \n رقم الجوال: ${document['TPhone Number']} \n , تحويل الى المدرب : ${document['CoachName']} ${document['CoachName2']} رقم جوال المدرب: ${document['CoachPhone']} ";
                               var baseDialog = BaseAlertDialog(
                                   title: "", //اقول خدمة؟؟؟؟
                                   content: " 'سوف يتم تحويلك لخدمة 'سترايب " +
@@ -346,7 +349,9 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                     ////////////////////////////////////////////////////////////API call 
                                     var response =
                                         await StripeServices.payNowHandler(
-                                            amount: newp, currency: 'SAR');
+                                            amount: newp, 
+                                            currency: 'SAR',
+                                            description: 'desc' );
                                     print("response ${response.message}");
  
                                     if (response.message == 'Transaction succeful') {

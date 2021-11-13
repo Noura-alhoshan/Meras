@@ -14,6 +14,7 @@ import 'package:meras/screen/Trainee/TRpages/TRnotification.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
 import 'screen/Admin/ADcategory.dart';
+import 'screen/Trainee/PaypalPayment.dart';
 import 'screen/wrapper.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,16 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: SignIn()//TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+        home: SignIn()
+        
+        
+        
+        //PaypalPayment(onFinish: (number) async {},
+        //                       COID: "sarah",
+        //                       Cprice: 3.75 ,
+        //                     ),
+        
+        ////TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
         //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
         ///wrapper
