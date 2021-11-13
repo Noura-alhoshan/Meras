@@ -27,62 +27,40 @@ class _TRexplore2ScreenState extends State<TRexplore2Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Card(
-          child: TextField(
-            decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search), hintText: 'Search...'),
-            onChanged: (String) {
-              setState(() {
-                name = String;
-              });
+        title: Text('Awesome appbar'),
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.filter_list),
+            onSelected: (String result) {
+              switch (result) {
+                case 'filter1':
+                  print('filter 1 clicked');
+                  break;
+                case 'filter2':
+                  print('filter 2 clicked');
+                  break;
+                case 'clearFilters':
+                  print('Clear filters');
+                  break;
+                default:
+              }
             },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'filter1',
+                child: Text('Filter 1'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'filter2',
+                child: Text('Filter 2'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'clearFilters',
+                child: Text('Clear filters'),
+              ),
+            ],
           ),
-        ),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: (name != "" && name != null)
-            ? FirebaseFirestore.instance
-                .collection('Coach')
-                .where("Fname", isEqualTo: name)
-                .snapshots()
-            : FirebaseFirestore.instance.collection("Coach").snapshots(),
-        builder: (context, snapshot) {
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot data = snapshot.data!.docs[index];
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      data['Gender'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    Text(
-                      data['Fname'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+        ],
       ),
     );
   }

@@ -22,9 +22,11 @@ import 'SendRequest.dart';
 
 class CoachDate extends StatefulWidget {
   late final String id;
+
   CoachDate(String icd) {
     this.id = icd;
   }
+
   @override
   _CoachDate createState() => _CoachDate();
 }
@@ -97,14 +99,29 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     width: 100.0,
                   ),
             Text(' '),
-            Text(
-              ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 23,
-                  // color: kPrimaryColor,
-                  fontWeight: FontWeight.bold),
-            ),
+
+            Row(children: [
+              Text(
+                document['Rate'].toStringAsFixed(2),
+                style: TextStyle(
+                    fontSize: 16,
+                    // color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              Icon(
+                Icons.star_rate,
+                color: Colors.orange,
+                size: 30.0,
+              ),
+              Text(
+                ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 23,
+                    // color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+            ]),
 
             Row(
               children: [

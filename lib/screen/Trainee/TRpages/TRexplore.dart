@@ -35,9 +35,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                     textAlign: TextAlign.right,
                   ),
                   subtitle: Text(
-                    'تقييم المدرب:' +
-                        ' ' +
-                        document['Rate'].toString().substring(0, 4),
+                    'تقييم المدرب:' + ' ' + document['Rate'].toStringAsFixed(2),
 
                     style: TextStyle(height: 2, fontSize: 12),
                     textAlign: TextAlign.right,
