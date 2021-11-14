@@ -58,68 +58,77 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                           });
                         },
                         decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey.shade100,
-                            ////
-                            prefixIcon: PopupMenuButton<String>(
-                              icon: Icon(Icons.filter_list),
-                              onSelected: (String result) {
-                                switch (result) {
-                                  case 'filter0':
-                                    setState(() {
-                                      help = '';
-                                    });
-                                    print('filter 0 clicked');
+                          filled: true,
+                          fillColor: Colors.grey.shade100,
+                          ////
+                          prefixIcon: PopupMenuButton<String>(
+                            icon: Icon(Icons.filter_list),
+                            onSelected: (String result) {
+                              switch (result) {
+                                case 'filter0':
+                                  setState(() {
+                                    help = '';
+                                  });
+                                  print('filter 0 clicked');
 
-                                    break;
-                                  case 'filter1':
-                                    setState(() {
-                                      help = 'A';
-                                    });
-                                    print('filter 1 clicked');
+                                  break;
+                                case 'filter1':
+                                  setState(() {
+                                    help = 'A';
+                                  });
+                                  print('filter 1 clicked');
 
-                                    break;
-                                  case 'filter2':
-                                    setState(() {
-                                      help = 'B';
-                                    });
-                                    print('filter 2 clicked');
-                                    break;
-                                  case 'clearFilters':
-                                    setState(() {
-                                      help = 'C';
-                                    });
-                                    print('Clear filters');
-                                    break;
-                                  default:
-                                }
-                              },
-                              itemBuilder: (BuildContext context) =>
-                                  <PopupMenuEntry<String>>[
-                                const PopupMenuItem<String>(
-                                  value: 'filter0',
-                                  child: Text('جميع الأيام'),
-                                ),
-                                const PopupMenuItem<String>(
-                                  value: 'filter1',
-                                  child: Text('السبت'),
-                                ),
-                                const PopupMenuItem<String>(
-                                  value: 'filter2',
-                                  child: Text('الأحد'),
-                                ),
-                                const PopupMenuItem<String>(
-                                  value: 'clearFilters',
-                                  child: Text('الأثنين'),
-                                ),
-                              ],
+                                  break;
+                                case 'filter2':
+                                  setState(() {
+                                    help = 'B';
+                                  });
+                                  print('filter 2 clicked');
+                                  break;
+                                case 'clearFilters':
+                                  setState(() {
+                                    help = 'C';
+                                  });
+                                  print('Clear filters');
+                                  break;
+                                default:
+                              }
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<String>>[
+                              const PopupMenuItem<String>(
+                                value: 'filter0',
+                                child: Text('جميع الأيام'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'filter1',
+                                child: Text('السبت'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'filter2',
+                                child: Text('الأحد'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'clearFilters',
+                                child: Text('الأثنين'),
+                              ),
+                            ],
+                          ),
+                          ////
+                          contentPadding: EdgeInsets.only(left: 25.0),
+                          hintText: 'قم بالبحث بالأسم الاول للمدرب ...',
+                          hintTextDirection: TextDirection.rtl,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                            borderSide: BorderSide(
+                              color: Colors.deepPurple.shade200,
+                              width: 2.0,
                             ),
-                            ////
-                            contentPadding: EdgeInsets.only(left: 25.0),
-                            hintText: 'قم بالبحث بالأسم الاول للمدرب ...',
-                            hintTextDirection: TextDirection.rtl,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0))),
+                          ),
+                        ),
                       ),
 
                       /*     
@@ -213,6 +222,9 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
     if (help == 'C') print("ITS C");
 
     print("Are you here sos");
+////
+
+    ///
 
     switch (help) {
       case 'A':
@@ -375,7 +387,7 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                       subtitle: Text(
                         'تقييم المدرب:' +
                             ' ' +
-                            document['Rate'].toString().substring(0, 4),
+                            document['Rate'].toStringAsFixed(2),
 
                         style: TextStyle(height: 2, fontSize: 12),
                         textAlign: TextAlign.right,

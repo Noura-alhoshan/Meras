@@ -216,6 +216,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                       style: BorderStyle.none,
                                       width: 0),
                                   children: [
+                                    /*
                                     TableRow(children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.all(1.0),
@@ -229,6 +230,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                       ),
                                       Container(
                                         padding: EdgeInsets.all(2.0),
+
                                         child: Text(
                                           ' :التقييم',
                                           style: TextStyle(
@@ -238,7 +240,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                                           textAlign: TextAlign.end,
                                         ),
                                       )
-                                    ]),
+                                    ]), */
                                     TableRow(children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.all(1.0),
