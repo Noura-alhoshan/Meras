@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:meras/screen/Trainee/TRpages/TRprofile.dart';
+import 'package:meras/screen/Trainee/TRpages/navDrawerTR.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -32,15 +34,11 @@ class _HomePageState extends State<TRhome> {
   Widget build(
     BuildContext context,
   ) {
-    // FirebaseAuth auth = FirebaseAuth.instance;
-    // User? user = auth.currentUser;
-    // dynamic userid = user!.uid;
-
     //print(userid+" hello there");//first user only
 
     //print(widget.userId);//updated
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: NavDrawerTR(),
       appBar: AppBar(
         //title: Text('Side menu'),
         backgroundColor: Colors.deepPurple[100],
@@ -84,21 +82,7 @@ class _HomePageState extends State<TRhome> {
                     fontSize: 17,
                     color: Colors.black),
               ),
-              //SizedBox(height: 20.0),
-              // RoundedHomeButton(
-              //     text: 'إشارات السير',
-              //     press: (){}
-              //     ),
-              // SizedBox(height: 10.0),
-              // RoundedHomeButton(
-              //     text: 'text',
-              //     press: (){}
-              // ),
-              // IconButton(
-              //   icon: Image.asset('assets/images/trafficsigns.png'),
-              //   iconSize: 350,
-              //   onPressed: () {},
-              // ),
+
               SizedBox(height: 50.0),
               SizedBox(height: 20.0),
               SizedBox(height: 20.0),
