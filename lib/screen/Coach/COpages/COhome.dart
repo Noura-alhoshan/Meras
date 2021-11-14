@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
+import 'package:meras/screen/Coach/COpages/COprofile.dart';
+import 'package:meras/screen/Coach/COpages/navDrawerCO.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -32,15 +34,15 @@ class _HomePageState extends State<COhome> {
   Widget build(
     BuildContext context,
   ) {
-    // FirebaseAuth auth = FirebaseAuth.instance;
-    // User? user = auth.currentUser;
-    // dynamic userid = user!.uid;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
+    String userid = user!.uid;
 
     //print(userid+" hello there");//first user only
 
     //print(widget.userId);//updated
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: NavDrawerCO(),
       appBar: AppBar(
         //title: Text('Side menu'),
         backgroundColor: Colors.deepPurple[100],
@@ -84,21 +86,6 @@ class _HomePageState extends State<COhome> {
                     fontSize: 17,
                     color: Colors.black),
               ),
-              //SizedBox(height: 20.0),
-              // RoundedHomeButton(
-              //     text: 'إشارات السير',
-              //     press: (){}
-              //     ),
-              // SizedBox(height: 10.0),
-              // RoundedHomeButton(
-              //     text: 'text',
-              //     press: (){}
-              // ),
-              // IconButton(
-              //   icon: Image.asset('assets/images/trafficsigns.png'),
-              //   iconSize: 350,
-              //   onPressed: () {},
-              // ),
               SizedBox(height: 50.0),
               SizedBox(height: 20.0),
               SizedBox(height: 20.0),
@@ -110,22 +97,6 @@ class _HomePageState extends State<COhome> {
                 ),
               ),
               SizedBox(height: 70.0),
-              // SizedBox(height: 40.0),
-              // SizedBox(height: 40.0),
-              // SizedBox(height: 40.0),
-              // SizedBox(height: 20.0),
-              // Transform.scale(
-              //   scale: 11.0,
-              //   child: IconButton(
-              //     onPressed: () {},
-              //     icon: new Image.asset('assets/images/test2.png'),
-              //   ),
-              // ),
-              // IconButton(
-              //   icon: Image.asset('assets/images/test2.png'),
-              //   iconSize: 350,
-              //   onPressed: () {},
-              // ),
               SizedBox(height: 40.0),
               SizedBox(height: 50.0),
               SizedBox(height: 50.0),
@@ -136,3 +107,12 @@ class _HomePageState extends State<COhome> {
     );
   }
 }
+
+// void navProfile(String uid, BuildContext context) async {
+//   Navigator.push(
+//     context,
+//     MaterialPageRoute(builder: (context) {
+//       return COprifile(uid);
+//     }),
+//   );
+// }
