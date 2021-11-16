@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
-import 'package:meras/screen/home/navDrawer.dart';
+import 'package:meras/screen/Trainee/TRpages/navDrawerTR.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 
 class TRnotification extends StatefulWidget {
@@ -124,25 +125,10 @@ class _TRnotification extends State<TRnotification> {
   }
 
   Widget build(BuildContext context) {
-    //   Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: NavDrawer(),
+      drawer: NavDrawerTR(),
       appBar: AppBar(
-        /*
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.swap_vert_rounded,
-              color: Colors.black,
-              size: 40,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],*/
         title: Center(child: Text('التنبيهات')),
         backgroundColor: Colors.deepPurple[100],
       ),

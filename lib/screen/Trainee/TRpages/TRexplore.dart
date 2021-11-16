@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
-import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
-import 'package:meras/screen/home/navDrawer.dart';
-import 'BackgroundLo2.dart';
+import 'package:meras/screen/Trainee/TRpages/navDrawerTR.dart';
 
 import 'DraftF.dart';
 
@@ -69,7 +67,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       // extendBody: true,
-      drawer: NavDrawer(),
+      drawer: NavDrawerTR(),
       appBar: AppBar(
         title: Text(
           'قائمة المدربين المتاحين          ',

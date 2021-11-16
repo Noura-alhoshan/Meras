@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/screen/Trainee/TRpages/TRprofile.dart';
+import 'package:meras/screen/Trainee/TRpages/navDrawerTR.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'package:meras/screen/Trainee/TRpages/acceptedLessons.dart';
 import 'package:meras/screen/Trainee/TRpages/rejectedLessons.dart';
@@ -16,7 +19,7 @@ class TRlessons extends StatelessWidget {
         length: 3,
         child: Scaffold(
           extendBodyBehindAppBar: true,
-          drawer: NavDrawer(),
+          drawer: NavDrawerTR(),
           appBar: AppBar(
             backgroundColor: Colors.deepPurple[100],
             bottom: TabBar(
@@ -46,4 +49,13 @@ class TRlessons extends StatelessWidget {
       ),
     );
   }
+
+  // void nav(String userid, BuildContext context) async {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) {
+  //       return TRprofile(userid);
+  //     }),
+  //   );
+  // }
 }
