@@ -54,7 +54,7 @@ class ADhome extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "إدارة معلومات إشارات السير    ",
+                          "إدارة معلومات إشارات السير     ",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 19,
@@ -93,7 +93,7 @@ class ADhome extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "إدارة الاختبار القصير ",
+                          "إدارة الاختبار القصير  ",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 19,

@@ -81,8 +81,8 @@ class MyApp extends StatelessWidget {
         ),
         home:
             // TRguidelines(),
-            SignIn(),
-        // ADcategory(),
+            // SignIn(),
+            ADcategory(),
         // TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
         // COcategory(),
         //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
