@@ -88,7 +88,8 @@ flutter:
     - assets/images/TF.png
     - assets/icons/ringing.png
     - assets/images/req.png
-
+    - assets/images/BackgroundProfileLight2.jpeg
+    - assets/images/BackgroundProfileDark2.jpeg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
+import 'package:meras/screen/Coach/BackgroundProfileLight.dart';
+import 'package:meras/screen/Coach/BackgroungProfileDark.dart';
 
 class COprifile extends StatefulWidget {
   final String id;
@@ -12,6 +15,30 @@ class COprifile extends StatefulWidget {
 }
 
 class _COprifileState extends State<COprifile> {
+  Widget textfield({@required hintText}) {
+    return Material(
+      elevation: 4,
+      shadowColor: Colors.grey,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: TextStyle(
+              letterSpacing: 2,
+              color: Colors.black54,
+              fontWeight: FontWeight.bold,
+            ),
+            fillColor: Colors.white30,
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide.none)),
+      ),
+    );
+  }
+
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
@@ -53,268 +80,279 @@ class _COprifileState extends State<COprifile> {
       height: 230.0,
       width: 250.0,
     );
-    return Container(
-      child: SingleChildScrollView(
-        child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Colors.deepPurple.shade50,
-                Colors.white10,
-              ],
-            )),
-            child: Column(children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(30, 50, 30, 30),
-              ),
-              Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(89),
-                  child: Container(
-                    child: ImageFullScreenWrapperWidget(
-                      child: im,
-                      dark: false,
-                    ),
+    return BackgroundProfileLight(
+      child: Container(
+        child: SingleChildScrollView(
+          child: Container(
+              // decoration: BoxDecoration(
+              //     gradient: LinearGradient(
+              //   begin: Alignment.topRight,
+              //   end: Alignment.bottomLeft,
+              //   colors: [
+              //     Colors.deepPurple.shade50,
+              //     Colors.white10,
+              //   ],
+              // )),
+              child: Column(children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(30, 20, 1, 0),
+            ),
+            Container(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(70),
+                child: Container(
+                  child: ImageFullScreenWrapperWidget(
+                    child: im,
+                    dark: false,
                   ),
                 ),
               ),
-              SizedBox(
-                height: 30,
-                //width: 40,
-              ),
-              Card(
-                child: Column(children: [
-                  Container(
-                    child: Column(children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(40),
-                        child: Table(
-                          defaultColumnWidth: FixedColumnWidth(150.0),
-                          border: TableBorder.all(
-                              color: Colors.white,
-                              style: BorderStyle.solid,
-                              width: 0),
-                          children: [
-                            TableRow(children: [
-                              Container(
-                                  padding: EdgeInsets.all(1.0),
-                                  child: Text(
-                                    document['Fname'] + ' ' + document['Lname'],
-                                    style: TextStyle(
-                                        fontSize: 16.5,
-                                        color: Colors.grey,
-                                        height: 1.3),
-                                    textAlign: TextAlign.right,
-                                  )),
+            ),
+            Card(
+              child:
+                  // Column(children: [
+                  //   Container(
+                  //     child:
+                  Column(children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(20),
+                  child: Table(
+                    columnWidths: {
+                      0: FlexColumnWidth(6),
+                      1: FlexColumnWidth(3),
+                      //2: FlexColumnWidth(4),
+                    },
+                    //margin: EdgeInsets.all(40),
+                    //child: Table(
+                    defaultColumnWidth: FixedColumnWidth(150.0),
+                    border: TableBorder.all(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                        width: 0),
+                    children: [
+                      TableRow(children: [
+                        Container(
+                            padding: EdgeInsets.all(1.0),
+                            child: Text(
+                              document['Fname'] + ' ' + document['Lname'],
+                              style: TextStyle(
+                                  fontSize: 16.5,
+                                  color: Colors.grey,
+                                  height: 1.3),
+                              textAlign: TextAlign.right,
+                            )),
 
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':الاسم',
-                                    style: TextStyle(fontSize: 18.0),
-                                    textAlign: TextAlign.end,
-                                  )),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':الاسم',
+                              style: TextStyle(fontSize: 18.0),
+                              textAlign: TextAlign.end,
+                            )),
 
-                              //Column(children: [Text('')]),
-                              // Column(children: [
-                              // Text('')
-                            ]),
-                            TableRow(children: [
-                              Container(
-                                padding: EdgeInsets.all(1.0),
-                                child: Text(
-                                  document['Email'],
-                                  style: TextStyle(
-                                    height: 1.99,
-                                    fontSize: 15.37,
-                                    color: Colors.grey,
-                                    //height: 1
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
+                        //Column(children: [Text('')]),
+                        // Column(children: [
+                        // Text('')
+                      ]),
+                      TableRow(children: [
+                        //Column(children:[Text('')]),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              document['Age'].toString() + "  سنة ",
+                              style: TextStyle(
+                                height: 1.49,
+                                fontSize: 16.3,
+                                color: Colors.grey,
                               ),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':البريد الالكتروني',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                    ),
-                                    textAlign: TextAlign.end,
-                                  )),
-                            ]),
-                            TableRow(children: [
-                              //Column(children:[Text('')]),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    document['Age'].toString() + "  سنة ",
-                                    style: TextStyle(
-                                      height: 1.49,
-                                      fontSize: 16.3,
-                                      color: Colors.grey,
-                                    ),
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.right,
-                                  )),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':العمر',
-                                    style: TextStyle(fontSize: 18.0),
-                                    textAlign: TextAlign.right,
-                                  )),
-                            ]),
-                            TableRow(children: [
-                              Container(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text(
-                                  document['Gender'],
-                                  style: TextStyle(
-                                    height: 1.99,
-                                    fontSize: 16.37,
-                                    color: Colors.grey,
-                                    //height: 1
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':الجنس',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                    ),
-                                    textAlign: TextAlign.end,
-                                  )),
-                            ]),
-                            TableRow(children: [
-                              Container(
-                                padding: EdgeInsets.all(1.0),
-                                child: Text(
-                                  document['Neighborhood'],
-                                  style: TextStyle(
-                                    height: 1.99,
-                                    fontSize: 16.37,
-                                    color: Colors.grey,
-                                    //height: 1
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':الحي السكني ',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                    ),
-                                    textAlign: TextAlign.end,
-                                  )),
-                            ]),
-                            TableRow(children: [
-                              Container(
-                                padding: EdgeInsets.all(1.0),
-                                child: Text(
-                                  document['Price'],
-                                  style: TextStyle(
-                                    height: 1.99,
-                                    fontSize: 16.37,
-                                    color: Colors.grey,
-                                    //height: 1
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':سعر التدريب ',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                    ),
-                                    textAlign: TextAlign.end,
-                                  )),
-                            ]),
-                            TableRow(children: [
-                              Container(
-                                padding: EdgeInsets.all(1.0),
-                                child: Text(
-                                  document['Phone Number'],
-                                  style: TextStyle(
-                                    height: 1.99,
-                                    fontSize: 16.37,
-                                    color: Colors.grey,
-                                    //height: 1
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(3.0),
-                                  child: Text(
-                                    ':رقم الجوال',
-                                    style: TextStyle(fontSize: 18.0),
-                                    textAlign: TextAlign.end,
-                                  )),
-                            ]),
-                            TableRow(children: [
-                              Container(
-                                padding: EdgeInsets.all(1.0),
-                                child: Text(
-                                  document['Discerption'],
-                                  style: TextStyle(
-                                    height: 1.99,
-                                    fontSize: 16.5,
-                                    color: Colors.grey,
-                                    //height: 1
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    ':الوصف ',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                    ),
-                                    textAlign: TextAlign.end,
-                                  )),
-                            ]),
-                          ],
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right,
+                            )),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':العمر',
+                              style: TextStyle(fontSize: 18.0),
+                              textAlign: TextAlign.right,
+                            )),
+                      ]),
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(2.0),
+                          child: Text(
+                            document['Gender'],
+                            style: TextStyle(
+                              height: 1.99,
+                              fontSize: 16.37,
+                              color: Colors.grey,
+                              //height: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                    ]),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':الجنس',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.end,
+                            )),
+                      ]),
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(1.0),
+                          child: Text(
+                            document['Email'],
+                            style: TextStyle(
+                              height: 1.99,
+                              fontSize: 15.37,
+                              color: Colors.grey,
+                              //height: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':البريد الالكتروني',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.end,
+                            )),
+                      ]),
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(1.0),
+                          child: Text(
+                            document['Neighborhood'],
+                            style: TextStyle(
+                              height: 1.99,
+                              fontSize: 16.37,
+                              color: Colors.grey,
+                              //height: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':الحي السكني ',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.end,
+                            )),
+                      ]),
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(1.0),
+                          child: Text(
+                            document['Price'],
+                            style: TextStyle(
+                              height: 1.99,
+                              fontSize: 16.37,
+                              color: Colors.grey,
+                              //height: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':سعر التدريب ',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.end,
+                            )),
+                      ]),
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(1.0),
+                          child: Text(
+                            document['Phone Number'],
+                            style: TextStyle(
+                              height: 1.99,
+                              fontSize: 16.37,
+                              color: Colors.grey,
+                              //height: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(3.0),
+                            child: Text(
+                              ':رقم الجوال',
+                              style: TextStyle(fontSize: 18.0),
+                              textAlign: TextAlign.end,
+                            )),
+                      ]),
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(1.0),
+                          child: Text(
+                            document['Discerption'],
+                            style: TextStyle(
+                              height: 1.99,
+                              fontSize: 16.5,
+                              color: Colors.grey,
+                              //height: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text(
+                              ':الوصف ',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.end,
+                            )),
+                      ]),
+                    ],
                   ),
-                ]),
-                elevation: 40,
-                shadowColor: Colors.deepPurple[500],
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(18),
-                    borderSide: BorderSide(color: Colors.white, width: 1)),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                child: Text('تعديل'),
-                onPressed: () async {
-                  //nav(document.id);
-                },
-                style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    shape: StadiumBorder(),
-                    primary: Color(0xFF6F35A5),
-                    textStyle: TextStyle(fontSize: 17)),
-              ),
-            ])),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+              ]),
+              // ),
+              // ]),
+              elevation: 30,
+              shadowColor: Colors.deepPurple[500],
+              shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide(color: Colors.white, width: 1)),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              child: Text('تعديل'),
+              onPressed: () async {
+                //nav(document.id);
+              },
+              style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  shape: StadiumBorder(),
+                  primary: Color(0xFF6F35A5),
+                  textStyle: TextStyle(fontSize: 17)),
+            ),
+            SizedBox(
+              height: 30,
+              //width: 40,
+            ),
+          ])),
+        ),
       ),
     );
   }
