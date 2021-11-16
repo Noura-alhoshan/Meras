@@ -9,6 +9,8 @@ import 'package:meras/screen/home/navDrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/screen/authenticate/background2.dart';
 
+import 'CnavDrawer.dart';
+
 //this home page will be edited to fit our app, this one is just for testing ^_^
 
 // CollectionReference firevar = FirebaseFirestore.instance.collection('users');
@@ -40,7 +42,7 @@ class _HomePageState extends State<Chome> {
 
     //print(widget.userId);//updated
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: CNavDrawer(),
       appBar: AppBar(
         //title: Text('Side menu'),
         backgroundColor: Colors.deepPurple[100],

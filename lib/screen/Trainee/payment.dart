@@ -36,12 +36,12 @@ class StripeServices {
   }
 
   static Future<Map<String, dynamic>> createPaymentIntent(
-      String amount, String currency,String des) async {
+      String amount, String currency,String description) async {
     try {
       Map<String, dynamic> body = {
         'amount': amount,
         'currency': currency,
-        'description': des,//DESCRIPTION
+        'description': description,//DESCRIPTION
       };
 
       var response =
@@ -54,12 +54,12 @@ class StripeServices {
   }
 
   static Future<StripeTransactionResponse> payNowHandler(
-      {required String amount, required String currency,required String des }) async {
+      {required String amount, required String currency,required String description }) async {
     try {
       var paymentMethod = await StripePayment.paymentRequestWithCardForm(
           CardFormPaymentRequest());
       var paymentIntent =
-          await StripeServices.createPaymentIntent(amount, currency,des);
+          await StripeServices.createPaymentIntent(amount, currency,description);
       var response = await StripePayment.confirmPaymentIntent(PaymentIntent(
           clientSecret: paymentIntent['client_secret'],/////////////////////////////////////////security 
           paymentMethodId: paymentMethod.id));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meras/screen/home/CnavDrawer.dart';
 
 import 'package:meras/screen/home/navDrawer.dart';
 
@@ -17,7 +18,7 @@ class COlist extends StatelessWidget {
         child: Scaffold(
           extendBody: true,
           //extendBodyBehindAppBar: true,
-          drawer: NavDrawer(),
+          drawer: CNavDrawer(),
           appBar: AppBar(
             backgroundColor: Colors.deepPurple[100],
             bottom: TabBar(

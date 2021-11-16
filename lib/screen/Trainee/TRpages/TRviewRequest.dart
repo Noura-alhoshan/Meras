@@ -1,6 +1,4 @@
-import 'dart:html';
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +13,7 @@ import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../payment.dart';
 import 'TRlessons.dart';
+
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -338,11 +337,11 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                               String desc= "اسم المتدرب: ${document['Tname']} \n رقم الجوال: ${document['TPhone Number']} \n , تحويل الى المدرب : ${document['CoachName']} ${document['CoachName2']} رقم جوال المدرب: ${document['CoachPhone']} ";
                               var baseDialog = BaseAlertDialog(
                                   title: "", //اقول خدمة؟؟؟؟
-                                  content: " 'سوف يتم تحويلك لخدمة 'سترايب " +
-                                      "\nلدفع مبلغ " +
-                                      document['Price'] +
-                                      'ريال ' +
-                                      "\nهل أنت متأكد من إتمام العملية؟",
+                                  content: //" سوف يتم تحويلك ل " +
+                                      //"\nلدفع مبلغ " +
+                                      //document['Price'] +
+                                      //'ريال ' +
+                                      " هل أنت متأكد من إتمام عملية دفع " +"\n"+"مبلغ ${document['Price']} ريال ؟",
                                   yesOnPressed: () async {
                                     Navigator.of(context, rootNavigator: true)
                                         .pop('dialog');
@@ -351,7 +350,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                         await StripeServices.payNowHandler(
                                             amount: newp, 
                                             currency: 'SAR',
-                                            description: 'desc' );
+                                            description: desc );
                                     print("response ${response.message}");
  
                                     if (response.message == 'Transaction succeful') {
@@ -397,7 +396,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       var baseDialog = SignleBaseAlertDialog(
                                         title: "",
                                         content:
-                                            ".تمت مقاطعة عملية الدفع \n يرجى المحاولة مرة أخرى",
+                                            ".لم تتم عملية الدفع \n يرجى المحاولة مرة أخرى",
                                         yesOnPressed: () async {
                                           Navigator.of(context,
                                                   rootNavigator: true)
