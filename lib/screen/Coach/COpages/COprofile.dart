@@ -5,6 +5,7 @@ import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/BackgroundProfileLight.dart';
 import 'package:meras/screen/Coach/BackgroungProfileDark.dart';
+import 'package:meras/screen/Coach/COpages/editProfileInfoCO.dart';
 
 class COprifile extends StatefulWidget {
   final String id;
@@ -15,30 +16,6 @@ class COprifile extends StatefulWidget {
 }
 
 class _COprifileState extends State<COprifile> {
-  Widget textfield({@required hintText}) {
-    return Material(
-      elevation: 4,
-      shadowColor: Colors.grey,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              letterSpacing: 2,
-              color: Colors.black54,
-              fontWeight: FontWeight.bold,
-            ),
-            fillColor: Colors.white30,
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide.none)),
-      ),
-    );
-  }
-
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
@@ -49,10 +26,7 @@ class _COprifileState extends State<COprifile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            'الملف الشخصي                                 ',
-            textAlign: TextAlign.center,
-          ),
+          elevation: 0.0,
           backgroundColor: Colors.deepPurple[100],
         ),
         body: StreamBuilder<QuerySnapshot>(
@@ -84,18 +58,17 @@ class _COprifileState extends State<COprifile> {
       child: Container(
         child: SingleChildScrollView(
           child: Container(
-              // decoration: BoxDecoration(
-              //     gradient: LinearGradient(
-              //   begin: Alignment.topRight,
-              //   end: Alignment.bottomLeft,
-              //   colors: [
-              //     Colors.deepPurple.shade50,
-              //     Colors.white10,
-              //   ],
-              // )),
               child: Column(children: <Widget>[
+            Text(
+              'الملف الشخصي                                 ',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 27),
+            ),
             Padding(
-              padding: EdgeInsets.fromLTRB(30, 20, 1, 0),
+              padding: EdgeInsets.fromLTRB(30, 0, 1, 0),
             ),
             Container(
               child: ClipRRect(
@@ -339,7 +312,7 @@ class _COprifileState extends State<COprifile> {
             ElevatedButton(
               child: Text('تعديل'),
               onPressed: () async {
-                //nav(document.id);
+                nav(document.id);
               },
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -354,6 +327,16 @@ class _COprifileState extends State<COprifile> {
           ])),
         ),
       ),
+    );
+  }
+
+  void nav(String id) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return EditProfileInfoCo(id);
+        //return RequestLessonPage(icd);
+      }),
     );
   }
 }
