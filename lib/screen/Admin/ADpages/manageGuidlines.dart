@@ -7,6 +7,7 @@ import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/authenticate/background.dart';
 
 import '../../../constants.dart';
+import 'deleteGuidelines.dart';
 
 class ManageGuidlines extends StatefulWidget {
   @override
@@ -142,6 +143,46 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                             Icons.border_color,
                             color: kPrimaryColor,
                             size: 23,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              Container(
+                width: 350,
+                height: 90,
+                padding: EdgeInsets.all(10),
+                decoration: new BoxDecoration(
+                  color: Colors.deepPurple[50],
+                  border: Border.all(color: Colors.white, width: 0.0),
+                  borderRadius: new BorderRadius.all(Radius.circular(29.0)),
+                ),
+                child: Center(
+                  child: FlatButton(
+                    onPressed: () => {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => deleteGuidelines()))
+                    },
+                    padding: EdgeInsets.all(5.0),
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "حذف إشارة سير  ",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Icon(
+                            Icons.clear,
+                            color: kPrimaryColor,
+                            size: 30,
                           ),
                         ],
                       ),
