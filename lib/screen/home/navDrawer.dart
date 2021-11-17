@@ -1,10 +1,5 @@
-import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meras/services/database.dart';
-import 'package:meras/controllers/MyUser.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../constants.dart';
 import 'BaseAlertDialog.dart';
 //import 'package:flutter/material.dart';
@@ -12,7 +7,7 @@ import 'BaseAlertDialog.dart';
 
 class NavDrawer extends StatelessWidget  {
 
-  final AuthService _auth = AuthService();
+ final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context)  {
@@ -43,15 +38,15 @@ class NavDrawer extends StatelessWidget  {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('الملف الشخصي'),
+              trailing: Icon(Icons.person),
+              title: Text('الملف الشخصي',textAlign: TextAlign.end,),
               onTap: () => null,
             ),
 
             Divider(),
             ListTile(
-              title: Text('تسجيل الخروج'),
-              leading: Icon(Icons.exit_to_app),
+              title: Text('تسجيل الخروج',textAlign: TextAlign.end,),
+              trailing: Icon(Icons.exit_to_app),
               onTap: ()  {
 
                 var baseDialog = BaseAlertDialog(
@@ -64,9 +59,7 @@ class NavDrawer extends StatelessWidget  {
                       //Navigator.of(context).push(
                              //  MaterialPageRoute(builder: (context) => SignIn()),//CHANGE IT
                              //);
-                      
                     },
-
                     noOnPressed: () {
                       Navigator.of(context, rootNavigator: true).pop('dialog');
                     },
@@ -82,4 +75,3 @@ class NavDrawer extends StatelessWidget  {
 
   }
 }
-
