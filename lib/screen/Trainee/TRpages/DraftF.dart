@@ -536,6 +536,20 @@ Widget _buildListItem(
   );
 }
 
+void setday(String a) {
+  switch (a) {
+    case 'Saturday':
+      // setState(() {
+      //  selectedDay = 'السبت';
+      // });
+      //   print("y " + selectedDay);
+
+      break;
+    default:
+  }
+  print('are you workung in setday?');
+}
+
 String getArabicdays(String a) {
   switch (a.substring(19)) {
     case 'Saturday':

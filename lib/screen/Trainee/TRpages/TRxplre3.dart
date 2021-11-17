@@ -47,9 +47,6 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
-                      height: 40.0,
-                    ),
                     Container(
                       child: TextField(
                         onChanged: (String) {
@@ -62,7 +59,7 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                           fillColor: Colors.grey.shade100,
                           ////
                           prefixIcon: PopupMenuButton<String>(
-                            icon: Icon(Icons.filter_list),
+                            icon: Icon(Icons.calendar_today),
                             onSelected: (String result) {
                               switch (result) {
                                 case 'filter0':
@@ -118,6 +115,10 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                           contentPadding: EdgeInsets.only(left: 25.0),
                           hintText: 'قم بالبحث بالأسم الاول للمدرب ...',
                           hintTextDirection: TextDirection.rtl,
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4.0),
                           ),
@@ -418,7 +419,7 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
         );
     }
   }
-
+/*
   void case1() {
     StreamBuilder<QuerySnapshot>(
         stream: (name != "" && name != null)
@@ -438,7 +439,7 @@ class _TRexplore3ScreenState extends State<TRexplore3Screen> {
                 _buildListItem(context, (snapshot.data!).docs[index]),
           );
         });
-  }
+  } */
 
   void test(String a) {
     StreamBuilder<QuerySnapshot>(
