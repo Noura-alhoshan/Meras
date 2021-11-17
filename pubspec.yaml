@@ -97,6 +97,8 @@ flutter:
     - assets/images/TF.png
     - assets/icons/ringing.png
     - assets/images/req.png
+    - assets/images/logo_forground.png
+    - assets/images/whitelogo.png
 
 
   # To add assets to your application, add an assets section, like this:

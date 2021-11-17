@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meras/services/database.dart';
-import 'package:meras/controllers/MyUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
@@ -26,11 +23,14 @@ class CNavDrawer extends StatefulWidget {
   _ViewLessonsInfoState createState() => _ViewLessonsInfoState();
 }
 
+Color pu= Color(0xF4F1F8);
+
 class _ViewLessonsInfoState extends State<CNavDrawer> {
   final ScrollController _scrollController = ScrollController();
 late int earn=0; 
   void initState() {
     super.initState();
+    getE();
   }
 
   getE(){
@@ -55,7 +55,7 @@ late int earn=0;
 
   @override
   Widget build(BuildContext context)  {
-getE();
+//getE();
     return  Container(
       height: 650,
       width: 250,
@@ -66,16 +66,17 @@ getE();
 
           children: [
             Container(
-              height: 210,
+              
+              height: 220,
               child: DrawerHeader(
 
-                child: CircleAvatar(
-                  child: ClipOval(
-                    child: Image.asset('assets/images/def.jpg', height: 230,),
-                  ),
-                ),
+               // child: CircleAvatar(
+                  //child: ClipOval(
+                    child: Image.asset('assets/images/whitelogo.png', height: 280,alignment: Alignment.topCenter,),
+                 // ),
+                //),
                 decoration: BoxDecoration(
-                  color: kPrimaryLightColor,
+                  color: Colors.white,//or pu 
 
                 ), //child: null,
               ),
@@ -88,14 +89,10 @@ getE();
 
             Divider(),
 
-
             ListTile(
               title: Text('الربح: $earn ريال'  ,textAlign: TextAlign.end,),
               trailing: Icon(CNavDrawer.money) ,
-              onTap: ()  {
-
-               
-              }
+              onTap: null
               ,),
 
 
