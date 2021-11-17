@@ -366,6 +366,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                               )
                             else
                               Column(children: <Widget>[
+                                //
                                 if (document['IsRate'] == 'false')
                                   Container(
                                     child: Column(children: <Widget>[
@@ -498,19 +499,15 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                 //  SizedBox(
                                 //  height: 15,
                                 // ),
-
-                                ElevatedButton(
-                                  child: Text('   تم الدفع  ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.green[800])),
-                                  //  disabledColor:
-                                  onPressed: null,
-                                  style: ElevatedButton.styleFrom(
-                                    shape: StadiumBorder(),
-                                    onSurface: Colors.greenAccent[700],
+                                Center(
+                                  child: Text(
+                                    'تم الدفع',
+                                    style: TextStyle(
+                                        fontSize: 18.5,
+                                        color: Colors.green[600],
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                ),
+                                )
                               ]),
                           ],
                         ),
