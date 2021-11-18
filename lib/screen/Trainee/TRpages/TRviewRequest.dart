@@ -13,6 +13,7 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import '../payment.dart';
+import 'Rate.dart';
 import 'TRlessons.dart';
 
 
@@ -28,6 +29,8 @@ class ViewLessonsInfo extends StatefulWidget {
 
 class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
   final ScrollController _scrollController = ScrollController();
+    late int rating = 0;
+
 
   void initState() {
     super.initState();
@@ -74,7 +77,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
         alignment: const Alignment(0, -0.4),
         child: Container(
           width: 307,
-          height: 455,
+          height: 570,
           padding: EdgeInsets.only(bottom: 10, top: 0),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -96,7 +99,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                     Widget>[
               Container(
                 height:
-                    440, ////////////////////////////////////////////////////////////////
+                    560, ////////////////////////////////////////////////////////////////
                 //child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
@@ -316,6 +319,27 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
+                               TableRow(children: [
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          document['TRate'].toString(),
+                                          style: TextStyle(
+                                            height: 1.49,
+                                            fontSize: 16.3,
+                                            color: Colors.grey,
+                                          ),
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.right,
+                                        )),
+                                    Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        child: Text(
+                                          ':تقييمك الحالي',
+                                          style: TextStyle(fontSize: 18.0),
+                                          textAlign: TextAlign.end,
+                                        )),
+                                  ]),
                             ],
                           ),
                         ),
@@ -432,7 +456,141 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                 textStyle: TextStyle(fontSize: 16)),
                           )
                         else
-                          Center(
+                              Column(children: <Widget>[
+                                if (document['IsRate'] == 'false')
+                                  Container(
+                                    child: Column(children: <Widget>[
+                                      Table(columnWidths: {
+                                        0: FlexColumnWidth(10),
+                                        1: FlexColumnWidth(25),
+                                        //2: FlexColumnWidth(4),
+                                      }, children: [
+                                        TableRow(children: [
+                                          Container(),
+                                          Container(
+                                            //  height: 25,
+                                            //   width: 70,
+                                            child: Text(
+                                              ' : قيم تجربتك مع المدرب    .',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.black,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 35,
+                                          ),
+                                        ]),
+                                        TableRow(children: [
+                                          Container(),
+                                          Container(
+                                            // height: 44,
+                                            //width: 110,
+                                            child: StarRating(
+                                              rating: rating,
+                                              onRatingChanged: (rating) =>
+                                                  setState(() =>
+                                                      this.rating = rating),
+                                              color:
+                                                  Colors.amberAccent.shade400,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                        ]),
+                                      ]),
+                                      Container(
+                                        child: ElevatedButton(
+                                          child: Text(
+                                            'حفظ التقييم',
+                                          ),
+                                          //  disabledColor:
+                                          onPressed: () {
+                                            if (document['TRate'] == 0) {
+                                              FirebaseFirestore.instance
+                                                  .collection('Coach')
+                                                  .doc(document['Cid'])
+                                                  .get()
+                                                  .then((DocumentSnapshot
+                                                      em) async {
+                                                CollectionReference users =
+                                                    FirebaseFirestore.instance
+                                                        .collection('Coach');
+
+                                                users
+                                                    .doc(document['Cid'])
+                                                    .update({
+                                                  'ReqCount': em['ReqCount'] + 1
+                                                });
+                                              });
+
+                                              FirebaseFirestore.instance
+                                                  .collection('Coach')
+                                                  .doc(document['Cid'])
+                                                  .get()
+                                                  .then((DocumentSnapshot
+                                                      em) async {
+                                                CollectionReference users =
+                                                    FirebaseFirestore.instance
+                                                        .collection('Coach');
+                                                if (em['Rate'] > 0) {
+                                                  print("here1");
+                                                  var num1 =
+                                                      (rating - em['Rate']);
+                                                  print("this rate here1 " +
+                                                      num1.toString());
+
+                                                  users
+                                                      .doc(document['Cid'])
+                                                      .update({
+                                                    'Rate': (em['Rate'] +
+                                                        ((num1) /
+                                                            em['ReqCount']))
+                                                  });
+                                                } else {
+                                                  print("here2 is zero");
+
+                                                  users
+                                                      .doc(document['Cid'])
+                                                      .update({'Rate': rating});
+                                                }
+                                              });
+                                            }
+                                            FirebaseFirestore.instance
+                                                .collection('Requests')
+                                                .doc(widget.id)
+                                                .update({'TRate': rating});
+                                            print(rating);
+                                            FirebaseFirestore.instance
+                                                .collection('Requests')
+                                                .doc(widget.id)
+                                                .update({'IsRate': 'true'});
+                                          },
+
+                                          style: ElevatedButton.styleFrom(
+                                              shape: StadiumBorder(),
+                                              primary: Color(0xFF6F35A5),
+                                              textStyle:
+                                                  TextStyle(fontSize: 16)),
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+
+                                //FirebaseFirestore s=FirebaseFirestore.collection('Requests')
+                                //             .where(FieldPath.documentId, isEqualTo: widget.id)
+                                //            .snapshots();
+
+                                //   Container(child: Text(update(document['Rate']))),
+
+                                //  SizedBox(
+                                //  height: 15,
+                                // ),
+
+                                  Center(
                             child: Text(
                               'تم الدفع',
                               style: TextStyle(
@@ -441,6 +599,9 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                   fontWeight: FontWeight.bold),
                             ),
                           )
+                        
+                              ]),
+                  
                       ]),
                     ),
                     ////////////////////////end of the table
