@@ -95,7 +95,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
       ),
       body: Container(
         child: SingleChildScrollView(
-          child: BackgroundLO22(
+          child: Background(
             child: SafeArea(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,27 +109,28 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                           fillColor: Colors.grey.shade100,
                           ////
                           prefixIcon: PopupMenuButton<String>(
-                            icon: Icon(Icons.calendar_today),
+                            icon: Icon(Icons.filter_alt),
                             onSelected: (String result) {
                               switch (result) {
                                 case 'filter0':
                                   setState(() {
-                                    help = '';
+                                    help = 'A';
                                   });
                                   print('filter 0 clicked');
 
                                   break;
                                 case 'filter1':
                                   setState(() {
-                                    help = 'A';
+                                    help = 'B';
                                   });
                                   print('filter 1 clicked');
 
                                   break;
                                 case 'filter2':
                                   setState(() {
-                                    help = 'B';
+                                    help = '';
                                   });
+
                                   print('filter 2 clicked');
                                   break;
                                 default:
@@ -137,17 +138,38 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                             },
                             itemBuilder: (BuildContext context) =>
                                 <PopupMenuEntry<String>>[
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'filter0',
-                                child: Text('الجميع'),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text('           أنثى        '),
+                                    Icon(
+                                      Icons.female_rounded,
+                                      color: Colors.pink,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'filter1',
-                                child: Text('أنثى'),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text('           ذكر        '),
+                                    Icon(
+                                      Icons.male_rounded,
+                                      color: Colors.blue,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'filter2',
-                                child: Text('ذكر'),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(' محو التحديد   '),
+                                    Icon(Icons.clear_rounded),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -216,6 +238,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                         },
                       ), */
                     ),
+
                     ///////////////////// start from here
                     Expanded(
                       child: Container(
