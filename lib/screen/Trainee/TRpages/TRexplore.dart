@@ -16,10 +16,65 @@ class TRexploreScreen extends StatefulWidget {
 
 class _TRexploreScreenState extends State<TRexploreScreen> {
   //final ScrollController _scrollController = ScrollController();
+  TextEditingController _searchController = TextEditingController();
+
+  late Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
 
   @override
   void initState() {
     super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    print(_searchController.text);
+    var showResults = [];
+
+    if (_searchController.text != "") {
+      for (var tripSnapshot in _allResults) {
+        var title = hope(tripSnapshot).toLowerCase();
+
+        if (title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await FirebaseFirestore.instance
+        .collection("Coach")
+        .orderBy("Rate", descending: true)
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
   }
 
   String name = "";
@@ -48,11 +103,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                   children: <Widget>[
                     Container(
                       child: TextField(
-                        onChanged: (String) {
-                          setState(() {
-                            name = String;
-                          });
-                        },
+                        controller: _searchController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.grey.shade100,
@@ -170,30 +221,11 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                       child: Container(
                         child: SingleChildScrollView(
                           child: Background(
-                            child: StreamBuilder<QuerySnapshot>(
-                                stream: (name != "" && name != null)
-                                    ? FirebaseFirestore.instance
-                                        .collection('Coach')
-                                        .where("Fname", isEqualTo: name)
-                                        .orderBy("Rate", descending: true)
-                                        .snapshots()
-                                    : FirebaseFirestore.instance
-                                        .collection("Coach")
-                                        .orderBy("Rate", descending: true)
-                                        .snapshots(),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) return Loading();
-                                  return ListView.builder(
-                                    //physics: const NeverScrollableScrollPhysics(), //<--here
-                                    //controller: _scrollController,
-
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (context, index) =>
-                                        _buildListItem(context,
-                                            (snapshot.data!).docs[index]),
-                                  );
-                                }),
-                          ),
+                              child: ListView.builder(
+                            itemCount: _resultsList.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                buildTripCard(context, _resultsList[index]),
+                          )),
                         ),
                       ),
                     ),
@@ -205,7 +237,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     );
   }
 
-  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+  Widget buildTripCard(BuildContext context, DocumentSnapshot document) {
     if (help == 'A') print("ITS A");
 
     if (help == 'B') print("ITS B");
@@ -357,6 +389,11 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
               : null,
         );
     }
+  }
+
+  String hope(DocumentSnapshot snapshot) {
+    name = snapshot['Fname'] + ' ' + snapshot['Lname'];
+    return name;
   }
 
   void nav(String icd) async {

@@ -429,7 +429,7 @@ Widget _buildListItem(
   String phone,
   String n,
   String price,
-  int Rate,
+  double Rate,
   DocumentSnapshot document,
 ) {
   return SingleChildScrollView(
