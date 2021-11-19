@@ -55,7 +55,7 @@ class EditAlertDialog extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
-      contentPadding: EdgeInsets.only(top: 24.0),
+      contentPadding: EdgeInsets.only(top: 14.0, right: 23,left: 23),
       title: new Text(this._title,
           style: TextStyle(
             fontSize: 15.7,

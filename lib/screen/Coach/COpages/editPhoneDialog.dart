@@ -55,7 +55,7 @@ class EditPhoneAlertDialog extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
-      contentPadding: EdgeInsets.only(top: 24.0),
+      contentPadding: EdgeInsets.only(top: 14.0, right: 23,left: 23),
       title: new Text(this._title,
           style: TextStyle(
             fontSize: 15.7,
@@ -71,7 +71,7 @@ class EditPhoneAlertDialog extends StatelessWidget {
           keyboardType: TextInputType.phone,
           controller: _controller,
           cursorColor: kPrimaryColor,
-          textDirection: TextDirection.rtl,
+          //textDirection: TextDirection.rtl,
           decoration: InputDecoration(
             hintText: sp + _content,
             fillColor: kPrimaryColor,

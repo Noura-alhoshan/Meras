@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/services/editTitle_alert.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
-import 'package:meras/screen/Coach/COpages/editAgeCO.dart';
 import 'package:meras/screen/Coach/COpages/editNameCO.dart';
 import 'package:meras/screen/Coach/COpages/editPhoneDialog.dart';
 
@@ -15,7 +15,8 @@ class EditProfileInfoCo extends StatefulWidget {
   //const EditProfileInfoCo({ Key? key }) : super(key: key);
   final String id;
   final String ppp;
-  EditProfileInfoCo(this.id,  this.ppp);
+  final String aaa;//age
+  EditProfileInfoCo(this.id,  this.ppp,this.aaa);
 
   @override
   _EditProfileInfoCoState createState() => _EditProfileInfoCoState();
@@ -60,9 +61,12 @@ int _age = 0;
   String sp = '      ';
 
   TextEditingController _controller = TextEditingController();
+  TextEditingController _controller1111 = TextEditingController();
+
   void initState() {
     super.initState();
-    _controller.text = widget.ppp; // Setting the initial value for the field.
+    _controller.text = widget.ppp; 
+    _controller1111.text=widget.aaa;// Setting the initial value for the field.
   }
 
   static final nameValidCharacters = RegExp(r'^[a-zA-Z0-9]+$');
@@ -164,13 +168,22 @@ int _age = 0;
                                   });
                                 },
                                 yesOnPressed: () async {
+                                   var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل الاسم الأول بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update({'Fname': Fname.trim()});
 
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
+                                  
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -246,13 +259,22 @@ int _age = 0;
                                   }
                                 },
                                 yesOnPressed: () async {
+                                   var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل الاسم الأخير بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update({'Lname': Lname.trim()});
 
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
+                               
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -294,55 +316,8 @@ int _age = 0;
                               color: Colors.white,
                             ),
                             onPressed: () async {
-                              var baseDialog = EditAgeAlertDialog(
-                                title: 'تعديل العمر',
-                                 Inittext: document['Age'].toString(),
-                                content: '    أدخل العمر الجديد',
-                                onChange: (value) {
-                                  setState(() {
-                                    _age = int.parse(value);
-                                  });
-                                },
-                                validator: (value) {
-                                  try {
-                                    _age = value; 
-                                  } on FormatException catch (ex) {
-                                    setState(() {
-                                      _message =
-                                          "     الرجاء إدخال العمر بشكل صحيح";
-                                    });
-                                  }
-                                  if (value!.isEmpty) {
-                                    return '                                 الرجاء إدخال العمر';
-                                  } else if (!_message.contains('cool')) {
-                                    if (_age < 17) {
-                                      return '                         الرجاء إدخال العمر، ١٧ سنة وأكثر';
-                                    }
-                                    //  else
-                                    //   return null;
-                                  } else
-                                    return '                        الرجاء إدخال العمر بشكل صحيح';
-                                },
-                                yesOnPressed: () async {
-                                  await FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(widget.id)
-                                      .update({'Age': _age});
-
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
-                                },
-                                noOnPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
-                                },
-                                yes: "حفظ",
-                                no: "إلغاء",
-                              );
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      baseDialog);
+                              await showInformationDialig3(context, document);
+                        
                             },
                           ),
                         ),
@@ -433,7 +408,7 @@ int _age = 0;
                           textAlign: TextAlign.right,
                         ),
                         subtitle: Text(
-                          'سعر التدريب',
+                          'سعر التدريب لساعتين',
                           textAlign: TextAlign.right,
                         ),
                         leading: CircleAvatar(
@@ -493,14 +468,24 @@ int _age = 0;
                                   return null;
                                 },
                                 yesOnPressed: () async {
+                                var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل رقم الجوال بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update(
                                           {'Phone Number': phoneNumber.trim()});
 
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
+                                  // Navigator.of(context, rootNavigator: true)
+                                  //     .pop('dialog');
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -552,13 +537,22 @@ int _age = 0;
                                   });
                                 },
                                 yesOnPressed: () async {
+                                  var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل الوصف بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update({'Discerption': description});
 
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
+                                 
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -638,7 +632,7 @@ int _age = 0;
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('تغيير الحي السكني'),
+                      Text('تعديل الحي السكني'),
                       Column(
                         children: <Widget>[
                           DropdownButton(
@@ -691,11 +685,21 @@ int _age = 0;
                   ),
                   textColor: Colors.deepPurple[900],
                   onPressed: () async {
+                    var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل الحي السكني بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                     await FirebaseFirestore.instance
                         .collection('Coach')
                         .doc(widget.id)
                         .update({'Neighborhood': neighborhood});
-                    Navigator.of(context).pop();
+                   
                   },
                 ),
               ],
@@ -721,7 +725,7 @@ int _age = 0;
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('تغيير سعر التدريب'),
+                      Text(' تعديل سعر التدريب لساعتين'),
                       Center(
                         child: Container(
                           width: 120.0,
@@ -832,11 +836,21 @@ int _age = 0;
                   ),
                   textColor: Colors.deepPurple[900],
                   onPressed: () async {
+                     var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل سعر التدريب بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                     await FirebaseFirestore.instance
                         .collection('Coach')
                         .doc(widget.id)
                         .update({'Price': _controller.text});
-                    Navigator.of(context).pop();
+                   
                   },
                 ),
               ],
@@ -844,4 +858,155 @@ int _age = 0;
           });
         });
   }
+
+    Future<void> showInformationDialig3(
+      BuildContext context, DocumentSnapshot document) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
+              contentPadding: EdgeInsets.only(
+                top: 24.0,
+              ),
+              content: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('تعديل العمر'),
+                      Center(
+                        child: Container(
+                          width: 120.0,
+                          foregroundDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            // border: Border.all(
+                            //   color: Colors.white,
+                            //   width: 0.0,
+                            // ),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(8.0),
+                                    // border: OutlineInputBorder(
+                                    //   borderRadius: BorderRadius.circular(10.0),
+                                    // ),
+                                  ),
+                                  controller: _controller1111,
+                                  keyboardType: TextInputType.numberWithOptions(
+                                    decimal: false,
+                                    signed: true,
+                                  ),
+                                  inputFormatters: <TextInputFormatter>[
+                                    WhitelistingTextInputFormatter.digitsOnly
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 38.0,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      child: InkWell(
+                                        child: Icon(
+                                          Icons.arrow_drop_up,
+                                          size: 18.0,
+                                        ),
+                                        onTap: () {
+                                          int currentValue =
+                                              int.parse(_controller1111.text);
+                                          setState(() {
+                                            currentValue = currentValue + 1;
+                                            _controller1111.text =
+                                                (currentValue < 70
+                                                        ? currentValue
+                                                        : 70)
+                                                    .toString();
+                                            //_controller.text = (currentValue).toString(); // incrementing value
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    InkWell(
+                                      child: Icon(
+                                        Icons.arrow_drop_down,
+                                        size: 18.0,
+                                      ),
+                                      onTap: () {
+                                        int currentValue =
+                                            int.parse(_controller1111.text);
+                                        setState(() {
+                                          //print("hello state");
+                                          currentValue = currentValue - 1;
+                                          _controller1111.text = (currentValue > 17
+                                                  ? currentValue
+                                                  : 17)
+                                              .toString();
+                                          // decrementing value
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              actions: <Widget>[
+                new FlatButton(
+                  child: Text(
+                    'إلغاء',
+                    style: TextStyle(fontSize: 15.3),
+                    textAlign: TextAlign.left,
+                  ),
+                  textColor: Colors.deepPurple[900],
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                ),
+                SizedBox(
+                  width: 45,
+                ),
+                new FlatButton(
+                  child: Text(
+                    'حفظ          ',
+                    style: TextStyle(fontSize: 15.3),
+                    textAlign: TextAlign.left,
+                  ),
+                  textColor: Colors.deepPurple[900],
+                  onPressed: () async {
+                     var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: "تم تعديل العمر بنجاح",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                    await FirebaseFirestore.instance
+                        .collection('Coach')
+                        .doc(widget.id)
+                        .update({'Age': int.parse(_controller1111.text)});
+                   
+                  },
+                ),
+              ],
+            );
+          });
+        });
+      }
 }
