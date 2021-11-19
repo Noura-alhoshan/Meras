@@ -202,6 +202,13 @@ class _EditDetailsState extends State<EditDetails> {
             },
             yes: "حفظ",
             no: "إلغاء",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return '                                       ادخل وصف';
+              } else if (value!.length == 1) {
+                return '                            ادخل وصف بشكل صحيح';
+              }
+            },
           );
           showDialog(
               context: context, builder: (BuildContext context) => baseDialog);

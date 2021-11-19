@@ -49,6 +49,7 @@ class _AddGuidlinesState extends State<AddGuidlines> {
   final _formKey = GlobalKey<FormState>();
   String error = '';
   String imageUrl = '';
+  String _message = '';
 
   String title = '';
   String type = 'W';
@@ -185,9 +186,15 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 11.0),
                 ),
+                Text(_message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14.0, color: Colors.red)),
                 RoundedButton(
                     text: 'إضافة',
                     press: () async {
+                      // if (imageUrl.isEmpty) {
+                      //   _message = 'الرجاء تحميل صورة';
+                      // } else {
                       if (_formKey.currentState!.validate()) {
                         try {
                           var baseDialog = BaseAlertDialog(

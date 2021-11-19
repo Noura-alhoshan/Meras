@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../../constants.dart';
 
-class EditAlertDialog extends StatelessWidget {
+class EditPhoneAlertDialog extends StatelessWidget {
   //When creating please recheck 'context' if there is an error!
 
   String _title = '';
@@ -15,7 +15,7 @@ class EditAlertDialog extends StatelessWidget {
   late Function _onChange;
   late final FormFieldValidator _validator;
 
-  EditAlertDialog(
+  EditPhoneAlertDialog(
       {required String title,
       required String content,
       required Function onChange,
@@ -43,7 +43,7 @@ class EditAlertDialog extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  String sp = '                    ';
+  String sp = '                  ';
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +64,7 @@ class EditAlertDialog extends StatelessWidget {
           onChanged: (value) {
             this._onChange(value);
           },
+          keyboardType: TextInputType.phone,
           controller: _controller,
           cursorColor: kPrimaryColor,
           textDirection: TextDirection.rtl,
@@ -78,7 +79,7 @@ class EditAlertDialog extends StatelessWidget {
             ),
           ),
           inputFormatters: [
-            new LengthLimitingTextInputFormatter(150),
+            new LengthLimitingTextInputFormatter(10),
           ],
         ),
       ),
