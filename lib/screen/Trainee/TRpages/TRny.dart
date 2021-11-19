@@ -37,7 +37,7 @@ class TRny extends StatelessWidget {
               children: [
                 IconButton(onPressed: Get.back, icon: Icon(Icons.arrow_back)),
                 SizedBox(width: 50),
-                Center(child: Text('الإرشادات التنظيمية ')),
+                Center(child: Text('الإشارات التنظيمية')),
               ],
             )),
           ),
