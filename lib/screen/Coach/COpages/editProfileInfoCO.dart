@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meras/Controllers/Loading.dart';
@@ -8,10 +9,12 @@ import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/COpages/editNameCO.dart';
 import 'package:meras/screen/Coach/COpages/editPhoneDialog.dart';
 
+ 
 class EditProfileInfoCo extends StatefulWidget {
   //const EditProfileInfoCo({ Key? key }) : super(key: key);
   final String id;
-  EditProfileInfoCo(this.id);
+  final String ppp;
+  EditProfileInfoCo(this.id,  this.ppp);
 
   @override
   _EditProfileInfoCoState createState() => _EditProfileInfoCoState();
@@ -39,7 +42,8 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
 
   final _formKey = GlobalKey<FormState>();
   String error = '';
-
+  
+  
   // text field state
   String Fname = '';
   String Lname = '';
@@ -57,7 +61,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
   TextEditingController _controller = TextEditingController();
   void initState() {
     super.initState();
-    _controller.text = "100"; // Setting the initial value for the field.
+    _controller.text = widget.ppp; // Setting the initial value for the field.
   }
 
   static final nameValidCharacters = RegExp(r'^[a-zA-Z0-9]+$');

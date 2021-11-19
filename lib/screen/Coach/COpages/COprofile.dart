@@ -312,7 +312,7 @@ class _COprifileState extends State<COprifile> {
             ElevatedButton(
               child: Text('تعديل'),
               onPressed: () async {
-                nav(document.id);
+                nav(document.id,document['Price'] );
               },
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -330,11 +330,11 @@ class _COprifileState extends State<COprifile> {
     );
   }
 
-  void nav(String id) {
+  void nav(String id,String pppp) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return EditProfileInfoCo(id);
+        return EditProfileInfoCo(id,pppp);
         //return RequestLessonPage(icd);
       }),
     );
