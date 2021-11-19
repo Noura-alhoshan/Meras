@@ -429,7 +429,7 @@ Widget _buildListItem(
   String phone,
   String n,
   String price,
-  int Rate,
+  double Rate,
   DocumentSnapshot document,
 ) {
   return SingleChildScrollView(
@@ -534,6 +534,20 @@ Widget _buildListItem(
       ///
     ),
   );
+}
+
+void setday(String a) {
+  switch (a) {
+    case 'Saturday':
+      // setState(() {
+      //  selectedDay = 'السبت';
+      // });
+      //   print("y " + selectedDay);
+
+      break;
+    default:
+  }
+  print('are you workung in setday?');
 }
 
 String getArabicdays(String a) {
