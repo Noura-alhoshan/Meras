@@ -10,6 +10,7 @@ class EditPhoneAlertDialog extends StatelessWidget {
   String _content = '';
   String _yes = '';
   String _no = '';
+  var _Inittext='';
   late Function _yesOnPressed;
   late Function _noOnPressed;
   late Function _onChange;
@@ -18,6 +19,7 @@ class EditPhoneAlertDialog extends StatelessWidget {
   EditPhoneAlertDialog(
       {required String title,
       required String content,
+     required var Inittext,
       required Function onChange,
       required Function yesOnPressed,
       required Function noOnPressed,
@@ -27,6 +29,7 @@ class EditPhoneAlertDialog extends StatelessWidget {
     this._title = title;
     this._content = content;
     this._onChange = onChange;
+    this._Inittext=Inittext;
     this._yesOnPressed = yesOnPressed;
     this._noOnPressed = noOnPressed;
     this._yes = yes;
@@ -47,6 +50,7 @@ class EditPhoneAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _controller.text=_Inittext ;
     String space = '                       ';
     return AlertDialog(
       shape: RoundedRectangleBorder(

@@ -3,21 +3,22 @@ import 'package:flutter/services.dart';
 
 import '../../../constants.dart';
 
-class EditAlertDialog extends StatelessWidget {
+class EditAgeAlertDialog extends StatelessWidget {
   //When creating please recheck 'context' if there is an error!
 
   String _title = '';
   String _content = '';
-  var _Inittext='';
   String _yes = '';
   String _no = '';
+  late var _Inittext;
   late Function _yesOnPressed;
   late Function _noOnPressed;
   late Function _onChange;
   late final FormFieldValidator _validator;
-
-  EditAlertDialog(
-      {required String title,
+//EditNameAlertDialog
+  EditAgeAlertDialog(
+      {
+      required String title,
       required String content,
       required var Inittext, 
       required Function onChange,
@@ -29,18 +30,20 @@ class EditAlertDialog extends StatelessWidget {
     this._title = title;
     this._content = content;
     this._onChange = onChange;
-    this._Inittext=Inittext;
     this._yesOnPressed = yesOnPressed;
     this._noOnPressed = noOnPressed;
     this._yes = yes;
     this._no = no;
+    this._Inittext= Inittext ;
     this._validator = validator;
   }
 
   final TextEditingController _controller = TextEditingController();
 
+
   void dispose() {
     _controller.dispose();
+     
     //super.dispose();
   }
 
@@ -50,7 +53,7 @@ class EditAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _controller.text=_Inittext ;
+    _controller.text=_Inittext;
     String space = '                       ';
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -64,6 +67,7 @@ class EditAlertDialog extends StatelessWidget {
       content: Form(
         key: _formKey,
         child: TextFormField(
+          
           validator: this._validator,
           onChanged: (value) {
             this._onChange(value);
@@ -71,6 +75,7 @@ class EditAlertDialog extends StatelessWidget {
           controller: _controller,
           cursorColor: kPrimaryColor,
           textDirection: TextDirection.rtl,
+
           decoration: InputDecoration(
             hintText: sp + _content,
             fillColor: kPrimaryColor,
@@ -82,7 +87,7 @@ class EditAlertDialog extends StatelessWidget {
             ),
           ),
           inputFormatters: [
-            new LengthLimitingTextInputFormatter(150),
+            new LengthLimitingTextInputFormatter(10),
           ],
         ),
       ),

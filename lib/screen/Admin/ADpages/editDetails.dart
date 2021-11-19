@@ -1,3 +1,4 @@
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -180,6 +181,7 @@ class _EditDetailsState extends State<EditDetails> {
         text: 'تعديل',
         onClicked: () async {
           var baseDialog = EditAlertDialog(
+            Inittext: document['Title'],
             title: 'تعديل الوصف',
             content: 'أدخل الوصف الجديد',
             onChange: (value) {

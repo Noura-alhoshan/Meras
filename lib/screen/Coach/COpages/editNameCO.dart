@@ -10,14 +10,16 @@ class EditNameAlertDialog extends StatelessWidget {
   String _content = '';
   String _yes = '';
   String _no = '';
+  var _Inittext='';
   late Function _yesOnPressed;
   late Function _noOnPressed;
   late Function _onChange;
   late final FormFieldValidator _validator;
-
+//EditNameAlertDialog
   EditNameAlertDialog(
       {required String title,
       required String content,
+      required var Inittext, 
       required Function onChange,
       required Function yesOnPressed,
       required Function noOnPressed,
@@ -31,13 +33,16 @@ class EditNameAlertDialog extends StatelessWidget {
     this._noOnPressed = noOnPressed;
     this._yes = yes;
     this._no = no;
+    this._Inittext= Inittext;
     this._validator = validator;
   }
 
   final TextEditingController _controller = TextEditingController();
 
+
   void dispose() {
     _controller.dispose();
+     
     //super.dispose();
   }
 
@@ -47,6 +52,7 @@ class EditNameAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _controller.text=_Inittext ;
     String space = '                       ';
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -60,6 +66,7 @@ class EditNameAlertDialog extends StatelessWidget {
       content: Form(
         key: _formKey,
         child: TextFormField(
+          
           validator: this._validator,
           onChanged: (value) {
             this._onChange(value);
@@ -67,6 +74,7 @@ class EditNameAlertDialog extends StatelessWidget {
           controller: _controller,
           cursorColor: kPrimaryColor,
           textDirection: TextDirection.rtl,
+          
           decoration: InputDecoration(
             hintText: sp + _content,
             fillColor: kPrimaryColor,

@@ -6,6 +6,7 @@ import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/services/editTitle_alert.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
+import 'package:meras/screen/Coach/COpages/editAgeCO.dart';
 import 'package:meras/screen/Coach/COpages/editNameCO.dart';
 import 'package:meras/screen/Coach/COpages/editPhoneDialog.dart';
 
@@ -54,7 +55,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
   String description = '';
   String price = '';
 
-  int _age = 0;
+int _age = 0;
   String _message = 'cool';
   String sp = '      ';
 
@@ -155,6 +156,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                             onPressed: () async {
                               var baseDialog = EditNameAlertDialog(
                                 title: 'تعديل الاسم الأول',
+                                Inittext: document['Fname'],
                                 content: 'أدخل الاسم الجديد',
                                 onChange: (value) {
                                   setState(() {
@@ -224,6 +226,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                             onPressed: () async {
                               var baseDialog = EditNameAlertDialog(
                                 title: 'تعديل الاسم الأخير',
+                                 Inittext: document['Lname'],
                                 content: 'أدخل الاسم الجديد',
                                 onChange: (value) {
                                   setState(() {
@@ -291,17 +294,18 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                               color: Colors.white,
                             ),
                             onPressed: () async {
-                              var baseDialog = EditNameAlertDialog(
+                              var baseDialog = EditAgeAlertDialog(
                                 title: 'تعديل العمر',
+                                 Inittext: document['Age'].toString(),
                                 content: '    أدخل العمر الجديد',
                                 onChange: (value) {
                                   setState(() {
-                                    _age = value;
+                                    _age = int.parse(value);
                                   });
                                 },
                                 validator: (value) {
                                   try {
-                                    _age = int.parse(value);
+                                    _age = value; 
                                   } on FormatException catch (ex) {
                                     setState(() {
                                       _message =
@@ -472,6 +476,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                             onPressed: () async {
                               var baseDialog = EditPhoneAlertDialog(
                                 title: 'تعديل رقم الجوال',
+                                Inittext: document['Phone Number'],
                                 content: 'أدخل رقم الجوال الجديد       ',
                                 onChange: (value) {
                                   setState(() {
@@ -538,6 +543,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                             ),
                             onPressed: () async {
                               var baseDialog = EditAlertDialog(
+                                Inittext: document['Discerption'],
                                 title: 'تعديل الوصف',
                                 content: 'أدخل الوصف الجديد',
                                 onChange: (value) {
