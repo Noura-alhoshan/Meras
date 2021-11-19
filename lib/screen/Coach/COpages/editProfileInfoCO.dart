@@ -562,9 +562,9 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                                 no: "إلغاء",
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return '                                       ادخل وصف';
+                                    return '                                   الرجاء إدخال وصف';
                                   } else if (value!.length == 1) {
-                                    return '                            ادخل وصف بشكل صحيح';
+                                    return '                       الرجاء إدخال الوصف بشكل صحيح';
                                   }
                                 },
                               );
