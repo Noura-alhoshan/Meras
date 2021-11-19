@@ -177,11 +177,11 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                                     return '                            الرجاء إدخال الأسم الأول          ';
                                   } else if (value!.length == 1) {
                                     return '                   الرجاء إدخال الأسم الأول بشكل صحيح  ';
-                                  } else if (!RegExp(r"^[a-zA-Z0-9]+$")
+                                  } else if (!RegExp(r"^[a-zA-Z]+$")
                                           .hasMatch(value) &&
                                       !RegExp(r'^[\u0621-\u064A]+$')
                                           .hasMatch(value)) {
-                                    return '             الرجاء إدخال اسم أول صحيح بدون رموز خاصة';
+                                    return '         الرجاء إدخال اسم أول صحيح بدون رموز خاصة وأرقام';
                                   }
                                 },
                               );
@@ -231,11 +231,11 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
                                     return '                            الرجاء إدخال الأسم الأخير          ';
                                   } else if (value!.length == 1) {
                                     return '                   الرجاء إدخال الأسم الأخير بشكل صحيح  ';
-                                  } else if (!RegExp(r"^[a-zA-Z0-9]+$")
+                                  } else if (!RegExp(r"^[a-zA-Z]+$")
                                           .hasMatch(value) &&
                                       !RegExp(r'^[\u0621-\u064A]+$')
                                           .hasMatch(value)) {
-                                    return '             الرجاء إدخال اسم أخير صحيح بدون رموز خاصة';
+                                    return '        الرجاء إدخال اسم أخير صحيح بدون رموز خاصة وأرقام';
                                   }
                                 },
                                 yesOnPressed: () async {
