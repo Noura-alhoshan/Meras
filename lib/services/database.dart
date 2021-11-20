@@ -72,7 +72,7 @@ class DatabaseService {
   ) {
     CollectionReference coachesCollection =
         FirebaseFirestore.instance.collection('Coach');
-    Map<String, dynamic> traineeDataDemo = {
+    Map<String, dynamic> CDataDemo = {
       "Fname": Fname,
       'Lname': Lname,
       'Email': email,
@@ -91,7 +91,8 @@ class DatabaseService {
       'CountDate': 0,
       'Rate': 0.0,
       'ReqCount': 1,
+      'Earn': 0.1,
     };
-    coachesCollection.doc(co.uid).set(traineeDataDemo);
+    coachesCollection.doc(co.uid).set(CDataDemo);
   }
 }

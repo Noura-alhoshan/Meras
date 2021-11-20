@@ -88,7 +88,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text(
-          'البحث        ',
+          '   قائمة المدربين               ',
           textDirection: TextDirection.rtl,
         ),
         backgroundColor: Colors.deepPurple[100],
@@ -101,100 +101,110 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Container(
-                      child: TextField(
-                        controller: _searchController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey.shade100,
-                          ////
-                          prefixIcon: PopupMenuButton<String>(
-                            icon: Icon(Icons.filter_alt),
-                            onSelected: (String result) {
-                              switch (result) {
-                                case 'filter0':
-                                  setState(() {
-                                    help = 'A';
-                                  });
-                                  print('filter 0 clicked');
+                    TextField(
+                      //  textDirection: TextDirection.ltr,
+                      textAlign: TextAlign.right,
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
+                        ////
+                        //   icon: Icon(
+                        //     Icons.star,
+                        //      color: Colors.grey,
+                        //      size: 40,
+                        //   ),
 
-                                  break;
-                                case 'filter1':
-                                  setState(() {
-                                    help = 'B';
-                                  });
-                                  print('filter 1 clicked');
+                        prefixIcon: PopupMenuButton<String>(
+                          icon: Image.asset(
+                            "assets/images/lavatory.png",
+                            width: 40,
+                          ),
+                          onSelected: (String result) {
+                            switch (result) {
+                              case 'filter0':
+                                setState(() {
+                                  help = 'A';
+                                });
+                                print('filter 0 clicked');
 
-                                  break;
-                                case 'filter2':
-                                  setState(() {
-                                    help = '';
-                                  });
+                                break;
+                              case 'filter1':
+                                setState(() {
+                                  help = 'B';
+                                });
+                                print('filter 1 clicked');
 
-                                  print('filter 2 clicked');
-                                  break;
-                                default:
-                              }
-                            },
-                            itemBuilder: (BuildContext context) =>
-                                <PopupMenuEntry<String>>[
-                              PopupMenuItem<String>(
-                                value: 'filter0',
-                                child: Row(
-                                  children: <Widget>[
-                                    Text('           أنثى        '),
-                                    Icon(
-                                      Icons.female_rounded,
-                                      color: Colors.pink,
-                                    ),
-                                  ],
-                                ),
+                                break;
+                              case 'filter2':
+                                setState(() {
+                                  help = '';
+                                });
+
+                                print('filter 2 clicked');
+                                break;
+                              default:
+                            }
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<String>>[
+                            PopupMenuItem<String>(
+                              value: 'filter0',
+                              child: Row(
+                                children: <Widget>[
+                                  Text('           أنثى        '),
+                                  Icon(
+                                    Icons.female_rounded,
+                                    color: Colors.pink,
+                                  ),
+                                ],
                               ),
-                              PopupMenuItem<String>(
-                                value: 'filter1',
-                                child: Row(
-                                  children: <Widget>[
-                                    Text('           ذكر        '),
-                                    Icon(
-                                      Icons.male_rounded,
-                                      color: Colors.blue,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              PopupMenuItem<String>(
-                                value: 'filter2',
-                                child: Row(
-                                  children: <Widget>[
-                                    Text(' محو التحديد   '),
-                                    Icon(Icons.clear_rounded),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          ////
-                          contentPadding: EdgeInsets.only(left: 25.0),
-                          hintText: 'قم بالبحث بالأسم الاول للمدرب ...',
-                          hintTextDirection: TextDirection.rtl,
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                            borderSide: BorderSide(
-                              color: Colors.deepPurple.shade200,
-                              width: 2.0,
                             ),
+                            PopupMenuItem<String>(
+                              value: 'filter1',
+                              child: Row(
+                                children: <Widget>[
+                                  Text('           ذكر        '),
+                                  Icon(
+                                    Icons.male_rounded,
+                                    color: Colors.blue,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'filter2',
+                              child: Row(
+                                children: <Widget>[
+                                  Text(' محو التحديد   '),
+                                  Icon(Icons.clear_rounded),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        ////
+                        contentPadding: EdgeInsets.only(left: 25.0),
+                        hintText: 'قم بالبحث بإسم المدرب ...',
+                        hintTextDirection: TextDirection.rtl,
+                        suffixIcon: Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                          borderSide: BorderSide(
+                            color: Colors.deepPurple.shade200,
+                            width: 2.0,
                           ),
                         ),
                       ),
+                    ),
 
-                      /*     
+                    /*     
                       TextField(
                         decoration: InputDecoration(
                           filled: true,
@@ -237,7 +247,6 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                           });
                         },
                       ), */
-                    ),
 
                     ///////////////////// start from here
                     Expanded(
