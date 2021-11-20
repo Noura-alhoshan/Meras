@@ -91,7 +91,7 @@ class _COprifileState extends State<COprifile> {
                   margin: EdgeInsets.all(20),
                   child: Table(
                     columnWidths: {
-                      0: FlexColumnWidth(6),
+                      0: FlexColumnWidth(5),
                       1: FlexColumnWidth(3),
                       //2: FlexColumnWidth(4),
                     },
@@ -179,7 +179,7 @@ class _COprifileState extends State<COprifile> {
                           child: Text(
                             document['Email'],
                             style: TextStyle(
-                              height: 1.7,//1.99 
+                              height: 1.7, //1.99
                               fontSize: 15.37,
                               color: Colors.grey,
                               //height: 1
@@ -188,12 +188,11 @@ class _COprifileState extends State<COprifile> {
                           ),
                         ),
                         Container(
-                            padding: EdgeInsets.all(2.0),
+                            padding: EdgeInsets.all(1.0),
                             child: Text(
                               ':البريد الالكتروني',
                               style: TextStyle(
                                 fontSize: 18.0,
-                                
                               ),
                               textAlign: TextAlign.end,
                             )),
@@ -226,7 +225,7 @@ class _COprifileState extends State<COprifile> {
                         Container(
                           padding: EdgeInsets.all(1.0),
                           child: Text(
-                            " " + document['Price'] +" ريال",
+                            " " + document['Price'] + " ريال",
                             style: TextStyle(
                               height: 1.99,
                               fontSize: 16.37,
@@ -314,7 +313,7 @@ class _COprifileState extends State<COprifile> {
             ElevatedButton(
               child: Text('تعديل'),
               onPressed: () async {
-                nav(document.id,document['Price'],document['Age'] );
+                nav(document.id, document['Price'], document['Age']);
               },
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -326,17 +325,29 @@ class _COprifileState extends State<COprifile> {
               height: 30,
               //width: 40,
             ),
+            SizedBox(
+              height: 30,
+              //width: 40,
+            ),
+            SizedBox(
+              height: 30,
+              //width: 40,
+            ),
+            SizedBox(
+              height: 30,
+              //width: 40,
+            ),
           ])),
         ),
       ),
     );
   }
 
-  void nav(String id,String pppp,int aaaa) {
+  void nav(String id, String pppp, int aaaa) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return EditProfileInfoCo(id,pppp,aaaa.toString());
+        return EditProfileInfoCo(id, pppp, aaaa.toString());
         //return RequestLessonPage(icd);
       }),
     );

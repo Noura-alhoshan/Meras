@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class BackgroundProfileLight extends StatelessWidget {
+class BackgroundProfileLight2 extends StatelessWidget {
   final Widget child;
-  const BackgroundProfileLight({
+  const BackgroundProfileLight2({
     Key? key,
     required this.child,
   }) : super(key: key);
@@ -17,7 +17,7 @@ class BackgroundProfileLight extends StatelessWidget {
         //alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            bottom: 590,
+            bottom: 725,
             right: 0,
             child: Image.asset(
               "assets/images/BackgroundProfileLight2.jpeg",
