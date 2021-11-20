@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 
 import '../services/navDraweradmin.dart';
@@ -99,7 +100,7 @@ class _ADlistScreenState extends State<ADlistScreen> {
                     .orderBy('Time', descending: false)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('loading 7 ...');
+                  if (!snapshot.hasData) return Loading();
 
                   return ListView.builder(
                     //    controller: _scrollController,

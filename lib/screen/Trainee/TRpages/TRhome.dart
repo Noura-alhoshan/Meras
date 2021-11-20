@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
@@ -50,15 +51,26 @@ class _HomePageState extends State<TRhome> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 50.0),
-              Text(
-                'أهلًا بك في مِـرَاس',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                  color: kPrimaryColor,
-                ),
-              ),
+              StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream: FirebaseFirestore.instance
+                      .collection('trainees')
+                      .where('ID',
+                          isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.data!.docs.isEmpty) return Container();
+                    return Text(
+                        'أهلًا بك ${snapshot.data!.docs[0].data()['Fname'] ?? ''} في مِـرَاس',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: kPrimaryColor,
+                        ));
+                  }),
+
               SizedBox(height: 20.0),
               Text(
                 'مِرَاس يقدم لك تجربة فريدة من نوعها في تعلّم وتعليم القيادة' +
