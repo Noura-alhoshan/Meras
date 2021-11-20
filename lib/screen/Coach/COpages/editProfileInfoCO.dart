@@ -10,13 +10,12 @@ import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/COpages/editNameCO.dart';
 import 'package:meras/screen/Coach/COpages/editPhoneDialog.dart';
 
- 
 class EditProfileInfoCo extends StatefulWidget {
   //const EditProfileInfoCo({ Key? key }) : super(key: key);
   final String id;
   final String ppp;
-  final String aaa;//age
-  EditProfileInfoCo(this.id,  this.ppp,this.aaa);
+  final String aaa; //age
+  EditProfileInfoCo(this.id, this.ppp, this.aaa);
 
   @override
   _EditProfileInfoCoState createState() => _EditProfileInfoCoState();
@@ -44,8 +43,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
 
   final _formKey = GlobalKey<FormState>();
   String error = '';
-  
-  
+
   // text field state
   String Fname = '';
   String Lname = '';
@@ -56,7 +54,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
   String description = '';
   String price = '';
 
-int _age = 0;
+  int _age = 0;
   String _message = 'cool';
   String sp = '      ';
 
@@ -65,8 +63,9 @@ int _age = 0;
 
   void initState() {
     super.initState();
-    _controller.text = widget.ppp; 
-    _controller1111.text=widget.aaa;// Setting the initial value for the field.
+    _controller.text = widget.ppp;
+    _controller1111.text =
+        widget.aaa; // Setting the initial value for the field.
   }
 
   static final nameValidCharacters = RegExp(r'^[a-zA-Z0-9]+$');
@@ -168,22 +167,26 @@ int _age = 0;
                                   });
                                 },
                                 yesOnPressed: () async {
-                                   var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل الاسم الأول بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                                  var baseDialog = SignleBaseAlertDialog(
+                                    title: "",
+                                    content: "تم تعديل الاسم الأول بنجاح",
+                                    yesOnPressed: () async {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop(
+                                              'dialog'); //////////////////////////////////??????
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                    },
+                                    yes: "إغلاق",
+                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update({'Fname': Fname.trim()});
-
-                                  
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -239,7 +242,7 @@ int _age = 0;
                             onPressed: () async {
                               var baseDialog = EditNameAlertDialog(
                                 title: 'تعديل الاسم الأخير',
-                                 Inittext: document['Lname'],
+                                Inittext: document['Lname'],
                                 content: 'أدخل الاسم الجديد',
                                 onChange: (value) {
                                   setState(() {
@@ -259,22 +262,26 @@ int _age = 0;
                                   }
                                 },
                                 yesOnPressed: () async {
-                                   var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل الاسم الأخير بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                                  var baseDialog = SignleBaseAlertDialog(
+                                    title: "",
+                                    content: "تم تعديل الاسم الأخير بنجاح",
+                                    yesOnPressed: () async {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop(
+                                              'dialog'); //////////////////////////////////??????
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                    },
+                                    yes: "إغلاق",
+                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update({'Lname': Lname.trim()});
-
-                               
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -317,7 +324,6 @@ int _age = 0;
                             ),
                             onPressed: () async {
                               await showInformationDialig3(context, document);
-                        
                             },
                           ),
                         ),
@@ -462,22 +468,30 @@ int _age = 0;
                                   RegExp regExp = new RegExp(r"^\+?0[0-9]{9}$");
                                   if (value.length == 0) {
                                     return '                              الرجاء إدخال رقم الجوال';
+                                  } else if (value.length < 10) {
+                                    return '                  الرجاء إدخال رقم جوال صحيح';
                                   } else if (!regExp.hasMatch(value)) {
-                                    return '                  الرجاء إدخال رقم جوال صحيح يبدأ بـ 05';
+                                    return '                  الرجاء إدخال رقم جوال يبدأ بـ 05';
                                   }
                                   return null;
                                 },
                                 yesOnPressed: () async {
-                                var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل رقم الجوال بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                                  var baseDialog = SignleBaseAlertDialog(
+                                    title: "",
+                                    content: "تم تعديل رقم الجوال بنجاح",
+                                    yesOnPressed: () async {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop(
+                                              'dialog'); //////////////////////////////////??????
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                    },
+                                    yes: "إغلاق",
+                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
@@ -538,21 +552,25 @@ int _age = 0;
                                 },
                                 yesOnPressed: () async {
                                   var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل الوصف بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                                    title: "",
+                                    content: "تم تعديل الوصف بنجاح",
+                                    yesOnPressed: () async {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop(
+                                              'dialog'); //////////////////////////////////??????
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                    },
+                                    yes: "إغلاق",
+                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          baseDialog);
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
                                       .update({'Discerption': description});
-
-                                 
                                 },
                                 noOnPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -686,20 +704,23 @@ int _age = 0;
                   textColor: Colors.deepPurple[900],
                   onPressed: () async {
                     var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل الحي السكني بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                      title: "",
+                      content: "تم تعديل الحي السكني بنجاح",
+                      yesOnPressed: () async {
+                        Navigator.of(context, rootNavigator: true).pop(
+                            'dialog'); //////////////////////////////////??????
+                        Navigator.of(context, rootNavigator: true)
+                            .pop('dialog');
+                      },
+                      yes: "إغلاق",
+                    );
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => baseDialog);
                     await FirebaseFirestore.instance
                         .collection('Coach')
                         .doc(widget.id)
                         .update({'Neighborhood': neighborhood});
-                   
                   },
                 ),
               ],
@@ -836,21 +857,24 @@ int _age = 0;
                   ),
                   textColor: Colors.deepPurple[900],
                   onPressed: () async {
-                     var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل سعر التدريب بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                    var baseDialog = SignleBaseAlertDialog(
+                      title: "",
+                      content: "تم تعديل سعر التدريب بنجاح",
+                      yesOnPressed: () async {
+                        Navigator.of(context, rootNavigator: true).pop(
+                            'dialog'); //////////////////////////////////??????
+                        Navigator.of(context, rootNavigator: true)
+                            .pop('dialog');
+                      },
+                      yes: "إغلاق",
+                    );
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => baseDialog);
                     await FirebaseFirestore.instance
                         .collection('Coach')
                         .doc(widget.id)
                         .update({'Price': _controller.text});
-                   
                   },
                 ),
               ],
@@ -859,7 +883,7 @@ int _age = 0;
         });
   }
 
-    Future<void> showInformationDialig3(
+  Future<void> showInformationDialig3(
       BuildContext context, DocumentSnapshot document) async {
     return await showDialog(
         context: context,
@@ -947,10 +971,11 @@ int _age = 0;
                                         setState(() {
                                           //print("hello state");
                                           currentValue = currentValue - 1;
-                                          _controller1111.text = (currentValue > 17
-                                                  ? currentValue
-                                                  : 17)
-                                              .toString();
+                                          _controller1111.text =
+                                              (currentValue > 17
+                                                      ? currentValue
+                                                      : 17)
+                                                  .toString();
                                           // decrementing value
                                         });
                                       },
@@ -987,26 +1012,29 @@ int _age = 0;
                   ),
                   textColor: Colors.deepPurple[900],
                   onPressed: () async {
-                     var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل العمر بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                    var baseDialog = SignleBaseAlertDialog(
+                      title: "",
+                      content: "تم تعديل العمر بنجاح",
+                      yesOnPressed: () async {
+                        Navigator.of(context, rootNavigator: true).pop(
+                            'dialog'); //////////////////////////////////??????
+                        Navigator.of(context, rootNavigator: true)
+                            .pop('dialog');
+                      },
+                      yes: "إغلاق",
+                    );
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => baseDialog);
                     await FirebaseFirestore.instance
                         .collection('Coach')
                         .doc(widget.id)
                         .update({'Age': int.parse(_controller1111.text)});
-                   
                   },
                 ),
               ],
             );
           });
         });
-      }
+  }
 }

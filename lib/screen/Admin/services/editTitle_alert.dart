@@ -8,7 +8,7 @@ class EditAlertDialog extends StatelessWidget {
 
   String _title = '';
   String _content = '';
-  var _Inittext='';
+  var _Inittext = '';
   String _yes = '';
   String _no = '';
   late Function _yesOnPressed;
@@ -19,7 +19,7 @@ class EditAlertDialog extends StatelessWidget {
   EditAlertDialog(
       {required String title,
       required String content,
-      required var Inittext, 
+      required var Inittext,
       required Function onChange,
       required Function yesOnPressed,
       required Function noOnPressed,
@@ -29,7 +29,7 @@ class EditAlertDialog extends StatelessWidget {
     this._title = title;
     this._content = content;
     this._onChange = onChange;
-    this._Inittext=Inittext;
+    this._Inittext = Inittext;
     this._yesOnPressed = yesOnPressed;
     this._noOnPressed = noOnPressed;
     this._yes = yes;
@@ -50,12 +50,12 @@ class EditAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _controller.text=_Inittext ;
+    _controller.text = _Inittext;
     String space = '                       ';
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
-      contentPadding: EdgeInsets.only(top: 14.0, right: 23,left: 23),
+      contentPadding: EdgeInsets.only(top: 14.0, right: 23, left: 23),
       title: new Text(this._title,
           style: TextStyle(
             fontSize: 15.7,
@@ -64,6 +64,7 @@ class EditAlertDialog extends StatelessWidget {
       content: Form(
         key: _formKey,
         child: TextFormField(
+          maxLines: null,
           validator: this._validator,
           onChanged: (value) {
             this._onChange(value);
