@@ -62,7 +62,7 @@ class _HomePageState extends State<TRhome> {
                           snapshot) {
                     if (snapshot.data!.docs.isEmpty) return Container();
                     return Text(
-                        'أهلًا بك ${snapshot.data!.docs[0].data()['Fname'] ?? ''} في مِـرَاس',
+                        'أهلًا بك ${snapshot.data!.docs[0].data()['Fname'] ?? ''}  ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,

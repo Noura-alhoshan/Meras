@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
@@ -102,6 +103,9 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     TextField(
+                      inputFormatters: [
+                        new LengthLimitingTextInputFormatter(25),
+                      ],
                       //  textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                       controller: _searchController,

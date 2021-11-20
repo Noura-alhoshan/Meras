@@ -4,7 +4,6 @@ import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/BackgroundProfileLight.dart';
-import 'package:meras/screen/Coach/BackgroungProfileDark.dart';
 import 'package:meras/screen/Coach/COpages/editProfileInfoCO.dart';
 
 class COprifile extends StatefulWidget {
@@ -179,7 +178,7 @@ class _COprifileState extends State<COprifile> {
                           child: Text(
                             document['Email'],
                             style: TextStyle(
-                              height: 1.7,//1.99 
+                              height: 1.7, //1.99
                               fontSize: 15.37,
                               color: Colors.grey,
                               //height: 1
@@ -193,7 +192,6 @@ class _COprifileState extends State<COprifile> {
                               ':البريد الالكتروني',
                               style: TextStyle(
                                 fontSize: 18.0,
-                                
                               ),
                               textAlign: TextAlign.end,
                             )),
@@ -226,7 +224,7 @@ class _COprifileState extends State<COprifile> {
                         Container(
                           padding: EdgeInsets.all(1.0),
                           child: Text(
-                            " " + document['Price'] +" ريال",
+                            " " + document['Price'] + " ريال",
                             style: TextStyle(
                               height: 1.99,
                               fontSize: 16.37,
@@ -314,7 +312,7 @@ class _COprifileState extends State<COprifile> {
             ElevatedButton(
               child: Text('تعديل'),
               onPressed: () async {
-                nav(document.id,document['Price'],document['Age'] );
+                nav(document.id, document['Price'], document['Age']);
               },
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -332,11 +330,11 @@ class _COprifileState extends State<COprifile> {
     );
   }
 
-  void nav(String id,String pppp,int aaaa) {
+  void nav(String id, String pppp, int aaaa) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return EditProfileInfoCo(id,pppp,aaaa.toString());
+        return EditProfileInfoCo(id, pppp, aaaa.toString());
         //return RequestLessonPage(icd);
       }),
     );
