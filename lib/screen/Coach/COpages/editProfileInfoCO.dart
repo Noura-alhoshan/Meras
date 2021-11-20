@@ -462,8 +462,10 @@ int _age = 0;
                                   RegExp regExp = new RegExp(r"^\+?0[0-9]{9}$");
                                   if (value.length == 0) {
                                     return '                              الرجاء إدخال رقم الجوال';
+                                  } else if (value.length < 10) {
+                                    return '                  الرجاء إدخال رقم جوال صحيح';
                                   } else if (!regExp.hasMatch(value)) {
-                                    return '                  الرجاء إدخال رقم جوال صحيح يبدأ بـ 05';
+                                    return '                  الرجاء إدخال رقم جوال يبدأ بـ 05';
                                   }
                                   return null;
                                 },
