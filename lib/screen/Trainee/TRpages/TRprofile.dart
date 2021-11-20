@@ -5,6 +5,7 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/BackgroundProfileLight.dart';
 import 'package:meras/screen/authenticate/background2.dart';
+import 'package:meras/screen/Trainee/TRpages/BackgroundProfileLight2.dart';
 
 import '../../../constants.dart';
 
@@ -50,7 +51,7 @@ class _TRprofileState extends State<TRprofile> {
   }
 
   Widget _build(BuildContext context, DocumentSnapshot document) {
-    return BackgroundProfileLight(
+    return BackgroundProfileLight2(
       child: Container(
         child: Column(children: <Widget>[
           Text(
