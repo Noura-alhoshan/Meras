@@ -1,3 +1,4 @@
+import 'package:meras/screen/Trainee/TRpages/TRprofile.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class NavDrawer extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context)  {
+ final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
 
     return  Container(
       height: 650,
@@ -30,13 +34,11 @@ class NavDrawer extends StatelessWidget  {
               height: 210,
               child: DrawerHeader(
 
-                child: CircleAvatar(
-                  child: ClipOval(
-                    child: Image.asset('assets/images/def.jpg', height: 230,),
-                  ),
-                ),
+             
+                    child: Image.asset('assets/images/whitelogo.png', height: 230,),
+                 
                 decoration: BoxDecoration(
-                  color: kPrimaryLightColor,
+                  color: Colors.white,
 
                 ), //child: null,
               ),
@@ -44,9 +46,13 @@ class NavDrawer extends StatelessWidget  {
             ListTile(
               trailing: Icon(Icons.person),
               title: Text('الملف الشخصي',textAlign: TextAlign.end,),
-              onTap: () => null,
+               onTap: () {
+                      Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>TRprofile(uid)), //CHANGE IT
+                          );
+              },
             ),
-
             Divider(),
             ListTile(
               title: Text('تسجيل الخروج',textAlign: TextAlign.end,),

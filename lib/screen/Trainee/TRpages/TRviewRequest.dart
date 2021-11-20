@@ -458,29 +458,50 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             if (document['IsRate'] == 'false')
                               Container(
                                 child: Column(children: <Widget>[
-                                  Table(columnWidths: {
-                                    0: FlexColumnWidth(10),
-                                    1: FlexColumnWidth(25),
-                                    //2: FlexColumnWidth(4),
-                                  }, children: [
-                                    TableRow(children: [
-                                      Container(),
-                                      Container(
-                                        //  height: 25,
-                                        //   width: 70,
-                                        child: Text(
-                                          ' : قيم تجربتك مع المدرب    .',
+                                   Center(
+                              child: Text(
+                                'تم الدفع',
+                                style: TextStyle(
+                                    fontSize: 18.5,
+                                    color: Colors.green[600],
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                          'قيم تجربتك مع المدرب     ',
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 35,
-                                      ),
-                                    ]),
+                            ),
+                            SizedBox(height: 9,),
+                                  Table(columnWidths: {
+                                    0: FlexColumnWidth(10),
+                                    1: FlexColumnWidth(25),
+                                    //2: FlexColumnWidth(4),
+                                  }, children: [
+                                    // TableRow(children: [
+                                    //   Container(),
+                                    //   Container(
+                                    //     //  height: 25,
+                                    //     //   width: 70,
+                                    //     child: 
+                                    //     Text(
+                                    //       'قيم تجربتك مع المدرب             .',
+                                    //       style: TextStyle(
+                                    //         fontSize: 18,
+                                    //         color: Colors.black,
+                                    //       ),
+                                    //       textAlign: TextAlign.center,
+                                    //     ),
+                                    //   ),
+                                    //   SizedBox(
+                                    //     height: 35,
+                                    //   ),
+                                    // ]),
                                     TableRow(children: [
                                       Container(),
                                       Container(
@@ -498,6 +519,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       ),
                                     ]),
                                   ]),
+                                  
                                   Container(
                                     child: ElevatedButton(
                                       child: Text(
@@ -597,15 +619,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             //  height: 15,
                             // ),
 
-                            Center(
-                              child: Text(
-                                'تم الدفع',
-                                style: TextStyle(
-                                    fontSize: 18.5,
-                                    color: Colors.green[600],
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
+                           
                           ]),
                       ]),
                     ),

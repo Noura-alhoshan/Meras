@@ -101,33 +101,36 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
             Text(' '),
 
             Row(children: [
+              Center(child:
               Text(
-                document['Rate'].toStringAsFixed(2),
+                '                           ' +document['Rate'].toStringAsFixed(2),
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 16,
                     // color: kPrimaryColor,
                     fontWeight: FontWeight.bold),
-              ),
+              ),),
               Icon(
                 Icons.star_rate,
                 color: Colors.orange,
                 size: 30.0,
               ),
+              Center(child:
               Text(
                 ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 style: TextStyle(
                     fontSize: 23,
                     // color: kPrimaryColor,
                     fontWeight: FontWeight.bold),
-              ),
+              ),)
             ]),
 
             Row(
               children: [
                 Text(' '),
                 Text(
-                  document['Price'] + ' ريال ',
+                   document['Price'] + ' ريال '+ '                   ',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -142,7 +145,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text('  :سعر التدريب لساعتين',
+                  child: Text( ' ' +'  :سعر التدريب لساعتين',
                       style: TextStyle(fontSize: 18, color: Colors.grey[700])),
                 ),
               ],
@@ -157,7 +160,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                 Text(' '),
                 TextButton(
                     child: Text(
-                      document['Phone Number'],
+                      document['Phone Number']+ '                        ',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.blue,

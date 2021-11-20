@@ -25,14 +25,35 @@ class TRhome extends StatefulWidget {
 }
 
 class _HomePageState extends State<TRhome> {
+  late String nnaame = '';
   void initState() {
     super.initState();
+    getn();
   }
+getn(){
 
+ final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+FirebaseFirestore.instance
+        .collection("trainees")
+        .doc(uid)
+        .get()
+        .then((querySnapshot) async {
+      //String ddd = querySnapshot.data()!['Fname'];
+      //print(ddd);
+      setState(() {
+        nnaame = querySnapshot.data()!['Fname'];
+   
+      }); });
+
+}
   @override
   Widget build(
     BuildContext context,
   ) {
+
+   
     // FirebaseAuth auth = FirebaseAuth.instance;
     // User? user = auth.currentUser;
     // dynamic userid = user!.uid;
@@ -51,25 +72,15 @@ class _HomePageState extends State<TRhome> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 50.0),
-              StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: FirebaseFirestore.instance
-                      .collection('trainees')
-                      .where('ID',
-                          isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                          snapshot) {
-                    if (snapshot.data!.docs.isEmpty) return Container();
-                    return Text(
-                        'أهلًا بك ${snapshot.data!.docs[0].data()['Fname'] ?? ''}  ',
+               Text(
+                        'أهلًا بك $nnaame  ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           color: kPrimaryColor,
-                        ));
-                  }),
+                        )),
+                
 
               SizedBox(height: 20.0),
               Text(
