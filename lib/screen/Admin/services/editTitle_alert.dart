@@ -64,6 +64,7 @@ class EditAlertDialog extends StatelessWidget {
       content: Form(
         key: _formKey,
         child: TextFormField(
+          maxLines: null,
           validator: this._validator,
           onChanged: (value) {
             this._onChange(value);
