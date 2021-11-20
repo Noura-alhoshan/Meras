@@ -17,7 +17,7 @@ class BackgroundProfileLight extends StatelessWidget {
         //alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            bottom: 725,
+            bottom: 590,
             right: 0,
             child: Image.asset(
               "assets/images/BackgroundProfileLight2.jpeg",
