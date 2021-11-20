@@ -24,16 +24,14 @@ class NavDraweradmin extends StatelessWidget {
             Container(
               height: 210,
               child: DrawerHeader(
-                child: CircleAvatar(
-                  child: ClipOval(
+                
                     child: Image.asset(
-                      'assets/images/def.jpg',
+                      'assets/images/whitelogo.png',
                       height: 230,
-                    ),
-                  ),
+                   
                 ),
                 decoration: BoxDecoration(
-                    color: kPrimaryLightColor,
+                    color: Colors.white,
 
                     ), //child: null,
               ),
@@ -46,10 +44,12 @@ class NavDraweradmin extends StatelessWidget {
                     title: "",
                     content: "هل أنت متأكد من تسجيل الخروج؟",
                     yesOnPressed: () async {
-                      await _auth.signOut();
-                       Navigator.of(context, rootNavigator: true).pop('dialog');
-                      //Navigator.push( context,
-                      //MaterialPageRoute(builder: (context) => SignIn()),);
+                       await _auth.signOut();
+                      //print("hellppp");
+                      Navigator.of(context, rootNavigator: true).pop('dialog');//عكستهم
+                      //Navigator.of(context).push(
+                             //  MaterialPageRoute(builder: (context) => SignIn()),//CHANGE IT
+                             //);
                      
                     },
                     noOnPressed: () {
