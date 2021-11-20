@@ -85,6 +85,11 @@ flutter:
     - assets/images/main_bottom.png
     - assets/images/login_bottom.png
     - assets/icons/login.svg
+    - assets/icons/SteeringWheel1.png
+    - assets/icons/Test1.png
+    - assets/icons/TrafficLight1.png
+    - assets/icons/Warning1.png
+    - assets/icons/X.png
     - assets/images/signup_top.png
     - assets/images/logo1.png
     - assets/images/driver-male.jpg
