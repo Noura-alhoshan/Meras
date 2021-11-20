@@ -6,6 +6,7 @@ import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
 import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/Trainee/TRpages/TRny.dart';
+import 'package:meras/screen/home/CnavDrawer.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -39,7 +40,7 @@ class _HomePageState extends State<COhome> {
 
     //print(widget.userId);//updated
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: CNavDrawer(),
       appBar: AppBar(
         title: Text('                 الصفحة الرئيسية'),
         backgroundColor: Colors.deepPurple[100],
@@ -60,7 +61,7 @@ class _HomePageState extends State<COhome> {
                           snapshot) {
                     if (snapshot.data!.docs.isEmpty) return Container();
                     return Text(
-                        'أهلًا بك ${snapshot.data!.docs[0].data()['Fname'] ?? ''} في مِـرَاس',
+                        'أهلًا بك ${snapshot.data!.docs[0].data()['Fname'] ?? ''} ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,

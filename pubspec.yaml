@@ -73,6 +73,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family:  MyFlutterApp
+      fonts:
+       - asset: fonts/MyFlutterApp.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -103,6 +107,8 @@ flutter:
     - assets/images/lavatory.png
     - assets/images/logo_forground.png
     - assets/images/whitelogo.png
+    - assets/images/BackgroundProfileLight2.jpeg
+    - assets/images/BackgroundProfileDark2.jpeg
 
 
   # To add assets to your application, add an assets section, like this:
