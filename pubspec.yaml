@@ -56,11 +56,13 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter_spinkit: ^5.1.0
   bottom_navy_bar: ^6.0.0
-  http_auth: ^1.0.1
-  webview_flutter: 2.1.2
+  flutter_rating_bar: ^4.0.0
+  rating_dialog: ^2.0.3
+  in_app_review: ^2.0.3
   shared_preferences: ^2.0.8
   stripe_payment: ^1.1.4
   fluttericon: ^2.0.0
+  http_auth: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -71,10 +73,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-  fonts:
-    - family:  MyFlutterApp
-      fonts:
-       - asset: fonts/MyFlutterApp.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -87,6 +85,11 @@ flutter:
     - assets/images/main_bottom.png
     - assets/images/login_bottom.png
     - assets/icons/login.svg
+    - assets/icons/SteeringWheel1.png
+    - assets/icons/Test1.png
+    - assets/icons/TrafficLight1.png
+    - assets/icons/Warning1.png
+    - assets/icons/X.png
     - assets/images/signup_top.png
     - assets/images/logo1.png
     - assets/images/driver-male.jpg
@@ -97,6 +100,7 @@ flutter:
     - assets/images/TF.png
     - assets/icons/ringing.png
     - assets/images/req.png
+    - assets/images/lavatory.png
     - assets/images/logo_forground.png
     - assets/images/whitelogo.png
 

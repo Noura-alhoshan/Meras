@@ -60,7 +60,7 @@ Request1(
   String price, //document['Neighborhood']
   String DateNTime,
   String Dateid,
-  int Rate,
+  double Rate,
   //document['DateTime'] ? I'm not sure if this how you read from subcollection
 ) async {
   DateTime now = new DateTime.now();
@@ -109,7 +109,7 @@ Request1(
     'Lid': lid, //Lesson id, Leena needs it
     'Paid': 'false',
     'TRate': 0,
-    'ّIsRate': 'false',
+    'IsRate': 'false',
   };
   Collection.doc(lid).set(RequestDataDemo);
 
