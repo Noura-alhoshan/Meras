@@ -4,6 +4,7 @@ import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/BackgroundProfileLight.dart';
+import 'package:meras/screen/Coach/BackgroungProfileDark.dart';
 import 'package:meras/screen/Coach/COpages/editProfileInfoCO.dart';
 
 class COprifile extends StatefulWidget {
@@ -90,7 +91,7 @@ class _COprifileState extends State<COprifile> {
                   margin: EdgeInsets.all(20),
                   child: Table(
                     columnWidths: {
-                      0: FlexColumnWidth(6),
+                      0: FlexColumnWidth(5),
                       1: FlexColumnWidth(3),
                       //2: FlexColumnWidth(4),
                     },
@@ -187,7 +188,7 @@ class _COprifileState extends State<COprifile> {
                           ),
                         ),
                         Container(
-                            padding: EdgeInsets.all(2.0),
+                            padding: EdgeInsets.all(1.0),
                             child: Text(
                               ':البريد الالكتروني',
                               style: TextStyle(
@@ -319,6 +320,18 @@ class _COprifileState extends State<COprifile> {
                   shape: StadiumBorder(),
                   primary: Color(0xFF6F35A5),
                   textStyle: TextStyle(fontSize: 17)),
+            ),
+            SizedBox(
+              height: 30,
+              //width: 40,
+            ),
+            SizedBox(
+              height: 30,
+              //width: 40,
+            ),
+            SizedBox(
+              height: 30,
+              //width: 40,
             ),
             SizedBox(
               height: 30,
