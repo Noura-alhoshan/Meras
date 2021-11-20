@@ -59,6 +59,10 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   rating_dialog: ^2.0.3
   in_app_review: ^2.0.3
+  shared_preferences: ^2.0.8
+  stripe_payment: ^1.1.4
+  fluttericon: ^2.0.0
+  http_auth: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +96,8 @@ flutter:
     - assets/icons/ringing.png
     - assets/images/req.png
     - assets/images/lavatory.png
+    - assets/images/logo_forground.png
+    - assets/images/whitelogo.png
 
 
   # To add assets to your application, add an assets section, like this:

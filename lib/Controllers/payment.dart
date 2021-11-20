@@ -1,4 +1,3 @@
-/*
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
@@ -21,7 +20,7 @@ class StripeServices {
   static String paymentApiUrl = '${StripeServices.apiBase}/payment_intents';
   static Uri paymentApiUri = Uri.parse(paymentApiUrl);
   static String secret =
-      'sk_test_51JudnjFOmG51lcyIi8PRSDv4H7ELNLCciSLC2XVADPiNNhJcPYxp3zkxiumTijVJ1g3didRSyNXcat0s16E3GP2F0000YbPUUn';///////////////////////////////////////////////////////////////////////////
+      'sk_test_51JudnjFOmG51lcyIi8PRSDv4H7ELNLCciSLC2XVADPiNNhJcPYxp3zkxiumTijVJ1g3didRSyNXcat0s16E3GP2F0000YbPUUn'; ///////////////////////////////////////////////////////////////////////////
 
   static Map<String, String> headers = {
     'Authorization': 'Bearer ${StripeServices.secret}',
@@ -31,18 +30,18 @@ class StripeServices {
   static init() {
     StripePayment.setOptions(StripeOptions(
         publishableKey:
-            'pk_test_51JudnjFOmG51lcyIyCHnlvbVXCi2JY24ccqbxxeSE0kTK1nqfMYdDcQ1mFe60eFtGJOPtjMYIDSWtdy8UNc5Qaaf00nkkgeKCq',////////////////////////////////////////////////////////////////////////
+            'pk_test_51JudnjFOmG51lcyIyCHnlvbVXCi2JY24ccqbxxeSE0kTK1nqfMYdDcQ1mFe60eFtGJOPtjMYIDSWtdy8UNc5Qaaf00nkkgeKCq', ////////////////////////////////////////////////////////////////////////
         androidPayMode: 'test',
         merchantId: 'test'));
   }
 
   static Future<Map<String, dynamic>> createPaymentIntent(
-      String amount, String currency,String description) async {
+      String amount, String currency, String description) async {
     try {
       Map<String, dynamic> body = {
         'amount': amount,
         'currency': currency,
-        'description': description,//DESCRIPTION
+        'description': description, //DESCRIPTION
       };
 
       var response =
@@ -55,14 +54,17 @@ class StripeServices {
   }
 
   static Future<StripeTransactionResponse> payNowHandler(
-      {required String amount, required String currency,required String description }) async {
+      {required String amount,
+      required String currency,
+      required String description}) async {
     try {
       var paymentMethod = await StripePayment.paymentRequestWithCardForm(
           CardFormPaymentRequest());
-      var paymentIntent =
-          await StripeServices.createPaymentIntent(amount, currency,description);
+      var paymentIntent = await StripeServices.createPaymentIntent(
+          amount, currency, description);
       var response = await StripePayment.confirmPaymentIntent(PaymentIntent(
-          clientSecret: paymentIntent['client_secret'],/////////////////////////////////////////security 
+          clientSecret: paymentIntent[
+              'client_secret'], /////////////////////////////////////////security
           paymentMethodId: paymentMethod.id));
 
       if (response.status == 'succeeded') {
@@ -88,4 +90,3 @@ class StripeServices {
     return StripeTransactionResponse(message: message, success: false);
   }
 }
-*/
