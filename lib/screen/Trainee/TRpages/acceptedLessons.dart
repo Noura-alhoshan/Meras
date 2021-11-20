@@ -48,19 +48,31 @@ class _AcceptedLessonsState extends State<AcceptedLessons> {
                     children: [
                       Container(
                         height: 25,
-                        decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(20.0)),
-                            //borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: green),
+                        decoration: document['Paid'] == 'true'
+                            ? new BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20.0)),
+                                //borderRadius: BorderRadius.all(Radius.circular(20)),
+                                color: Colors.green[300])
+                            : new BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20.0)),
+                                //borderRadius: BorderRadius.all(Radius.circular(20)),
+                                color: green),
                         child: ListTile(
-                          title: Text(' مقبول',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                  height: -1,
-                                  fontSize: 16,
-                                  color: Colors.green[900])),
-                        ),
+                            title: document['Paid'] == 'true'
+                                ? Text(' مدفوع',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        height: -1,
+                                        fontSize: 16,
+                                        color: Colors.green[900]))
+                                : Text(' مقبول',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        height: -1,
+                                        fontSize: 16,
+                                        color: Colors.green[900]))),
                       ),
                       Container(
                         child: ListTile(
