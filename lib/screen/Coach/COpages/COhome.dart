@@ -61,7 +61,7 @@ FirebaseFirestore.instance
     return Scaffold(
       drawer: CNavDrawer(),
       appBar: AppBar(
-        title: Text('                 الصفحة الرئيسية'),
+        title: Text('          الصفحة الرئيسية'),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
@@ -170,33 +170,7 @@ FirebaseFirestore.instance
                     )),
               ),
               // SizedBox(height: 1),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                child: TextButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(Size(120, 80)),
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(29))),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.deepPurple[50])),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('اختبر معلوماتك',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w500)),
-                        SizedBox(width: 30),
-                        Image.asset('assets/icons/Test1.png',
-                            width: 60, height: 60)
-                      ],
-                    )),
-              ),
-
+            
               // SizedBox(height: 40.0),
               // SizedBox(height: 40.0),
               // SizedBox(height: 40.0),

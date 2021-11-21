@@ -79,7 +79,7 @@ int _age = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'تعديل معلومات الملف الشخصي               ',
+          'تعديل معلومات الملف الشخصي    ',
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.deepPurple[100],

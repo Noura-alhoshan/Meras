@@ -203,7 +203,7 @@ class _COprifileState extends State<COprifile> {
                           child: Text(
                             document['Neighborhood'],
                             style: TextStyle(
-                              height: 1.99,
+                              height: 1.59,
                               fontSize: 16.37,
                               color: Colors.grey,
                               //height: 1
@@ -227,7 +227,7 @@ class _COprifileState extends State<COprifile> {
                           child: Text(
                             " " + document['Price'] + " ريال",
                             style: TextStyle(
-                              height: 1.99,
+                              height: 1.59,
                               fontSize: 16.37,
                               color: Colors.grey,
                               //height: 1
@@ -252,7 +252,7 @@ class _COprifileState extends State<COprifile> {
                           child: Text(
                             document['Phone Number'],
                             style: TextStyle(
-                              height: 1.99,
+                              height: 1.74,
                               fontSize: 16.37,
                               color: Colors.grey,
                               //height: 1
@@ -274,7 +274,7 @@ class _COprifileState extends State<COprifile> {
                           child: Text(
                             document['Discerption'],
                             style: TextStyle(
-                              height: 1.99,
+                              height: 1.59,
                               fontSize: 16.5,
                               color: Colors.grey,
                               //height: 1
@@ -311,7 +311,7 @@ class _COprifileState extends State<COprifile> {
               height: 30,
             ),
             ElevatedButton(
-              child: Text('تعديل'),
+              child: Text(' تعديل'),
               onPressed: () async {
                 nav(document.id, document['Price'], document['Age']);
               },

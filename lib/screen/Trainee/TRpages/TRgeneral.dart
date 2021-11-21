@@ -19,7 +19,7 @@ class _TRgeneral extends State<TRgeneral> {
   ) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('الإشارات العامة')),
+          title: Center(child: Text('الإشارات العامة           ')),
           backgroundColor: Colors.deepPurple[100],
         ),
         body: CardListWidget(
