@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meras/Controllers/Loading.dart';
+import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/services/editTitle_alert.dart';
@@ -158,12 +159,23 @@ class _EditDetailsState extends State<EditDetails> {
               title: "",
               content: "هل أنت متأكد من تغيير الصورة؟",
               yesOnPressed: () async {
+                var baseDialog = SignleBaseAlertDialog(
+                  title: "",
+                  content: "تم تعديل الصورة بنجاح",
+                  yesOnPressed: () async {
+                    Navigator.of(context, rootNavigator: true)
+                        .pop('dialog'); //////////////////////////////////??????
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  },
+                  yes: "إغلاق",
+                );
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => baseDialog);
                 await FirebaseFirestore.instance
                     .collection('Guidlines')
                     .doc(widget.id)
                     .update({'PicLink': imageUrl});
-
-                //nav1();
               },
               noOnPressed: () {
                 Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -180,6 +192,7 @@ class _EditDetailsState extends State<EditDetails> {
         text: 'تعديل',
         onClicked: () async {
           var baseDialog = EditAlertDialog(
+            Inittext: document['Title'],
             title: 'تعديل الوصف',
             content: 'أدخل الوصف الجديد',
             onChange: (value) {
@@ -188,20 +201,36 @@ class _EditDetailsState extends State<EditDetails> {
               });
             },
             yesOnPressed: () async {
+              var baseDialog = SignleBaseAlertDialog(
+                title: "",
+                content: "تم تعديل الوصف بنجاح",
+                yesOnPressed: () async {
+                  Navigator.of(context, rootNavigator: true)
+                      .pop('dialog'); //////////////////////////////////??????
+                  Navigator.of(context, rootNavigator: true).pop('dialog');
+                },
+                yes: "إغلاق",
+              );
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => baseDialog);
               await FirebaseFirestore.instance
                   .collection('Guidlines')
                   .doc(widget.id)
                   .update({'Title': newTitle});
-
-              Navigator.of(context, rootNavigator: true).pop('dialog');
-
-              // nav1();
             },
             noOnPressed: () {
               Navigator.of(context, rootNavigator: true).pop('dialog');
             },
             yes: "حفظ",
             no: "إلغاء",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return '                          الرجاء إدخال وصف';
+              } else if (value!.length == 1) {
+                return '                  الرجاء إدخال وصف بشكل صحيح';
+              }
+            },
           );
           showDialog(
               context: context, builder: (BuildContext context) => baseDialog);
@@ -322,11 +351,24 @@ class _EditDetailsState extends State<EditDetails> {
                   ),
                   textColor: Colors.deepPurple[900],
                   onPressed: () async {
+                    var baseDialog = SignleBaseAlertDialog(
+                      title: "",
+                      content: "تم تعديل النوع بنجاح",
+                      yesOnPressed: () async {
+                        Navigator.of(context, rootNavigator: true).pop(
+                            'dialog'); //////////////////////////////////??????
+                        Navigator.of(context, rootNavigator: true)
+                            .pop('dialog');
+                      },
+                      yes: "إغلاق",
+                    );
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => baseDialog);
                     await FirebaseFirestore.instance
                         .collection('Guidlines')
                         .doc(widget.id)
                         .update({'Type': type});
-                    Navigator.of(context).pop();
                   },
                 ),
               ],

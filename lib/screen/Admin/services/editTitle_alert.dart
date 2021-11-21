@@ -8,27 +8,33 @@ class EditAlertDialog extends StatelessWidget {
 
   String _title = '';
   String _content = '';
+  var _Inittext = '';
   String _yes = '';
   String _no = '';
   late Function _yesOnPressed;
   late Function _noOnPressed;
   late Function _onChange;
+  late final FormFieldValidator _validator;
 
   EditAlertDialog(
       {required String title,
       required String content,
+      required var Inittext,
       required Function onChange,
       required Function yesOnPressed,
       required Function noOnPressed,
       String yes = "Yes",
-      String no = "No"}) {
+      String no = "No",
+      required FormFieldValidator validator}) {
     this._title = title;
     this._content = content;
     this._onChange = onChange;
+    this._Inittext = Inittext;
     this._yesOnPressed = yesOnPressed;
     this._noOnPressed = noOnPressed;
     this._yes = yes;
     this._no = no;
+    this._validator = validator;
   }
 
   final TextEditingController _controller = TextEditingController();
@@ -38,40 +44,49 @@ class EditAlertDialog extends StatelessWidget {
     //super.dispose();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   String sp = '                    ';
 
   @override
   Widget build(BuildContext context) {
+    _controller.text = _Inittext;
     String space = '                       ';
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
-      contentPadding: EdgeInsets.only(top: 24.0),
+      contentPadding: EdgeInsets.only(top: 14.0, right: 23, left: 23),
       title: new Text(this._title,
           style: TextStyle(
             fontSize: 15.7,
           ),
           textAlign: TextAlign.center),
-      content: TextField(
-        onChanged: (value) {
-          this._onChange(value);
-        },
-        controller: _controller,
-        cursorColor: kPrimaryColor,
-        decoration: InputDecoration(
-          hintText: sp + _content,
-          fillColor: kPrimaryColor,
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+      content: Form(
+        key: _formKey,
+        child: TextFormField(
+          validator: this._validator,
+          onChanged: (value) {
+            this._onChange(value);
+          },
+          controller: _controller,
+          cursorColor: kPrimaryColor,
+          textDirection: TextDirection.rtl,
+          decoration: InputDecoration(
+            hintText: sp + _content,
+            fillColor: kPrimaryColor,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: kPrimaryColor),
+            ),
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: kPrimaryColor),
-          ),
+          inputFormatters: [
+            new LengthLimitingTextInputFormatter(150),
+          ],
         ),
       ),
-
       backgroundColor: Colors.white,
-      //shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
       actions: <Widget>[
         new FlatButton(
           child: Text(
@@ -92,7 +107,9 @@ class EditAlertDialog extends StatelessWidget {
           ),
           textColor: Colors.deepPurple[900],
           onPressed: () {
-            this._yesOnPressed();
+            if (_formKey.currentState!.validate()) {
+              this._yesOnPressed();
+            }
           },
         ),
       ],
