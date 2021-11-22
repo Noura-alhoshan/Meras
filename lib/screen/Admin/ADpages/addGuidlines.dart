@@ -74,9 +74,52 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                 SizedBox(height: 40.0),
                 SizedBox(height: 40.0),
                 SizedBox(height: 40.0),
-                SizedBox(height: 40.0),
-                SizedBox(height: 40.0),
-                SizedBox(height: 40.0),
+                SizedBox(height: 30.0),
+                // SizedBox(height: 40.0),
+                // SizedBox(height: 40.0),
+                Container(
+                  width: 150,
+                  height: 70,
+                  padding: EdgeInsets.all(10),
+                  decoration: new BoxDecoration(
+                    color: Colors.deepPurple[50],
+                    border: Border.all(color: Colors.white, width: 0.0),
+                    borderRadius: new BorderRadius.all(Radius.circular(29.0)),
+                  ),
+                  child: Center(
+                    child: FlatButton(
+                      onPressed: () => {
+                        uploadImage(),
+                      },
+                      padding: EdgeInsets.all(5.0),
+                      child: Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "إضافة صورة",
+                              style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Icon(
+                              Icons.add_a_photo_outlined,
+                              color: kPrimaryColor,
+                              size: 23,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  imageUrl,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 11.0),
+                ),
                 Center(
                   child: ADroundedTitle(
                     hintText: sp + "        وصف إشارة السير",
@@ -141,108 +184,109 @@ class _AddGuidlinesState extends State<AddGuidlines> {
                     ),
                   ],
                 ),
+                // SizedBox(height: 40.0),
                 SizedBox(height: 40.0),
-                SizedBox(height: 40.0),
-                Container(
-                  width: 150,
-                  height: 70,
-                  padding: EdgeInsets.all(10),
-                  decoration: new BoxDecoration(
-                    color: Colors.deepPurple[50],
-                    border: Border.all(color: Colors.white, width: 0.0),
-                    borderRadius: new BorderRadius.all(Radius.circular(29.0)),
-                  ),
-                  child: Center(
-                    child: FlatButton(
-                      onPressed: () => {
-                        uploadImage(),
-                      },
-                      padding: EdgeInsets.all(5.0),
-                      child: Center(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "إضافة صورة",
-                              style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Icon(
-                              Icons.add_a_photo_outlined,
-                              color: kPrimaryColor,
-                              size: 23,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Text(
-                  imageUrl,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 11.0),
-                ),
+                // Container(
+                //   width: 150,
+                //   height: 70,
+                //   padding: EdgeInsets.all(10),
+                //   decoration: new BoxDecoration(
+                //     color: Colors.deepPurple[50],
+                //     border: Border.all(color: Colors.white, width: 0.0),
+                //     borderRadius: new BorderRadius.all(Radius.circular(29.0)),
+                //   ),
+                //   child: Center(
+                //     child: FlatButton(
+                //       onPressed: () => {
+                //         uploadImage(),
+                //       },
+                //       padding: EdgeInsets.all(5.0),
+                //       child: Center(
+                //         child: Row(
+                //           mainAxisSize: MainAxisSize.max,
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: <Widget>[
+                //             Text(
+                //               "إضافة صورة",
+                //               style: TextStyle(
+                //                   color: kPrimaryColor,
+                //                   fontSize: 19,
+                //                   fontWeight: FontWeight.w500),
+                //             ),
+                //             Icon(
+                //               Icons.add_a_photo_outlined,
+                //               color: kPrimaryColor,
+                //               size: 23,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Text(
+                //   imageUrl,
+                //   textAlign: TextAlign.center,
+                //   style: TextStyle(fontSize: 11.0),
+                // ),
                 Text(_message,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14.0, color: Colors.red)),
                 RoundedButton(
                     text: 'إضافة',
                     press: () async {
-                      // if (imageUrl.isEmpty) {
-                      //   _message = 'الرجاء تحميل صورة';
-                      // } else {
-                      if (_formKey.currentState!.validate()) {
-                        try {
-                          var baseDialog = BaseAlertDialog(
-                              title: "",
-                              content: "هل أنت متأكد من إضافة إشارة السير؟",
-                              yesOnPressed: () async {
-                                // if(type){
+                      if (imageUrl.isEmpty) {
+                        _message = 'الرجاء تحميل صورة';
+                      } else {
+                        if (_formKey.currentState!.validate()) {
+                          try {
+                            var baseDialog = BaseAlertDialog(
+                                title: "",
+                                content: "هل أنت متأكد من إضافة إشارة السير؟",
+                                yesOnPressed: () async {
+                                  // if(type){
 
-                                // }
-                                addGuidlines(title, type, imageUrl);
-                                var baseDialog2 = SignleBaseAlertDialog(
-                                  title: '',
-                                  content: "تم إضافة إشارة السير بنجاح",
-                                  yesOnPressed: () async {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop('dialog');
-                                    nav();
-                                  },
-                                  yes: "إغلاق",
-                                );
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        baseDialog2);
-                              },
-                              noOnPressed: () {
+                                  // }
+                                  addGuidlines(title, type, imageUrl);
+                                  var baseDialog2 = SignleBaseAlertDialog(
+                                    title: '',
+                                    content: "تم إضافة إشارة السير بنجاح",
+                                    yesOnPressed: () async {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                      nav();
+                                    },
+                                    yes: "إغلاق",
+                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          baseDialog2);
+                                },
+                                noOnPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop('dialog');
+                                },
+                                yes: "نعم",
+                                no: "لا");
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => baseDialog);
+                          } catch (e) {
+                            var baseDialog2 = SignleBaseAlertDialog(
+                              title: '',
+                              content:
+                                  "حدث خطأ ما أثناء عملية الإضافة! حاول مرة أخرى",
+                              yesOnPressed: () async {
                                 Navigator.of(context, rootNavigator: true)
                                     .pop('dialog');
                               },
-                              yes: "نعم",
-                              no: "لا");
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) => baseDialog);
-                        } catch (e) {
-                          var baseDialog2 = SignleBaseAlertDialog(
-                            title: '',
-                            content:
-                                "حدث خطأ ما أثناء عملية الإضافة! حاول مرة أخرى",
-                            yesOnPressed: () async {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop('dialog');
-                            },
-                            yes: "إغلاق",
-                          );
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) => baseDialog2);
+                              yes: "إغلاق",
+                            );
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => baseDialog2);
+                          }
                         }
                       }
                     }),
