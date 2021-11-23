@@ -8,6 +8,7 @@ import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'BackgroundLo2.dart';
 
+import 'BackgroundSearch.dart';
 import 'DraftF.dart';
 
 class TRexploreScreen extends StatefulWidget {
@@ -256,7 +257,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                     Expanded(
                       child: Container(
                         child: SingleChildScrollView(
-                          child: Background(
+                          child: BackgroundSearch(
                               child: ListView.builder(
                             itemCount: _resultsList.length,
                             itemBuilder: (BuildContext context, int index) =>
