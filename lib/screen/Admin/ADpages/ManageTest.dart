@@ -7,6 +7,7 @@ import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/authenticate/background.dart';
 
 import '../../../constants.dart';
+import 'AddTest.dart';
 import 'deleteGuidelines.dart';
 
 class ManageTest extends StatefulWidget {
@@ -43,8 +44,8 @@ class _ManageTest extends State<ManageTest> {
                 child: Center(
                   child: FlatButton(
                     onPressed: () => {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => AddGuidlines()))
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => AddTest()))
                     },
                     padding: EdgeInsets.all(5.0),
                     child: Center(
