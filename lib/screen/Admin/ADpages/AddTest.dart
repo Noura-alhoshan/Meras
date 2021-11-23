@@ -29,9 +29,6 @@ class AddTest extends StatefulWidget {
 }
 
 class _AddTest extends State<AddTest> {
-  CollectionReference Collection =
-      FirebaseFirestore.instance.collection('Guidlines');
-
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   TextEditingController _controller = TextEditingController();
@@ -42,12 +39,6 @@ class _AddTest extends State<AddTest> {
 
   final _formKey = GlobalKey<FormState>();
   String error = '';
-  String imageUrl = '';
-  String _message = '';
-
-  String title = '';
-  String type = 'W';
-  String sp = '      ';
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +61,7 @@ class _AddTest extends State<AddTest> {
                       height: Get.height * 0.95,
                       child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
-                              .collection('TESTS')
+                              .collection('Tests')
                               .orderBy('createdAt', descending: true)
                               .snapshots(),
                           builder: (context, snapshot) {
@@ -115,16 +106,16 @@ class _AddTest extends State<AddTest> {
                       child: Text('Cancel')),
                   TextButton(
                       onPressed: () async {
-                        if (testNameController.text.length < 4) {
+                        if (testNameController.text.length < 1) {
                           Get.showSnackbar(GetBar(
                             title: 'Error',
                             message: 'Please enter valid test name',
                             duration: Duration(seconds: 1),
                           ));
                         } else {
-                          final String id = randomNumeric(15);
+                          final String id = randomAlpha(20);
                           await FirebaseFirestore.instance
-                              .collection('TESTS')
+                              .collection('Tests')
                               .doc(id)
                               .set({
                             'id': id,
