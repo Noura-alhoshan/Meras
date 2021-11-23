@@ -4,6 +4,7 @@ import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Coach/BackgroundProfileLight.dart';
+import 'package:meras/screen/Trainee/TRpages/TReditProfile.dart';
 import 'package:meras/screen/authenticate/background2.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundProfileLight2.dart';
 
@@ -273,6 +274,7 @@ class _TRprofileState extends State<TRprofile> {
           ElevatedButton(
             child: Text('تعديل'),
             onPressed: () async {
+              nav(document.id, document['Age']);
               //nav(document.id);
             },
             style: ElevatedButton.styleFrom(
@@ -283,6 +285,16 @@ class _TRprofileState extends State<TRprofile> {
           ),
         ]),
       ),
+    );
+  }
+
+  void nav(String id, int aaaa) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return EditProfileInfoTr(id, aaaa.toString());
+        //return RequestLessonPage(icd);
+      }),
     );
   }
 }

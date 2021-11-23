@@ -11,18 +11,18 @@ import 'package:meras/screen/Coach/COpages/editNameCO.dart';
 import 'package:meras/screen/Coach/COpages/editPhoneDialog.dart';
 
  
-class EditProfileInfoCo extends StatefulWidget {
+class EditProfileInfoTr extends StatefulWidget {
   //const EditProfileInfoCo({ Key? key }) : super(key: key);
   final String id;
-  final String ppp;
+ 
   final String aaa;//age
-  EditProfileInfoCo(this.id,  this.ppp,this.aaa);
+  EditProfileInfoTr(this.id, this.aaa);
 
   @override
-  _EditProfileInfoCoState createState() => _EditProfileInfoCoState();
+  _EditProfileInfoTrState createState() => _EditProfileInfoTrState();
 }
 
-class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
+class _EditProfileInfoTrState extends State<EditProfileInfoTr> {
   String dropdownValue = 'الرمال وماحولها';
   var items = [
     'الرمال وماحولها',
@@ -66,7 +66,7 @@ int _age = 0;
 
   void initState() {
     super.initState();
-    _controller.text = widget.ppp; 
+    //_controller.text = widget.ppp; 
     _controller1111.text=widget.aaa;// Setting the initial value for the field.
   }
 
@@ -87,7 +87,7 @@ int _age = 0;
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
-              .collection('Coach')
+              .collection('trainees')
               .where(FieldPath.documentId, isEqualTo: widget.id)
               .snapshots(),
           builder: (context, snapshot) {
@@ -103,11 +103,11 @@ int _age = 0;
 
   Widget _build(BuildContext context, DocumentSnapshot document) {
     neighborhood = document['Neighborhood'];
-    Image im = new Image.network(
-      document['URL'],
-      height: 230.0,
-      width: 250.0,
-    );
+    // Image im = new Image.network(
+    //   document['URL'],
+    //   height: 230.0,
+    //   width: 250.0,
+    // );
     return BackgroundA(
       child: Container(
         height: 900,
@@ -128,16 +128,22 @@ int _age = 0;
                 height: 5,
               ),
               Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Container(
-                    child: ImageFullScreenWrapperWidget(
-                      child: im,
-                      dark: false,
+                 child: ClipOval(
+              child: document['Gender'] == 'أنثى'
+                  ? Image.asset(
+                      "assets/images/TF.png",
+                      height: 150,
+                      width: 150,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      "assets/images/TM.png",
+                      height: 150,
+                      width: 150,
+                      fit: BoxFit.cover,
                     ),
-                  ),
-                ),
-              ),
+            ),
+          ),
               Center(
                 child: Column(
                   children: [
@@ -165,7 +171,7 @@ int _age = 0;
                                 content: 'أدخل الاسم الجديد',
                                 onChange: (value) {
                                   setState(() {
-                                    Fname = value;
+                                    Fname = value.trim();
                                   });
                                 },
                                 yesOnPressed: () async {
@@ -180,7 +186,7 @@ int _age = 0;
                                     );
                                     showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
-                                      .collection('Coach')
+                                      .collection('trainees')
                                       .doc(widget.id)
                                       .update({'Fname': Fname.trim()});
 
@@ -271,7 +277,7 @@ int _age = 0;
                                     );
                                     showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
-                                      .collection('Coach')
+                                      .collection('trainees')
                                       .doc(widget.id)
                                       .update({'Lname': Lname.trim()});
 
@@ -409,7 +415,7 @@ int _age = 0;
                                         .catchError((onError) => message = 'error');
                                         print(message);
                                   await FirebaseFirestore.instance
-                                      .collection('Coach')
+                                      .collection('trainees')
                                       .doc(widget.id)
                                       .update({'Email': emailnew.trim()});                             
                                 },
@@ -421,7 +427,7 @@ int _age = 0;
                                 no: "إلغاء",
                                validator: (val) {
                     RegExp regex = new RegExp(pattern);
-                  if (val.trim()==document['Email'])
+                    if (val.trim()==document['Email'])
                     return '                الرجاء إدخال بريد إلكتروني جديد';
                    else if (val.trim().isEmpty) {
                     return '               الرجاء إدخال البريد الإلكتروني';
@@ -477,36 +483,36 @@ int _age = 0;
                           borderSide:
                               BorderSide(color: Colors.white, width: 1)),
                     ),
-                    Card(
-                      child: ListTile(
-                        title: Text(
-                          document['Price'],
-                          textAlign: TextAlign.right,
-                        ),
-                        subtitle: Text(
-                          'سعر التدريب لساعتين',
-                          textAlign: TextAlign.right,
-                        ),
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.black54,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                            onPressed: () async {
-                              await showInformationDialig2(context, document);
-                            },
-                          ),
-                        ),
-                      ),
-                      elevation: 4,
-                      shadowColor: Colors.deepPurple[500],
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide:
-                              BorderSide(color: Colors.white, width: 1)),
-                    ),
+                    // Card(
+                    //   child: ListTile(
+                    //     title: Text(
+                    //       document['Price'],
+                    //       textAlign: TextAlign.right,
+                    //     ),
+                    //     subtitle: Text(
+                    //       'سعر التدريب لساعتين',
+                    //       textAlign: TextAlign.right,
+                    //     ),
+                    //     leading: CircleAvatar(
+                    //       backgroundColor: Colors.black54,
+                    //       child: IconButton(
+                    //         icon: Icon(
+                    //           Icons.edit,
+                    //           color: Colors.white,
+                    //         ),
+                    //         onPressed: () async {
+                    //           await showInformationDialig2(context, document);
+                    //         },
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   elevation: 4,
+                    //   shadowColor: Colors.deepPurple[500],
+                    //   shape: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(18),
+                    //       borderSide:
+                    //           BorderSide(color: Colors.white, width: 1)),
+                    // ),
                     Card(
                       child: ListTile(
                         title: Text(
@@ -557,7 +563,7 @@ int _age = 0;
                                     );
                                     showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                                   await FirebaseFirestore.instance
-                                      .collection('Coach')
+                                      .collection('trainees')
                                       .doc(widget.id)
                                       .update(
                                           {'Phone Number': phoneNumber.trim()});
@@ -587,80 +593,80 @@ int _age = 0;
                           borderSide:
                               BorderSide(color: Colors.white, width: 1)),
                     ),
-                    Card(
-                      child: ListTile(
-                        title: Text(
-                          document['Discerption'],
-                          textAlign: TextAlign.right,
-                        ),
-                        subtitle: Text(
-                          'الوصف',
-                          textAlign: TextAlign.right,
-                        ),
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.black54,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                            onPressed: () async {
-                              var baseDialog = EditAlertDialog(
-                                Inittext: document['Discerption'],
-                                title: 'تعديل الوصف',
-                                content: 'أدخل الوصف الجديد',
-                                onChange: (value) {
-                                  setState(() {
-                                    description = value;
-                                  });
-                                },
-                                yesOnPressed: () async {
-                                  var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل الوصف بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
-                                  await FirebaseFirestore.instance
-                                      .collection('Coach')
-                                      .doc(widget.id)
-                                      .update({'Discerption': description});
+                    // Card(
+                    //   child: ListTile(
+                    //     title: Text(
+                    //       document['Discerption'],
+                    //       textAlign: TextAlign.right,
+                    //     ),
+                    //     subtitle: Text(
+                    //       'الوصف',
+                    //       textAlign: TextAlign.right,
+                    //     ),
+                    //     leading: CircleAvatar(
+                    //       backgroundColor: Colors.black54,
+                    //       child: IconButton(
+                    //         icon: Icon(
+                    //           Icons.edit,
+                    //           color: Colors.white,
+                    //         ),
+                    //         onPressed: () async {
+                    //           var baseDialog = EditAlertDialog(
+                    //             Inittext: document['Discerption'],
+                    //             title: 'تعديل الوصف',
+                    //             content: 'أدخل الوصف الجديد',
+                    //             onChange: (value) {
+                    //               setState(() {
+                    //                 description = value;
+                    //               });
+                    //             },
+                    //             yesOnPressed: () async {
+                    //               var baseDialog = SignleBaseAlertDialog(
+                    //                   title: "",
+                    //                   content: "تم تعديل الوصف بنجاح",
+                    //                   yesOnPressed: () async {
+                    //                     Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                    //                     Navigator.of(context, rootNavigator: true).pop('dialog');
+                    //                   },
+                    //                   yes: "إغلاق",
+                    //                 );
+                    //                 showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                    //               await FirebaseFirestore.instance
+                    //                   .collection('Coach')
+                    //                   .doc(widget.id)
+                    //                   .update({'Discerption': description});
 
                                  
-                                },
-                                noOnPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
-                                },
-                                yes: "حفظ",
-                                no: "إلغاء",
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return '                                   الرجاء إدخال وصف';
-                                  } else if (value!.length == 1) {
-                                    return '                       الرجاء إدخال الوصف بشكل صحيح';
-                                  }
-                                },
-                              );
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      baseDialog);
-                            },
-                          ),
-                        ),
-                      ),
-                      elevation: 4,
-                      shadowColor: Colors.deepPurple[500],
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide:
-                              BorderSide(color: Colors.white, width: 1)),
-                    ),
+                    //             },
+                    //             noOnPressed: () {
+                    //               Navigator.of(context, rootNavigator: true)
+                    //                   .pop('dialog');
+                    //             },
+                    //             yes: "حفظ",
+                    //             no: "إلغاء",
+                    //             validator: (value) {
+                    //               if (value!.isEmpty) {
+                    //                 return '                                   الرجاء إدخال وصف';
+                    //               } else if (value!.length == 1) {
+                    //                 return '                       الرجاء إدخال الوصف بشكل صحيح';
+                    //               }
+                    //             },
+                    //           );
+                    //           showDialog(
+                    //               context: context,
+                    //               builder: (BuildContext context) =>
+                    //                   baseDialog);
+                    //         },
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   elevation: 4,
+                    //   shadowColor: Colors.deepPurple[500],
+                    //   shape: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(18),
+                    //       borderSide:
+                    //           BorderSide(color: Colors.white, width: 1)),
+                    // ),
                   ],
                 ),
               ),
@@ -774,7 +780,7 @@ int _age = 0;
                                     );
                                     showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                     await FirebaseFirestore.instance
-                        .collection('Coach')
+                        .collection('trainees')
                         .doc(widget.id)
                         .update({'Neighborhood': neighborhood});
                    
@@ -786,156 +792,156 @@ int _age = 0;
         });
   }
 
-  Future<void> showInformationDialig2(
-      BuildContext context, DocumentSnapshot document) async {
-    return await showDialog(
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(builder: (context, setState) {
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
-              contentPadding: EdgeInsets.only(
-                top: 24.0,
-              ),
-              content: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(' تعديل سعر التدريب لساعتين'),
-                      Center(
-                        child: Container(
-                          width: 120.0,
-                          foregroundDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            // border: Border.all(
-                            //   color: Colors.white,
-                            //   width: 0.0,
-                            // ),
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: TextFormField(
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(8.0),
-                                    // border: OutlineInputBorder(
-                                    //   borderRadius: BorderRadius.circular(10.0),
-                                    // ),
-                                  ),
-                                  controller: _controller,
-                                  keyboardType: TextInputType.numberWithOptions(
-                                    decimal: false,
-                                    signed: true,
-                                  ),
-                                  inputFormatters: <TextInputFormatter>[
-                                    WhitelistingTextInputFormatter.digitsOnly
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 38.0,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      child: InkWell(
-                                        child: Icon(
-                                          Icons.arrow_drop_up,
-                                          size: 18.0,
-                                        ),
-                                        onTap: () {
-                                          int currentValue =
-                                              int.parse(_controller.text);
-                                          setState(() {
-                                            currentValue = currentValue + 10;
-                                            _controller.text =
-                                                (currentValue < 500
-                                                        ? currentValue
-                                                        : 500)
-                                                    .toString();
-                                            //_controller.text = (currentValue).toString(); // incrementing value
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    InkWell(
-                                      child: Icon(
-                                        Icons.arrow_drop_down,
-                                        size: 18.0,
-                                      ),
-                                      onTap: () {
-                                        int currentValue =
-                                            int.parse(_controller.text);
-                                        setState(() {
-                                          //print("hello state");
-                                          currentValue = currentValue - 10;
-                                          _controller.text = (currentValue > 100
-                                                  ? currentValue
-                                                  : 100)
-                                              .toString();
-                                          // decrementing value
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
-              actions: <Widget>[
-                new FlatButton(
-                  child: Text(
-                    'إلغاء',
-                    style: TextStyle(fontSize: 15.3),
-                    textAlign: TextAlign.left,
-                  ),
-                  textColor: Colors.deepPurple[900],
-                  onPressed: () {
-                    Navigator.of(context, rootNavigator: true).pop('dialog');
-                  },
-                ),
-                SizedBox(
-                  width: 45,
-                ),
-                new FlatButton(
-                  child: Text(
-                    'حفظ          ',
-                    style: TextStyle(fontSize: 15.3),
-                    textAlign: TextAlign.left,
-                  ),
-                  textColor: Colors.deepPurple[900],
-                  onPressed: () async {
-                     var baseDialog = SignleBaseAlertDialog(
-                                      title: "",
-                                      content: "تم تعديل سعر التدريب بنجاح",
-                                      yesOnPressed: () async {
-                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                                      },
-                                      yes: "إغلاق",
-                                    );
-                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
-                    await FirebaseFirestore.instance
-                        .collection('Coach')
-                        .doc(widget.id)
-                        .update({'Price': _controller.text});
+  // Future<void> showInformationDialig2(
+  //     BuildContext context, DocumentSnapshot document) async {
+  //   return await showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return StatefulBuilder(builder: (context, setState) {
+  //           return AlertDialog(
+  //             shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
+  //             contentPadding: EdgeInsets.only(
+  //               top: 24.0,
+  //             ),
+  //             content: Form(
+  //                 key: _formKey,
+  //                 child: Column(
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   children: [
+  //                     Text(' تعديل سعر التدريب لساعتين'),
+  //                     Center(
+  //                       child: Container(
+  //                         width: 120.0,
+  //                         foregroundDecoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10.0),
+  //                           // border: Border.all(
+  //                           //   color: Colors.white,
+  //                           //   width: 0.0,
+  //                           // ),
+  //                         ),
+  //                         child: Row(
+  //                           children: <Widget>[
+  //                             Expanded(
+  //                               flex: 1,
+  //                               child: TextFormField(
+  //                                 textAlign: TextAlign.center,
+  //                                 decoration: InputDecoration(
+  //                                   contentPadding: EdgeInsets.all(8.0),
+  //                                   // border: OutlineInputBorder(
+  //                                   //   borderRadius: BorderRadius.circular(10.0),
+  //                                   // ),
+  //                                 ),
+  //                                 controller: _controller,
+  //                                 keyboardType: TextInputType.numberWithOptions(
+  //                                   decimal: false,
+  //                                   signed: true,
+  //                                 ),
+  //                                 inputFormatters: <TextInputFormatter>[
+  //                                   WhitelistingTextInputFormatter.digitsOnly
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                             Container(
+  //                               height: 38.0,
+  //                               child: Column(
+  //                                 crossAxisAlignment: CrossAxisAlignment.center,
+  //                                 mainAxisAlignment: MainAxisAlignment.center,
+  //                                 children: <Widget>[
+  //                                   Container(
+  //                                     child: InkWell(
+  //                                       child: Icon(
+  //                                         Icons.arrow_drop_up,
+  //                                         size: 18.0,
+  //                                       ),
+  //                                       onTap: () {
+  //                                         int currentValue =
+  //                                             int.parse(_controller.text);
+  //                                         setState(() {
+  //                                           currentValue = currentValue + 10;
+  //                                           _controller.text =
+  //                                               (currentValue < 500
+  //                                                       ? currentValue
+  //                                                       : 500)
+  //                                                   .toString();
+  //                                           //_controller.text = (currentValue).toString(); // incrementing value
+  //                                         });
+  //                                       },
+  //                                     ),
+  //                                   ),
+  //                                   InkWell(
+  //                                     child: Icon(
+  //                                       Icons.arrow_drop_down,
+  //                                       size: 18.0,
+  //                                     ),
+  //                                     onTap: () {
+  //                                       int currentValue =
+  //                                           int.parse(_controller.text);
+  //                                       setState(() {
+  //                                         //print("hello state");
+  //                                         currentValue = currentValue - 10;
+  //                                         _controller.text = (currentValue > 100
+  //                                                 ? currentValue
+  //                                                 : 100)
+  //                                             .toString();
+  //                                         // decrementing value
+  //                                       });
+  //                                     },
+  //                                   ),
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 )),
+  //             actions: <Widget>[
+  //               new FlatButton(
+  //                 child: Text(
+  //                   'إلغاء',
+  //                   style: TextStyle(fontSize: 15.3),
+  //                   textAlign: TextAlign.left,
+  //                 ),
+  //                 textColor: Colors.deepPurple[900],
+  //                 onPressed: () {
+  //                   Navigator.of(context, rootNavigator: true).pop('dialog');
+  //                 },
+  //               ),
+  //               SizedBox(
+  //                 width: 45,
+  //               ),
+  //               new FlatButton(
+  //                 child: Text(
+  //                   'حفظ          ',
+  //                   style: TextStyle(fontSize: 15.3),
+  //                   textAlign: TextAlign.left,
+  //                 ),
+  //                 textColor: Colors.deepPurple[900],
+  //                 onPressed: () async {
+  //                    var baseDialog = SignleBaseAlertDialog(
+  //                                     title: "",
+  //                                     content: "تم تعديل سعر التدريب بنجاح",
+  //                                     yesOnPressed: () async {
+  //                                       Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+  //                                       Navigator.of(context, rootNavigator: true).pop('dialog');
+  //                                     },
+  //                                     yes: "إغلاق",
+  //                                   );
+  //                                   showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+  //                   await FirebaseFirestore.instance
+  //                       .collection('Coach')
+  //                       .doc(widget.id)
+  //                       .update({'Price': _controller.text});
                    
-                  },
-                ),
-              ],
-            );
-          });
-        });
-  }
+  //                 },
+  //               ),
+  //             ],
+  //           );
+  //         });
+  //       });
+  // }
 
     Future<void> showInformationDialig3(
       BuildContext context, DocumentSnapshot document) async {
@@ -1076,7 +1082,7 @@ int _age = 0;
                                     );
                                     showDialog(context: context,builder: (BuildContext context) =>baseDialog);
                     await FirebaseFirestore.instance
-                        .collection('Coach')
+                        .collection('trainees')
                         .doc(widget.id)
                         .update({'Age': int.parse(_controller1111.text)});
                    
