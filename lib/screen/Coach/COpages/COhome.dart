@@ -41,6 +41,10 @@ FirebaseFirestore.instance
         .then((querySnapshot) async {
       //String ddd = querySnapshot.data()!['Fname'];
       //print(ddd);
+       FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(uid)
+                                      .update({'Email': user.email});    
       setState(() {
         nnaame = querySnapshot.data()!['Fname'];
    

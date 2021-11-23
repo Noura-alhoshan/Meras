@@ -199,9 +199,9 @@ int _age = 0;
                                 yes: "حفظ",
                                 no: "إلغاء",
                                 validator: (value) {
-                                  if (value!.isEmpty) {
+                                  if (value.trim()!.isEmpty) {
                                     return '                            الرجاء إدخال الأسم الأول          ';
-                                  } else if (value!.length == 1) {
+                                  } else if (value.trim()!.length == 1) {
                                     return '                   الرجاء إدخال الأسم الأول بشكل صحيح  ';
                                   } else if (!RegExp(r"^[a-zA-Z]+$")
                                           .hasMatch(value) &&
@@ -254,9 +254,9 @@ int _age = 0;
                                   });
                                 },
                                 validator: (value) {
-                                  if (value!.isEmpty) {
+                                  if (value!.trim().isEmpty) {
                                     return '                            الرجاء إدخال الأسم الأخير          ';
-                                  } else if (value!.length == 1) {
+                                  } else if (value!.trim().length == 1) {
                                     return '                   الرجاء إدخال الأسم الأخير بشكل صحيح  ';
                                   } else if (!RegExp(r"^[a-zA-Z]+$")
                                           .hasMatch(value) &&
@@ -542,11 +542,11 @@ int _age = 0;
                                 },
                                 validator: (value) {
                                   RegExp regExp = new RegExp(r"^\+?0[0-9]{9}$");
-                                  if (value.length == 0) {
+                                  if (value.trim().length == 0) {
                                     return '                              الرجاء إدخال رقم الجوال';
-                                  } else if (value.length < 10) {
+                                  } else if (value.trim().length < 10) {
                                     return '                  الرجاء إدخال رقم جوال صحيح';
-                                  } else if (!regExp.hasMatch(value)) {
+                                  } else if (!regExp.hasMatch(value.trim())) {
                                     return '                  الرجاء إدخال رقم جوال يبدأ بـ 05';
                                   }
                                   return null;
@@ -593,80 +593,7 @@ int _age = 0;
                           borderSide:
                               BorderSide(color: Colors.white, width: 1)),
                     ),
-                    // Card(
-                    //   child: ListTile(
-                    //     title: Text(
-                    //       document['Discerption'],
-                    //       textAlign: TextAlign.right,
-                    //     ),
-                    //     subtitle: Text(
-                    //       'الوصف',
-                    //       textAlign: TextAlign.right,
-                    //     ),
-                    //     leading: CircleAvatar(
-                    //       backgroundColor: Colors.black54,
-                    //       child: IconButton(
-                    //         icon: Icon(
-                    //           Icons.edit,
-                    //           color: Colors.white,
-                    //         ),
-                    //         onPressed: () async {
-                    //           var baseDialog = EditAlertDialog(
-                    //             Inittext: document['Discerption'],
-                    //             title: 'تعديل الوصف',
-                    //             content: 'أدخل الوصف الجديد',
-                    //             onChange: (value) {
-                    //               setState(() {
-                    //                 description = value;
-                    //               });
-                    //             },
-                    //             yesOnPressed: () async {
-                    //               var baseDialog = SignleBaseAlertDialog(
-                    //                   title: "",
-                    //                   content: "تم تعديل الوصف بنجاح",
-                    //                   yesOnPressed: () async {
-                    //                     Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-                    //                     Navigator.of(context, rootNavigator: true).pop('dialog');
-                    //                   },
-                    //                   yes: "إغلاق",
-                    //                 );
-                    //                 showDialog(context: context,builder: (BuildContext context) =>baseDialog);
-                    //               await FirebaseFirestore.instance
-                    //                   .collection('Coach')
-                    //                   .doc(widget.id)
-                    //                   .update({'Discerption': description});
-
-                                 
-                    //             },
-                    //             noOnPressed: () {
-                    //               Navigator.of(context, rootNavigator: true)
-                    //                   .pop('dialog');
-                    //             },
-                    //             yes: "حفظ",
-                    //             no: "إلغاء",
-                    //             validator: (value) {
-                    //               if (value!.isEmpty) {
-                    //                 return '                                   الرجاء إدخال وصف';
-                    //               } else if (value!.length == 1) {
-                    //                 return '                       الرجاء إدخال الوصف بشكل صحيح';
-                    //               }
-                    //             },
-                    //           );
-                    //           showDialog(
-                    //               context: context,
-                    //               builder: (BuildContext context) =>
-                    //                   baseDialog);
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   elevation: 4,
-                    //   shadowColor: Colors.deepPurple[500],
-                    //   shape: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(18),
-                    //       borderSide:
-                    //           BorderSide(color: Colors.white, width: 1)),
-                    // ),
+                 
                   ],
                 ),
               ),
@@ -792,157 +719,7 @@ int _age = 0;
         });
   }
 
-  // Future<void> showInformationDialig2(
-  //     BuildContext context, DocumentSnapshot document) async {
-  //   return await showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return StatefulBuilder(builder: (context, setState) {
-  //           return AlertDialog(
-  //             shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-  //             contentPadding: EdgeInsets.only(
-  //               top: 24.0,
-  //             ),
-  //             content: Form(
-  //                 key: _formKey,
-  //                 child: Column(
-  //                   mainAxisSize: MainAxisSize.min,
-  //                   children: [
-  //                     Text(' تعديل سعر التدريب لساعتين'),
-  //                     Center(
-  //                       child: Container(
-  //                         width: 120.0,
-  //                         foregroundDecoration: BoxDecoration(
-  //                           borderRadius: BorderRadius.circular(10.0),
-  //                           // border: Border.all(
-  //                           //   color: Colors.white,
-  //                           //   width: 0.0,
-  //                           // ),
-  //                         ),
-  //                         child: Row(
-  //                           children: <Widget>[
-  //                             Expanded(
-  //                               flex: 1,
-  //                               child: TextFormField(
-  //                                 textAlign: TextAlign.center,
-  //                                 decoration: InputDecoration(
-  //                                   contentPadding: EdgeInsets.all(8.0),
-  //                                   // border: OutlineInputBorder(
-  //                                   //   borderRadius: BorderRadius.circular(10.0),
-  //                                   // ),
-  //                                 ),
-  //                                 controller: _controller,
-  //                                 keyboardType: TextInputType.numberWithOptions(
-  //                                   decimal: false,
-  //                                   signed: true,
-  //                                 ),
-  //                                 inputFormatters: <TextInputFormatter>[
-  //                                   WhitelistingTextInputFormatter.digitsOnly
-  //                                 ],
-  //                               ),
-  //                             ),
-  //                             Container(
-  //                               height: 38.0,
-  //                               child: Column(
-  //                                 crossAxisAlignment: CrossAxisAlignment.center,
-  //                                 mainAxisAlignment: MainAxisAlignment.center,
-  //                                 children: <Widget>[
-  //                                   Container(
-  //                                     child: InkWell(
-  //                                       child: Icon(
-  //                                         Icons.arrow_drop_up,
-  //                                         size: 18.0,
-  //                                       ),
-  //                                       onTap: () {
-  //                                         int currentValue =
-  //                                             int.parse(_controller.text);
-  //                                         setState(() {
-  //                                           currentValue = currentValue + 10;
-  //                                           _controller.text =
-  //                                               (currentValue < 500
-  //                                                       ? currentValue
-  //                                                       : 500)
-  //                                                   .toString();
-  //                                           //_controller.text = (currentValue).toString(); // incrementing value
-  //                                         });
-  //                                       },
-  //                                     ),
-  //                                   ),
-  //                                   InkWell(
-  //                                     child: Icon(
-  //                                       Icons.arrow_drop_down,
-  //                                       size: 18.0,
-  //                                     ),
-  //                                     onTap: () {
-  //                                       int currentValue =
-  //                                           int.parse(_controller.text);
-  //                                       setState(() {
-  //                                         //print("hello state");
-  //                                         currentValue = currentValue - 10;
-  //                                         _controller.text = (currentValue > 100
-  //                                                 ? currentValue
-  //                                                 : 100)
-  //                                             .toString();
-  //                                         // decrementing value
-  //                                       });
-  //                                     },
-  //                                   ),
-  //                                 ],
-  //                               ),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 )),
-  //             actions: <Widget>[
-  //               new FlatButton(
-  //                 child: Text(
-  //                   'إلغاء',
-  //                   style: TextStyle(fontSize: 15.3),
-  //                   textAlign: TextAlign.left,
-  //                 ),
-  //                 textColor: Colors.deepPurple[900],
-  //                 onPressed: () {
-  //                   Navigator.of(context, rootNavigator: true).pop('dialog');
-  //                 },
-  //               ),
-  //               SizedBox(
-  //                 width: 45,
-  //               ),
-  //               new FlatButton(
-  //                 child: Text(
-  //                   'حفظ          ',
-  //                   style: TextStyle(fontSize: 15.3),
-  //                   textAlign: TextAlign.left,
-  //                 ),
-  //                 textColor: Colors.deepPurple[900],
-  //                 onPressed: () async {
-  //                    var baseDialog = SignleBaseAlertDialog(
-  //                                     title: "",
-  //                                     content: "تم تعديل سعر التدريب بنجاح",
-  //                                     yesOnPressed: () async {
-  //                                       Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
-  //                                       Navigator.of(context, rootNavigator: true).pop('dialog');
-  //                                     },
-  //                                     yes: "إغلاق",
-  //                                   );
-  //                                   showDialog(context: context,builder: (BuildContext context) =>baseDialog);
-  //                   await FirebaseFirestore.instance
-  //                       .collection('Coach')
-  //                       .doc(widget.id)
-  //                       .update({'Price': _controller.text});
-                   
-  //                 },
-  //               ),
-  //             ],
-  //           );
-  //         });
-  //       });
-  // }
-
+  
     Future<void> showInformationDialig3(
       BuildContext context, DocumentSnapshot document) async {
     return await showDialog(

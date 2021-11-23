@@ -193,14 +193,14 @@ int _age = 0;
                                 yes: "حفظ",
                                 no: "إلغاء",
                                 validator: (value) {
-                                  if (value!.isEmpty) {
+                                  if (value!.trim().isEmpty) {
                                     return '                            الرجاء إدخال الأسم الأول          ';
-                                  } else if (value!.length == 1) {
+                                  } else if (value!.trim().length == 1) {
                                     return '                   الرجاء إدخال الأسم الأول بشكل صحيح  ';
                                   } else if (!RegExp(r"^[a-zA-Z]+$")
-                                          .hasMatch(value) &&
+                                          .hasMatch(value.trim()) &&
                                       !RegExp(r'^[\u0621-\u064A]+$')
-                                          .hasMatch(value)) {
+                                          .hasMatch(value.trim())) {
                                     return '         الرجاء إدخال اسم أول صحيح بدون رموز خاصة وأرقام';
                                   }
                                 },
@@ -244,18 +244,18 @@ int _age = 0;
                                 content: 'أدخل الاسم الجديد',
                                 onChange: (value) {
                                   setState(() {
-                                    Lname = value;
+                                    Lname = value.trim();
                                   });
                                 },
                                 validator: (value) {
-                                  if (value!.isEmpty) {
+                                  if (value!.trim().isEmpty) {
                                     return '                            الرجاء إدخال الأسم الأخير          ';
-                                  } else if (value!.length == 1) {
+                                  } else if (value!.trim().length == 1) {
                                     return '                   الرجاء إدخال الأسم الأخير بشكل صحيح  ';
                                   } else if (!RegExp(r"^[a-zA-Z]+$")
-                                          .hasMatch(value) &&
+                                          .hasMatch(value.trim()) &&
                                       !RegExp(r'^[\u0621-\u064A]+$')
-                                          .hasMatch(value)) {
+                                          .hasMatch(value.trim())) {
                                     return '        الرجاء إدخال اسم أخير صحيح بدون رموز خاصة وأرقام';
                                   }
                                 },
@@ -402,7 +402,7 @@ int _age = 0;
                                     FirebaseAuth auth = FirebaseAuth.instance;
                                     User? user13 = auth.currentUser;
                                     user13!
-                                        .updateEmail(emailnew)
+                                        .updateEmail(emailnew.trim())
                                         .then(
                                           (value) => message = 'Success',
                                         )
@@ -536,11 +536,11 @@ int _age = 0;
                                 },
                                 validator: (value) {
                                   RegExp regExp = new RegExp(r"^\+?0[0-9]{9}$");
-                                  if (value.length == 0) {
+                                  if (value.trim().length == 0) {
                                     return '                              الرجاء إدخال رقم الجوال';
-                                  } else if (value.length < 10) {
+                                  } else if (value.trim().length < 10) {
                                     return '                  الرجاء إدخال رقم جوال صحيح';
-                                  } else if (!regExp.hasMatch(value)) {
+                                  } else if (!regExp.hasMatch(value.trim())) {
                                     return '                  الرجاء إدخال رقم جوال يبدأ بـ 05';
                                   }
                                   return null;
@@ -611,7 +611,7 @@ int _age = 0;
                                 content: 'أدخل الوصف الجديد',
                                 onChange: (value) {
                                   setState(() {
-                                    description = value;
+                                    description = value.trim();
                                   });
                                 },
                                 yesOnPressed: () async {
@@ -628,7 +628,7 @@ int _age = 0;
                                   await FirebaseFirestore.instance
                                       .collection('Coach')
                                       .doc(widget.id)
-                                      .update({'Discerption': description});
+                                      .update({'Discerption': description.trim()});
 
                                  
                                 },
