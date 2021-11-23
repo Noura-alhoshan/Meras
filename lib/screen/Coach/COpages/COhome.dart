@@ -24,17 +24,17 @@ class COhome extends StatefulWidget {
 }
 
 class _HomePageState extends State<COhome> {
-   late String nnaame = '';
+  late String nnaame = '';
   void initState() {
     super.initState();
-   getn();
+    getn();
   }
-getn(){
 
- final FirebaseAuth auth = FirebaseAuth.instance;
+  getn() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
-FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection("Coach")
         .doc(uid)
         .get()
@@ -43,10 +43,10 @@ FirebaseFirestore.instance
       //print(ddd);
       setState(() {
         nnaame = querySnapshot.data()!['Fname'];
-   
-      }); });
+      });
+    });
+  }
 
-}
   @override
   Widget build(
     BuildContext context,
@@ -69,15 +69,13 @@ FirebaseFirestore.instance
           child: Column(
             children: <Widget>[
               SizedBox(height: 50.0),
-              Text(
-                        'أهلًا بك $nnaame  ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: kPrimaryColor,
-                        )),
-                
+              Text('أهلًا بك $nnaame  ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: kPrimaryColor,
+                  )),
 
               SizedBox(height: 20.0),
               Text(
@@ -170,7 +168,7 @@ FirebaseFirestore.instance
                     )),
               ),
               // SizedBox(height: 1),
-            
+
               // SizedBox(height: 40.0),
               // SizedBox(height: 40.0),
               // SizedBox(height: 40.0),
@@ -188,7 +186,10 @@ FirebaseFirestore.instance
               //   iconSize: 350,
               //   onPressed: () {},
               // ),
-              SizedBox(height: 40.0),
+              SizedBox(height: 50.0),
+              SizedBox(height: 50.0),
+              SizedBox(height: 50.0),
+              SizedBox(height: 50.0),
               SizedBox(height: 50.0),
               SizedBox(height: 50.0),
             ],
