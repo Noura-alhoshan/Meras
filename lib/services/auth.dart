@@ -177,7 +177,18 @@ class AuthService {
   }
 
 
+Future checkPass(String email , String password) async {
+   try 
+    {
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      print('this is check method');
+      return result.user;
   
-
+    }
+     catch (error) 
+    {
+      return null;
+    }
+}
 
 }

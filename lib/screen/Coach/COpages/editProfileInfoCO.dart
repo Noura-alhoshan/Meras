@@ -55,6 +55,7 @@ class _EditProfileInfoCoState extends State<EditProfileInfoCo> {
   String neighborhood = 'الرمال وماحولها';
   String description = '';
   String price = '';
+  String emailnew='';
 
 int _age = 0;
   String _message = 'cool';
@@ -350,18 +351,91 @@ int _age = 0;
                           borderSide:
                               BorderSide(color: Colors.white, width: 1)),
                     ),
+
+                   // #######################################################################
                     Card(
                       child: ListTile(
                         title: Text(
                           document['Email'],
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                            color: Colors.grey,
+                            //color: Colors.grey,
                           ),
                         ),
                         subtitle: Text(
                           'البريد الالكتروني',
                           textAlign: TextAlign.right,
+                        ),
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.black54,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
+                            onPressed: () async {
+
+                              var baseDialog = EditAlertDialog(
+                                Inittext: document['Email'],
+                                title: 'تعديل البريد الإلكتروني',
+                                content: 'أدخل البريد الإلكتروني الجديد',
+                                onChange: (value) {
+                                  setState(() {
+                                    emailnew = value;
+                                  });
+                                },
+                                yesOnPressed: () async {
+                                  var baseDialog = SignleBaseAlertDialog(
+                                      title: "",
+                                      content: " تم تعديل البريد الإلكتروني بنجاح \n الرجاء الدخول على الرابط المرسل لبريدك الإلكتروني الجديد لإثبات ملكية الحساب",
+                                      yesOnPressed: () async {
+                                        Navigator.of(context, rootNavigator: true).pop('dialog'); //////////////////////////////////??????
+                                        Navigator.of(context, rootNavigator: true).pop('dialog');
+                                      },
+                                      yes: "إغلاق",
+                                    );
+                                    showDialog(context: context,builder: (BuildContext context) =>baseDialog);
+                                     
+
+                                     /////////////////////////////////////////////////////////
+                                     var message;
+                                    FirebaseAuth auth = FirebaseAuth.instance;
+                                    User? user13 = auth.currentUser;
+                                    user13!
+                                        .updateEmail(emailnew)
+                                        .then(
+                                          (value) => message = 'Success',
+                                        )
+                                        .catchError((onError) => message = 'error');
+                                        print(message);
+                                  await FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(widget.id)
+                                      .update({'Email': emailnew});                             
+                                },
+                                noOnPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop('dialog');
+                                },
+                                yes: "حفظ",
+                                no: "إلغاء",
+                               validator: (val) {
+                    RegExp regex = new RegExp(pattern);
+                    
+                    if (val.isEmpty) {
+                    return '               الرجاء إدخال البريد الإلكتروني';
+                    } else if (!regex.hasMatch(val)) {
+                      return '               الرجاء إدخال بريد الكتروني صالح';
+                    } else
+                      return null;
+                  },
+                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      baseDialog);                             
+                            },
+                          ),
                         ),
                       ),
                       elevation: 4,
@@ -371,6 +445,7 @@ int _age = 0;
                           borderSide:
                               BorderSide(color: Colors.white, width: 1)),
                     ),
+                    //##############################################################################
                     Card(
                       child: ListTile(
                         title: Text(
