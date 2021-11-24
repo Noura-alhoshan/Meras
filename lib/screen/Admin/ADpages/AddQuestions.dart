@@ -19,18 +19,16 @@ import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:random_string/random_string.dart';
 
-import 'AddQuestions.dart';
-
-class AddTest extends StatefulWidget {
+class AddQuestions extends StatefulWidget {
   // final String uid;
   // AddGuidlines({required this.uid});
   //const AddGuidlines({ Key? key }) : super(key: key);
 
   @override
-  _AddTest createState() => _AddTest();
+  _AddQuestions createState() => _AddQuestions();
 }
 
-class _AddTest extends State<AddTest> {
+class _AddQuestions extends State<AddQuestions> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   TextEditingController _controller = TextEditingController();
@@ -41,7 +39,6 @@ class _AddTest extends State<AddTest> {
 
   final _formKey = GlobalKey<FormState>();
   String error = '';
-  String title = '';
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +47,7 @@ class _AddTest extends State<AddTest> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Center(child: Text('إضافة اختبار قصير  ')),
+          title: Center(child: Text(' ')),
           backgroundColor: Colors.deepPurple[100],
         ),
         body: SingleChildScrollView(
@@ -60,22 +57,22 @@ class _AddTest extends State<AddTest> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 40.0),
-                  SizedBox(
-                      height: Get.height * 0.95,
-                      child: StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection('Tests')
-                              .orderBy('createdAt', descending: true)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) return Loading();
+                  // SizedBox(
+                  //     height: Get.height * 0.95,
+                  //     child: StreamBuilder<QuerySnapshot>(
+                  //         stream: FirebaseFirestore.instance
+                  //             .collection('Tests')
+                  //             .orderBy('createdAt', descending: true)
+                  //             .snapshots(),
+                  //         builder: (context, snapshot) {
+                  //           if (!snapshot.hasData) return Loading();
 
-                            return ListView.builder(
-                              itemCount: snapshot.data!.docs.length,
-                              itemBuilder: (context, index) => _buildListItem(
-                                  context, (snapshot.data!).docs[index]),
-                            );
-                          })),
+                  //           return ListView.builder(
+                  //             itemCount: snapshot.data!.docs.length,
+                  //             itemBuilder: (context, index) => _buildListItem(
+                  //                 context, (snapshot.data!).docs[index]),
+                  //           );
+                  //         })),
                 ],
               ),
             ),
@@ -89,14 +86,52 @@ class _AddTest extends State<AddTest> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: Text('إضافة عنوان ', textAlign: TextAlign.center),
+                title: Text('محتوى السؤال', textAlign: TextAlign.center),
                 content: SizedBox(
-                    height: 150,
+                    height: 500,
                     child: Column(
                       children: [
                         TextFormField(
                           controller: testNameController,
-                          decoration: InputDecoration(hintText: 'العنوان'),
+                          decoration: InputDecoration(
+                            hintText: 'السؤال',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: testNameController,
+                          decoration: InputDecoration(
+                            hintText: 'الإجابة الأولى ',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: testNameController,
+                          decoration: InputDecoration(
+                            hintText: 'الإجابة الثانية ',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: testNameController,
+                          decoration: InputDecoration(
+                            hintText: 'الإجابة الثالثة ',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: testNameController,
+                          decoration: InputDecoration(
+                            hintText: 'الإجابة الرابعة ',
+                          ),
                         )
                       ],
                     )),
@@ -111,7 +146,7 @@ class _AddTest extends State<AddTest> {
                         if (testNameController.text.length < 1) {
                           Get.showSnackbar(GetBar(
                             title: 'Error',
-                            message: 'Please enter valid test name',
+                            message: 'Please enter valid name',
                             duration: Duration(seconds: 1),
                           ));
                         } else {
@@ -153,9 +188,7 @@ class _AddTest extends State<AddTest> {
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide(color: Colors.white, width: 1)),
           child: ListTile(
-            onTap: () {
-              Get.to(AddQuestions());
-            },
+            onTap: () {},
             title: Text(doc.data()['title']),
           )),
     );
