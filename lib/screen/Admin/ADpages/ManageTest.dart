@@ -22,7 +22,7 @@ class _ManageTest extends State<ManageTest> {
         extendBodyBehindAppBar: true,
         //drawer: NavDraweradmin(),
         appBar: AppBar(
-          title: Text('        إدارةالاختبار القصير'),
+          title: Center(child: Text('إدارة الاختبار القصير')),
           backgroundColor: Colors.deepPurple[100],
         ),
         body: Background(

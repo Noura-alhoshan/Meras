@@ -19,7 +19,7 @@ import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:random_string/random_string.dart';
 
-import 'AddQuestions.dart';
+import 'Questions.dart';
 
 class AddTest extends StatefulWidget {
   // final String uid;
@@ -50,7 +50,7 @@ class _AddTest extends State<AddTest> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Center(child: Text('إضافة اختبار قصير  ')),
+          title: Center(child: Text('الاختبارات المضافة')),
           backgroundColor: Colors.deepPurple[100],
         ),
         body: SingleChildScrollView(
@@ -89,14 +89,25 @@ class _AddTest extends State<AddTest> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(32.0))),
                 title: Text('إضافة عنوان ', textAlign: TextAlign.center),
                 content: SizedBox(
                     height: 150,
                     child: Column(
                       children: [
                         TextFormField(
+                          cursorColor: kPrimaryColor,
                           controller: testNameController,
-                          decoration: InputDecoration(hintText: 'العنوان'),
+                          textAlign: TextAlign.right,
+                          decoration: InputDecoration(
+                              hintText: 'أدخل العنوان',
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: kPrimaryColor)),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: kPrimaryColor))),
+                          // Colors.deepPurple[900]!
                         )
                       ],
                     )),
@@ -154,9 +165,18 @@ class _AddTest extends State<AddTest> {
               borderSide: BorderSide(color: Colors.white, width: 1)),
           child: ListTile(
             onTap: () {
-              Get.to(AddQuestions());
+              Get.to(Questions(testId: doc.id));
             },
-            title: Text(doc.data()['title']),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  doc.data()['title'],
+                  // style: TextStyle(fontSize: 18),
+                ),
+              ],
+            ),
           )),
     );
   }
