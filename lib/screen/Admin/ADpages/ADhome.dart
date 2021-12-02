@@ -8,7 +8,7 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/authenticate/background.dart';
 
 import '../../../constants.dart';
-import 'ManageTest.dart';
+//import 'ManageTest.dart';
 
 class ADhome extends StatelessWidget {
   @override
@@ -91,8 +91,8 @@ class ADhome extends StatelessWidget {
                   child: Center(
                     child: FlatButton(
                       onPressed: () => {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ManageTest()))
+                        //   Navigator.of(context).push(MaterialPageRoute(
+                        //      builder: (context) => ManageTest()))
                       },
                       padding: EdgeInsets.all(5.0),
                       child: Center(
