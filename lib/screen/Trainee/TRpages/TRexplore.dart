@@ -252,7 +252,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
                           });
                         },
                       ), */
-
+//ss
                     ///////////////////// start from here
                     Expanded(
                       child: Container(
@@ -275,7 +275,7 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
   }
 
   Widget buildTripCard(BuildContext context, DocumentSnapshot document) {
-    if (help == 'A') print("ITS A");
+    if (help == 'A') print("ITS A A");
 
     if (help == 'B') print("ITS B");
     if (help == 'C') print("ITS C");
