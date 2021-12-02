@@ -39,6 +39,11 @@ class _HomePageState extends State<COhome> {
         .doc(uid)
         .get()
         .then((querySnapshot) async {
+          
+        FirebaseFirestore.instance
+                                      .collection('Coach')
+                                      .doc(uid)
+                                      .update({'Email': user.email});    
       //String ddd = querySnapshot.data()!['Fname'];
       //print(ddd);
       setState(() {
