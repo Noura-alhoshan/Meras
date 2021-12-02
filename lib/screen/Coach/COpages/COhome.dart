@@ -44,8 +44,7 @@ class _HomePageState extends State<COhome> {
                                       .collection('Coach')
                                       .doc(uid)
                                       .update({'Email': user.email});    
-      //String ddd = querySnapshot.data()!['Fname'];
-      //print(ddd);
+    
       setState(() {
         nnaame = querySnapshot.data()!['Fname'];
       });

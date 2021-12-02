@@ -13,6 +13,8 @@ import 'package:meras/screen/Trainee/TRpages/SendRequest.dart';
 import 'package:meras/screen/Trainee/TRpages/TRnotification.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
+import 'package:meras/services/chat2.dart';
+import 'package:meras/services/chatP.dart';
 import 'screen/Admin/ADcategory.dart';
 import 'screen/wrapper.dart';
 import 'package:meras/services/auth.dart';
@@ -20,6 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
 import 'package:get_storage/get_storage.dart';
+
+import 'services/rooms.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //check the pull
@@ -76,7 +80,8 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: SignIn()//TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+        home: RoomsPage(),//ChatPage(room:) 
+        //Chat2(projectId: "111111111", channleId: "22222222")//SignIn()//TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
         //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
         ///wrapper

@@ -14,6 +14,7 @@ import 'package:meras/screen/Trainee/TRpages/BackgroundC2.dart';
 //import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
 import 'package:meras/screen/home/navDrawer.dart';
+import 'package:meras/services/rooms.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
@@ -169,7 +170,13 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                       textAlign: TextAlign.right,
                     ),
                     onPressed: () {
-                      launch("tel://$ph");
+                      //launch("tel://$ph");
+                      
+                       Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RoomsPage()),
+                              );
                     }),
                 Align(
                   alignment: Alignment.centerRight,
