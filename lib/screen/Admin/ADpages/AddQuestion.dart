@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:meras/components/rounded_button.dart';
 import 'package:meras/constants.dart';
@@ -7,15 +8,20 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 
 class AddQuestion extends StatelessWidget {
   final String testId;
+  final bool isEditPage;
+  final String questionId;
 
-  AddQuestion({required this.testId});
+  AddQuestion(
+      {required this.testId,
+      required this.isEditPage,
+      required this.questionId});
   final controller = Get.put(AddQuestionController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(child: Text('إضافة سؤال')),
+        title: Center(child: Text(isEditPage ? 'تعديل السؤال' : 'إضافة سؤال')),
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(
@@ -27,11 +33,19 @@ class AddQuestion extends StatelessWidget {
                     shrinkWrap: true,
                     physics: ScrollPhysics(),
                     children: [
+                      SizedBox(
+                        height: 25,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           cursorColor: kPrimaryColor,
                           controller: controller.testNameController,
+                          maxLines: null,
+                          textDirection: TextDirection.rtl,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(150)
+                          ],
                           textAlign: TextAlign.right,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -48,7 +62,7 @@ class AddQuestion extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 45,
+                        height: 15,
                       ),
                       SizedBox(
                         width: 150,
@@ -67,7 +81,7 @@ class AddQuestion extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 45,
+                        height: 10,
                       ),
                       if (controller.isTnFType.value)
                         SizedBox(
@@ -76,23 +90,6 @@ class AddQuestion extends StatelessWidget {
                           child: Obx(() => Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SizedBox(
-                                    width: 120,
-                                    height: 50,
-                                    child: RadioListTile(
-                                      value: 0,
-                                      activeColor: kPrimaryColor,
-                                      controlAffinity:
-                                          ListTileControlAffinity.trailing,
-                                      groupValue:
-                                          controller.selectedTnFAnswer.value,
-                                      onChanged: (value) {
-                                        controller.selectedTnFAnswer.value =
-                                            value == 0 ? 0 : 1;
-                                      },
-                                      title: Text('صح'),
-                                    ),
-                                  ),
                                   SizedBox(
                                     width: 130,
                                     height: 50,
@@ -112,13 +109,30 @@ class AddQuestion extends StatelessWidget {
                                               TextStyle(color: Colors.black)),
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 120,
+                                    height: 50,
+                                    child: RadioListTile(
+                                      value: 0,
+                                      activeColor: kPrimaryColor,
+                                      controlAffinity:
+                                          ListTileControlAffinity.trailing,
+                                      groupValue:
+                                          controller.selectedTnFAnswer.value,
+                                      onChanged: (value) {
+                                        controller.selectedTnFAnswer.value =
+                                            value == 0 ? 0 : 1;
+                                      },
+                                      title: Text('صح'),
+                                    ),
+                                  ),
                                 ],
                               )),
                         ),
                       if (!controller.isTnFType.value)
                         SizedBox(
                           width: 270,
-                          height: 50,
+                          height: 70,
                           child: RadioListTile(
                             value: 0,
                             activeColor: kPrimaryColor,
@@ -136,6 +150,11 @@ class AddQuestion extends StatelessWidget {
                             title: TextFormField(
                               cursorColor: kPrimaryColor,
                               controller: controller.answerOneController,
+                              maxLines: null,
+                              textDirection: TextDirection.rtl,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(150)
+                              ],
                               textAlign: TextAlign.right,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -160,7 +179,7 @@ class AddQuestion extends StatelessWidget {
                       if (!controller.isTnFType.value)
                         SizedBox(
                           width: 270,
-                          height: 50,
+                          height: 70,
                           child: RadioListTile(
                             value: 1,
                             activeColor: kPrimaryColor,
@@ -178,6 +197,11 @@ class AddQuestion extends StatelessWidget {
                             title: TextFormField(
                               cursorColor: kPrimaryColor,
                               controller: controller.answerTwoController,
+                              maxLines: null,
+                              textDirection: TextDirection.rtl,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(150)
+                              ],
                               textAlign: TextAlign.right,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -202,7 +226,7 @@ class AddQuestion extends StatelessWidget {
                       if (!controller.isTnFType.value)
                         SizedBox(
                           width: 270,
-                          height: 50,
+                          height: 70,
                           child: RadioListTile(
                             value: 2,
                             activeColor: kPrimaryColor,
@@ -220,6 +244,11 @@ class AddQuestion extends StatelessWidget {
                             title: TextFormField(
                               cursorColor: kPrimaryColor,
                               controller: controller.answerThreeController,
+                              maxLines: null,
+                              textDirection: TextDirection.rtl,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(150)
+                              ],
                               textAlign: TextAlign.right,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -244,7 +273,7 @@ class AddQuestion extends StatelessWidget {
                       if (!controller.isTnFType.value)
                         SizedBox(
                           width: 270,
-                          height: 50,
+                          height: 70,
                           child: RadioListTile(
                             value: 3,
                             activeColor: kPrimaryColor,
@@ -262,6 +291,11 @@ class AddQuestion extends StatelessWidget {
                             title: TextFormField(
                               cursorColor: kPrimaryColor,
                               controller: controller.answerFourController,
+                              maxLines: null,
+                              textDirection: TextDirection.rtl,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(150)
+                              ],
                               textAlign: TextAlign.right,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -292,11 +326,17 @@ class AddQuestion extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 75.0),
                         child: RoundedButton(
-                            text: 'إضافة',
+                            text: isEditPage ? 'تعديل' : 'إضافة',
                             press: () async {
                               if (controller.formKey.currentState!.validate() &&
                                   controller.validateForm()) {
-                                await controller.addQuestion(testId);
+                                if (isEditPage) {
+                                  await controller.addQuestion(
+                                      testId, isEditPage, context, questionId);
+                                } else {
+                                  await controller.addQuestion(
+                                      testId, isEditPage, context);
+                                }
                               }
                             }),
                       ),

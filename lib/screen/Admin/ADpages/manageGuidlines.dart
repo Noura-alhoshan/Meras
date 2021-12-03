@@ -52,6 +52,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          SizedBox(width: 60),
                           Text(
                             "إشارات السير المضافة   ",
                             style: TextStyle(
@@ -59,6 +60,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500),
                           ),
+                          SizedBox(width: 20),
                           Icon(
                             Icons.check,
                             color: kPrimaryColor,
@@ -92,6 +94,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          SizedBox(width: 60),
                           Text(
                             "إضافة إشارة سير ",
                             style: TextStyle(
@@ -99,6 +102,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500),
                           ),
+                          SizedBox(width: 40),
                           Icon(
                             Icons.add,
                             color: kPrimaryColor,
@@ -132,6 +136,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          SizedBox(width: 5),
                           Text(
                             "تعديل معلومات إشارات السير    ",
                             style: TextStyle(
@@ -139,6 +144,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500),
                           ),
+                          SizedBox(width: 15),
                           Icon(
                             Icons.border_color,
                             color: kPrimaryColor,
@@ -172,6 +178,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          SizedBox(width: 60),
                           Text(
                             "حذف إشارة سير  ",
                             style: TextStyle(
@@ -179,6 +186,7 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500),
                           ),
+                          SizedBox(width: 40),
                           Icon(
                             Icons.clear,
                             color: kPrimaryColor,
@@ -195,4 +203,3 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
         ));
   }
 }
-

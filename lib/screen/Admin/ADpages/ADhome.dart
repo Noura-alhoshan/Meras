@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/components/adminRounded_button.dart';
+import 'package:meras/screen/Admin/ADpages/Test.dart';
 import 'package:meras/screen/Admin/ADpages/manageGuidlines.dart';
 import 'package:meras/screen/Admin/services/navDraweradmin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +9,6 @@ import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/authenticate/background.dart';
 
 import '../../../constants.dart';
-import 'ManageTest.dart';
 
 class ADhome extends StatelessWidget {
   @override
@@ -58,13 +58,15 @@ class ADhome extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            SizedBox(width: 50),
                             Text(
-                              "إدارة معلومات إشارات السير     ",
+                              "إدارة معلومات إشارات السير  ",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 19,
                                   fontWeight: FontWeight.w500),
                             ),
+                            SizedBox(width: 30),
                             Icon(
                               Icons.directions_car_rounded,
                               color: kPrimaryColor,
@@ -91,8 +93,8 @@ class ADhome extends StatelessWidget {
                   child: Center(
                     child: FlatButton(
                       onPressed: () => {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ManageTest()))
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Test()))
                       },
                       padding: EdgeInsets.all(5.0),
                       child: Center(
@@ -100,6 +102,7 @@ class ADhome extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            SizedBox(width: 60),
                             Text(
                               "إدارة الاختبار القصير  ",
                               style: TextStyle(
@@ -107,6 +110,7 @@ class ADhome extends StatelessWidget {
                                   fontSize: 19,
                                   fontWeight: FontWeight.w500),
                             ),
+                            SizedBox(width: 45),
                             Icon(
                               Icons.text_snippet,
                               color: kPrimaryColor,
