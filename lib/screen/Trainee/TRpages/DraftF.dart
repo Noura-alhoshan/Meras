@@ -10,6 +10,10 @@ import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
+import 'package:meras/screen/Chat/chatWidget.dart';
+import 'package:meras/screen/Chat/screens/chat.dart';
+import 'package:meras/screen/Chat/screens/dashboard_screen.dart';
+import 'package:meras/screen/Chat/screens/login_screen.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundC2.dart';
 //import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
@@ -79,6 +83,7 @@ class _CoachDate extends State<CoachDate> {
 // 1. show the coach info
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
+  print("daaay");
   final String ph = document['Phone Number'];
   return BackgroundA(
     child: Container(
@@ -171,13 +176,17 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     ),
                     onPressed: () {
                       //launch("tel://$ph");
-                      
-                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RoomsPage()),
-                              );
-                    }),
+                      Navigator.of(context).push( MaterialPageRoute(
+              builder: (context) => 
+              Chat(currentUserId: document['ID'], peerAvatar: 'mmm', peerId: '68979m', peerName: 'sarah')
+                  //(currentUserId: document['ID'])));
+              // Navigator.of(context).push( MaterialPageRoute(
+              // builder: (context) =>
+              //LoginScreen()));
+                        //DashboardScreen(,);
+                              
+                       )); }),
+                    
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(':للتواصل',
