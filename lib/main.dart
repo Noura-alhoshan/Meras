@@ -80,8 +80,8 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: RoomsPage(),//ChatPage(room:) 
-        //Chat2(projectId: "111111111", channleId: "22222222")//SignIn()//TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+        home: SignIn(),//RoomsPage(),//ChatPage(room:) 
+        //Chat2(projectId: "111111111", channleId: "22222222")////TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
         //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 
         ///wrapper
