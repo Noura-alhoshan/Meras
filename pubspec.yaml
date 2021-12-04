@@ -63,6 +63,7 @@ dependencies:
   stripe_payment: ^1.1.4
   fluttericon: ^2.0.0
   http_auth: ^1.0.1
+  font_awesome_flutter: ^9.2.0
 
 dev_dependencies:
   flutter_test:

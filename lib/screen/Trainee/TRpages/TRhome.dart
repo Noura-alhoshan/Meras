@@ -8,6 +8,8 @@ import 'package:meras/controllers/MyUser.dart';
 import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/Trainee/TRpages/TRny.dart';
 import 'package:meras/screen/Trainee/quiz/welcome_screen.dart';
+import 'package:meras/screen/Trainee/quiz2/categories.dart';
+import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -146,7 +148,7 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(TRguidelines());
+                      Get.to(WelcomeScreen());
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
@@ -177,7 +179,9 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(WelcomeScreen());
+                      Get.to(
+                        CategoryPage(category: categories.first),
+                      );
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
