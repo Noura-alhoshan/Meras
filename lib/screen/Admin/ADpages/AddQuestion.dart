@@ -21,7 +21,8 @@ class AddQuestion extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(child: Text(isEditPage ? 'تعديل السؤال' : 'إضافة سؤال')),
+        title: Text(isEditPage ? 'تعديل السؤال' : 'إضافة سؤال'),
+        centerTitle: true,
         backgroundColor: Colors.deepPurple[100],
       ),
       body: SingleChildScrollView(

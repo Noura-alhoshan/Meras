@@ -17,7 +17,8 @@ class Test extends StatelessWidget {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Center(child: Text('الاختبارات المضافة')),
+          title: Text('الاختبارات المضافة'),
+          centerTitle: true,
           backgroundColor: Colors.deepPurple[100],
         ),
         body: SingleChildScrollView(

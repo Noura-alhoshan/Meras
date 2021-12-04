@@ -17,7 +17,8 @@ class ADhome extends StatelessWidget {
         extendBodyBehindAppBar: true,
         drawer: NavDraweradmin(),
         appBar: AppBar(
-          title: Center(child: Text('الصفحة الرئيسية')),
+          title: Text('الصفحة الرئيسية'),
+          centerTitle: true,
           backgroundColor: Colors.deepPurple[100],
         ),
         body: SingleChildScrollView(

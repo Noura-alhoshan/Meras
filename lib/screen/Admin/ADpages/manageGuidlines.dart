@@ -21,7 +21,8 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
         extendBodyBehindAppBar: true,
         //drawer: NavDraweradmin(),
         appBar: AppBar(
-          title: Text('        إدارة معلومات إشارات السير'),
+          title: Text('إدارة معلومات إشارات السير'),
+          centerTitle: true,
           backgroundColor: Colors.deepPurple[100],
         ),
         body: Background(

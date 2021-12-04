@@ -66,6 +66,14 @@ class TestController extends GetxController {
     showDialog(context: context, builder: (BuildContext context) => baseDialog);
   }
 
+  Future<bool> checkIfTestExists(String testName) async {
+    return await FirebaseFirestore.instance
+        .collection('Tests')
+        .where('title', isEqualTo: testName)
+        .get()
+        .then((snapshot) => snapshot.docs.isNotEmpty ? true : false);
+  }
+
   Future<void>? addTest(BuildContext context, bool isEditPage,
       [String? testId]) async {
     if (!isEditPage) clearForm();
@@ -127,17 +135,21 @@ class TestController extends GetxController {
             textColor: Colors.deepPurple[900],
             onPressed: () async {
               if (formKey.currentState!.validate()) {
+                bool isError = false;
                 final String id = randomAlpha(20);
                 if (!isEditPage) {
-                  await FirebaseFirestore.instance
-                      .collection('Tests')
-                      .doc(id)
-                      .set({
-                    'id': id,
-                    'title': testNameController.text,
-                    'numberOfQuestions': 0,
-                    'createdAt': FieldValue.serverTimestamp(),
-                  });
+                  if (await checkIfTestExists(testNameController.text)) {
+                    isError = true;
+                  } else
+                    await FirebaseFirestore.instance
+                        .collection('Tests')
+                        .doc(id)
+                        .set({
+                      'id': id,
+                      'title': testNameController.text,
+                      'numberOfQuestions': 0,
+                      'createdAt': FieldValue.serverTimestamp(),
+                    });
                 } else {
                   await FirebaseFirestore.instance
                       .collection('Tests')
@@ -152,7 +164,9 @@ class TestController extends GetxController {
                   title: "",
                   content: isEditPage
                       ? 'تم تعديل عنوان الاختبار بنجاح'
-                      : 'تم إضافة الاختبار بنجاح',
+                      : isError
+                          ? 'يوجد اختبار بهذا العنوان'
+                          : 'تم إضافة الاختبار بنجاح',
                   yesOnPressed: () async {
                     Get.back();
                   },

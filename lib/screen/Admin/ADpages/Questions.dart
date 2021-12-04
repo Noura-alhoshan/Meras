@@ -20,7 +20,8 @@ class Questions extends StatelessWidget {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Center(child: Text('الأسئلة المضافة')),
+          title: Text('الأسئلة المضافة'),
+          centerTitle: true,
           backgroundColor: Colors.deepPurple[100],
         ),
         body: SingleChildScrollView(
@@ -52,8 +53,11 @@ class Questions extends StatelessWidget {
                                 return numberOfQuestions < 0
                                     ? Container()
                                     : Container(
-                                        margin: const EdgeInsets.only(top: 70),
+                                        margin: const EdgeInsets.only(top: 55),
                                         child: ListTile(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 13),
                                           tileColor: numberOfQuestions ==
                                                   questionsLimit
                                               ? Colors.green[200]
