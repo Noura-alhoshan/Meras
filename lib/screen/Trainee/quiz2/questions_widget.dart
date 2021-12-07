@@ -41,25 +41,30 @@ class QuestionsWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 32),
-
-            //   Image.network(
-            //      question.text,
-            //      height: 100.0,
-            //      width: 60.0,
-            //    ),
-            //
-            //
-            Text(
-              question.text,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            // const SizedBox(height: 32),
+            Container(
+              alignment: Alignment.center,
+              child: Image.network(
+                question.text,
+                height: 120.0,
+                width: 120.0,
+              ),
             ),
+            //
+            //
+            //   Text(
+            //  question.text,
+            //    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            //  ),
             SizedBox(height: 8),
-            Text(
-              'Choose your answer from below',
-              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+            Container(
+              alignment: Alignment.topRight,
+              child: Text(
+                'أختر معنى الصورة الصحيح',
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
+              ),
             ),
-            SizedBox(height: 32),
+            SizedBox(height: 15),
             Expanded(
               child: OptionsWidget(
                 question: question,
@@ -85,7 +90,7 @@ class QuestionsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'السؤال التالي next',
+                        'السؤال التالي',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -113,7 +118,7 @@ class QuestionsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'إنهاء الأختبار end ',
+                        'إنهاء الأختبار ',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,

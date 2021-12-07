@@ -50,15 +50,20 @@ class OptionsWidget extends StatelessWidget {
   Widget buildAnswer(Option option) => Container(
         height: 50,
         child: Row(children: [
+          new Spacer(),
+          Text(
+            option.text,
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            '   ',
+            style: TextStyle(fontSize: 20),
+          ),
+          SizedBox(width: 12),
           Text(
             option.code,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
-          SizedBox(width: 12),
-          Text(
-            option.text,
-            style: TextStyle(fontSize: 20),
-          )
         ]),
       );
 

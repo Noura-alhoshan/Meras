@@ -52,6 +52,9 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     var showResults = [];
 
     if (_searchController.text != "") {
+      //var title = _allResults[0].toLowerCase();
+      // Trip.fromSnapshot(_allResults[0]).title;
+
       for (var tripSnapshot in _allResults) {
         var title = hope(tripSnapshot).toLowerCase();
 
