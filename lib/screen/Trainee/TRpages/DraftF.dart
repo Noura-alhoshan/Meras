@@ -43,13 +43,13 @@ class _CoachDate extends State<CoachDate> {
   late DateTime day;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+  
   //CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
 
   ///first null?
   @override
   Widget build(BuildContext context) {
-    // final User? user = auth.currentUser;
-    // final uid = user!.uid;
+  
     return Scaffold(
       extendBodyBehindAppBar: true,
       //drawer: NavDrawer(),
@@ -83,7 +83,10 @@ class _CoachDate extends State<CoachDate> {
 // 1. show the coach info
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
-  print("daaay");
+  //print("daaay");
+   FirebaseAuth auth2 = FirebaseAuth.instance;
+    User? truser= auth2.currentUser;
+    final tuid = truser!.uid;
   final String ph = document['Phone Number'];
   return BackgroundA(
     child: Container(
@@ -176,14 +179,10 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     ),
                     onPressed: () {
                       //launch("tel://$ph");
-                      Navigator.of(context).push( MaterialPageRoute(
+                      Navigator.of(context).push( MaterialPageRoute(/////////////////////////////////////////////temporary!!! delete it 
               builder: (context) => 
-              Chat(currentUserId: document['ID'], peerAvatar: 'mmm', peerId: '68979m', peerName: 'sarah')
-                  //(currentUserId: document['ID'])));
-              // Navigator.of(context).push( MaterialPageRoute(
-              // builder: (context) =>
-              //LoginScreen()));
-                        //DashboardScreen(,);
+              Chat(currentUserId: tuid, peerAvatar: 'https://sitechecker.pro/wp-content/uploads/2017/12/URL-meaning.png', peerId: document['ID'], peerName: 'نورة الحوشان')
+                 
                               
                        )); }),
                     

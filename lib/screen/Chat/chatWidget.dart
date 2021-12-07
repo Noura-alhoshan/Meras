@@ -13,13 +13,13 @@ import 'screens/chat.dart';
 import 'screens/zoomImage.dart';
 
 class ChatWidget {
-  static getFriendList() {
-    List<String> data = [
-      "h7127ZCne0OzSRwNXtktMPei0CH3",
-      "pdj9dlfEQMTUD6s954qiPeplEog2"
-    ];
-    return data;
-  }
+  // static getFriendList() {
+  //   List<String> data = [
+  //     "h7127ZCne0OzSRwNXtktMPei0CH3",
+  //     "pdj9dlfEQMTUD6s954qiPeplEog2"
+  //   ];
+  //   return data;
+  // }
 
 //static Future<Widget> userListStack(String currentUserId, BuildContext context)  async{
 //
@@ -34,7 +34,7 @@ class ChatWidget {
     //print('adgbasdg_userbuildItem');
 
     //print(currentUserId);
-    if (document.get('userId') == currentUserId) {
+    if (document.get('ID') == currentUserId) {
       return Container();
     } else {
       return Container(
@@ -58,7 +58,7 @@ class ChatWidget {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            'Nickname: ${document.get('nickname')}',
+                            'Fname: ${document.get('Fname')}',
                             style: TextStyle(color: primaryColor),
                           ),
                           alignment: Alignment.centerLeft,

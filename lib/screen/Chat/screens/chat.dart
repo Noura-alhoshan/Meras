@@ -65,7 +65,7 @@ class _ChatScreenState extends State<_ChatScreen> {
 
   String peerId;
   String peerAvatar;
-  String id='';
+  String id='';//trainee id
 
   var listMessage;
   late String groupChatId;
@@ -113,7 +113,7 @@ class _ChatScreenState extends State<_ChatScreen> {
     }
 
     FirebaseFirestore.instance
-        .collection('users')
+        .collection('trainees')
         .doc(id)
         .update({'chattingWith': peerId});
 

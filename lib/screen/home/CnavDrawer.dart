@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meras/screen/Chat/chatWidget.dart';
+import 'package:meras/screen/Chat/screens/chat.dart';
 import 'package:meras/screen/Coach/COpages/COprofile.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +112,24 @@ class _ViewLessonsInfoState extends State<CNavDrawer> {
               },
             ),
             Divider(),
+            ListTile(
+              title: Text(
+               "chat",
+                textAlign: TextAlign.end,
+              ),
+              trailing: Icon(
+                Icons.message_outlined,
+                color: Colors.orange,
+                size: 30.0,
+              ),
+              onTap:  () {
+                 Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => Chat(currentUserId: uid,
+              peerId: "b6J60NW8fEU2bVWoFETnRX0HyYE3",
+              peerAvatar: "https://sitechecker.pro/wp-content/uploads/2017/12/URL-meaning.png",
+              peerName: "sarah",) ));
+              }
+            ),
             ListTile(
               title: Text(
                 rate.toStringAsFixed(2),
