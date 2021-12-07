@@ -5,7 +5,7 @@ import 'package:meras/constants.dart';
 
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
-import 'package:meras/screen/Trainee/quiz4/quiz_play.dart';
+import 'package:meras/screen/Trainee/quiz2/test2.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/home/navDrawer.dart';
@@ -173,7 +173,7 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(QuizPlay("H7j0jVK05a3SeGvVyDHu"));
+                      Get.to(test2());
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
