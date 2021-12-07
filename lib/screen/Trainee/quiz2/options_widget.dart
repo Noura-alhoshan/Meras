@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
 import 'package:meras/screen/Trainee/quiz2/utils.dart';
-//import 'package:quiz_app_example/model/option.dart';
-///import 'package:quiz_app_example/model/question.dart';
-//import 'package:quiz_app_example/utils.dart';
 
 class OptionsWidget extends StatelessWidget {
   static int score = 0;
@@ -43,7 +40,7 @@ class OptionsWidget extends StatelessWidget {
         child: Column(
           children: [
             buildAnswer(option),
-            buildSolution(question.selectedOption, option),
+            // buildSolution(question.selectedOption, option),
           ],
         ),
       ),
@@ -65,16 +62,16 @@ class OptionsWidget extends StatelessWidget {
         ]),
       );
 
-  Widget buildSolution(Option solution, Option answer) {
-    if (solution == answer) {
-      return Text(
-        question.solution,
-        style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
-      );
-    } else {
-      return Container();
-    }
-  }
+  //Widget buildSolution(Option solution, Option answer) {
+  //   if (solution == answer) {
+  //   return Text(
+  ///       question.solution,
+  //     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+  //   );
+  //  } else {
+  //   return Container();
+  // }
+  /// }
 
   Color getColorForOption(Option option, Question question) {
     final isSelected = option == question.selectedOption;

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:meras/screen/Trainee/quiz2/category.dart';
+import 'package:get/get.dart';
+import 'package:meras/constants.dart';
+import 'package:meras/screen/Trainee/quiz2/Score.dart';
 import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
+import 'package:meras/screen/Trainee/quiz2/questions.dart';
 
 class QuestionsWidget extends StatelessWidget {
-  final Category category;
+  // final Category category;
   final PageController controller;
   final ValueChanged<int> onChangedPage;
   final ValueChanged<Option> onClickedOption;
 
   const QuestionsWidget({
     // Key key,
-    required this.category,
+    //  required this.category,
     required this.controller,
     required this.onChangedPage,
     required this.onClickedOption,
@@ -22,9 +25,9 @@ class QuestionsWidget extends StatelessWidget {
   Widget build(BuildContext context) => PageView.builder(
         onPageChanged: onChangedPage,
         controller: controller,
-        itemCount: category.questions.length,
+        itemCount: questions.length,
         itemBuilder: (context, index) {
-          final question = category.questions[index];
+          final question = questions[index];
 
           return buildQuestion(question: question);
         },
@@ -39,6 +42,14 @@ class QuestionsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 32),
+
+            //   Image.network(
+            //      question.text,
+            //      height: 100.0,
+            //      width: 60.0,
+            //    ),
+            //
+            //
             Text(
               question.text,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
@@ -55,6 +66,65 @@ class QuestionsWidget extends StatelessWidget {
                 onClickedOption: onClickedOption,
               ),
             ),
+
+            // /*
+            if (controller.page!.toInt() + 1 < questions.length)
+              TextButton(
+                  onPressed: () {
+                    controller.jumpToPage(controller.page!.toInt() + 1);
+                    //Get.to(ScoreScreen());
+                  },
+                  style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(Size(100, 50)),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(29))),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.deepPurple[50])),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'السؤال التالي next',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      //    SizedBox(width: 30),
+                      //  Image.asset('assets/icons/SteeringWheel1.png',
+                      //       width: 60, height: 60)
+                    ],
+                  ))
+            else
+              TextButton(
+                  onPressed: () {
+                    controller.jumpToPage(controller.page!.toInt() + 1);
+                    Get.to(ScoreScreen());
+                  },
+                  style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(Size(100, 50)),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(29))),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.deepPurple[50])),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'إنهاء الأختبار end ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      //    SizedBox(width: 30),
+                      //  Image.asset('assets/icons/SteeringWheel1.png',
+                      //       width: 60, height: 60)
+                    ],
+                  ))
+            // */
           ],
         ),
       );

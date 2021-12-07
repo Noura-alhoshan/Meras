@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 //import 'package:quiz_app/constants.dart';
 //import 'package:quiz_app/controllers/question_controller.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:meras/screen/Trainee/TRpages/TRhome.dart';
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
 
@@ -37,6 +38,30 @@ class ScoreScreen extends StatelessWidget {
                     .copyWith(color: Colors.amber),
               ),
               Spacer(flex: 3),
+              TextButton(
+                  onPressed: () {
+                    Get.to(TRhome());
+                  },
+                  style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(29))),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.deepPurple[50])),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('العودة لصفحة الرئيسية',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500)),
+                      SizedBox(width: 30),
+                      Image.asset('assets/icons/Test1.png',
+                          width: 60, height: 60)
+                    ],
+                  )),
             ],
           )
         ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
-//import 'package:quiz_app_ii_example/model/question.dart';
 
 class QuestionNumbersWidget extends StatelessWidget {
   final List<Question> questions;
@@ -44,7 +43,7 @@ class QuestionNumbersWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => onClickedNumber(index),
       child: CircleAvatar(
-        backgroundColor: color,
+        backgroundColor: isSelected ? Colors.orange.shade300 : Colors.white,
         child: Text(
           '${index + 1}',
           style: TextStyle(

@@ -1,20 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:meras/Controllers/Loading.dart';
-import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/constants.dart';
-import 'package:meras/controllers/MyUser.dart';
-import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
-import 'package:meras/screen/Trainee/TRpages/TRny.dart';
-import 'package:meras/screen/Trainee/quiz/welcome_screen.dart';
-import 'package:meras/screen/Trainee/quiz2/categories.dart';
+
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
+import 'package:meras/screen/Trainee/quiz2/questions.dart';
+import 'package:meras/screen/Trainee/quiz4/quiz_play.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meras/services/auth.dart';
 import 'package:meras/screen/home/navDrawer.dart';
-import 'package:provider/provider.dart';
 import 'package:meras/screen/authenticate/background2.dart';
 
 //
@@ -148,7 +142,7 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(WelcomeScreen());
+                      Get.to(CategoryPage(questions: questions));
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
@@ -179,9 +173,7 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(
-                        CategoryPage(category: categories.first),
-                      );
+                      Get.to(QuizPlay("H7j0jVK05a3SeGvVyDHu"));
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
