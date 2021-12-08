@@ -13,6 +13,7 @@ import 'package:meras/screen/Trainee/TRcategory.dart';
 import 'package:meras/screen/Trainee/TRpages/DraftF.dart';
 import 'package:meras/screen/Trainee/TRpages/SendRequest.dart';
 import 'package:meras/screen/Trainee/TRpages/TRnotification.dart';
+import 'package:meras/screen/Trainee/quiz2/test2.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
 import 'screen/Admin/ADcategory.dart';
@@ -78,10 +79,12 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: SignIn(),
-        // TRguidelines(),
-        // ADcategory(),
-        // TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+        home:
+            // SignIn(),
+            // TRguidelines(),
+            // ADcategory(),
+            // TRcategory(traineeId: "WmgSYdymxxdbzCaCstS8aFKqYhT2"),
+            test2(),
         // COcategory(),
         //ViewLessonRequest("BtQOpVTIjSAsLpOJVtMN"), //this is a comment to test
 

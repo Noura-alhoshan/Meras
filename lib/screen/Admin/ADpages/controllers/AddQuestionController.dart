@@ -9,6 +9,7 @@ import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:random_string/random_string.dart';
+import 'package:path/path.dart';
 
 class AddQuestionController extends GetxController {
   final TextEditingController testNameController = TextEditingController();
@@ -16,12 +17,31 @@ class AddQuestionController extends GetxController {
   final TextEditingController answerTwoController = TextEditingController();
   final TextEditingController answerThreeController = TextEditingController();
   final TextEditingController answerFourController = TextEditingController();
+  RxString currentImageUrl = ''.obs;
   RxBool isTnFType = false.obs;
   RxInt selectedTnFAnswer = 0.obs;
   RxInt selectedAnswerIndex = 0.obs;
   RxString errorMessage = ''.obs;
 
   final formKey = GlobalKey<FormState>();
+
+  RxString selectedImageName = ''.obs;
+  Rx<XFile> selectedFile = XFile('').obs;
+
+  Future<void> pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1024,
+      maxHeight: 1024,
+    );
+    if (pickedFile != null) {
+      selectedFile.value = pickedFile;
+      selectedImageName.value = basename(pickedFile.path);
+    } else {
+      selectedFile.value = XFile('');
+      selectedImageName.value = '';
+    }
+  }
 
   bool validateForm() {
     if (isTnFType.value) {
@@ -46,6 +66,12 @@ class AddQuestionController extends GetxController {
       [String? questionId]) async {
     final String id = randomAlpha(20);
     Map<String, dynamic> data = {};
+
+    String imageUrl = '';
+
+    if (selectedFile.value.path != '') {
+      imageUrl = await uploadImage(selectedFile.value) ?? '';
+    }
 
     if (!isEditPage) {
       data = {
@@ -74,6 +100,7 @@ class AddQuestionController extends GetxController {
                     : selectedAnswerIndex.value == 2
                         ? answerThreeController.text
                         : answerFourController.text,
+        'imageUrl': imageUrl,
         'createdAt': FieldValue.serverTimestamp(),
       };
     } else {
@@ -102,6 +129,7 @@ class AddQuestionController extends GetxController {
                     : selectedAnswerIndex.value == 2
                         ? answerThreeController.text
                         : answerFourController.text,
+        'imageUrl': imageUrl,
       };
     }
     if (isEditPage) {
@@ -134,25 +162,16 @@ class AddQuestionController extends GetxController {
     showDialog(context: context, builder: (BuildContext context) => baseDialog);
   }
 
-  // Future<String?> uploadImage() async {
-  //   final _storage = FirebaseStorage.instance;
-  //   final _picker = ImagePicker();
-  //   PickedFile image;
+  Future<String?> uploadImage(XFile file) async {
+    final _storage = FirebaseStorage.instance;
 
-  //   //Check for permissions
-  //   await Permission.photos.request();
-  //   image = (await _picker.getImage(source: ImageSource.gallery))!;
-  //   var file = File(image.path);
+    var snapshot = await _storage
+        .ref()
+        .child('Questions/${file.path}')
+        .putFile(File(file.path));
 
-  //   if (image != null) {
-  //     var snapshot =
-  //         await _storage.ref().child('Guidlines/${image.path}').putFile(file);
-
-  //     return await snapshot.ref.getDownloadURL();
-  //   } else {
-  //     print('No Path received');
-  //   }
-  // }
+    return await snapshot.ref.getDownloadURL();
+  }
 
   Future<void>? deleteQuestion(
       String testId, String questionId, BuildContext context) async {
@@ -198,12 +217,14 @@ class AddQuestionController extends GetxController {
     answerTwoController.text = '';
     answerThreeController.text = '';
     answerFourController.text = '';
+    currentImageUrl.value = '';
     isTnFType.value = false;
     selectedAnswerIndex.value = 0;
   }
 
   void initEditQuestionPage(dynamic questionData) {
     testNameController.text = questionData.data()['question'];
+    currentImageUrl.value = questionData.data()['imageUrl'] ?? '';
     if (!questionData.data()['isTnFType']) {
       answerOneController.text = questionData.data()['options']['0'];
       answerTwoController.text = questionData.data()['options']['1'];

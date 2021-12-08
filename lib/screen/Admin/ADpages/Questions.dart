@@ -8,6 +8,7 @@ import 'package:meras/screen/Admin/ADpages/AddQuestion.dart';
 import 'package:meras/screen/Admin/ADpages/controllers/AddQuestionController.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget_edit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Questions extends StatelessWidget {
   final String testId;
@@ -38,7 +39,7 @@ class Questions extends StatelessWidget {
                     return Column(
                       children: [
                         SizedBox(
-                          height: 106,
+                          height: 125,
                           child: StreamBuilder<
                                   DocumentSnapshot<Map<String, dynamic>>>(
                               stream: FirebaseFirestore.instance
@@ -52,27 +53,30 @@ class Questions extends StatelessWidget {
                                     -1;
                                 return numberOfQuestions < 0
                                     ? Container()
-                                    : Container(
-                                        margin: const EdgeInsets.only(top: 55),
-                                        child: ListTile(
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 13),
-                                          tileColor: numberOfQuestions ==
-                                                  questionsLimit
-                                              ? Colors.green[200]
-                                              : Colors.red[200],
-                                          title: Text(
-                                              numberOfQuestions ==
+                                    : Center(
+                                        child: Container(
+                                            margin:
+                                                const EdgeInsets.only(top: 65),
+                                            child: ListTile(
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 13),
+                                              tileColor: numberOfQuestions ==
                                                       questionsLimit
-                                                  ? 'تم إضافة جميع الأسئلة'
-                                                  : 'عدد الأسئلة المتبقية ${questionsLimit - numberOfQuestions}',
-                                              textAlign: TextAlign.center),
-                                        ));
+                                                  ? Colors.green[200]
+                                                  : Colors.red[200],
+                                              title: Text(
+                                                  numberOfQuestions ==
+                                                          questionsLimit
+                                                      ? 'تم إضافة جميع الأسئلة'
+                                                      : 'عدد الأسئلة المتبقية ${questionsLimit - numberOfQuestions}',
+                                                  textAlign: TextAlign.center),
+                                            )),
+                                      );
                               }),
                         ),
                         SizedBox(
-                          height: Get.height - 106,
+                          height: Get.height - 125,
                           child: ListView.builder(
                             itemCount: snapshot.data!.docs.length,
                             itemBuilder: (context, index) => _buildListItem(
@@ -110,7 +114,7 @@ class Questions extends StatelessWidget {
                   Get.to(AddQuestion(
                     testId: testId,
                     isEditPage: false,
-                    questionId: '',
+                    questionData: '',
                   ));
                 }
               }
@@ -133,10 +137,27 @@ class Questions extends StatelessWidget {
           child: ListTile(
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 10.0, top: 10),
-                child: Container(
-                  child: Text(doc.data()['question'],
-                      textAlign: TextAlign.right,
-                      style: TextStyle(fontWeight: FontWeight.w500)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if (doc.data()['imageUrl'] != null &&
+                        doc.data()['imageUrl'] != '')
+                      Center(
+                        child: CachedNetworkImage(
+                          imageUrl: doc.data()['imageUrl'],
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                          height: 150,
+                        ),
+                      ),
+                    if (doc.data()['imageUrl'] != null &&
+                        doc.data()['imageUrl'] != '')
+                      SizedBox(height: 30),
+                    Text(doc.data()['question'],
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                  ],
                 ),
               ),
               subtitle: Column(
@@ -174,7 +195,7 @@ class Questions extends StatelessWidget {
                           Get.to(AddQuestion(
                               testId: testId,
                               isEditPage: true,
-                              questionId: doc.data()['id']));
+                              questionData: doc.data()));
                         },
                       ),
                       SizedBox(width: 30),

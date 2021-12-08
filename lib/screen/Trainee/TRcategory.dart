@@ -44,12 +44,15 @@ class _State extends State<TRcategory> {
               traineeId: widget.traineeId,
             )
           : selectedIndex == 1
-              ? TRlessons()
+              ? Text(' ')
               : selectedIndex == 2
-                  ? TRexploreScreen()
+                  ? TRlessons()
                   : selectedIndex == 3
-                      ? TRhome()
-                      : TRhome(),
+                      ? TRexploreScreen()
+                      : selectedIndex == 4
+                          ? TRhome()
+                          : TRhome(),
+      // : selectedIndex == 1? TRlessons(): selectedIndex == 2 ? TRexploreScreen()   : selectedIndex == 3     ? TRhome()  : TRhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
@@ -91,6 +94,10 @@ class _State extends State<TRcategory> {
                 ],
               ),
               activeColor: Colors.blue),
+          BottomNavyBarItem(
+              icon: Icon(Icons.chat),
+              title: Text('المحادثات'),
+              activeColor: Colors.grey),
           BottomNavyBarItem(
               icon: Icon(Icons.car_repair),
               title: Text('الدروس'),

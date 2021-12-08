@@ -19,12 +19,15 @@ class _State extends State<COcategory> {
     return Scaffold(
       extendBody: true,
       body: selectedIndex == 0
-          ? COlist()
+          ? Text(' ')
           : selectedIndex == 1
-              ? CoachDate()
+              ? COlist()
               : selectedIndex == 2
-                  ? COhome()
-                  : COhome(),
+                  ? CoachDate()
+                  : selectedIndex == 3
+                      ? COhome()
+                      : COhome(),
+      // selectedIndex == 0 ? COlist() : selectedIndex == 1 ? CoachDate() : selectedIndex == 2    ? COhome()    : COhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
@@ -34,6 +37,10 @@ class _State extends State<COcategory> {
           });
         },
         items: [
+          BottomNavyBarItem(
+              icon: Icon(Icons.chat),
+              title: Text('المحادثات'),
+              activeColor: Colors.grey),
           BottomNavyBarItem(
               icon: Icon(Icons.list_alt),
               title: Text('الطلبات'),
