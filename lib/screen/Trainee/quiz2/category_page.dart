@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class CategoryPage extends StatefulWidget {
   //  static int score = 0;
-  static List allResults = [];
 
   static int score = 0;
   final List<Question> questions;
@@ -26,20 +25,6 @@ class _CategoryPageState extends State<CategoryPage> {
   late PageController controller;
   late Question question;
   late Future resultsLoaded;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    resultsLoaded = getUsersPastTripsStreamSnapshots();
-  }
-
-  getUsersPastTripsStreamSnapshots() async {
-    var data = await FirebaseFirestore.instance.collection("quiz").get();
-    setState(() {
-      CategoryPage.allResults = data.docs;
-    });
-    return "complete";
-  }
 
   @override
   void initState() {

@@ -53,7 +53,7 @@ class OptionsWidget extends StatelessWidget {
           new Spacer(),
           Text(
             option.text,
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 17),
           ),
           Text(
             '   ',
@@ -62,7 +62,7 @@ class OptionsWidget extends StatelessWidget {
           SizedBox(width: 12),
           Text(
             option.code,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
           ),
         ]),
       );
