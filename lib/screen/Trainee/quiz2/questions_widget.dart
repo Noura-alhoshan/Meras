@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Trainee/quiz2/Score.dart';
+import 'package:meras/screen/Trainee/quiz2/challenge_controller.dart';
 import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
@@ -12,8 +13,17 @@ class QuestionsWidget extends StatelessWidget {
   final PageController controller;
   final ValueChanged<int> onChangedPage;
   final ValueChanged<Option> onClickedOption;
+  final challengeController = ChallengeController();
 
-  const QuestionsWidget({
+  void initState() {
+    controller.addListener(() {
+      challengeController.currentPage = controller.page!.toInt() + 1;
+    });
+
+    initState();
+  }
+
+  QuestionsWidget({
     // Key key,
     //  required this.category,
     required this.controller,
@@ -71,9 +81,9 @@ class QuestionsWidget extends StatelessWidget {
                 onClickedOption: onClickedOption,
               ),
             ),
-
             // /*
             if (controller.page!.toInt() + 1 < questions.length)
+              // if (challengeController.currentPage < questions.length)
               TextButton(
                   onPressed: () {
                     controller.jumpToPage(controller.page!.toInt() + 1);
@@ -90,7 +100,7 @@ class QuestionsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'السؤال التالي',
+                        'السؤال التالي' + controller.page!.toInt().toString(),
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -106,6 +116,7 @@ class QuestionsWidget extends StatelessWidget {
                   onPressed: () {
                     controller.jumpToPage(controller.page!.toInt() + 1);
                     Get.to(ScoreScreen());
+                    //   controller.dispose();
                   },
                   style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(Size(100, 50)),

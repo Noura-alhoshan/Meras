@@ -5,7 +5,7 @@ import 'package:meras/constants.dart';
 
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
-import 'package:meras/screen/Trainee/quiz2/test2.dart';
+import 'package:meras/screen/Trainee/quiz2/startPage.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/screen/home/navDrawer.dart';

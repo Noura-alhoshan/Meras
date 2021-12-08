@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:meras/constants.dart';
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
-import 'package:meras/screen/Trainee/quiz2/test.dart';
+import 'package:meras/screen/Trainee/quiz2/questionModel.dart';
 import 'package:meras/screen/authenticate/background.dart';
 
 class test2 extends StatefulWidget {

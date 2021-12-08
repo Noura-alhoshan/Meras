@@ -4,7 +4,6 @@ import 'package:meras/screen/Trainee/quiz2/question.dart';
 import 'package:meras/screen/Trainee/quiz2/utils.dart';
 
 class OptionsWidget extends StatelessWidget {
-  static int score = 0;
   final Question question;
   final ValueChanged<Option> onClickedOption;
 
@@ -27,7 +26,6 @@ class OptionsWidget extends StatelessWidget {
 
   Widget buildOption(BuildContext context, Option option) {
     final color = getColorForOption(option, question);
-    getscore(option, question);
 
     return GestureDetector(
       onTap: () => onClickedOption(option),
@@ -85,16 +83,6 @@ class OptionsWidget extends StatelessWidget {
       return Colors.grey.shade200;
     } else {
       return option.isCorrect ? Colors.green : Colors.red;
-    }
-  }
-
-  void getscore(Option option, Question question) {
-    print(" score is   " + score.toString());
-    final isSelected = option == question.selectedOption;
-    if (question.isLocked == false) {
-      if (!isSelected) {
-        score++;
-      } else {}
     }
   }
 }

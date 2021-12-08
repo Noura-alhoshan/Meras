@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
-import 'package:meras/screen/Trainee/quiz2/test.dart';
-import 'package:meras/screen/Trainee/quiz2/test2.dart';
+import 'package:meras/screen/Trainee/quiz2/questionModel.dart';
+import 'package:meras/screen/Trainee/quiz2/startPage.dart';
 
 final questions = [
   Question(

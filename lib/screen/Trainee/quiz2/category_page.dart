@@ -103,7 +103,7 @@ class _CategoryPageState extends State<CategoryPage> {
       setState(() {
         question.isLocked = true;
         question.selectedOption = option;
-        if (option == question.selectedOption) {
+        if (option.isCorrect) {
           CategoryPage.score++;
         }
       });
