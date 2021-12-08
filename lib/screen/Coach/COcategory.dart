@@ -35,6 +35,10 @@ class _State extends State<COcategory> {
         },
         items: [
           BottomNavyBarItem(
+              icon: Icon(Icons.chat),
+              title: Text('المحادثات'),
+              activeColor: Colors.grey),
+          BottomNavyBarItem(
               icon: Icon(Icons.list_alt),
               title: Text('الطلبات'),
               activeColor: Colors.pink),
