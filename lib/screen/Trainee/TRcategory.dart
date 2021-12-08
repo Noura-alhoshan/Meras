@@ -92,6 +92,10 @@ class _State extends State<TRcategory> {
               ),
               activeColor: Colors.blue),
           BottomNavyBarItem(
+              icon: Icon(Icons.chat),
+              title: Text('المحادثات'),
+              activeColor: Colors.grey),
+          BottomNavyBarItem(
               icon: Icon(Icons.car_repair),
               title: Text('الدروس'),
               activeColor: Colors.purple),
