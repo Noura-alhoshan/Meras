@@ -3,21 +3,27 @@ import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
 import 'package:meras/screen/Trainee/quiz2/utils.dart';
 
-class OptionsWidget extends StatelessWidget {
+class OptionsWidget extends StatefulWidget {
   final Question question;
   final ValueChanged<Option> onClickedOption;
 
-  OptionsWidget({
+/////*
+  const OptionsWidget({
     //Key key,
 
     required this.question,
     required this.onClickedOption,
   }); // : super(key: key);
+//*/
+  _OptionsWidgetState createState() => _OptionsWidgetState();
+}
+
+class _OptionsWidgetState extends State<OptionsWidget> {
   @override
   Widget build(BuildContext context) => ListView(
         physics: BouncingScrollPhysics(),
         children: Utils.heightBetween(
-          question.options
+          widget.question.options
               .map((option) => buildOption(context, option))
               .toList(),
           height: 8,
@@ -25,10 +31,10 @@ class OptionsWidget extends StatelessWidget {
       );
 
   Widget buildOption(BuildContext context, Option option) {
-    final color = getColorForOption(option, question);
+    final color = getColorForOption(option, widget.question);
 
     return GestureDetector(
-      onTap: () => onClickedOption(option),
+      onTap: () => widget.onClickedOption(option),
       child: Container(
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(

@@ -25,7 +25,7 @@ class test2State extends State<test2> {
   }
 
   getUsersPastTripsStreamSnapshots() async {
-    var data = await FirebaseFirestore.instance.collection("quiz").get();
+    var data = await FirebaseFirestore.instance.collection("Questions").get();
     setState(() {
       test2.allResults = data.docs;
     });
@@ -54,75 +54,113 @@ class test2State extends State<test2> {
           child: Background(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 50.0),
-                Text('أهلًا بك ',
+                if (test2.allResults.length <
+                    9) ///////////////////////////////////////////
+                  Container(
+                      child: Column(children: <Widget>[
+                    //////////////// here to manage the minumm limit
+                    SizedBox(height: 90.0),
+                    Image.asset(
+                      "assets/images/Quiz1.png",
+                      height: 250,
+                    ),
+                    /*
+                   Text('أهلًا بك ',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                       color: kPrimaryColor,
-                    )),
-                SizedBox(height: 20.0),
-                Text(
-                  'الأختبار يتكون من 10 اسئلة ولا يوجد وقت محدد ',
-                  textDirection: TextDirection.rtl,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 17, color: Colors.black),
-                ),
-                Text(
-                  '  ',
-                  textAlign: TextAlign.center,
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(fontSize: 17, color: Colors.black),
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  'مِرَاس حيث سهولة التعلّم',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
+                    )),*/
+
+                    SizedBox(height: 20.0),
+                    Text(
+                      'الأختبار يتكون من 10 اسئلة ولا يوجد وقت محدد ',
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 17, color: Colors.black),
+                    ),
+
+                    //  SizedBox(height: 20.0),
+                    /*
+                    Text(
+                    'مِرَاس حيث سهولة التعلّم',
+                   textAlign: TextAlign.right,
+                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
                       color: Colors.black),
-                ),
-                SizedBox(height: 20.0),
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 30),
-                    child: Column(
-                      children: [
-                        //   if (test2.allResults.length < 9) //////////////// here to manage the minumm limit
-                        TextButton(
-                            onPressed: () {
-                              Get.to(CategoryPage(questions: questions));
-                            },
-                            style: ButtonStyle(
-                                minimumSize:
-                                    MaterialStateProperty.all(Size(120, 80)),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(29))),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.deepPurple[50])),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '         بدء الأختبار',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 19,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(width: 30),
-                                //  Image.asset('assets/icons/SteeringWheel1.png',
-                                //        width: 60, height: 60)
-                              ],
-                            )),
-                      ],
-                    )),
-                SizedBox(height: 40.0),
+                  ),*/
+                    SizedBox(height: 10.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 30),
+                      child: Column(
+                        children: [
+                          //   if (test2.allResults.length < 9) //////////////// here to manage the minumm limit
+                          TextButton(
+                              onPressed: () {
+                                //CategoryPage.score = 0;
+                                //
+
+                                // test2.allResults = [];
+                                Get.to(CategoryPage(questions: questions));
+                              },
+                              style: ButtonStyle(
+                                  minimumSize:
+                                      MaterialStateProperty.all(Size(120, 60)),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(29))),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.deepPurple[50])),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '         بدء الأختبار',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(width: 30),
+                                  //  Image.asset('assets/icons/SteeringWheel1.png',
+                                  //        width: 60, height: 60)
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ]))
+                else
+                  Container(
+                      child: Column(children: <Widget>[
+                    //////////////// here to manage the minumm limit
+                    SizedBox(height: 90.0),
+                    Image.asset(
+                      "assets/images/Quiz2.png",
+                      height: 250,
+                    ),
+                    /*
+                   Text('أهلًا بك ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: kPrimaryColor,
+                    )),*/
+
+                    SizedBox(height: 20.0),
+                    Text(
+                      'الأختبار غير متوفر حالياً، سيتم إضافته قريباً ',
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 17, color: Colors.grey[700]),
+                    ),
+                  ])), //   SizedBox(height: 40.0),
                 SizedBox(height: 50.0),
                 SizedBox(height: 50.0),
               ],

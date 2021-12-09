@@ -10,21 +10,12 @@ import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
 
-class QuestionsWidget extends StatelessWidget {
+class QuestionsWidget extends StatefulWidget {
   final PageController controller;
   final ValueChanged<int> onChangedPage;
   final ValueChanged<Option> onClickedOption;
   final challengeController = ChallengeController();
-  int a = 0;
-  // State<StatefulWidget> createState() => new QuestionsWidgeta();
-
-  void initState() {
-    controller.addListener(() {
-      challengeController.currentPage = controller.page!.toInt() + 1;
-    });
-
-    initState();
-  }
+  _QuestionsWidgetState createState() => new _QuestionsWidgetState();
 
   QuestionsWidget({
     // Key key,
@@ -33,11 +24,22 @@ class QuestionsWidget extends StatelessWidget {
     required this.onChangedPage,
     required this.onClickedOption,
   }); // : super(key: key);
+}
+// void initState() {
+//   controller.addListener(() {
+//    challengeController.currentPage = controller.page!.toInt() + 1;
+//  });
+
+//  initState();
+// }
+
+class _QuestionsWidgetState extends State<QuestionsWidget> {
+  int a = 0;
 
   @override
   Widget build(BuildContext context) => PageView.builder(
-        onPageChanged: onChangedPage,
-        controller: controller,
+        onPageChanged: widget.onChangedPage,
+        controller: widget.controller,
         itemCount: questions.length,
         itemBuilder: (context, index) {
           final question = questions[index];
@@ -83,19 +85,89 @@ class QuestionsWidget extends StatelessWidget {
             Expanded(
               child: OptionsWidget(
                 question: question,
-                onClickedOption: onClickedOption,
+                onClickedOption: widget.onClickedOption,
               ),
             ),
             // /*
             //  if (controller.page == 1)
-            if (controller.page!.toInt() + 1 < questions.length)
-              //  if (CategoryPage.next < questions.length)
-              // if (challengeController.currentPage < questions.length)
+
+            if (a != 0)
+              if (widget.controller.page!.toInt() + 1 < questions.length)
+                // if (challengeController.currentPage < questions.length)
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        a = 200;
+                      });
+
+                      widget.controller
+                          .jumpToPage(widget.controller.page!.toInt() + 1);
+                      //Get.to(ScoreScreen());
+                    },
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(100, 50)),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(29))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.deepPurple[50])),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'السؤال التالي' + a.toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        //    SizedBox(width: 30),
+                        //  Image.asset('assets/icons/SteeringWheel1.png',
+                        //       width: 60, height: 60)
+                      ],
+                    ))
+              else
+                TextButton(
+                    onPressed: () {
+                      //
+                      widget.controller
+                          .jumpToPage(widget.controller.page!.toInt() + 1);
+                      // controller.dispose();
+
+                      Get.to(ScoreScreen());
+                      //controller.dispose();
+                    },
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(100, 50)),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(29))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.deepPurple[50])),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'إنهاء الأختبار ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        //    SizedBox(width: 30),
+                        //  Image.asset('assets/icons/SteeringWheel1.png',
+                        //       width: 60, height: 60)
+                      ],
+                    )),
+            if (a == 0)
               TextButton(
                   onPressed: () {
-                    //    setState(() {
-                    //  a++;)}
-                    controller.jumpToPage(controller.page!.toInt() + 1);
+                    setState(() {
+                      a = 200;
+                    });
+
+                    widget.controller
+                        .jumpToPage(widget.controller.page!.toInt() + 1);
                     //Get.to(ScoreScreen());
                   },
                   style: ButtonStyle(
@@ -109,7 +181,7 @@ class QuestionsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'السؤال التالي' + controller.page.toString(),
+                        'السؤال التالي',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -120,36 +192,7 @@ class QuestionsWidget extends StatelessWidget {
                       //       width: 60, height: 60)
                     ],
                   ))
-            else
-              TextButton(
-                  onPressed: () {
-                    //
-                    controller.jumpToPage(controller.page!.toInt() + 1);
-                    Get.to(ScoreScreen());
-                    //   controller.dispose();
-                  },
-                  style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(Size(100, 50)),
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(29))),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.deepPurple[50])),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'إنهاء الأختبار ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      //    SizedBox(width: 30),
-                      //  Image.asset('assets/icons/SteeringWheel1.png',
-                      //       width: 60, height: 60)
-                    ],
-                  ))
+
             // */
           ],
         ),
