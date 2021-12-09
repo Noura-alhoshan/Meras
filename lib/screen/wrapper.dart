@@ -20,6 +20,8 @@ import 'Trainee/TRpages/TRhome.dart';
 import 'Verify.dart';
 import 'home/Chome.dart';
 
+
+
 Future<bool> isTrainee(dynamic userid) async {
   print(userid);
   bool yesno = false;
@@ -113,7 +115,7 @@ Future<bool> isCoachP(dynamic userid) async {
 
 class Wrapper extends StatelessWidget {
   Wrapper();
-
+static var userType="";
   AuthService aut = AuthService();
 
   Widget build(

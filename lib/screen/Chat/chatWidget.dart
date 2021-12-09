@@ -13,7 +13,7 @@ import 'screens/chat.dart';
 import 'screens/zoomImage.dart';
 
 class ChatWidget {
-  // static getFriendList() {
+  // static getFriendList() {///////////////////////////////////////////////////////////////
   //   List<String> data = [
   //     "h7127ZCne0OzSRwNXtktMPei0CH3",
   //     "pdj9dlfEQMTUD6s954qiPeplEog2"
@@ -47,7 +47,7 @@ class ChatWidget {
                       : Icon(
                           Icons.account_circle,
                           size: 50.0,
-                          color: colorPrimaryDark,
+                          color: Colors.purple,
                         ),
                   borderRadius: BorderRadius.all(Radius.circular(25.0)),
                   clipBehavior: Clip.hardEdge,
@@ -92,8 +92,12 @@ class ChatWidget {
                       builder: (context) => Chat(
                             currentUserId: currentUserId,
                             peerId: document.id,
-                            peerName: document.get('nickname'),
-                            peerAvatar: document.get('photoUrl'),
+                            peerName: document.get('Fname'),
+                            peerAvatar: "assets/images/TF.png",
+                            Cname: "nnn",
+                            Tname: "nnnnn",
+                            Tid: '',
+                            Cid: "kk"
                           )));
             },
             style: ElevatedButton.styleFrom(
@@ -147,8 +151,8 @@ class ChatWidget {
                   style: TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                    primary: Color(0xffdd4b39),
-                    onPrimary: Color(0xffff7f7f),
+                    primary: Colors.red,
+                    onPrimary: Colors.red,
                     padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0))),
           ),
         ],
@@ -160,7 +164,7 @@ class ChatWidget {
     return AppBar(
       leading: null,
       title: Text(ChatData.appName),
-      backgroundColor: themeColor,
+      backgroundColor: Colors.deepPurple,
     );
   }
 
@@ -289,7 +293,7 @@ class ChatWidget {
           }
         },
         text: chatContent,
-        style: TextStyle(color: logUserMsg ? primaryColor : Colors.white),
+        style: TextStyle(color: logUserMsg ? primaryColor : Colors.white),///here sarah
         linkStyle: TextStyle(color: Colors.blueGrey),
       ),
       // Text(

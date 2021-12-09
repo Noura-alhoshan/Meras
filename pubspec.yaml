@@ -124,6 +124,7 @@ flutter:
     - assets/images/whitelogo.png
     - assets/images/BackgroundProfileLight2.jpeg
     - assets/images/BackgroundProfileDark2.jpeg
+    - assets/images/leftarrow.png
 
 
   # To add assets to your application, add an assets section, like this:

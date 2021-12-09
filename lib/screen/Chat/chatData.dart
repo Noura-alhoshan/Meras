@@ -10,7 +10,7 @@ import 'chatDB.dart';
 import 'chatWidget.dart';
 import 'constants.dart';
 import 'screens/dashboard_screen.dart';
-import 'screens/login_screen.dart';
+
 
 class ChatData {
   static String appName = "Just Chat ";
@@ -24,7 +24,7 @@ class ChatData {
                 EdgeInsets.only(left: 0.0, right: 0.0, top: 0.0, bottom: 0.0),
             children: <Widget>[
               Container(
-                color: themeColor,
+                color: Colors.red,
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.only(bottom: 10.0, top: 10.0),
                 height: 100.0,
@@ -96,9 +96,9 @@ class ChatData {
     await googleSignIn.disconnect();
     await googleSignIn.signOut();
 
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
+  //   Navigator.pushReplacement(
+  //       context, MaterialPageRoute(builder: (context) => LoginScreen()));
+   }
 
   static Future<bool> authUsersGoogle(BuildContext context) async {
     await Firebase.initializeApp();
@@ -216,8 +216,8 @@ class ChatData {
                   DashboardScreen(currentUserId: logInUser.uid)));
     } else {
       //return ChatData.widgetLoginScreen(context);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => LoginScreen()));
     }
   }
 

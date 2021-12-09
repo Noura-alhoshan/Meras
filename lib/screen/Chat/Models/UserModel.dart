@@ -1,11 +1,11 @@
 class UserModel {
-  final String photoUrl;
-  final String nickname;
+  final String photoUrl='assets/images/Female.png';
+  final String Fname;
   final String id;
 
   @override
   String toString() =>
-      'UserModel{photoUrl: $photoUrl, nickname: $nickname, id: $id}';
+      'UserModel{photoUrl: $photoUrl, nickname: $Fname, id: $id}';
 
-  UserModel({required this.id, required this.nickname, required this.photoUrl});
+  UserModel({required this.id, required this.Fname, });
 }

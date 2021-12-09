@@ -45,7 +45,7 @@ class ChatDBFireStore {
     try {
       result = await FirebaseFirestore.instance
           .collection(getDocName())
-          .where('userId', isEqualTo: logInUser.uid)
+          .where('ID', isEqualTo: logInUser.uid)
           .get();
     } catch (e) {
       //print('ex ' + e.toString());
@@ -69,9 +69,9 @@ class ChatDBFireStore {
     List<String> friendList = [];
 
     FirebaseFirestore.instance.collection(getDocName()).doc(logInUser.uid).set({
-      'nickname': logInUser.displayName,
+      'Fname': logInUser.displayName,
       'photoUrl': logInUser.photoURL,
-      'userId': logInUser.uid,
+      'ID': logInUser.uid,
       'email': logInUser.email,
       'friends': friendList,
       'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
@@ -112,7 +112,7 @@ class ChatDBFireStore {
 
   Future<List<dynamic>> getFriendList(var userId) async {
    late List<dynamic> friendList;
-
+  
     FirebaseFirestore.instance
         .collection('users')
         .doc(userId)

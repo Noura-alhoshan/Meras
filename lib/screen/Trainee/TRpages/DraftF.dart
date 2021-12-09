@@ -13,7 +13,7 @@ import 'package:meras/screen/Admin/widget/button_widget.dart';
 import 'package:meras/screen/Chat/chatWidget.dart';
 import 'package:meras/screen/Chat/screens/chat.dart';
 import 'package:meras/screen/Chat/screens/dashboard_screen.dart';
-import 'package:meras/screen/Chat/screens/login_screen.dart';
+
 import 'package:meras/screen/Trainee/TRpages/BackgroundC2.dart';
 //import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
@@ -84,10 +84,20 @@ class _CoachDate extends State<CoachDate> {
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
   //print("daaay");
+  late String tname;
    FirebaseAuth auth2 = FirebaseAuth.instance;
     User? truser= auth2.currentUser;
     final tuid = truser!.uid;
   final String ph = document['Phone Number'];
+   FirebaseFirestore.instance
+      .collection('trainees')
+      .doc(tuid)
+      .get()
+      .then((ds) {
+    tname = ds['Fname'] + ' ' + ds['Lname'];
+  }).catchError((e) {
+    print(e);
+  });
   return BackgroundA(
     child: Container(
       height: 900,
@@ -179,9 +189,18 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     ),
                     onPressed: () {
                       //launch("tel://$ph");
-                      Navigator.of(context).push( MaterialPageRoute(/////////////////////////////////////////////temporary!!! delete it 
+                      Navigator.of(context).push( 
+              MaterialPageRoute(/////////////////////////////////////////////temporary!!! delete it 
               builder: (context) => 
-              Chat(currentUserId: tuid, peerAvatar: 'https://sitechecker.pro/wp-content/uploads/2017/12/URL-meaning.png', peerId: document['ID'], peerName: 'نورة الحوشان')
+              Chat(currentUserId: tuid, 
+              peerAvatar:  "https://i.postimg.cc/59D0sP2g/Female.png",
+              peerId: document['ID'], 
+              peerName: document['Fname'] + " " +document['Lname'],
+              Cname:document['Fname'] + " " +document['Lname'] ,
+              Tname: tname,
+              Tid: tuid,
+              Cid: document['ID'], 
+              )
                  
                               
                        )); }),

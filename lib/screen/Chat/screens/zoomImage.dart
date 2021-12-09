@@ -11,14 +11,14 @@ class ZoomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.white,
-      appBar: new AppBar(
-        title: new Text(
-          'FULL PHOTO',
-          style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
+     // backgroundColor: Colors.white,
+      // appBar: new AppBar(
+      //   title: new Text(
+      //     'FULL PHOTO',
+      //     style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
+      //   ),
+      //   centerTitle: true,
+      // ),
       body: new ZoomImageScreen(url: url),
     );
   }

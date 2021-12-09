@@ -4,6 +4,7 @@ import 'package:meras/screen/Coach/COpages/COlist.dart';
 import 'COpages/COhome.dart';
 import 'COpages/COlist.dart';
 import 'COpages/CoachDate.dart';
+import 'Cchat.dart';
 
 //import 'package:meras_sprint1/TRpages/TRhome.dart';
 
@@ -23,7 +24,7 @@ class _State extends State<COcategory> {
           : selectedIndex == 1
               ? CoachDate()
               : selectedIndex == 2
-                  ? COhome()
+                  ? Cchat()
                   : COhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
@@ -34,6 +35,7 @@ class _State extends State<COcategory> {
           });
         },
         items: [
+          
           BottomNavyBarItem(
               icon: Icon(Icons.list_alt),
               title: Text('الطلبات'),
@@ -42,6 +44,10 @@ class _State extends State<COcategory> {
               icon: Icon(Icons.perm_contact_calendar),
               title: Text('المواعيد'),
               activeColor: Colors.purple),
+              BottomNavyBarItem(
+              icon: Icon(Icons.chat),
+              title: Text('المحادثات'),
+              activeColor: Colors.grey),
           BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),

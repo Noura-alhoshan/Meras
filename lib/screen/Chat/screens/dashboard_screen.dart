@@ -45,7 +45,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<List<dynamic>> getFriendList(bool onLoad) async {
     await FirebaseFirestore.instance
-        .collection('Coach')
+        .collection('users')
         .doc(widget.currentUserId)
         .get()
         .then((DocumentSnapshot documentSnapshot) {
@@ -169,12 +169,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           bool alreadyExist = false;
 
           for (var fr in friendList) {
-            if (fr == result.data()['userId']) alreadyExist = true;
+            if (fr == result.data()['ID']) alreadyExist = true;
           }
           if (alreadyExist == true) {
             showToast("already friend", true);
           } else {
-            friendList.add(result.data()['userId']);
+            friendList.add(result.data()['ID']);
             FirebaseFirestore.instance
                 .collection('users')
                 .doc(widget.currentUserId)
@@ -382,9 +382,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           MaterialPageRoute(
                               builder: (context) => Chat(
                                     currentUserId: widget.currentUserId,
-                                    peerId: document.get('userId'),
-                                    peerName: document.get('nickname'),
+                                    peerId: document.get('ID'),
+                                    peerName: document.get('Fname'),
                                     peerAvatar: document.get('photoUrl'),
+                                    Cname: "mmm",
+                                    Tname: 'mmmm',
+                                    Tid: "jj",
+                                    Cid: "",
                                   )));
                     },
                   );

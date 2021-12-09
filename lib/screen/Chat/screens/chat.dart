@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../chatWidget.dart';
 import '../constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,6 +16,11 @@ class Chat extends StatelessWidget {
   final String peerAvatar;
   final String peerName;
   final String currentUserId;
+  final String Cname;
+  final String Tname;
+  final String Tid;
+  final String Cid;
+   
   static const String id = "chat";
 
   Chat(
@@ -22,7 +28,12 @@ class Chat extends StatelessWidget {
       required this.currentUserId,
       required this.peerId,
       required this.peerAvatar,
-      required this.peerName})
+      required this.peerName,
+      required this.Cname,
+      required this.Tname,
+      required this.Tid,
+       required this.Cid,
+      })
       : super(key: key);
 
   @override
@@ -31,13 +42,26 @@ class Chat extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: null,
-        title: Text(peerName),
-        backgroundColor: themeColor,
+        actions: [
+        Padding( padding:EdgeInsets.symmetric(horizontal: 17), 
+        child: IconButton (icon: Icon (Icons.call), onPressed: () 
+        { launch("tel://0555015098"); },//change the phone
+        ),
+        
+         )
+  ],
+        title: Text(peerName, textAlign: TextAlign.center ,),
+        //centerTitle: true,
+        backgroundColor: Colors.purple[900],//find the color
       ),
       body: new _ChatScreen(
         currentUserId: currentUserId,
         peerId: peerId,
         peerAvatar: peerAvatar,
+        Cname: Cname,
+        Tname: Tname,
+        Tid: Tid,
+        Cid: Cid,
       ),
     );
   }
@@ -47,24 +71,41 @@ class _ChatScreen extends StatefulWidget {
   final String peerId;
   final String peerAvatar;
   final String currentUserId;
+  final String Cname;
+  final String Tname;
+  final String Tid;
+  final String Cid;
+
 
   _ChatScreen(
       {Key? key,
       required this.peerId,
       required this.peerAvatar,
-      required this.currentUserId})
+      required this.currentUserId,
+       required this.Cname,
+      required this.Tname,
+       required this.Tid,
+       required this.Cid,
+      })
       : super(key: key);
 
   @override
   State createState() =>
-      new _ChatScreenState(peerId: peerId, peerAvatar: peerAvatar);
+      new _ChatScreenState(peerId: peerId, peerAvatar: peerAvatar, Cname: Cname, Tname:Tname, Tid:Tid, Cid:Cid);
 }
 
 class _ChatScreenState extends State<_ChatScreen> {
-  _ChatScreenState({Key? key, required this.peerId, required this.peerAvatar});
+  _ChatScreenState({Key? key, required this.peerId, required this.peerAvatar, required this.Cname,
+      required this.Tname, required this.Tid,
+       required this.Cid,});
 
   String peerId;
   String peerAvatar;
+  String Cname;
+  String Tname;
+  String Tid;
+  String Cid;
+
   String id='';//trainee id
 
   var listMessage;
@@ -112,10 +153,10 @@ class _ChatScreenState extends State<_ChatScreen> {
       groupChatId = '$peerId-$id';
     }
 
-    FirebaseFirestore.instance
-        .collection('trainees')
-        .doc(id)
-        .update({'chattingWith': peerId});
+    // FirebaseFirestore.instance
+    //     .collection('trainees')
+    //     .doc(id)
+    //     .update({'chattingWith': peerId});
 
     setState(() {});
   }
@@ -186,7 +227,10 @@ class _ChatScreenState extends State<_ChatScreen> {
     }
   }
 
-  void onSendMessage(String content, int type) {
+
+
+
+  void onSendMessage(String content, int type,) {
     // type: 0 = text, 1 = image, 2 = sticker
     if (content.trim() != '') {
       textEditingController.clear();
@@ -209,6 +253,24 @@ class _ChatScreenState extends State<_ChatScreen> {
           },
         );
       });
+       Map<String, dynamic> Demo = {
+      "lastMessage": content,
+      'Cname': Cname,
+      "Cid":peerId,
+      "Tid":Tid,
+      'Tname': Tname,
+      'lastTime': DateTime.now().millisecondsSinceEpoch.toString(),
+      "ID": groupChatId,
+      "peers": [id,peerId]
+
+    };
+
+
+      FirebaseFirestore.instance
+          .collection('messages')
+          .doc(groupChatId).set(Demo);
+
+
       listScrollController.animateTo(0.0,
           duration: Duration(milliseconds: 300), curve: Curves.easeOut);
     } else {
@@ -269,7 +331,40 @@ class _ChatScreenState extends State<_ChatScreen> {
       child: Row(
         children: <Widget>[
           // Button send image
-          Material(
+         Material(
+            child: new Container(
+              margin: new EdgeInsets.symmetric(horizontal: 8.0),
+               child: new IconButton(
+               icon:  Image.asset(
+                            "assets/images/leftarrow.png",
+                            width: 23,
+                          ),
+                onPressed: () => onSendMessage(textEditingController.text, 0),
+                color: primaryColor,
+              ),
+            ),
+            color: Colors.white,
+          ),
+          Flexible(
+            child: Container(
+              child: TextField(
+                maxLines: null,
+                style: TextStyle(color: primaryColor, fontSize: 15.0,), textAlign: TextAlign.right,
+                controller: textEditingController,
+                 textDirection: TextDirection.rtl,
+                decoration: InputDecoration.collapsed(
+                  
+                  hintText: '..اكتب رسالتك',
+                  hintStyle: TextStyle(color: greyColor,),
+                ),
+                focusNode: focusNode,
+              ),
+            ),
+          ),
+
+          // Button send message
+          
+ Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 1.0),
               child: new IconButton(
@@ -295,32 +390,10 @@ class _ChatScreenState extends State<_ChatScreen> {
             ),
           ),
           // Edit text
-          Flexible(
-            child: Container(
-              child: TextField(
-                style: TextStyle(color: primaryColor, fontSize: 15.0),
-                controller: textEditingController,
-                decoration: InputDecoration.collapsed(
-                  hintText: 'اكتب رسالتك..',
-                  hintStyle: TextStyle(color: greyColor),
-                ),
-                focusNode: focusNode,
-              ),
-            ),
-          ),
 
-          // Button send message
-          Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 8.0),
-              child: new IconButton(
-                icon: new Icon(Icons.send),
-                onPressed: () => onSendMessage(textEditingController.text, 0),
-                color: primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
+
+
+
         ],
       ),
       width: double.infinity,
@@ -330,5 +403,6 @@ class _ChatScreenState extends State<_ChatScreen> {
               new Border(top: new BorderSide(color: greyColor2, width: 0.5)),
           color: Colors.white),
     );
+    
   }
 }
