@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/constants.dart';
+import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Trainee/quiz2/Score.dart';
+import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/challenge_controller.dart';
 import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
@@ -9,11 +11,12 @@ import 'package:meras/screen/Trainee/quiz2/question.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
 
 class QuestionsWidget extends StatelessWidget {
-  // final Category category;
   final PageController controller;
   final ValueChanged<int> onChangedPage;
   final ValueChanged<Option> onClickedOption;
   final challengeController = ChallengeController();
+  int a = 0;
+  // State<StatefulWidget> createState() => new QuestionsWidgeta();
 
   void initState() {
     controller.addListener(() {
@@ -53,13 +56,15 @@ class QuestionsWidget extends StatelessWidget {
           children: [
             // const SizedBox(height: 32),
             Container(
-              alignment: Alignment.center,
-              child: Image.network(
-                question.text,
-                height: 120.0,
-                width: 120.0,
-              ),
-            ),
+                alignment: Alignment.center,
+                child: ImageFullScreenWrapperWidget(
+                  child: Image.network(
+                    question.text,
+                    height: 120.0,
+                    width: 120.0,
+                  ),
+                  dark: false,
+                )),
             //
             //
             //   Text(
@@ -70,7 +75,7 @@ class QuestionsWidget extends StatelessWidget {
             Container(
               alignment: Alignment.topRight,
               child: Text(
-                'أختر معنى الصورة الصحيح',
+                question.textQ,
                 style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
               ),
             ),
@@ -82,10 +87,14 @@ class QuestionsWidget extends StatelessWidget {
               ),
             ),
             // /*
+            //  if (controller.page == 1)
             if (controller.page!.toInt() + 1 < questions.length)
+              //  if (CategoryPage.next < questions.length)
               // if (challengeController.currentPage < questions.length)
               TextButton(
                   onPressed: () {
+                    //    setState(() {
+                    //  a++;)}
                     controller.jumpToPage(controller.page!.toInt() + 1);
                     //Get.to(ScoreScreen());
                   },
@@ -100,7 +109,7 @@ class QuestionsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'السؤال التالي' + controller.page!.toInt().toString(),
+                        'السؤال التالي' + controller.page.toString(),
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -114,6 +123,7 @@ class QuestionsWidget extends StatelessWidget {
             else
               TextButton(
                   onPressed: () {
+                    //
                     controller.jumpToPage(controller.page!.toInt() + 1);
                     Get.to(ScoreScreen());
                     //   controller.dispose();

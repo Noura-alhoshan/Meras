@@ -86,35 +86,42 @@ class test2State extends State<test2> {
                 ),
                 SizedBox(height: 20.0),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                  child: TextButton(
-                      onPressed: () {
-                        Get.to(CategoryPage(questions: questions));
-                      },
-                      style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(Size(120, 80)),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(29))),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.deepPurple[50])),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '         بدء الأختبار',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(width: 30),
-                          //  Image.asset('assets/icons/SteeringWheel1.png',
-                          //        width: 60, height: 60)
-                        ],
-                      )),
-                ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 30),
+                    child: Column(
+                      children: [
+                        //   if (test2.allResults.length < 9) //////////////// here to manage the minumm limit
+                        TextButton(
+                            onPressed: () {
+                              Get.to(CategoryPage(questions: questions));
+                            },
+                            style: ButtonStyle(
+                                minimumSize:
+                                    MaterialStateProperty.all(Size(120, 80)),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(29))),
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.deepPurple[50])),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '         بدء الأختبار',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(width: 30),
+                                //  Image.asset('assets/icons/SteeringWheel1.png',
+                                //        width: 60, height: 60)
+                              ],
+                            )),
+                      ],
+                    )),
                 SizedBox(height: 40.0),
                 SizedBox(height: 50.0),
                 SizedBox(height: 50.0),

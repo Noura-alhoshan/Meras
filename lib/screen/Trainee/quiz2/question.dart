@@ -4,6 +4,7 @@ import 'option.dart';
 
 class Question {
   final String text;
+  final String textQ;
   final List<Option> options;
   // final String solution;
   bool isLocked;
@@ -11,6 +12,7 @@ class Question {
 
   Question({
     required this.text,
+    required this.textQ,
     required this.options,
     //  required this.solution,
     this.isLocked = false,

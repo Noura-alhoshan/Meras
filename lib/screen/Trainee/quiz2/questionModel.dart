@@ -8,8 +8,10 @@ class test {
   String o3;
   String o4;
   String o5;
-
-  test(this.q, this.o1, this.o2, this.o3, this.o4, this.o5);
+  Map mm;
+  String textQ;
+  test(
+      this.q, this.o1, this.o2, this.o3, this.o4, this.o5, this.mm, this.textQ);
 
   // formatting for upload to Firbase when creating the trip
   Map<String, dynamic> toJson() => {
@@ -19,6 +21,8 @@ class test {
         'o3': o3,
         'o4': o4,
         'o5': o5,
+        'mm': mm,
+        'textQ': textQ
       };
 
   // creating a Trip object from a firebase snapshot
@@ -28,5 +32,7 @@ class test {
         o2 = snapshot['o2'],
         o3 = snapshot['o3'],
         o4 = snapshot['o4'],
-        o5 = snapshot['o5'];
+        o5 = snapshot['o5'],
+        mm = snapshot['map'],
+        textQ = snapshot['question'];
 }

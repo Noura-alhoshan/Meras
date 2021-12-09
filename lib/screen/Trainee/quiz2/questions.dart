@@ -8,27 +8,28 @@ import 'package:meras/screen/Trainee/quiz2/startPage.dart';
 final questions = [
   Question(
     text: test.fromSnapshot(test2.allResults[1]).q,
+    textQ: test.fromSnapshot(test2.allResults[1]).textQ,
 
     options: [
       Option(
           code: '.أ',
-          text: test.fromSnapshot(test2.allResults[1]).o1,
-          isCorrect: test.fromSnapshot(test2.allResults[1]).o1 ==
+          text: test.fromSnapshot(test2.allResults[1]).mm['0'],
+          isCorrect: test.fromSnapshot(test2.allResults[1]).mm['0'] ==
               test.fromSnapshot(test2.allResults[1]).o5),
       Option(
           code: '.ب',
-          text: test.fromSnapshot(test2.allResults[1]).o2,
-          isCorrect: test.fromSnapshot(test2.allResults[1]).o2 ==
+          text: test.fromSnapshot(test2.allResults[1]).mm['1'],
+          isCorrect: test.fromSnapshot(test2.allResults[1]).mm['1'] ==
               test.fromSnapshot(test2.allResults[1]).o5),
       Option(
           code: '.ج',
-          text: test.fromSnapshot(test2.allResults[1]).o3,
-          isCorrect: test.fromSnapshot(test2.allResults[1]).o3 ==
+          text: test.fromSnapshot(test2.allResults[1]).mm['2'],
+          isCorrect: test.fromSnapshot(test2.allResults[1]).mm['2'] ==
               test.fromSnapshot(test2.allResults[1]).o5),
       Option(
           code: '.د',
-          text: test.fromSnapshot(test2.allResults[1]).o4,
-          isCorrect: test.fromSnapshot(test2.allResults[1]).o4 ==
+          text: test.fromSnapshot(test2.allResults[1]).mm['3'],
+          isCorrect: test.fromSnapshot(test2.allResults[1]).mm['3'] ==
               test.fromSnapshot(test2.allResults[1]).o5),
     ],
     // solution: 'Venus is the hottest planet in the solar system',
@@ -36,30 +37,33 @@ final questions = [
   ),
   Question(
       text: test.fromSnapshot(test2.allResults[0]).q,
+      textQ: test.fromSnapshot(test2.allResults[0]).textQ,
       options: [
         Option(
             code: '.أ',
-            text: test.fromSnapshot(test2.allResults[0]).o1,
-            isCorrect: test.fromSnapshot(test2.allResults[0]).o1 ==
+            text: test.fromSnapshot(test2.allResults[0]).mm['0'],
+            isCorrect: test.fromSnapshot(test2.allResults[0]).mm['0'] ==
                 test.fromSnapshot(test2.allResults[0]).o5),
         Option(
             code: '.ب',
-            text: test.fromSnapshot(test2.allResults[0]).o2,
-            isCorrect: test.fromSnapshot(test2.allResults[0]).o2 ==
+            text: test.fromSnapshot(test2.allResults[0]).mm['1'],
+            isCorrect: test.fromSnapshot(test2.allResults[0]).mm['1'] ==
                 test.fromSnapshot(test2.allResults[0]).o5),
         Option(
             code: '.ج',
-            text: test.fromSnapshot(test2.allResults[0]).o3,
-            isCorrect: test.fromSnapshot(test2.allResults[0]).o3 ==
+            text: test.fromSnapshot(test2.allResults[0]).mm['2'],
+            isCorrect: test.fromSnapshot(test2.allResults[0]).mm['2'] ==
                 test.fromSnapshot(test2.allResults[0]).o5),
         Option(
             code: '.د',
-            text: test.fromSnapshot(test2.allResults[0]).o4,
-            isCorrect: test.fromSnapshot(test2.allResults[0]).o4 ==
+            text: test.fromSnapshot(test2.allResults[0]).mm['3'],
+            isCorrect: test.fromSnapshot(test2.allResults[0]).mm['3'] ==
                 test.fromSnapshot(test2.allResults[0]).o5),
       ],
       //solution: 'Ozone have 3 molecules of oxygen',
       selectedOption: Option(code: 'A', text: '', isCorrect: false)),
+];
+/*
   Question(
       text: test.fromSnapshot(test2.allResults[2]).q,
       options: [
@@ -218,3 +222,5 @@ final questions = [
       //   solution: 'Uruguay was the first country to win world cup',
       selectedOption: Option(code: 'A', text: 'Brazil', isCorrect: false)),
 ];
+
+ */ 
