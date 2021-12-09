@@ -196,12 +196,20 @@ final questions = [
       options: [
         Option(
             code: '.أ',
-            text: test.fromSnapshot(test2.allResults[7]).o1,
+            text: test.fromSnapshot(test2.allResults[7]).o1 == 'True'
+                ? 'صح'
+                : test.fromSnapshot(test2.allResults[7]).o1 == 'False'
+                    ? 'خطأ'
+                    : test.fromSnapshot(test2.allResults[7]).o1,
             isCorrect: test.fromSnapshot(test2.allResults[7]).o1 ==
                 test.fromSnapshot(test2.allResults[7]).o5),
         Option(
             code: '.ب',
-            text: test.fromSnapshot(test2.allResults[7]).o2,
+            text: test.fromSnapshot(test2.allResults[7]).o2 == 'True'
+                ? 'صح'
+                : test.fromSnapshot(test2.allResults[7]).o2 == 'False'
+                    ? 'خطأ'
+                    : test.fromSnapshot(test2.allResults[7]).o2,
             isCorrect: test.fromSnapshot(test2.allResults[7]).o2 ==
                 test.fromSnapshot(test2.allResults[7]).o5),
         Option(

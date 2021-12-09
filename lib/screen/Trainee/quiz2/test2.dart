@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/constants.dart';
@@ -16,6 +17,28 @@ class test2 extends StatefulWidget {
 
 class test2State extends State<test2> {
   late Future resultsLoaded;
+  late String nnaame = '';
+  void initState() {
+    super.initState();
+    getn();
+  }
+
+  getn() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    FirebaseFirestore.instance
+        .collection("trainees")
+        .doc(uid)
+        .get()
+        .then((querySnapshot) async {
+      //String ddd = querySnapshot.data()!['Fname'];
+      //print(ddd);
+      setState(() {
+        nnaame = querySnapshot.data()!['Fname'];
+      });
+    });
+  }
   //static List _allResults = [];
 
   @override
@@ -36,7 +59,8 @@ class test2State extends State<test2> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("               صفحة الأختبار"),
+          title: Text("صفحة الاختبار"),
+          centerTitle: true,
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -54,17 +78,17 @@ class test2State extends State<test2> {
           child: Background(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 50.0),
-                Text('أهلًا بك ',
+                SizedBox(height: 60.0),
+                Text('أهلًا بك $nnaame  ',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                       color: kPrimaryColor,
                     )),
-                SizedBox(height: 20.0),
+                SizedBox(height: 50.0),
                 Text(
-                  'الأختبار يتكون من 10 اسئلة ولا يوجد وقت محدد ',
+                  'الاختبار يتكون من 10 أسئلة ولا يوجد وقت محدد',
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 17, color: Colors.black),
@@ -75,7 +99,7 @@ class test2State extends State<test2> {
                   textDirection: TextDirection.rtl,
                   style: TextStyle(fontSize: 17, color: Colors.black),
                 ),
-                SizedBox(height: 20.0),
+                // SizedBox(height: 5.0),
                 Text(
                   'مِرَاس حيث سهولة التعلّم',
                   textAlign: TextAlign.right,
@@ -103,7 +127,7 @@ class test2State extends State<test2> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '         بدء الأختبار',
+                            '         بدء الاختبار',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 19,

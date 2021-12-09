@@ -11,8 +11,6 @@ import 'package:meras/screen/Admin/widget/button_widget_edit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class Questions extends StatelessWidget {
-  final String testId;
-  Questions({required this.testId});
   final controller = Get.put(AddQuestionController());
   final int questionsLimit = 10;
 
@@ -21,7 +19,7 @@ class Questions extends StatelessWidget {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Text('الأسئلة المضافة'),
+          title: Text('إدارة الاختبار القصير'),
           centerTitle: true,
           backgroundColor: Colors.deepPurple[100],
         ),
@@ -29,8 +27,6 @@ class Questions extends StatelessWidget {
           child: BackgroundA(
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
-                      .collection('Tests')
-                      .doc(testId)
                       .collection('Questions')
                       .orderBy('createdAt', descending: true)
                       .snapshots(),
@@ -43,8 +39,8 @@ class Questions extends StatelessWidget {
                           child: StreamBuilder<
                                   DocumentSnapshot<Map<String, dynamic>>>(
                               stream: FirebaseFirestore.instance
-                                  .collection('Tests')
-                                  .doc(testId)
+                                  .collection('Global')
+                                  .doc('questions')
                                   .snapshots(),
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) return Loading();
@@ -91,8 +87,8 @@ class Questions extends StatelessWidget {
           backgroundColor: kPrimaryColor,
           onPressed: () async {
             await FirebaseFirestore.instance
-                .collection('Tests')
-                .doc(testId)
+                .collection('Global')
+                .doc('questions')
                 .get()
                 .then((snapshot) {
               if (snapshot.exists) {
@@ -112,7 +108,6 @@ class Questions extends StatelessWidget {
                 } else {
                   controller.clearData();
                   Get.to(AddQuestion(
-                    testId: testId,
                     isEditPage: false,
                     questionData: '',
                   ));
@@ -178,7 +173,7 @@ class Questions extends StatelessWidget {
                               ? Colors.deepPurple[50]!.withOpacity(0.7)
                               : Colors.white,
                           title: Text(
-                            '${index == 0 ? 'أ' : index == 1 ? 'ب' : index == 2 ? 'ج' : 'د'}. ${doc.data()['options'][index.toString()] == 'True' ? 'صح' : doc.data()['options'][index.toString()] == 'False' ? 'خطأ' : doc.data()['options'][index.toString()]}',
+                            '${index == 0 ? 'أ' : index == 1 ? 'ب' : index == 2 ? 'ج' : 'د'} ${doc.data()['options'][index.toString()] == 'True' ? 'صح' : doc.data()['options'][index.toString()] == 'False' ? 'خطأ' : doc.data()['options'][index.toString()]}',
                             textAlign: TextAlign.right,
                           ),
                         );
@@ -193,9 +188,7 @@ class Questions extends StatelessWidget {
                         onClicked: () async {
                           controller.initEditQuestionPage(doc);
                           Get.to(AddQuestion(
-                              testId: testId,
-                              isEditPage: true,
-                              questionData: doc.data()));
+                              isEditPage: true, questionData: doc.data()));
                         },
                       ),
                       SizedBox(width: 30),
@@ -204,7 +197,7 @@ class Questions extends StatelessWidget {
                         text: ' حذف  ',
                         onClicked: () async {
                           await controller.deleteQuestion(
-                              testId, doc.data()['id'], context);
+                              doc.data()['id'], context);
                         },
                       ),
                     ],

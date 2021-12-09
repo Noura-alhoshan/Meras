@@ -61,8 +61,7 @@ class AddQuestionController extends GetxController {
     return true;
   }
 
-  Future<void>? addQuestion(
-      String testId, bool isEditPage, BuildContext context,
+  Future<void>? addQuestion(bool isEditPage, BuildContext context,
       [String? questionId]) async {
     final String id = randomAlpha(20);
     Map<String, dynamic> data = {};
@@ -82,6 +81,8 @@ class AddQuestionController extends GetxController {
             ? {
                 '0': 'True',
                 '1': 'False',
+                '2': ' ',
+                '3': ' ',
               }
             : {
                 '0': answerOneController.text,
@@ -111,6 +112,8 @@ class AddQuestionController extends GetxController {
             ? {
                 '0': 'True',
                 '1': 'False',
+                '2': ' ',
+                '3': ' ',
               }
             : {
                 '0': answerOneController.text,
@@ -134,19 +137,18 @@ class AddQuestionController extends GetxController {
     }
     if (isEditPage) {
       await FirebaseFirestore.instance
-          .collection('Tests')
-          .doc(testId)
           .collection('Questions')
           .doc(questionId)
           .update(data);
     } else {
       await FirebaseFirestore.instance
-          .collection('Tests')
-          .doc(testId)
           .collection('Questions')
           .doc(id)
           .set(data);
-      await FirebaseFirestore.instance.collection('Tests').doc(testId).update({
+      await FirebaseFirestore.instance
+          .collection('Global')
+          .doc('questions')
+          .update({
         'numberOfQuestions': FieldValue.increment(1),
       });
     }
@@ -173,21 +175,18 @@ class AddQuestionController extends GetxController {
     return await snapshot.ref.getDownloadURL();
   }
 
-  Future<void>? deleteQuestion(
-      String testId, String questionId, BuildContext context) async {
+  Future<void>? deleteQuestion(String questionId, BuildContext context) async {
     var baseDialog = BaseAlertDialog(
         title: "",
         content: "هل أنت متأكد من حذف السؤال؟",
         yesOnPressed: () async {
           await FirebaseFirestore.instance
-              .collection('Tests')
-              .doc(testId)
               .collection('Questions')
               .doc(questionId)
               .delete();
           await FirebaseFirestore.instance
-              .collection('Tests')
-              .doc(testId)
+              .collection('Global')
+              .doc('questions')
               .update({
             'numberOfQuestions': FieldValue.increment(-1),
           });

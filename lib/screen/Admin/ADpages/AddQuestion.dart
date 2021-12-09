@@ -11,14 +11,10 @@ import 'package:meras/screen/Admin/ADpages/controllers/AddQuestionController.dar
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 
 class AddQuestion extends StatelessWidget {
-  final String testId;
   final bool isEditPage;
   final dynamic questionData;
 
-  AddQuestion(
-      {required this.testId,
-      required this.isEditPage,
-      required this.questionData});
+  AddQuestion({required this.isEditPage, required this.questionData});
   final controller = Get.put(AddQuestionController());
   @override
   Widget build(BuildContext context) {
@@ -128,7 +124,7 @@ class AddQuestion extends StatelessWidget {
                           maxLines: null,
                           textDirection: TextDirection.rtl,
                           inputFormatters: [
-                            LengthLimitingTextInputFormatter(150)
+                            LengthLimitingTextInputFormatter(60)
                           ],
                           textAlign: TextAlign.right,
                           validator: (value) {
@@ -237,7 +233,7 @@ class AddQuestion extends StatelessWidget {
                               maxLines: null,
                               textDirection: TextDirection.rtl,
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(150)
+                                LengthLimitingTextInputFormatter(41)
                               ],
                               textAlign: TextAlign.right,
                               validator: (value) {
@@ -284,7 +280,7 @@ class AddQuestion extends StatelessWidget {
                               maxLines: null,
                               textDirection: TextDirection.rtl,
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(150)
+                                LengthLimitingTextInputFormatter(41)
                               ],
                               textAlign: TextAlign.right,
                               validator: (value) {
@@ -331,7 +327,7 @@ class AddQuestion extends StatelessWidget {
                               maxLines: null,
                               textDirection: TextDirection.rtl,
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(150)
+                                LengthLimitingTextInputFormatter(41)
                               ],
                               textAlign: TextAlign.right,
                               validator: (value) {
@@ -378,7 +374,7 @@ class AddQuestion extends StatelessWidget {
                               maxLines: null,
                               textDirection: TextDirection.rtl,
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(150)
+                                LengthLimitingTextInputFormatter(41)
                               ],
                               textAlign: TextAlign.right,
                               validator: (value) {
@@ -415,11 +411,11 @@ class AddQuestion extends StatelessWidget {
                               if (controller.formKey.currentState!.validate() &&
                                   controller.validateForm()) {
                                 if (isEditPage) {
-                                  await controller.addQuestion(testId,
+                                  await controller.addQuestion(
                                       isEditPage, context, questionData['id']);
                                 } else {
                                   await controller.addQuestion(
-                                      testId, isEditPage, context);
+                                      isEditPage, context);
                                 }
                               }
                             }),

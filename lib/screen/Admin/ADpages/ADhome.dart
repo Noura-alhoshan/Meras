@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/components/adminRounded_button.dart';
+import 'package:meras/screen/Admin/ADpages/Questions.dart';
 import 'package:meras/screen/Admin/ADpages/Test.dart';
 import 'package:meras/screen/Admin/ADpages/manageGuidlines.dart';
 import 'package:meras/screen/Admin/services/navDraweradmin.dart';
@@ -94,8 +95,8 @@ class ADhome extends StatelessWidget {
                   child: Center(
                     child: FlatButton(
                       onPressed: () => {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Test()))
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Questions()))
                       },
                       padding: EdgeInsets.all(5.0),
                       child: Center(
