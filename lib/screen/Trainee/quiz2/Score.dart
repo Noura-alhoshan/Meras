@@ -17,6 +17,7 @@ import 'package:meras/screen/authenticate/background.dart';
 
 class ScoreScreen extends StatefulWidget {
   State<StatefulWidget> createState() => new _ScoreScreenState();
+  late List<Question> questions;
 }
 
 class _ScoreScreenState extends State<ScoreScreen> {
@@ -57,6 +58,17 @@ class _ScoreScreenState extends State<ScoreScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: TextButton(
                   onPressed: () {
+                    // for (var Question in questions) {
+                    setState(() {
+                      //     int x = 0;
+                      for (var i = 0; i < questions.length; i++) {
+                        questions[i].isLocked = false;
+                        CategoryPage.score = 0;
+                      }
+                      // x++;
+                    });
+                    // }
+
                     setState(() {
                       //       CategoryPage.restart = true;
                       //  Question.restart = true;

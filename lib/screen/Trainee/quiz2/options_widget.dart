@@ -86,7 +86,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
     setState(() {
       OptionsWidget.isSelected = option == question.selectedOption;
     });
-
+    if (!question.isLocked) return Colors.grey.shade200;
     if (!OptionsWidget.isSelected) {
       return Colors.grey.shade200;
     } else {

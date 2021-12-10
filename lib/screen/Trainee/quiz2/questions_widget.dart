@@ -5,7 +5,6 @@ import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Trainee/quiz2/Score.dart';
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
-import 'package:meras/screen/Trainee/quiz2/challenge_controller.dart';
 import 'package:meras/screen/Trainee/quiz2/option.dart';
 import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
 import 'package:meras/screen/Trainee/quiz2/question.dart';
@@ -15,7 +14,6 @@ class QuestionsWidget extends StatefulWidget {
   final PageController controller;
   final ValueChanged<int> onChangedPage;
   final ValueChanged<Option> onClickedOption;
-  final challengeController = ChallengeController();
   _QuestionsWidgetState createState() => new _QuestionsWidgetState();
 
   QuestionsWidget({
@@ -26,13 +24,6 @@ class QuestionsWidget extends StatefulWidget {
     required this.onClickedOption,
   }); // : super(key: key);
 }
-// void initState() {
-//   controller.addListener(() {
-//    challengeController.currentPage = controller.page!.toInt() + 1;
-//  });
-
-//  initState();
-// }
 
 class _QuestionsWidgetState extends State<QuestionsWidget> {
   int a = 0;

@@ -27,8 +27,10 @@ class QuestionNumbersWidget extends StatelessWidget {
         itemCount: questions.length,
         itemBuilder: (context, index) {
           final isSelected = question == questions[index];
+          final isanswered = questions[index].isLocked;
 
-          return buildNumber(index: index, isSelected: isSelected);
+          return buildNumber(
+              index: index, isSelected: isSelected, isAnswered: isanswered);
         },
       ),
     );
@@ -37,13 +39,18 @@ class QuestionNumbersWidget extends StatelessWidget {
   Widget buildNumber({
     required int index,
     required bool isSelected,
+    required bool isAnswered,
   }) {
-    final color = isSelected ? Colors.orange.shade300 : Colors.white;
-
     return GestureDetector(
       onTap: () => onClickedNumber(index),
       child: CircleAvatar(
-        backgroundColor: isSelected ? Colors.orange.shade300 : Colors.white,
+        backgroundColor: isAnswered
+            ? isSelected
+                ? Colors.orange.shade300
+                : Colors.green.shade300
+            : isSelected
+                ? Colors.orange.shade300
+                : Colors.white,
         child: Text(
           '${index + 1}',
           style: TextStyle(

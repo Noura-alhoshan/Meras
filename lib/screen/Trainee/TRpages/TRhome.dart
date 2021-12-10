@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:meras/constants.dart';
+import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
@@ -142,7 +143,7 @@ class _HomePageState extends State<TRhome> {
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
                     onPressed: () {
-                      Get.to(CategoryPage(questions: questions));
+                      Get.to(TRguidelines());
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),

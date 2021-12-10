@@ -323,8 +323,6 @@ final questions = [
       ],
       //solution: 'Ozone have 3 molecules of oxygen',
       selectedOption: Option(code: 'A', text: '', isCorrect: false)),
-];
-/*
   Question(
       text: test.fromSnapshot(test2.allResults[9]).q,
       textQ: test.fromSnapshot(test2.allResults[9]).textQ,
@@ -361,4 +359,3 @@ final questions = [
       //solution: 'Ozone have 3 molecules of oxygen',
       selectedOption: Option(code: 'A', text: '', isCorrect: false)),
 ];
-*/
