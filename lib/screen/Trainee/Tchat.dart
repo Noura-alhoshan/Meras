@@ -72,6 +72,11 @@ class _TRexploreScreenState extends State<Tchat> {
    String from="";
    int spl= fullname.indexOf(' ');
    String Fname= fullname.substring(0, spl); 
+   late String dot="";
+
+   if(document["lastFrom"] != document["Tid"] && document['unread'] ==true){
+                    dot='.';
+                  }
 
 if(document['lastMessage'].toString().contains("https://firebasestorage")){
    pic = "صورة" ;
@@ -86,8 +91,10 @@ if (shortM.contains("\n")){
   shortM= shortM.substring(0,shortM.indexOf("\n"));
 }
 
-if (document['lastFrom']==document['Tid'] )
+if (document['lastFrom']==document['Tid'] ){
    from='أنت: ';
+   dot='';
+   }
 else 
    from=Fname+": ";
    
@@ -120,6 +127,16 @@ else
               child: Material(
               child: InkWell(
                   onTap: (){  
+                  if(document["lastFrom"] != document["Tid"] && document['unread'] ==true){
+                    dot='';
+                    //FirebaseFirestore.instance
+     
+        FirebaseFirestore.instance
+                                      .collection('messages')
+                                      .doc(document["ID"])
+                                      .update({'unread': false});
+                                      //;});
+                  }
                     Navigator.of(context).push( MaterialPageRoute(
               builder: (context) => 
               Chat(currentUserId: document['Tid'], 
@@ -140,11 +157,33 @@ else
                   ,splashColor: Colors.deepPurple[800],
                   child: Card(
                 child: ListTile(
-                  leading:  Text( DateFormat('dd MMM kk:mm').format(
+                  leading: 
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: 
+                  TextSpan(
+                    text: 
+                    "$dot\n",   
+                    style: TextStyle(height: .27, fontSize: 120,color: Colors.red[700],),
+                   
+                  children: <TextSpan>[
+             TextSpan(
+               text:  DateFormat('kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
-                              int.parse(document['lastTime'].toString())
-                              )),
-                              style: TextStyle(height: 5.5, fontSize: 11.7,color: greyColor),),
+                              int.parse(document['lastTime'].toString()))),
+                style: TextStyle(height: 1.6, fontSize: 11.7,color: Colors.grey,fontWeight: FontWeight.normal),
+                ),
+          ]
+     ),
+),
+                  
+                  
+                 
+                  // DateFormat('dd MMM kk:mm').format(
+                  //         DateTime.fromMillisecondsSinceEpoch(
+                  //             int.parse(document['lastTime'].toString()))),
+                              
+                  //             style: TextStyle(height: 0.4, fontSize: 15,color: Colors.red),),
                   title: Text(
                     document['Cname'],
                     style: TextStyle(height: 2, fontSize: 15.9,color: primaryColor) ,

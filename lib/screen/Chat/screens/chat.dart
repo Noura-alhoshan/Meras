@@ -274,6 +274,7 @@ class _ChatScreenState extends State<_ChatScreen> {
       "ID": groupChatId,
       "peers": [id,peerId],
       'Time': DateTime.now(),
+      'unread':true,
 
     };
 

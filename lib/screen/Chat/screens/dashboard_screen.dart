@@ -9,7 +9,7 @@ import '../constants.dart';
 import 'chat.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-List<dynamic> friendList = [];
+List<dynamic> friendList = ['rR3m3ViSYcO21IV4va4Xb41XFuz2'];
 
 class DashboardScreen extends StatefulWidget {
   static const String id = "dashboard_screen";
@@ -45,48 +45,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<List<dynamic>> getFriendList(bool onLoad) async {
     await FirebaseFirestore.instance
-        .collection('users')
+        .collection('trainees')
         .doc(widget.currentUserId)
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
+
         //print('Document data: ${documentSnapshot.data()}');
         //setState(() {
         friendList = documentSnapshot.get('friends');
-        return friendList;
+        return ['rR3m3ViSYcO21IV4va4Xb41XFuz2'];
         //});
       } else {
-        return friendList;
+        return ['rR3m3ViSYcO21IV4va4Xb41XFuz2'];
       }
     });
-    return friendList;
+    return ['rR3m3ViSYcO21IV4va4Xb41XFuz2'];
   }
 
-  void goExit() async {
-    await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Confirmation'),
-            content: Text('Do you want to logout?'),
-            actions: <Widget>[
-              new TextButton(
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true).pop(
-                      false); // dismisses only the dialog and returns false
-                },
-                child: Text('No'),
-              ),
-              TextButton(
-                onPressed: () {
-                  ChatData.handleSignOut(context);
-                },
-                child: Text('Yes'),
-              ),
-            ],
-          );
-        });
-  }
+  // void goExit() async {
+  //   await showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text('Confirmation'),
+  //           content: Text('Do you want to logout?'),
+  //           actions: <Widget>[
+  //             new TextButton(
+  //               onPressed: () {
+  //                 Navigator.of(context, rootNavigator: true).pop(
+  //                     false); // dismisses only the dialog and returns false
+  //               },
+  //               child: Text('No'),
+  //             ),
+  //             TextButton(
+  //               onPressed: () {
+  //                 ChatData.handleSignOut(context);
+  //               },
+  //               child: Text('Yes'),
+  //             ),
+  //           ],
+  //         );
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +149,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: const Text('Add'),
                     onPressed: () {
                       Navigator.pop(context);
-                      if (friendController.text != '') _addNewFriend();
+                      //if (friendController.text != '') _addNewFriend();
                     })
               ],
             ),
@@ -156,44 +157,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         });
   }
 
-  void _addNewFriend() async {
-    friendList = await getFriendList(true);
-
-    FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: friendController.text)
-        .get()
-        .then((value) {
-      if (value.docs.length > 0) {
-        value.docs.forEach((result) {
-          bool alreadyExist = false;
-
-          for (var fr in friendList) {
-            if (fr == result.data()['ID']) alreadyExist = true;
-          }
-          if (alreadyExist == true) {
-            showToast("already friend", true);
-          } else {
-            friendList.add(result.data()['ID']);
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(widget.currentUserId)
-                .update({"friends": friendList}).whenComplete(() {
-              // Navigator.pop(context);
-              setState(() {
-                getFriendList(true);
-              });
-              // getFriendList(true);
-            });
-          }
-          friendController.text = "";
-        });
-      } else {
-        showToast("No user found with this email.", true);
-        Navigator.pop(context);
-      }
-    });
-  }
 
   showToast(var text, bool error) {
     // if (error == false){
@@ -273,13 +236,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
           return new ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            return (document.get('userId') == currentUserId)
+            return (document.get('ID') == currentUserId)
                 ? SizedBox(
                     height: 2,
                   )
                 : new ListTile(
                     leading: Material(
-                      child: document.get('photoUrl') != null
+                      child: document.get('Lname') == null
                           ? ChatWidget.widgetShowImages(
                               document.get('photoUrl'), 50)
                           : Icon(
@@ -290,8 +253,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(25.0)),
                       clipBehavior: Clip.hardEdge,
                     ),
-                    title: new Text(document.get('nickname')),
-                    subtitle: new Text(document.get('nickname')),
+                    title: new Text(document.get('Fname')),
+                    subtitle: new Text(document.get('Fname')),
                     trailing: Wrap(
                       children: [
                         Container(
@@ -318,7 +281,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           width: 5,
                         ),
                         StreamBuilder(
-                            stream: getUnread(document.get('userId')),
+                            stream: getUnread(document.get('ID')),
                             builder: (context,
                                 AsyncSnapshot<MessageData> unreadData) {
                               int unreadMsg =
@@ -436,8 +399,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Stream<QuerySnapshot> streamFriendList() {
     return FirebaseFirestore.instance
-        .collection(ChatDBFireStore.getDocName())
-        .where('userId', whereIn: friendList)
+        .collection('Coach')
+        .where('ID', whereIn: friendList)
         .snapshots();
 
     // friendList = documentSnapshot.data()['friends'];

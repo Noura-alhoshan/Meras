@@ -77,6 +77,12 @@ class _CchatState extends State<Cchat> {
    int spl= fullname.indexOf(' ');
    String Fname= fullname.substring(0, spl); 
 
+   late String dot="";
+
+   if(document["lastFrom"] != document["Cid"] && document['unread'] ==true){
+                    dot='.';
+                  }
+
 if(document['lastMessage'].toString().contains("https://firebasestorage")){
    pic = "صورة" ;
 } 
@@ -118,6 +124,18 @@ else
               child: Material(
               child: InkWell(
                   onTap: (){  
+if(document["lastFrom"] != document["Cid"] && document['unread'] ==true){
+                    dot='';
+                    //FirebaseFirestore.instance
+     
+        FirebaseFirestore.instance
+                                      .collection('messages')
+                                      .doc(document["ID"])
+                                      .update({'unread': false});
+                                      //;});
+                  }
+
+
                     Navigator.of(context).push( MaterialPageRoute(
               builder: (context) => 
               Chat(
@@ -139,11 +157,25 @@ else
                   ,splashColor: Colors.purple[200],
                   child: Card(
                 child: ListTile(
-                  leading:  Text( DateFormat('dd MMM kk:mm').format(
+                 leading: 
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: 
+                  TextSpan(
+                    text: 
+                    "$dot\n",   
+                    style: TextStyle(height: .27, fontSize: 120,color: Colors.red[700],),
+                   
+                  children: <TextSpan>[
+             TextSpan(
+               text:  DateFormat('kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
-                              int.parse(document['lastTime'].toString())
-                              )),
-                              style: TextStyle(height: 5, fontSize: 11.7,color: greyColor),),
+                              int.parse(document['lastTime'].toString()))),
+                style: TextStyle(height: 1.6, fontSize: 11.7,color: Colors.grey,fontWeight: FontWeight.normal),
+                ),
+          ]
+     ),
+),
                   title: Text(
                     document['Tname'],
                     style: TextStyle(height: 2, fontSize: 15.9),

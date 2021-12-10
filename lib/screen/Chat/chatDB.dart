@@ -15,7 +15,7 @@ class ChatDBFireStore {
   }
 
   static String getDocName() {
-    String dbUser = "users";
+    String dbUser = "Coach";//users
     return dbUser;
   }
 
