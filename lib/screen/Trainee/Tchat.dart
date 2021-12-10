@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/Chat/constants.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'package:meras/screen/Chat/screens/chat.dart';
@@ -70,6 +71,10 @@ class _TRexploreScreenState extends State<Tchat> {
    String fullname=document['Cname'];
    String shortM='';
    String pic="";
+   String from="";
+   int spl= fullname.indexOf(' ');
+   String Fname= fullname.substring(0, spl); 
+
 if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
    shortM =  "..."+ lla.substring(0,25) ;
@@ -78,8 +83,11 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
    pic = "صورة" ;
 }
 
-   int spl= fullname.indexOf(' ');
-   String Fname= fullname.substring(0, spl); 
+if (document['lastFrom']==document['Tid'] )
+   from='أنت: ';
+else 
+   from=Fname+": ";
+   
 
    late String tname;
    FirebaseFirestore.instance
@@ -114,22 +122,24 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
               
               ),);
                   }
-                  ,splashColor: Colors.purple[200],
+                  ,splashColor: Colors.deepPurple[800],
                   child: Card(
                 child: ListTile(
                   leading:  Text( DateFormat('dd MMM kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
                               int.parse(document['lastTime'].toString())
                               )),
-                              style: TextStyle(height: 5, fontSize: 11.7),),
+                              style: TextStyle(height: 5.5, fontSize: 11.7,color: greyColor),),
                   title: Text(
                     document['Cname'],
-                    style: TextStyle(height: 2, fontSize: 15.7),
+                    style: TextStyle(height: 2, fontSize: 15.9,color: primaryColor) ,
                     textAlign: TextAlign.right,
+                    
                   ),
-                  subtitle: (pic == "صورة") ? 
+                  subtitle: 
+                  (pic == "صورة") ? 
                   Text(
-                     "صورة",////////////////////////////////////////////////from who???
+                     from+" صورة",////////////////////////////////////////////////from who???
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
@@ -138,7 +148,7 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
                     // style: TextStyle(fontWeight: FontWeight.bold),
                   )
                  : document['lastMessage'].toString().length > 16? Text(
-                      shortM,////////////////////////////////////////////////from who???
+                      from+ shortM,////////////////////////////////////////////////from who???
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
@@ -146,7 +156,7 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
                     textAlign: TextAlign.right,
                     // style: TextStyle(fontWeight: FontWeight.bold),
                   ):  Text(
-                     document['lastMessage'] ,////////////////////////////////////////////////from who???
+                     from+ document['lastMessage'] ,////////////////////////////////////////////////from who???
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,

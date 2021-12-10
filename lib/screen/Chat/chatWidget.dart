@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
+import 'package:meras/Controllers/Loading.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'chatDB.dart';
@@ -109,56 +110,7 @@ class ChatWidget {
     }
   }
 
-  static Widget widgetLoginScreen(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Icon(
-                    Icons.message,
-                    color: Colors.greenAccent,
-                  ),
-                  height: 25.0,
-                ),
-                Text(
-                  ChatData.appName,
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 48.0,
-          ),
-          Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  ChatData.authUser(context);
-                },
-                child: Text(
-                  'SIGN IN WITH GOOGLE',
-                  style: TextStyle(fontSize: 16.0, color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.red,
-                    padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0))),
-          ),
-        ],
-      ),
-    );
-  }
+  
 
   static Widget getAppBar() {
     return AppBar(
@@ -179,21 +131,53 @@ class ChatWidget {
   }
 
   static Widget widgetFullPhoto(BuildContext context, String url) {
-    return Container(child: PhotoView(imageProvider: NetworkImage(url)));
+    return Container(color: Colors.black, child: PhotoView(imageProvider: NetworkImage(url)));
   }
+
 
   static Widget widgetChatBuildItem(BuildContext context, var listMessage,
       String id, int index, DocumentSnapshot document, String peerAvatar) {
     if (document.get('idFrom') == id) {
-      return Row(
+      return Container(
+        child: Row(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
+         
           document.get('type') == 0
               ? chatText(document.get('content'), id, listMessage, index, true)
               : chatImage(context, id, listMessage, document.get('content'),
-                  index, true)
+                  index, true),
+               
+              Align(
+              alignment: Alignment.bottomRight,
+              child:
+                  Container(
+                    //padding:EdgeInsets.symmetric(horizontal: 0, vertical: 0), 
+
+                    child:  Text(
+                      DateFormat('kk:mm').format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                              int.parse(document.get('timestamp'))))+"  ",
+                      style: TextStyle(
+                          color: greyColor,
+                          fontSize: 11.5,
+                          fontStyle: FontStyle.italic),
+                          textAlign: TextAlign.left,
+                    ),
+                   margin: EdgeInsets.only(right: 0, top: 0.0, bottom: 10.0),))
+                 // ): Container()
+
+                 ])
+                 
         ],
         mainAxisAlignment: MainAxisAlignment.end,
-      );
+
+       
+      ));
+
+      
     } else {
       return Container(
         child: Column(
@@ -218,24 +202,26 @@ class ChatWidget {
             ),
 
             // Time
-            ChatData.isLastMessageLeft(listMessage, id, index)
-                ? Container(
+           // ChatData.isLastMessageLeft(listMessage, id, index)?
+                Container(
                     child: Text(
-                      DateFormat('dd MMM kk:mm').format(
+                      DateFormat('kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
                               int.parse(document.get('timestamp')))),
                       style: TextStyle(
                           color: greyColor,
-                          fontSize: 12.0,
+                          fontSize: 11.3,
                           fontStyle: FontStyle.italic),
                     ),
                     margin: EdgeInsets.only(left: 50.0, top: 5.0, bottom: 5.0),
                   )
-                : Container()
+               // : Container(),
+
+                 
           ],
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
-        margin: EdgeInsets.only(bottom: 10.0),
+        //margin: EdgeInsets.only(bottom: 10.0),
       );
     }
   }
@@ -249,16 +235,14 @@ class ChatWidget {
     return Flexible(
       child: groupChatId == ''
           ? Center(
-              child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(themeColor)))
+              child: Loading())
+                  //valueColor: AlwaysStoppedAnimation<Color>(themeColor)))
           : StreamBuilder<QuerySnapshot>(
               stream: _streamChatData,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
-                      child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(themeColor)));
+                      child: Loading());
                 } else {
                   listMessage = snapshot.data!.docs;
                   return ListView.builder(
@@ -293,39 +277,42 @@ class ChatWidget {
           }
         },
         text: chatContent,
-        style: TextStyle(color: logUserMsg ? primaryColor : Colors.white),///here sarah
+        
+        style: TextStyle(color: logUserMsg ? Colors.black : Colors.white),///here sarah
         linkStyle: TextStyle(color: Colors.blueGrey),
       ),
-      // Text(
-      //   chatContent,
-      //   style: TextStyle(color: logUserMsg ? primaryColor : Colors.white),
-      // ),
+      
       padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-      width: kIsWeb ? 400 : 200.0,
+     // width: kIsWeb ? 400 : 200.0,
+       constraints: BoxConstraints( maxWidth: 200),///////////////////////////////sarah
       decoration: BoxDecoration(
-          color: logUserMsg ? greyColor2 : primaryColor,
+          color: logUserMsg ? greyColor2 : Colors.purple[900],
           borderRadius: BorderRadius.circular(8.0)),
       margin: logUserMsg
           ? EdgeInsets.only(
               bottom: ChatData.isLastMessageRight(listMessage, id, index)
-                  ? 20.0
-                  : 10.0,
-              right: 10.0)
+                  ? 5.0
+                  : 5.0,
+              right: 0.0)
           : EdgeInsets.only(left: 10.0),
+          
     );
+    
   }
 
   static Widget chatImage(BuildContext context, String id, var listMessage,
       String chatContent, int index, bool logUserMsg) {
     return Container(
+      
       child: ElevatedButton(
           child: Material(
             child: kIsWeb
                 ? widgetShowImages(chatContent, 250)
                 : widgetShowImages(chatContent, 100),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            //borderRadius: BorderRadius.all(Radius.circular(10.0)),
             clipBehavior: Clip.hardEdge,
           ),
+          
           onPressed: () {
             Navigator.push(
                 context,
@@ -336,31 +323,41 @@ class ChatWidget {
       margin: logUserMsg
           ? EdgeInsets.only(
               bottom: ChatData.isLastMessageRight(listMessage, id, index)
-                  ? 20.0
+                  ? 10.0
                   : 10.0,
               right: 10.0)
           : EdgeInsets.only(left: 10.0),
+    //color: Colors.red,
     );
   }
 
   // Show Images from network
   static Widget widgetShowImages(String imageUrl, double imageSize) {
     return CachedNetworkImage(
+      color: Colors.red,// primaryColor,
       imageUrl: imageUrl,
-      imageBuilder: (context, imageProvider) => Container(
+      imageBuilder: (context, imageProvider) => 
+      Container(
         decoration: BoxDecoration(
+         color: Colors.transparent,
+          //backgroundBlendMode:Colors.black ,
           image: DecorationImage(
             image: imageProvider,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             //colorFilter:ColorFilter.mode(Colors.red, BlendMode.colorBurn)
           ),
         ),
+     
+      
       ),
+     
       height: imageSize,
       width: imageSize,
-      placeholder: (context, url) => CircularProgressIndicator(),
+      placeholder: (context, url) =>  CircularProgressIndicator( 
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple)),/////////////////////////////////////////
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
+    
   }
 
   static Widget widgetShowText(
@@ -373,3 +370,60 @@ class ChatWidget {
     );
   }
 }
+
+
+
+
+
+
+
+// static Widget widgetLoginScreen(BuildContext context) {
+  //   return Padding(
+  //     padding: EdgeInsets.symmetric(horizontal: 24.0),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       crossAxisAlignment: CrossAxisAlignment.stretch,
+  //       children: <Widget>[
+  //         Container(
+  //           child: Row(
+  //             crossAxisAlignment: CrossAxisAlignment.center,
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: <Widget>[
+  //               Container(
+  //                 child: Icon(
+  //                   Icons.message,
+  //                   color: Colors.greenAccent,
+  //                 ),
+  //                 height: 25.0,
+  //               ),
+  //               Text(
+  //                 ChatData.appName,
+  //                 style: TextStyle(
+  //                   fontSize: 25.0,
+  //                   fontWeight: FontWeight.w900,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 48.0,
+  //         ),
+  //         Center(
+  //           child: ElevatedButton(
+  //               onPressed: () {
+  //                 ChatData.authUser(context);
+  //               },
+  //               child: Text(
+  //                 'SIGN IN WITH GOOGLE',
+  //                 style: TextStyle(fontSize: 16.0, color: Colors.white),
+  //               ),
+  //               style: ElevatedButton.styleFrom(
+  //                   primary: Colors.red,
+  //                   onPrimary: Colors.red,
+  //                   padding: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0))),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }

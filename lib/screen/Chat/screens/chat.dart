@@ -41,18 +41,21 @@ class Chat extends StatelessWidget {
     return new Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+         iconTheme: IconThemeData(
+    color: Colors.white, //change your color here
+  ),
         leading: null,
         actions: [
         Padding( padding:EdgeInsets.symmetric(horizontal: 17), 
-        child: IconButton (icon: Icon (Icons.call), onPressed: () 
+        child: IconButton (icon: Icon (Icons.call), color: themeColor2, 
+        onPressed: () 
         { launch("tel://0555015098"); },//change the phone
         ),
-        
          )
   ],
-        title: Text(peerName, textAlign: TextAlign.center ,),
+        title: Text(peerName, textAlign: TextAlign.center ,style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         //centerTitle: true,
-        backgroundColor: Colors.purple[900],//find the color
+        backgroundColor: Colors.deepPurple[100],//find the color
       ),
       body: new _ChatScreen(
         currentUserId: currentUserId,
@@ -248,15 +251,16 @@ class _ChatScreenState extends State<_ChatScreen> {
             'idFrom': id,
             'idTo': peerId,
             'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
-            'content': content,
+            'content': content.trim(),
             'type': type
           },
         );
       });
        Map<String, dynamic> Demo = {
-      "lastMessage": content,
+      "lastMessage": content.trim(),
+      "lastFrom": id,
       'Cname': Cname,
-      "Cid":peerId,
+      "Cid":Cid,
       "Tid":Tid,
       'Tname': Tname,
       'lastTime': DateTime.now().millisecondsSinceEpoch.toString(),
@@ -318,7 +322,7 @@ class _ChatScreenState extends State<_ChatScreen> {
           ? Container(
               child: Center(
                 child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(themeColor)),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple)),
               ),
               color: Colors.white.withOpacity(0.8),
             )

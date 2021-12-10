@@ -9,6 +9,7 @@ import 'package:meras/screen/Chat/screens/chat.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundSearch.dart';
 import 'package:meras/screen/authenticate/background.dart';
+import 'package:meras/screen/home/CnavDrawer.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 
 import 'COpages/CoachDate.dart';
@@ -34,7 +35,7 @@ class _CchatState extends State<Cchat> {
  final User? user = auth.currentUser;
     final Muid = user!.uid;
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: CNavDrawer(),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -78,9 +79,13 @@ class _CchatState extends State<Cchat> {
  int spl= fullname.indexOf(' ');
    String Fname= fullname.substring(0, spl); 
    String shortM='';
+String pic="";
 if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
    shortM =  "..."+ lla.substring(0,25) ;
+}
+if(document['lastMessage'].toString().contains("https://firebasestorage")){
+   pic = "صورة" ;
 }
 
    late String tname='';
@@ -102,7 +107,8 @@ if(document['lastMessage'].toString().length > 20){
                   onTap: (){  
                     Navigator.of(context).push( MaterialPageRoute(
               builder: (context) => 
-              Chat(currentUserId: document['Cid'], 
+              Chat(
+              currentUserId: document['Cid'], 
               peerAvatar: "https://i.postimg.cc/PqFhPxLy/TF.png",
               peerId:document['Tid'], 
               peerName: document['Tname'] ,
@@ -126,26 +132,36 @@ if(document['lastMessage'].toString().length > 20){
                               style: TextStyle(height: 5, fontSize: 11.7),),
                   title: Text(
                     document['Tname'],
-                    style: TextStyle(height: 2, fontSize: 15.7),
+                    style: TextStyle(height: 2, fontSize: 15.9),
                     textAlign: TextAlign.right,
                   ),
-                  subtitle: document['lastMessage'].toString().length > 16 ? Text(
-                     shortM,////////////////////////////////////////////////from who???
+                  subtitle: (pic == "صورة") ? 
+                  Text(
+                     "صورة",////////////////////////////////////////////////from who???
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                    style: TextStyle(height: 2, fontSize: 15,color: Colors.blue),
+                    textAlign: TextAlign.right,
+                    // style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                 : document['lastMessage'].toString().length > 16? Text(
+                      shortM,////////////////////////////////////////////////from who???
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                     style: TextStyle(height: 2, fontSize: 15),
                     textAlign: TextAlign.right,
                     // style: TextStyle(fontWeight: FontWeight.bold),
-                  ) :  Text(
-                      document['lastMessage'],////////////////////////////////////////////////from who???
+                  ):  Text(
+                     document['lastMessage'] ,////////////////////////////////////////////////from who???
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                     style: TextStyle(height: 2, fontSize: 15),
                     textAlign: TextAlign.right,
                     // style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  ) ,
                   trailing: 
                        Image.asset("assets/images/TF.png"),
                       // Image.asset("assets/images/driver-male.jpg"),
