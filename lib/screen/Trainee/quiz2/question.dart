@@ -8,6 +8,8 @@ class Question {
   final List<Option> options;
   // final String solution;
   bool isLocked;
+  //bool restart;
+
   Option selectedOption;
 
   Question({
@@ -16,6 +18,7 @@ class Question {
     required this.options,
     //  required this.solution,
     this.isLocked = false,
+    // this.restart = false,
     required this.selectedOption,
   });
 }

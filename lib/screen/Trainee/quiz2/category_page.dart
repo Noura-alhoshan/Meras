@@ -8,7 +8,7 @@ import 'package:meras/screen/Trainee/quiz2/questions_widget.dart';
 import 'package:get/get.dart';
 
 class CategoryPage extends StatefulWidget {
-  //  static int score = 0;
+  //static bool restart = false;
 
   static int score = 0;
   final List<Question> questions;
@@ -108,6 +108,13 @@ class _CategoryPageState extends State<CategoryPage> {
         }
       });
     }
+    // if (CategoryPage.restart) {
+    //   setState(() {
+    //     question.isLocked = false;
+    //    question.selectedOption = option;
+    // CategoryPage.restart = false;
+    //  });
+    //}
   }
 
   void nextQuestion({required int index, bool jump = false}) {

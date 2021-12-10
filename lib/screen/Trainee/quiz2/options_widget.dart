@@ -6,7 +6,7 @@ import 'package:meras/screen/Trainee/quiz2/utils.dart';
 class OptionsWidget extends StatefulWidget {
   final Question question;
   final ValueChanged<Option> onClickedOption;
-
+  static bool isSelected = false;
 /////*
   const OptionsWidget({
     //Key key,
@@ -83,9 +83,11 @@ class _OptionsWidgetState extends State<OptionsWidget> {
   /// }
 
   Color getColorForOption(Option option, Question question) {
-    final isSelected = option == question.selectedOption;
+    setState(() {
+      OptionsWidget.isSelected = option == question.selectedOption;
+    });
 
-    if (!isSelected) {
+    if (!OptionsWidget.isSelected) {
       return Colors.grey.shade200;
     } else {
       return option.isCorrect ? Colors.green : Colors.red;

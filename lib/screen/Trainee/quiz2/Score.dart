@@ -8,6 +8,7 @@ import 'package:meras/screen/Trainee/TRcategory.dart';
 import 'package:meras/screen/Trainee/TRpages/TRhome.dart';
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
 import 'package:meras/screen/Trainee/quiz2/options_widget.dart';
+import 'package:meras/screen/Trainee/quiz2/question.dart';
 import 'package:meras/screen/Trainee/quiz2/questions.dart';
 import 'package:meras/screen/Trainee/quiz2/startPage.dart';
 import 'package:meras/screen/authenticate/background.dart';
@@ -57,6 +58,9 @@ class _ScoreScreenState extends State<ScoreScreen> {
               child: TextButton(
                   onPressed: () {
                     setState(() {
+                      //       CategoryPage.restart = true;
+                      //  Question.restart = true;
+                      //     OptionsWidget.re = false;
                       //  CategoryPage.score = 0;
                       //
                       //  test2.allResults = [];
