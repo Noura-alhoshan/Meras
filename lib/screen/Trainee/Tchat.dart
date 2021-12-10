@@ -45,15 +45,12 @@ class _TRexploreScreenState extends State<Tchat> {
                 stream:
                 FirebaseFirestore.instance
                           .collection("messages")
-                          .where('peers', arrayContains: Muid)
+                           .orderBy('Time', descending: true)
+                            .where('peers', arrayContains: Muid)
                           .snapshots(),
-                    //FirebaseFirestore.instance.collection('Coach').snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) return Loading();
                   return ListView.builder(
-                    //physics: const NeverScrollableScrollPhysics(), //<--here
-                    //controller: _scrollController,
-
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) =>
                         _buildListItem(context, (snapshot.data!).docs[index]),
@@ -81,9 +78,13 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
 } 
 else if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
-   shortM =  "..."+ lla.substring(0,25) ;
+   shortM =  "..."+ lla.substring(0,18) ;
 }
 else shortM= document['lastMessage'];
+
+if (shortM.contains("\n")){
+  shortM= shortM.substring(0,shortM.indexOf("\n"));
+}
 
 if (document['lastFrom']==document['Tid'] )
    from='أنت: ';

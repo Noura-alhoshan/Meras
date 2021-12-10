@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -271,7 +272,8 @@ class _ChatScreenState extends State<_ChatScreen> {
       'Tname': Tname,
       'lastTime': DateTime.now().millisecondsSinceEpoch.toString(),
       "ID": groupChatId,
-      "peers": [id,peerId]
+      "peers": [id,peerId],
+      'Time': DateTime.now(),
 
     };
 
@@ -358,10 +360,16 @@ class _ChatScreenState extends State<_ChatScreen> {
           Flexible(
             child: Container(
               child: TextField(
+               // maxLength: 1000,
+                
+                 inputFormatters:[
+      LengthLimitingTextInputFormatter(1000),
+    ],
+    
                 maxLines: null,
                 style: TextStyle(color: primaryColor, fontSize: 15.0,), textAlign: TextAlign.right,
                 controller: textEditingController,
-                 textDirection: TextDirection.rtl,
+                textDirection: TextDirection.rtl,
                 decoration: InputDecoration.collapsed(
                   
                   hintText: '..اكتب رسالتك',
@@ -371,6 +379,7 @@ class _ChatScreenState extends State<_ChatScreen> {
               ),
             ),
           ),
+
 
           // Button send message
           

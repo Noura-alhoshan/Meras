@@ -46,6 +46,7 @@ class _CchatState extends State<Cchat> {
                 stream:
                 FirebaseFirestore.instance
                           .collection("messages")
+                           .orderBy('Time', descending: true)
                           .where('peers', arrayContains: Muid)
                           .snapshots(),
                     //FirebaseFirestore.instance.collection('Coach').snapshots(),
@@ -81,9 +82,13 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
 } 
 else if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
-   shortM =  "..."+ lla.substring(0,25) ;
+   shortM =  "..."+ lla.substring(0,18) ;
 }
 else shortM= document['lastMessage'];
+
+if (shortM.contains("\n")){
+  shortM= shortM.substring(0,shortM.indexOf("\n"));
+}
 
 if (document['lastFrom']==document['Cid'] )
    from='أنت: ';
@@ -104,6 +109,8 @@ else
   }).catchError((e) {
     print(e);
   });
+
+  //print("here is the short $shortM");
     return SingleChildScrollView(    
           child: Container(
               height: 104,

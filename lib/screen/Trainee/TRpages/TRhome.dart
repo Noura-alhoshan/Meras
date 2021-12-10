@@ -155,7 +155,8 @@ FirebaseFirestore.instance
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(29))),
+                                borderRadius: BorderRadius.circular(29)
+                                )),
                         backgroundColor:
                             MaterialStateProperty.all(Colors.deepPurple[50])),
                     child: Row(
