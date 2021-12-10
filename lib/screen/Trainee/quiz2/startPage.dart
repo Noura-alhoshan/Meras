@@ -54,7 +54,7 @@ class test2State extends State<test2> {
           child: Background(
             child: Column(
               children: <Widget>[
-                if (test2.allResults.length <
+                if (test2.allResults.length ==
                     9) ///////////////////////////////////////////
                   Container(
                       child: Column(children: <Widget>[
@@ -75,7 +75,7 @@ class test2State extends State<test2> {
 
                     SizedBox(height: 20.0),
                     Text(
-                      'الأختبار يتكون من 10 اسئلة ولا يوجد وقت محدد ',
+                      ' الأختبار يتكون من 10 اسئلة ولا يمكنك تغيير الأجابة ',
                       textDirection: TextDirection.rtl,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 17, color: Colors.black),
@@ -139,7 +139,7 @@ class test2State extends State<test2> {
                   Container(
                       child: Column(children: <Widget>[
                     //////////////// here to manage the minumm limit
-                    SizedBox(height: 90.0),
+                    SizedBox(height: 150.0),
                     Image.asset(
                       "assets/images/Quiz2.png",
                       height: 250,

@@ -26,7 +26,14 @@ class _ScoreScreenState extends State<ScoreScreen> {
       child: Background(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 200.0),
+            //      SizedBox(height: 200.0),
+            SizedBox(height: 150.0),
+            Image.asset(
+              "assets/images/score.png",
+              height: 250,
+            ),
+            SizedBox(height: 10.0),
+
             Text('نتيجة الأختبار ',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -34,14 +41,14 @@ class _ScoreScreenState extends State<ScoreScreen> {
                   fontSize: 30,
                   color: kPrimaryColor,
                 )),
-            SizedBox(height: 20.0),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
+            // SizedBox(height: 20.0),
             Text(
               CategoryPage.score.toString() + '0' + '/' + '100',
               textAlign: TextAlign.right,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 17,
+                  fontSize: 20,
                   color: Colors.black),
             ),
             SizedBox(height: 20.0),
@@ -60,7 +67,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                     ));
                   },
                   style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(Size(120, 80)),
+                      minimumSize: MaterialStateProperty.all(Size(120, 60)),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(29))),

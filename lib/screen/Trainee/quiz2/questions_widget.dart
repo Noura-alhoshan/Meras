@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/constants.dart';
+import 'package:meras/screen/Admin/services/BaseAlertDialog.dart';
 import 'package:meras/screen/Admin/widget/FullScreen.dart';
 import 'package:meras/screen/Trainee/quiz2/Score.dart';
 import 'package:meras/screen/Trainee/quiz2/category_page.dart';
@@ -67,12 +68,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                   ),
                   dark: false,
                 )),
-            //
-            //
-            //   Text(
-            //  question.text,
-            //    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            //  ),
+
             SizedBox(height: 8),
             Container(
               alignment: Alignment.topRight,
@@ -115,27 +111,40 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'السؤال التالي' + a.toString(),
+                          'السؤال التالي',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
-                        //    SizedBox(width: 30),
-                        //  Image.asset('assets/icons/SteeringWheel1.png',
-                        //       width: 60, height: 60)
                       ],
                     ))
               else
                 TextButton(
                     onPressed: () {
-                      //
-                      widget.controller
-                          .jumpToPage(widget.controller.page!.toInt() + 1);
-                      // controller.dispose();
+                      var baseDialog = BaseAlertDialog(
+                          title: "",
+                          content: "هل أنت متأكد من إنهاء الأختبار؟",
+                          yesOnPressed: () async {
+                            //
+                            widget.controller.jumpToPage(
+                                widget.controller.page!.toInt() + 1);
+                            // controller.dispose();
 
-                      Get.to(ScoreScreen());
-                      //controller.dispose();
+                            Get.to(ScoreScreen());
+                            //controller.dispose();
+                            // Navigator.of(context, rootNavigator: true)
+                            //     .pop('dialog');
+                          },
+                          noOnPressed: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                          },
+                          yes: "نعم",
+                          no: "لا");
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => baseDialog);
                     },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(100, 50)),
@@ -154,9 +163,6 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
-                        //    SizedBox(width: 30),
-                        //  Image.asset('assets/icons/SteeringWheel1.png',
-                        //       width: 60, height: 60)
                       ],
                     )),
             if (a == 0)
@@ -168,7 +174,6 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
 
                     widget.controller
                         .jumpToPage(widget.controller.page!.toInt() + 1);
-                    //Get.to(ScoreScreen());
                   },
                   style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(Size(100, 50)),
@@ -187,9 +192,6 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
-                      //    SizedBox(width: 30),
-                      //  Image.asset('assets/icons/SteeringWheel1.png',
-                      //       width: 60, height: 60)
                     ],
                   ))
 
