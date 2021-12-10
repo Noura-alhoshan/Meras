@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Chat/constants.dart';
+import 'package:meras/screen/Chat/screens/Backg.dart';
 import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
 import 'package:meras/screen/home/navDrawer.dart';
 import 'package:meras/screen/Chat/screens/chat.dart';
@@ -39,7 +40,7 @@ class _TRexploreScreenState extends State<Tchat> {
       ),
       body: Container(
         child: SingleChildScrollView(
-          child: BackgroundLO22(
+          child: Backg(
             child: StreamBuilder<QuerySnapshot>(
                 stream:
                 FirebaseFirestore.instance
@@ -75,13 +76,14 @@ class _TRexploreScreenState extends State<Tchat> {
    int spl= fullname.indexOf(' ');
    String Fname= fullname.substring(0, spl); 
 
-if(document['lastMessage'].toString().length > 20){
+if(document['lastMessage'].toString().contains("https://firebasestorage")){
+   pic = "صورة" ;
+} 
+else if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
    shortM =  "..."+ lla.substring(0,25) ;
 }
-if(document['lastMessage'].toString().contains("https://firebasestorage")){
-   pic = "صورة" ;
-}
+else shortM= document['lastMessage'];
 
 if (document['lastFrom']==document['Tid'] )
    from='أنت: ';
@@ -96,6 +98,17 @@ else
       .get()
       .then((ds) {
     tname = ds['Fname'] + ' ' + ds['Lname'];
+  }).catchError((e) {
+    print(e);
+  });
+
+    late String phe='';
+   FirebaseFirestore.instance
+      .collection('Coach')
+      .doc(document['Cid'])
+      .get()
+      .then((ds) {
+    phe = ds['Phone Number'];
   }).catchError((e) {
     print(e);
   });
@@ -115,7 +128,8 @@ else
               Cname:document['Cname'] ,
               Tname: tname,
               Tid: document['Tid'],
-              Cid: document['Cid']
+              Cid: document['Cid'],
+              phone: phe,
               ),
               
 
@@ -136,34 +150,40 @@ else
                     textAlign: TextAlign.right,
                     
                   ),
-                  subtitle: 
-                  (pic == "صورة") ? 
-                  Text(
-                     from+" صورة",////////////////////////////////////////////////from who???
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                    style: TextStyle(height: 2, fontSize: 15,color: Colors.blue),
+subtitle:  
+                  (pic == "صورة")? 
+                  RichText(
                     textAlign: TextAlign.right,
-                    // style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                 : document['lastMessage'].toString().length > 16? Text(
-                      from+ shortM,////////////////////////////////////////////////from who???
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                    style: TextStyle(height: 2, fontSize: 15),
+                    text: 
+                  TextSpan(
+                    text: 
+                    from,   
+                    style: TextStyle(height: 2, fontSize: 15,color: Colors.green[700],),//fontWeight: FontWeight.bold
+                   
+                  children: <TextSpan>[
+             TextSpan(
+               text: "صورة",
+                style: TextStyle(height: 2, fontSize: 15,color: Colors.blue,fontWeight: FontWeight.normal),
+                ),
+          ]
+     ),
+)
+                 :  RichText(
                     textAlign: TextAlign.right,
-                    // style: TextStyle(fontWeight: FontWeight.bold),
-                  ):  Text(
-                     from+ document['lastMessage'] ,////////////////////////////////////////////////from who???
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                    style: TextStyle(height: 2, fontSize: 15),
-                    textAlign: TextAlign.right,
-                    // style: TextStyle(fontWeight: FontWeight.bold),
-                  ) ,
+                    text: 
+                  TextSpan(
+                    text: 
+                    from,   
+                    style: TextStyle(height: 2, fontSize: 15,color: Colors.green[700],),
+                   
+                  children: <TextSpan>[
+             TextSpan(
+               text: shortM,
+                style: TextStyle(height: 2, fontSize: 15,color: Colors.grey,fontWeight: FontWeight.normal),
+                ),
+          ]
+     ),
+),
                   trailing: 
                        Image.asset("assets/images/Female.png"),
                     

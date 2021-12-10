@@ -13,8 +13,7 @@ import 'package:meras/screen/Trainee/TRpages/SendRequest.dart';
 import 'package:meras/screen/Trainee/TRpages/TRnotification.dart';
 import 'package:meras/screen/authenticate/sign_in.dart';
 import 'package:meras/screen/home/home.dart';
-import 'package:meras/services/chat2.dart';
-import 'package:meras/services/chatP.dart';
+
 import 'screen/Admin/ADcategory.dart';
 import 'screen/Chat/chatWidget.dart';
 import 'screen/Chat/screens/dashboard_screen.dart';
@@ -25,7 +24,7 @@ import 'package:provider/provider.dart';
 import 'package:meras/controllers/MyUser.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'services/rooms.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //check the pull

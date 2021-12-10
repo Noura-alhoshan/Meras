@@ -98,7 +98,8 @@ class ChatWidget {
                             Cname: "nnn",
                             Tname: "nnnnn",
                             Tid: '',
-                            Cid: "kk"
+                            Cid: "kk",
+                            phone: '',
                           )));
             },
             style: ElevatedButton.styleFrom(
@@ -120,15 +121,6 @@ class ChatWidget {
     );
   }
 
-  static Widget widgetWelcomeScreen(BuildContext context) {
-    return Center(
-      child: Container(
-          child: Text(
-        ChatData.appName,
-        style: TextStyle(fontSize: 28),
-      )),
-    );
-  }
 
   static Widget widgetFullPhoto(BuildContext context, String url) {
     return Container(color: Colors.black, child: PhotoView(imageProvider: NetworkImage(url)));
@@ -425,5 +417,18 @@ class ChatWidget {
   //         ),
   //       ],
   //     ),
+  //   );
+  // }
+
+
+
+
+  //static Widget widgetWelcomeScreen(BuildContext context) {
+  //   return Center(
+  //     child: Container(
+  //         child: Text(
+  //       ChatData.appName,
+  //       style: TextStyle(fontSize: 28),
+  //     )),
   //   );
   // }

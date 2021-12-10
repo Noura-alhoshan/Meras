@@ -20,6 +20,7 @@ class Chat extends StatelessWidget {
   final String Tname;
   final String Tid;
   final String Cid;
+  final String phone;
    
   static const String id = "chat";
 
@@ -32,12 +33,15 @@ class Chat extends StatelessWidget {
       required this.Cname,
       required this.Tname,
       required this.Tid,
-       required this.Cid,
+      required this.Cid,
+       required this.phone,
+      
       })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,11 +53,13 @@ class Chat extends StatelessWidget {
         Padding( padding:EdgeInsets.symmetric(horizontal: 17), 
         child: IconButton (icon: Icon (Icons.call), color: themeColor2, 
         onPressed: () 
-        { launch("tel://0555015098"); },//change the phone
+        { 
+          print(phone);
+          launch("tel://$phone"); },//change the phone
         ),
          )
   ],
-        title: Text(peerName, textAlign: TextAlign.center ,style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: Text(peerName, textAlign: TextAlign.center ,style: TextStyle(color: Colors.white, )),//fontWeight: FontWeight.bold)),
         //centerTitle: true,
         backgroundColor: Colors.deepPurple[100],//find the color
       ),

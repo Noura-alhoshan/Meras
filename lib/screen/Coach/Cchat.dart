@@ -1,18 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:meras/Controllers/Loading.dart';
-import 'package:meras/screen/Admin/widget/BackgroundA.dart';
+import 'package:meras/screen/Chat/constants.dart';
+import 'package:meras/screen/Chat/screens/Backg.dart';
 import 'package:meras/screen/Chat/screens/chat.dart';
-import 'package:meras/screen/Trainee/TRpages/BackgroundLo22.dart';
-import 'package:meras/screen/Trainee/TRpages/BackgroundSearch.dart';
-import 'package:meras/screen/authenticate/background.dart';
 import 'package:meras/screen/home/CnavDrawer.dart';
-import 'package:meras/screen/home/navDrawer.dart';
 
-import 'COpages/CoachDate.dart';
 
 
 class Cchat extends StatefulWidget {
@@ -46,7 +41,7 @@ class _CchatState extends State<Cchat> {
       ),
       body: Container(
         child: SingleChildScrollView(
-          child: BackgroundLO22(
+          child: Backg(
             child: StreamBuilder<QuerySnapshot>(
                 stream:
                 FirebaseFirestore.instance
@@ -74,27 +69,38 @@ class _CchatState extends State<Cchat> {
 
 
  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-   
    String fullname=document['Tname'];
- int spl= fullname.indexOf(' ');
-   String Fname= fullname.substring(0, spl); 
    String shortM='';
-String pic="";
-if(document['lastMessage'].toString().length > 20){
+   String pic="";
+   String from="";
+   int spl= fullname.indexOf(' ');
+   String Fname= fullname.substring(0, spl); 
+
+if(document['lastMessage'].toString().contains("https://firebasestorage")){
+   pic = "صورة" ;
+} 
+else if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
    shortM =  "..."+ lla.substring(0,25) ;
 }
-if(document['lastMessage'].toString().contains("https://firebasestorage")){
-   pic = "صورة" ;
-}
+else shortM= document['lastMessage'];
+
+if (document['lastFrom']==document['Cid'] )
+   from='أنت: ';
+else 
+   from=Fname+": ";
+   
+   
 
    late String tname='';
+   late String pn='';
    FirebaseFirestore.instance
       .collection('trainees')
       .doc(document['Tid'])
       .get()
       .then((ds) {
     tname = ds['Fname'] + ' ' + ds['Lname'];
+    pn=ds['Phone Number'];
   }).catchError((e) {
     print(e);
   });
@@ -116,6 +122,7 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
               Tname: tname,
               Tid: document['Tid'],
               Cid: document['Cid'],  
+              phone: pn,
               ),
               
 
@@ -129,70 +136,51 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
                           DateTime.fromMillisecondsSinceEpoch(
                               int.parse(document['lastTime'].toString())
                               )),
-                              style: TextStyle(height: 5, fontSize: 11.7),),
+                              style: TextStyle(height: 5, fontSize: 11.7,color: greyColor),),
                   title: Text(
                     document['Tname'],
                     style: TextStyle(height: 2, fontSize: 15.9),
                     textAlign: TextAlign.right,
                   ),
-                  subtitle: (pic == "صورة") ? 
-                  Text(
-                     "صورة",////////////////////////////////////////////////from who???
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                    style: TextStyle(height: 2, fontSize: 15,color: Colors.blue),
+                  subtitle:  
+                  (pic == "صورة")? 
+                  RichText(
                     textAlign: TextAlign.right,
-                    // style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                 : document['lastMessage'].toString().length > 16? Text(
-                      shortM,////////////////////////////////////////////////from who???
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                    style: TextStyle(height: 2, fontSize: 15),
+                    text: 
+                  TextSpan(
+                    text: 
+                    from,   
+                    style: TextStyle(height: 2, fontSize: 15,color: Colors.green[700],),//fontWeight: FontWeight.bold),
+                   
+                  children: <TextSpan>[
+             TextSpan(
+               text: "صورة",
+                style: TextStyle(height: 2, fontSize: 15,color: Colors.blue,fontWeight: FontWeight.normal),
+                ),
+          ]
+     ),
+)
+                 :  RichText(
                     textAlign: TextAlign.right,
-                    // style: TextStyle(fontWeight: FontWeight.bold),
-                  ):  Text(
-                     document['lastMessage'] ,////////////////////////////////////////////////from who???
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                    style: TextStyle(height: 2, fontSize: 15),
-                    textAlign: TextAlign.right,
-                    // style: TextStyle(fontWeight: FontWeight.bold),
-                  ) ,
+                    text: 
+                  TextSpan(
+                    text: 
+                    from,   
+                    style: TextStyle(height: 2, fontSize: 15,color: Colors.green[700],),//fontWeight: FontWeight.bold),
+                   
+                  children: <TextSpan>[
+             TextSpan(
+               text: shortM,
+                style: TextStyle(height: 2, fontSize: 15,color: Colors.grey,fontWeight: FontWeight.normal),
+                ),
+          ]
+     ),
+),
                   trailing: 
                        Image.asset("assets/images/TF.png"),
-                      // Image.asset("assets/images/driver-male.jpg"),
-                //   leading: ElevatedButton(
-                //     child: Text('معلومات المدرب   '),
-                //     onPressed: () {
-                //       //nav(document.id); //for next sprint
-                //     },
-                //     style: ElevatedButton.styleFrom(
-                //         shape: StadiumBorder(),
-                //         primary: Color(0xFF6F35A5),
-                //         textStyle: TextStyle(fontSize: 16)),
-                //   ),
-                // ),
-                //elevation: 6,
-                //shadowColor: Colors.deepPurple[500],
-                //  shape: OutlineInputBorder(
-                //    borderRadius: BorderRadius.circular(18),
-                //    borderSide: BorderSide(color: Colors.white, width: 0)),
               ),
             )
           
     ))));
   }
-  // void nav(String icd) async {
-  //   Navigator.push(
-  //     context,
-  //     //MaterialPageRoute(builder: (context) {
-  //       //return CoachDate(icd);
-  //       //return RequestLessonPage(icd);
-  //    // }),
-  //   //);
-  // //}
 }
