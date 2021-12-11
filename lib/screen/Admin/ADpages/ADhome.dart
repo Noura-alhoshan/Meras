@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meras/components/adminRounded_button.dart';
 import 'package:meras/screen/Admin/ADpages/Questions.dart';
-import 'package:meras/screen/Admin/ADpages/Test.dart';
 import 'package:meras/screen/Admin/ADpages/manageGuidlines.dart';
 import 'package:meras/screen/Admin/services/navDraweradmin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -130,4 +129,3 @@ class ADhome extends StatelessWidget {
         )));
   }
 }
-
