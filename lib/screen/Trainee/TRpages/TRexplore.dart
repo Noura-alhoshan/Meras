@@ -280,7 +280,6 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
     if (help == 'B') print("ITS B");
     if (help == 'C') print("ITS C");
 
-    print("Are you here sos");
 ////
 
     ///

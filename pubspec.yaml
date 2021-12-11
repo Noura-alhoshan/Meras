@@ -44,6 +44,20 @@ dependencies:
   url_launcher:
   get_storage:
   number_inc_dec: ^0.8.0
+  mime: ^1.0.1
+  open_file: ^3.2.1
+  path_provider: ^2.0.5
+  faker: ^2.0.0
+  file_picker: ^4.1.6
+  flutter_chat_ui: ^1.5.0
+  flutter_firebase_chat_core:
+  cached_network_image: ^3.2.0
+  fluttertoast: ^8.0.8
+  photo_view: ^0.13.0
+  flutter_native_image: 
+  path: 
+  flutter_local_notifications: 
+  flutter_linkify: 
 
 
   #uses-material-design: true
@@ -63,6 +77,7 @@ dependencies:
   stripe_payment: ^1.1.4
   fluttericon: ^2.0.0
   http_auth: ^1.0.1
+  
 
 dev_dependencies:
   flutter_test:
