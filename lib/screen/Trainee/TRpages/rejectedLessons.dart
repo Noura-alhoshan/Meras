@@ -52,12 +52,19 @@ class _RejectedLessonsState extends State<RejectedLessons> {
                           //borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: red),
                       child: ListTile(
-                        title: Text(' مرفوض/ملغى',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                                height: -1,
-                                fontSize: 16,
-                                color: Colors.red[900])),
+                        title: document['Status'] == 'C'
+                            ? Text(' ملغى',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    height: -1,
+                                    fontSize: 16,
+                                    color: Colors.red[900]))
+                            : Text(' مرفوض',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    height: -1,
+                                    fontSize: 16,
+                                    color: Colors.red[900])),
                       ),
                     ),
                     Container(
