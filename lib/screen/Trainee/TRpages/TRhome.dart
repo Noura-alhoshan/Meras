@@ -7,6 +7,7 @@ import 'package:meras/constants.dart';
 import 'package:meras/controllers/MyUser.dart';
 import 'package:meras/screen/Trainee/TRpages/TRguidelines.dart';
 import 'package:meras/screen/Trainee/TRpages/TRny.dart';
+import 'package:meras/screen/Trainee/quiz2/startPage.dart';
 import 'package:meras/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meras/services/auth.dart';
@@ -30,32 +31,30 @@ class _HomePageState extends State<TRhome> {
     super.initState();
     getn();
   }
-getn(){
 
- final FirebaseAuth auth = FirebaseAuth.instance;
+  getn() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
-FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection("trainees")
         .doc(uid)
         .get()
         .then((querySnapshot) async {
-        FirebaseFirestore.instance
-                                      .collection('trainees')
-                                      .doc(uid)
-                                      .update({'Email': user.email});    
+      FirebaseFirestore.instance
+          .collection('trainees')
+          .doc(uid)
+          .update({'Email': user.email});
       setState(() {
         nnaame = querySnapshot.data()!['Fname'];
-   
-      }); });
+      });
+    });
+  }
 
-}
   @override
   Widget build(
     BuildContext context,
   ) {
-
-   
     // FirebaseAuth auth = FirebaseAuth.instance;
     // User? user = auth.currentUser;
     // dynamic userid = user!.uid;
@@ -74,15 +73,13 @@ FirebaseFirestore.instance
           child: Column(
             children: <Widget>[
               SizedBox(height: 50.0),
-               Text(
-                        'أهلًا بك $nnaame  ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: kPrimaryColor,
-                        )),
-                
+              Text('أهلًا بك $nnaame  ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: kPrimaryColor,
+                  )),
 
               SizedBox(height: 20.0),
               Text(
@@ -179,7 +176,9 @@ FirebaseFirestore.instance
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(test2());
+                    },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(120, 80)),
                         shape: MaterialStateProperty.all<OutlinedBorder>(
