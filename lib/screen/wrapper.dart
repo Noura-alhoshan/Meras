@@ -124,9 +124,9 @@ class Wrapper extends StatelessWidget {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
     dynamic userid = user!.uid;
-    if (user.emailVerified == false)
-      return Verify();
-    else
+    // if (user.emailVerified == false)
+    //   return Verify();
+    // else
       return _build(context);
   }
 

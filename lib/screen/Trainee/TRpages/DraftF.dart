@@ -10,6 +10,11 @@ import 'package:meras/components/SingleBaseAlert.dart';
 import 'package:meras/screen/Admin/ADpages/coachProfile_admin.dart';
 import 'package:meras/screen/Admin/widget/BackgroundA.dart';
 import 'package:meras/screen/Admin/widget/button_widget.dart';
+import 'package:meras/screen/Chat/chatWidget.dart';
+import 'package:meras/screen/Chat/constants.dart';
+import 'package:meras/screen/Chat/screens/chat.dart';
+import 'package:meras/screen/Chat/screens/dashboard_screen.dart';
+
 import 'package:meras/screen/Trainee/TRpages/BackgroundC2.dart';
 //import 'package:meras/screen/Coach/Cpages/BackgroundC.dart';
 import 'package:meras/screen/home/BaseAlertDialog.dart';
@@ -36,19 +41,76 @@ class _CoachDate extends State<CoachDate> {
   late TimeOfDay time;
   late DateTime dateTime;
   late DateTime day;
+  
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  //CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
-
+//    void initState() {
+//     super.initState();
+//   }
+//   //CollectionReference AvaDates = FirebaseFirestore.instance.collection('Coach');
+// void setState(Function() param0) {
+// }
   ///first null?
   @override
   Widget build(BuildContext context) {
-    // final User? user = auth.currentUser;
-    // final uid = user!.uid;
+   FirebaseAuth auth2 = FirebaseAuth.instance;
+    User? truser= auth2.currentUser;
+    final tuid = truser!.uid;
+
+
+late String tname='';
+   FirebaseFirestore.instance
+      .collection('trainees')
+      .doc(tuid)
+      .get()
+      .then((ds) {
+    tname = ds['Fname'] + ' ' + ds['Lname'];
+  }).catchError((e) {
+    print(e);
+  });
+late String cname='';
+late String pn='';
+   FirebaseFirestore.instance
+      .collection('Coach')
+      .doc(widget.id)
+      .get()
+      .then((ds) {
+    cname = ds['Fname'] + ' ' + ds['Lname'];
+    pn=ds['Phone Number]'];
+  }).catchError((e) {
+    print(e);
+  });
+
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       //drawer: NavDrawer(),
       appBar: AppBar(
+        centerTitle: true,
+         actions: [
+        Padding( padding:EdgeInsets.symmetric(horizontal: 17), 
+        child: IconButton (icon: Icon (Icons.mail), color: kPrimaryColor, 
+        onPressed: () 
+        { 
+            Navigator.of(context).push( 
+              MaterialPageRoute( 
+              builder: (context) => 
+              Chat(
+              currentUserId: tuid, 
+              peerAvatar:  "https://i.postimg.cc/59D0sP2g/Female.png",
+              peerId: widget.id, 
+              peerName: cname,
+              Cname:cname ,
+              Tname: tname,
+              Tid: tuid,
+              Cid: widget.id,
+              phone: pn,
+              )               
+                       ));
+
+
+         },//change the phone
+        ),)],
         title: Text(' حجز موعد جديد'
             // textAlign: TextAlign.center,
             ),
@@ -78,7 +140,13 @@ class _CoachDate extends State<CoachDate> {
 // 1. show the coach info
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
+  //print("daaay");
+  
+   FirebaseAuth auth2 = FirebaseAuth.instance;
+    User? truser= auth2.currentUser;
+    final tuid = truser!.uid;
   final String ph = document['Phone Number'];
+  
   return BackgroundA(
     child: Container(
       height: 900,
@@ -170,7 +238,8 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     ),
                     onPressed: () {
                       launch("tel://$ph");
-                    }),
+                     }),
+                    
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(':للتواصل',
@@ -421,6 +490,8 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
     ),
   );
 }
+
+
 
 // 2. show the coach dates
 

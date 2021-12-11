@@ -2,6 +2,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:meras/screen/Trainee/Tchat.dart';
 import 'TRpages/TRexplore.dart';
 import 'TRpages/TRhome.dart';
 import 'TRpages/TRlessons.dart';
@@ -16,7 +17,7 @@ class TRcategory extends StatefulWidget {
 }
 
 class _State extends State<TRcategory> {
-  int selectedIndex = 3;
+  int selectedIndex = 4;
   int numberOfNotification = 0;
   bool isNewNotification = false;
 
@@ -48,7 +49,7 @@ class _State extends State<TRcategory> {
               : selectedIndex == 2
                   ? TRexploreScreen()
                   : selectedIndex == 3
-                      ? TRhome()
+                      ? Tchat()
                       : TRhome(),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: selectedIndex,
@@ -91,18 +92,19 @@ class _State extends State<TRcategory> {
                 ],
               ),
               activeColor: Colors.blue),
-          BottomNavyBarItem(
-              icon: Icon(Icons.chat),
-              title: Text('المحادثات'),
-              activeColor: Colors.grey),
+         
           BottomNavyBarItem(
               icon: Icon(Icons.car_repair),
               title: Text('الدروس'),
               activeColor: Colors.purple),
           BottomNavyBarItem(
               icon: Icon(Icons.search),
-              title: Text('المدربين'),
+              title: Text('المدربين',),
               activeColor: Colors.red),
+               BottomNavyBarItem(
+              icon: Icon(Icons.chat),
+              title: Text('المحادثات'),
+              activeColor: Colors.yellow.shade700),
           BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),
