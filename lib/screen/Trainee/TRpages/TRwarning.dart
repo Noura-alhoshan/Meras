@@ -20,8 +20,20 @@ class _TRwarning extends State<TRwarning> {
   ) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('الإشارات التحذيرية            ')),
-          backgroundColor: Colors.deepPurple[100],
+          title: Text('الإشارات التحذيرية'),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.deepPurple.shade100,
+                  Colors.deepPurple.shade200
+                ],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              ),
+            ),
+          ),
         ),
         body: CardListWidget(
           type: 'W',

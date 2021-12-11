@@ -143,8 +143,17 @@ class _TRnotification extends State<TRnotification> {
             },
           )
         ],*/
-        title: Center(child: Text('التنبيهات')),
-        backgroundColor: Colors.deepPurple[100],
+        title: Text('التنبيهات'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: Container(
         child: SingleChildScrollView(

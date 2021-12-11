@@ -63,7 +63,16 @@ class _AddGuidlinesState extends State<AddGuidlines> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text('إضافة إشارات سير جديدة'),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: BackgroundA(

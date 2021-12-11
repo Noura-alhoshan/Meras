@@ -34,10 +34,18 @@ class _ViewPendingRequestState extends State<ViewPendingRequest> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          '                  تفاصيل الطلب',
-          textAlign: TextAlign.center,
+          'تفاصيل الطلب',
         ),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
@@ -257,14 +265,11 @@ class _ViewPendingRequestState extends State<ViewPendingRequest> {
                                       textAlign: TextAlign.end,
                                     )),
                               ]),
-
-
-
                               TableRow(children: [
-                               Container(
+                                Container(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                       document['Price'] + ' ريال ',
+                                      document['Price'] + ' ريال ',
                                       style: TextStyle(
                                         height: 1.49,
                                         fontSize: 16.3,

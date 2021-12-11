@@ -18,7 +18,18 @@ class TRlessons extends StatelessWidget {
           extendBodyBehindAppBar: true,
           drawer: NavDrawer(),
           appBar: AppBar(
-            backgroundColor: Colors.deepPurple[100],
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.deepPurple.shade100,
+                    Colors.deepPurple.shade200
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                ),
+              ),
+            ),
             bottom: TabBar(
               tabs: [
                 Tab(text: 'المرفوضة/الملغاة'),
@@ -30,7 +41,8 @@ class TRlessons extends StatelessWidget {
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Text('                 قائمة الدروس'),
+            title: Text('قائمة الدروس'),
+            centerTitle: true,
           ),
           body: TabBarView(
             children: [

@@ -65,8 +65,17 @@ class _HomePageState extends State<TRhome> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('                 الصفحة الرئيسية'),
-        backgroundColor: Colors.deepPurple[100],
+        title: Text('الصفحة الرئيسية'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Background(

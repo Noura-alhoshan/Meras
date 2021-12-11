@@ -43,8 +43,16 @@ class _HomePageState extends State<Chome> {
       drawer: NavDrawer(),
       appBar: AppBar(
         //title: Text('Side menu'),
-        backgroundColor: Colors.deepPurple[100],
-        //backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ), //backgroundColor: kPrimaryColor,
       ),
       body: SingleChildScrollView(
         child: Background(

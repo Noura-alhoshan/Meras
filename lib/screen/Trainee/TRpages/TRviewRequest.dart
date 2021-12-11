@@ -42,10 +42,18 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          ' تفاصيل الطلب',
-          textAlign: TextAlign.center,
+          'تفاصيل الطلب',
         ),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
@@ -458,26 +466,28 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             if (document['IsRate'] == 'false')
                               Container(
                                 child: Column(children: <Widget>[
-                                   Center(
-                              child: Text(
-                                'تم الدفع',
-                                style: TextStyle(
-                                    fontSize: 18.5,
-                                    color: Colors.green[600],
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                          'قيم تجربتك مع المدرب     ',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                            ),
-                            SizedBox(height: 9,),
+                                  Center(
+                                    child: Text(
+                                      'تم الدفع',
+                                      style: TextStyle(
+                                          fontSize: 18.5,
+                                          color: Colors.green[600],
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'قيم تجربتك مع المدرب     ',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 9,
+                                  ),
                                   Table(columnWidths: {
                                     0: FlexColumnWidth(10),
                                     1: FlexColumnWidth(25),
@@ -488,7 +498,7 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                     //   Container(
                                     //     //  height: 25,
                                     //     //   width: 70,
-                                    //     child: 
+                                    //     child:
                                     //     Text(
                                     //       'قيم تجربتك مع المدرب             .',
                                     //       style: TextStyle(
@@ -519,7 +529,6 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                                       ),
                                     ]),
                                   ]),
-                                  
                                   Container(
                                     child: ElevatedButton(
                                       child: Text(
@@ -618,8 +627,6 @@ class _ViewLessonsInfoState extends State<ViewLessonsInfo> {
                             //  SizedBox(
                             //  height: 15,
                             // ),
-
-                           
                           ]),
                       ]),
                     ),

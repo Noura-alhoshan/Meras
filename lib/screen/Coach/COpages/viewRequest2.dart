@@ -39,10 +39,19 @@ class _ADcoachProfileScreen2State extends State<ViewLessonRequest2> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          '             تفاصيل الطلب',
+          'تفاصيل الطلب',
           textAlign: TextAlign.center,
         ),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance

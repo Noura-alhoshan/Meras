@@ -21,8 +21,20 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
         extendBodyBehindAppBar: true,
         //drawer: NavDraweradmin(),
         appBar: AppBar(
-          title: Text('        إدارة معلومات إشارات السير'),
-          backgroundColor: Colors.deepPurple[100],
+          title: Text('إدارة معلومات إشارات السير'),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.deepPurple.shade100,
+                  Colors.deepPurple.shade200
+                ],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              ),
+            ),
+          ),
         ),
         body: Background(
           child: Column(
@@ -195,4 +207,3 @@ class _ManageGuidlinesState extends State<ManageGuidlines> {
         ));
   }
 }
-

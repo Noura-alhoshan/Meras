@@ -85,8 +85,17 @@ class _ADlistScreenState extends State<ADlistScreen> {
             },
           )
         ],*/
-        title: Center(child: Text('قائمة المدربين قيد الانتظار')),
-        backgroundColor: Colors.deepPurple[100],
+        title: Text('قائمة المدربين قيد الانتظار'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: Container(
         child: SingleChildScrollView(

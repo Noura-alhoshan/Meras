@@ -10,7 +10,16 @@ class COschedule extends StatelessWidget {
       drawer: CNavDrawer(),
       appBar: AppBar(
         title: Text('المواعيد'),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
     );
   }

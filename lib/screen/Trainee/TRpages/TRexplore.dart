@@ -90,10 +90,19 @@ class _TRexploreScreenState extends State<TRexploreScreen> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text(
-          '   قائمة المدربين               ',
+          'قائمة المدربين',
           textDirection: TextDirection.rtl,
         ),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: Container(
         child: SingleChildScrollView(

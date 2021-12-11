@@ -36,7 +36,8 @@ class test2State extends State<test2> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("               صفحة الأختبار"),
+          title: Text("صفحة الأختبار"),
+          centerTitle: true,
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(

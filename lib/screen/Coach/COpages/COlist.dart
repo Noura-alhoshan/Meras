@@ -20,7 +20,18 @@ class COlist extends StatelessWidget {
           //extendBodyBehindAppBar: true,
           drawer: CNavDrawer(),
           appBar: AppBar(
-            backgroundColor: Colors.deepPurple[100],
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.deepPurple.shade100,
+                    Colors.deepPurple.shade200
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                ),
+              ),
+            ),
             bottom: TabBar(
               tabs: [
                 Tab(text: 'المرفوضة'),
@@ -32,7 +43,8 @@ class COlist extends StatelessWidget {
               indicatorColor: kPrimaryColor,
               unselectedLabelColor: Colors.white54,
             ),
-            title: Text('        قائمة طلبات التدريب'),
+            title: Text('قائمة طلبات التدريب'),
+            centerTitle: true,
           ),
           body: TabBarView(
             children: [

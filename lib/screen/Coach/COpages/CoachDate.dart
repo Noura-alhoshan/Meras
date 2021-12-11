@@ -45,10 +45,19 @@ class _CoachDate extends State<CoachDate> {
       extendBodyBehindAppBar: true,
       drawer: CNavDrawer(),
       appBar: AppBar(
-        title: Text('          إضافة موعد جديد'
+        title: Text('إضافة موعد جديد'
             // textAlign: TextAlign.center,
             ),
-        backgroundColor: Colors.deepPurple[100],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: Container(
         child: SingleChildScrollView(

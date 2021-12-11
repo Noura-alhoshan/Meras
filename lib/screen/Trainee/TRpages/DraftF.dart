@@ -41,7 +41,6 @@ class _CoachDate extends State<CoachDate> {
   late TimeOfDay time;
   late DateTime dateTime;
   late DateTime day;
-  
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 //    void initState() {
@@ -53,68 +52,73 @@ class _CoachDate extends State<CoachDate> {
   ///first null?
   @override
   Widget build(BuildContext context) {
-   FirebaseAuth auth2 = FirebaseAuth.instance;
-    User? truser= auth2.currentUser;
+    FirebaseAuth auth2 = FirebaseAuth.instance;
+    User? truser = auth2.currentUser;
     final tuid = truser!.uid;
 
-
-late String tname='';
-   FirebaseFirestore.instance
-      .collection('trainees')
-      .doc(tuid)
-      .get()
-      .then((ds) {
-    tname = ds['Fname'] + ' ' + ds['Lname'];
-  }).catchError((e) {
-    print(e);
-  });
-late String cname='';
-late String pn='';
-   FirebaseFirestore.instance
-      .collection('Coach')
-      .doc(widget.id)
-      .get()
-      .then((ds) {
-    cname = ds['Fname'] + ' ' + ds['Lname'];
-    pn=ds['Phone Number]'];
-  }).catchError((e) {
-    print(e);
-  });
-
+    late String tname = '';
+    FirebaseFirestore.instance
+        .collection('trainees')
+        .doc(tuid)
+        .get()
+        .then((ds) {
+      tname = ds['Fname'] + ' ' + ds['Lname'];
+    }).catchError((e) {
+      print(e);
+    });
+    late String cname = '';
+    late String pn = '';
+    FirebaseFirestore.instance
+        .collection('Coach')
+        .doc(widget.id)
+        .get()
+        .then((ds) {
+      cname = ds['Fname'] + ' ' + ds['Lname'];
+      pn = ds['Phone Number]'];
+    }).catchError((e) {
+      print(e);
+    });
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       //drawer: NavDrawer(),
       appBar: AppBar(
         centerTitle: true,
-         actions: [
-        Padding( padding:EdgeInsets.symmetric(horizontal: 17), 
-        child: IconButton (icon: Icon (Icons.mail), color: kPrimaryColor, 
-        onPressed: () 
-        { 
-            Navigator.of(context).push( 
-              MaterialPageRoute( 
-              builder: (context) => 
-              Chat(
-              currentUserId: tuid, 
-              peerAvatar:  "https://i.postimg.cc/59D0sP2g/Female.png",
-              peerId: widget.id, 
-              peerName: cname,
-              Cname:cname ,
-              Tname: tname,
-              Tid: tuid,
-              Cid: widget.id,
-              phone: pn,
-              )               
-                       ));
-
-
-         },//change the phone
-        ),)],
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 17),
+            child: IconButton(
+              icon: Icon(Icons.mail), color: kPrimaryColor,
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Chat(
+                          currentUserId: tuid,
+                          peerAvatar:
+                              "https://i.postimg.cc/59D0sP2g/Female.png",
+                          peerId: widget.id,
+                          peerName: cname,
+                          Cname: cname,
+                          Tname: tname,
+                          Tid: tuid,
+                          Cid: widget.id,
+                          phone: pn,
+                        )));
+              }, //change the phone
+            ),
+          )
+        ],
         title: Text(' حجز موعد جديد'
             // textAlign: TextAlign.center,
             ),
-        backgroundColor: Colors.deepPurple[100],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
@@ -141,12 +145,12 @@ late String pn='';
 
 Widget _build(BuildContext context, DocumentSnapshot document) {
   //print("daaay");
-  
-   FirebaseAuth auth2 = FirebaseAuth.instance;
-    User? truser= auth2.currentUser;
-    final tuid = truser!.uid;
+
+  FirebaseAuth auth2 = FirebaseAuth.instance;
+  User? truser = auth2.currentUser;
+  final tuid = truser!.uid;
   final String ph = document['Phone Number'];
-  
+
   return BackgroundA(
     child: Container(
       height: 900,
@@ -169,36 +173,39 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
             Text(' '),
 
             Row(children: [
-              Center(child:
-              Text(
-                '                           ' +document['Rate'].toStringAsFixed(2),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16,
-                    // color: kPrimaryColor,
-                    fontWeight: FontWeight.bold),
-              ),),
+              Center(
+                child: Text(
+                  '                           ' +
+                      document['Rate'].toStringAsFixed(2),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 16,
+                      // color: kPrimaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               Icon(
                 Icons.star_rate,
                 color: Colors.orange,
                 size: 30.0,
               ),
-              Center(child:
-              Text(
-                ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    fontSize: 23,
-                    // color: kPrimaryColor,
-                    fontWeight: FontWeight.bold),
-              ),)
+              Center(
+                child: Text(
+                  ' ' + document['Fname'] + ' ' + document['Lname'] + ' ',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontSize: 23,
+                      // color: kPrimaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              )
             ]),
 
             Row(
               children: [
                 Text(' '),
                 Text(
-                   document['Price'] + ' ريال '+ '                   ',
+                  document['Price'] + ' ريال ' + '                   ',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -213,7 +220,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text( ' ' +'  :سعر التدريب لساعتين',
+                  child: Text(' ' + '  :سعر التدريب لساعتين',
                       style: TextStyle(fontSize: 18, color: Colors.grey[700])),
                 ),
               ],
@@ -228,7 +235,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                 Text(' '),
                 TextButton(
                     child: Text(
-                      document['Phone Number']+ '                        ',
+                      document['Phone Number'] + '                        ',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.blue,
@@ -238,8 +245,7 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
                     ),
                     onPressed: () {
                       launch("tel://$ph");
-                     }),
-                    
+                    }),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(':للتواصل',
@@ -490,8 +496,6 @@ Widget _build(BuildContext context, DocumentSnapshot document) {
     ),
   );
 }
-
-
 
 // 2. show the coach dates
 

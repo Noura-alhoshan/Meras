@@ -13,7 +13,18 @@ class TRny extends StatelessWidget {
         child: Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
-            backgroundColor: Colors.deepPurple[100],
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.deepPurple.shade100,
+                    Colors.deepPurple.shade200
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                ),
+              ),
+            ),
             bottom: TabBar(
               tabs: [
                 Tab(
