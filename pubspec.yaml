@@ -39,7 +39,9 @@ dependencies:
   mailer: ^5.0.1
   google_sign_in: ^5.0.4
   awesome_notifications:
+  cached_network_image:
   firebase_messaging:
+  path:
   get:
   url_launcher:
   get_storage:
@@ -118,6 +120,7 @@ flutter:
     - assets/images/TM.png
     - assets/images/TF.png
     - assets/icons/ringing.png
+    - assets/images/upload_file.png
     - assets/images/req.png
     - assets/images/lavatory.png
     - assets/images/logo_forground.png
