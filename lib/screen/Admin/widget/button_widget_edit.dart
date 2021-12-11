@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 class ButtonWidgetEdit extends StatelessWidget {
   final String text;
   final VoidCallback onClicked;
-
   final Color colorr;
+  final double verticalSize;
 
-  const ButtonWidgetEdit({
-    Key? key,
-    required this.text,
-    required this.onClicked,
-    required this.colorr,
-  }) : super(key: key);
+  final double horizontalSize;
+
+  const ButtonWidgetEdit(
+      {Key? key,
+      required this.text,
+      required this.onClicked,
+      required this.colorr,
+      this.verticalSize = 12,
+      this.horizontalSize = 45})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) => ClipRRect(
@@ -27,10 +31,12 @@ class ButtonWidgetEdit extends StatelessWidget {
             shape: StadiumBorder(),
             onPrimary:
                 colorr == Colors.deepPurple ? Colors.white : Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 45, vertical: 12),
+            padding: EdgeInsets.symmetric(
+                horizontal: horizontalSize, vertical: verticalSize),
           ),
 
           onPressed: onClicked, //child: null,
         ),
       );
 }
+
