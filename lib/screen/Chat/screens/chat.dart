@@ -49,6 +49,7 @@ class Chat extends StatelessWidget {
          iconTheme: IconThemeData(
     color: Colors.white, //change your color here
   ),
+  
         leading: null,
         actions: [
         Padding( padding:EdgeInsets.symmetric(horizontal: 17), 
@@ -62,7 +63,15 @@ class Chat extends StatelessWidget {
   ],
         title: Text(peerName, textAlign: TextAlign.center ,style: TextStyle(color: Colors.white, )),//fontWeight: FontWeight.bold)),
         //centerTitle: true,
-        backgroundColor: Colors.deepPurple[100],//find the color
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: new _ChatScreen(
         currentUserId: currentUserId,

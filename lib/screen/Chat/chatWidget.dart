@@ -271,7 +271,7 @@ class ChatWidget {
         text: chatContent,
                textDirection: TextDirection.rtl,
 
-        style: TextStyle(color: logUserMsg ? Colors.black : Colors.white),///here sarah
+        style: TextStyle(color: logUserMsg ?Colors.white  : Colors.black),///here sarah
         linkStyle: TextStyle(color: Colors.blueGrey),
       ),
       
@@ -279,7 +279,7 @@ class ChatWidget {
      // width: kIsWeb ? 400 : 200.0,
        constraints: BoxConstraints( maxWidth: 200),///////////////////////////////sarah
       decoration: BoxDecoration(
-          color: logUserMsg ? greyColor2 : Colors.purple[900],
+          color: logUserMsg ? Colors.purple[900] : greyColor2,
           borderRadius: BorderRadius.circular(8.0)),
       margin: logUserMsg
           ? EdgeInsets.only(
