@@ -21,7 +21,18 @@ class Questions extends StatelessWidget {
         appBar: AppBar(
           title: Text('إدارة الاختبار القصير'),
           centerTitle: true,
-          backgroundColor: Colors.deepPurple[100],
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.deepPurple.shade100,
+                  Colors.deepPurple.shade200
+                ],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              ),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: BackgroundA(

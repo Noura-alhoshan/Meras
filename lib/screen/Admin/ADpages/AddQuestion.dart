@@ -25,7 +25,15 @@ class AddQuestion extends StatelessWidget {
       appBar: AppBar(
         title: Text(isEditPage ? 'تعديل السؤال' : 'إضافة سؤال'),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple[100],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: BackgroundA(
