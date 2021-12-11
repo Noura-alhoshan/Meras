@@ -47,7 +47,7 @@ class _State extends State<COcategory> {
               BottomNavyBarItem(
               icon: Icon(Icons.chat),
               title: Text('المحادثات'),
-              activeColor: Colors.grey),
+              activeColor: Colors.yellow.shade700),
           BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),

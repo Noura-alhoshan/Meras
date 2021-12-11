@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as ui;
 import 'package:meras/Controllers/Loading.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -149,7 +149,7 @@ class ChatWidget {
                     //padding:EdgeInsets.symmetric(horizontal: 0, vertical: 0), 
 
                     child:  Text(
-                      DateFormat('kk:mm').format(
+                      ui.DateFormat('kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
                               int.parse(document.get('timestamp'))))+"  ",
                       style: TextStyle(
@@ -197,7 +197,7 @@ class ChatWidget {
            // ChatData.isLastMessageLeft(listMessage, id, index)?
                 Container(
                     child: Text(
-                      DateFormat('kk:mm').format(
+                      ui.DateFormat('kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
                               int.parse(document.get('timestamp')))),
                       style: TextStyle(
@@ -269,7 +269,8 @@ class ChatWidget {
           }
         },
         text: chatContent,
-        
+               textDirection: TextDirection.rtl,
+
         style: TextStyle(color: logUserMsg ? Colors.black : Colors.white),///here sarah
         linkStyle: TextStyle(color: Colors.blueGrey),
       ),
@@ -356,6 +357,7 @@ class ChatWidget {
       String text, dynamic textSize, dynamic textColor) {
     return Text(
       '$text',
+       textDirection: TextDirection.rtl,
       style: TextStyle(
           color: (textColor == '') ? Colors.white70 : textColor,
           fontSize: textSize == '' ? 14.0 : textSize),

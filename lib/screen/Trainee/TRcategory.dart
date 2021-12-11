@@ -99,12 +99,12 @@ class _State extends State<TRcategory> {
               activeColor: Colors.purple),
           BottomNavyBarItem(
               icon: Icon(Icons.search),
-              title: Text('المدربين'),
+              title: Text('المدربين',),
               activeColor: Colors.red),
                BottomNavyBarItem(
               icon: Icon(Icons.chat),
               title: Text('المحادثات'),
-              activeColor: Colors.grey),
+              activeColor: Colors.yellow.shade700),
           BottomNavyBarItem(
               icon: Icon(Icons.home),
               title: Text('الرئيسية'),

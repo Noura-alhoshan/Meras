@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as ui;
 import 'package:meras/Controllers/Loading.dart';
 import 'package:meras/screen/Chat/constants.dart';
 import 'package:meras/screen/Chat/screens/Backg.dart';
@@ -88,7 +88,7 @@ if(document['lastMessage'].toString().contains("https://firebasestorage")){
 } 
 else if(document['lastMessage'].toString().length > 20){
      String lla= document['lastMessage'];
-   shortM =  "..."+ lla.substring(0,18) ;
+    shortM = lla.substring(0,18)+"...";
 }
 else shortM= document['lastMessage'];
 
@@ -157,34 +157,37 @@ if(document["lastFrom"] != document["Cid"] && document['unread'] ==true){
                   ,splashColor: Colors.purple[200],
                   child: Card(
                 child: ListTile(
-                 leading: 
+                  leading: 
                   RichText(
                     textAlign: TextAlign.left,
                     text: 
-                  TextSpan(
-                    text: 
-                    "$dot\n",   
-                    style: TextStyle(height: .27, fontSize: 120,color: Colors.red[700],),
+                   TextSpan(
+               text:  ui.DateFormat('kk:mm').format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                              int.parse(document['lastTime'].toString()) ))+"\n",
+                style: TextStyle(height: 1.6, fontSize: 11.7,color: Colors.grey,fontWeight: FontWeight.normal),
+                
+
                    
                   children: <TextSpan>[
-             TextSpan(
-               text:  DateFormat('kk:mm').format(
-                          DateTime.fromMillisecondsSinceEpoch(
-                              int.parse(document['lastTime'].toString()))),
-                style: TextStyle(height: 1.6, fontSize: 11.7,color: Colors.grey,fontWeight: FontWeight.normal),
-                ),
-          ]
+           
+                 TextSpan(
+                    text: 
+                    "$dot",   
+                    style: TextStyle(height: .27, fontSize: 120,color: Colors.blue,),
+         ), ]
      ),
 ),
                   title: Text(
                     document['Tname'],
-                    style: TextStyle(height: 2, fontSize: 15.9),
+                    style: TextStyle(height: 2, fontSize: 15.9,color: primaryColor,fontWeight: FontWeight.bold),
                     textAlign: TextAlign.right,
                   ),
                   subtitle:  
                   (pic == "صورة")? 
                   RichText(
                     textAlign: TextAlign.right,
+                     textDirection: TextDirection.ltr, 
                     text: 
                   TextSpan(
                     text: 
@@ -201,6 +204,7 @@ if(document["lastFrom"] != document["Cid"] && document['unread'] ==true){
 )
                  :  RichText(
                     textAlign: TextAlign.right,
+                     textDirection: TextDirection.rtl,
                     text: 
                   TextSpan(
                     text: 
