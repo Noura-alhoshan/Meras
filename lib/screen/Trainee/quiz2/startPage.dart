@@ -56,7 +56,7 @@ class test2State extends State<test2> {
             child: Column(
               children: <Widget>[
                 if (test2.allResults.length ==
-                    9) ///////////////////////////////////////////
+                    10) ///////////////////////////////////////////
                   Container(
                       child: Column(children: <Widget>[
                     //////////////// here to manage the minumm limit
