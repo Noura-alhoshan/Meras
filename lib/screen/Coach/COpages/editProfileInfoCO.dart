@@ -83,7 +83,17 @@ int _age = 0;
           'تعديل معلومات الملف الشخصي    ',
           textAlign: TextAlign.center,
         ),
-        backgroundColor: Colors.deepPurple[100],
+         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade200],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+        ),
+      
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
