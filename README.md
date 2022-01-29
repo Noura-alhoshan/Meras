@@ -1,7 +1,7 @@
 
 <p align="center">
 
-<h1>  Meras | مراس  </h1>
+<h1>  Meras | مِرَاس  </h1>
 
  <p align="center">
 <img width="250" alt="Picturjje1" src="https://user-images.githubusercontent.com/79161313/150401016-b301fbec-65d2-43ad-897b-69ef683f87f4.png" style="margin-left: 100px;">
