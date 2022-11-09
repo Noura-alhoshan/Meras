@@ -11,8 +11,7 @@ Meras is a cross platform application that helps users in learning basic driving
 and practically by booking a driving coach in their region.
 <br>
  <br>
-Meras provides its users (Trainees and Coaches) with the following features:
- 
+Meras has mainly three users (Admin - Coach - Trainee). We provide our users with the following features based on their roles: 
 <h2> Coach: </h2>
  
  -Coach can sign up using his/her personal information, in addition to his/her driving license to be viewed by the admin then accepted <br>
@@ -44,3 +43,16 @@ Meras provides its users (Trainees and Coaches) with the following features:
  -Trainee can communicate with the coach via private chat <br>
  -Trainee can view his/her pending, rejected, accepted and paid lessons <br>
  -Trainee can view and edit his/her personal profile <br>
+ 
+  <br>
+
+ <h2> Admin: </h2>
+
+  -Admin can sign in using his/her email and password <br>
+  -Admin can browse theoretical guidelines <br>
+  -Admin can view the coaches’ sign up requests <br>
+  -Admin can view a coach profile <br>
+  -Admin receives a notification regarding coaches' sign-up requests <br>
+  -Admin can approve/disapprove the coach’s account <br>
+  -Admin can (post-edit-delete) driving guidelines <br>
+  -Admin can (post-edit-delete) questions in a test <br>
